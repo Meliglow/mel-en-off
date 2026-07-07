@@ -1,211 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mel en off — Le carnet</title>
+<meta name="description" content="Mel en off — mes adresses voyage testées : hôtels, spas, tables. Filtre par pays et par envie.">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --cream:#F4ECD7;
-    --paper:#FCF7EA;
-    --offer:#F5EDD8;
-    --espresso:#382718;
-    --ink:#4A3B2A;
-    --muted:#8A775E;
-    --terra:#B4562F;
-    --terra-2:#C56A42;
-    --gold:#CA9E52;
-    --tan:#CBB68C;
+    --cream:#F4ECD7; --paper:#FCF7EA; --offer:#F5EDD8;
+    --espresso:#382718; --ink:#4A3B2A; --muted:#8A775E;
+    --terra:#B4562F; --terra-2:#C56A42; --gold:#CA9E52; --tan:#CBB68C;
     --serif:"Playfair Display","Bodoni MT",Didot,"Hoefler Text",Georgia,"Times New Roman",serif;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
-  .wrap{min-height:100dvh;background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;padding:26px 18px 44px;}
-  .page{max-width:440px;margin:0 auto;}
-  .script{font-family:var(--serif);font-style:italic;color:var(--terra);}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  img{max-width:100%;display:block}
+  .wrap{padding:clamp(22px,4vw,42px) clamp(16px,4vw,28px) 60px}
+  .shell{max-width:1080px;margin:0 auto}
+  .script{font-family:var(--serif);font-style:italic;color:var(--terra)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:5px}
 
-  /* ---------- top badges ---------- */
-  .topbar{display:flex;align-items:flex-start;justify-content:space-between;}
-  .stamp{width:66px;height:66px;border:2px dashed var(--terra);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-9deg);color:var(--terra);}
-  .stamp b{font-size:.62rem;font-weight:800;letter-spacing:.08em;line-height:1.25;text-transform:uppercase;}
-  .compass{width:52px;height:52px;}
-  .compass text{font-family:var(--serif);font-size:7px;font-weight:700;fill:var(--espresso);text-anchor:middle;dominant-baseline:middle;}
-
-  /* ---------- hero ---------- */
-  .hero{text-align:center;margin-top:2px;}
-  .hero .ey{font-size:1.16rem;margin-bottom:2px;}
-  .hero h1{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:clamp(3rem,13.5vw,3.7rem);line-height:.98;letter-spacing:-.01em;}
-  .divider{position:relative;width:100%;max-width:320px;height:24px;margin:8px auto 0;}
-  .divider__line{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-  .divider__arrow{position:absolute;right:3%;top:5px;width:13px;height:13px;}
+  /* ---------- header ---------- */
+  .head{max-width:560px;margin:0 auto}
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between}
+  .stamp{width:66px;height:66px;border:2px dashed var(--terra);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-9deg);color:var(--terra);flex:none}
+  .stamp b{font-size:.62rem;font-weight:800;letter-spacing:.08em;line-height:1.25;text-transform:uppercase}
+  .compass{width:52px;height:52px;flex:none}
+  .compass text{font-family:var(--serif);font-size:7px;font-weight:700;fill:var(--espresso);text-anchor:middle;dominant-baseline:middle}
+  .hero{text-align:center;margin-top:2px}
+  .hero .ey{font-size:1.16rem;margin-bottom:2px}
+  .hero h1{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:clamp(2.8rem,11vw,3.9rem);line-height:.98;letter-spacing:-.01em}
+  .divider{position:relative;width:100%;max-width:320px;height:24px;margin:8px auto 0}
+  .divider__line{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .divider__arrow{position:absolute;right:3%;top:5px;width:13px;height:13px}
   @media (prefers-reduced-motion:no-preference){
-    .divider__line path{animation:dashflow 1.1s linear infinite;}
-    .divider__arrow{right:auto;left:0;top:4px;animation:fly 3.4s ease-in-out infinite;}
+    .divider__line path{animation:dashflow 1.1s linear infinite}
+    .divider__arrow{right:auto;left:0;top:4px;animation:fly 3.4s ease-in-out infinite}
   }
-  @keyframes dashflow{to{stroke-dashoffset:-10;}}
-  @keyframes fly{0%{left:1%;top:4px;opacity:0;}12%{opacity:1;}50%{left:47%;top:12px;}88%{opacity:1;}100%{left:92%;top:6px;opacity:0;}}
-  .tagline{font-size:.98rem;line-height:1.55;color:var(--ink);max-width:33ch;margin:16px auto 0;}
-  .collab{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 16px;border:1.5px dashed var(--terra);border-radius:999px;color:var(--espresso);text-decoration:none;font-size:.85rem;transition:background .2s ease;}
-  .collab:hover{background:rgba(180,86,47,.07);}
-  .collab svg{width:15px;height:15px;color:var(--terra);flex:none;}
-  .collab b{color:var(--terra);font-weight:700;}
+  @keyframes dashflow{to{stroke-dashoffset:-10}}
+  @keyframes fly{0%{left:1%;top:4px;opacity:0}12%{opacity:1}50%{left:47%;top:12px}88%{opacity:1}100%{left:92%;top:6px;opacity:0}}
+  .tagline{font-size:1.02rem;line-height:1.55;color:var(--ink);max-width:33ch;margin:18px auto 0}
+  .collab{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 16px;border:1.5px dashed var(--terra);border-radius:999px;color:var(--espresso);text-decoration:none;font-size:.85rem;transition:background .2s ease}
+  .collab:hover{background:rgba(180,86,47,.07)}
+  .collab svg{width:15px;height:15px;color:var(--terra);flex:none}
+  .collab b{color:var(--terra);font-weight:700}
 
   /* ---------- section head ---------- */
-  .sec{margin-top:38px;}
-  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
-  .sec-head h2{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.5rem;white-space:nowrap;}
-  .sec-head::after{content:"";flex:1;border-top:2px dashed var(--tan);}
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px}
+  .sec-head h2{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:clamp(1.5rem,4vw,1.9rem);white-space:nowrap}
+  .sec-head::after{content:"";flex:1;border-top:2px dashed var(--tan)}
+
+  /* ---------- offre du moment ---------- */
+  .offer-wrap{max-width:560px;margin:38px auto 0}
+  .offer{position:relative;overflow:hidden;background:var(--offer);border:2px dashed var(--terra);border-radius:18px;padding:16px}
+  .offer .ribbon{position:absolute;top:16px;right:-40px;transform:rotate(45deg);background:var(--terra);color:#FBF3E5;font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 44px;box-shadow:0 3px 8px rgba(56,39,24,.2);z-index:2}
+  .offer .body{padding:14px 4px 4px}
+  .offer .kicker{font-size:1.02rem;display:flex;align-items:center;gap:7px}
+  .offer h3{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.42rem;margin:6px 0 8px;line-height:1.1}
+  .offer p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:14px}
 
   /* ---------- buttons / bits ---------- */
-  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--terra);color:#FBF3E5;text-decoration:none;font-weight:700;font-size:.92rem;padding:12px 20px;border-radius:9px;box-shadow:0 6px 14px rgba(180,86,47,.24);transition:background .2s ease,transform .1s ease;}
-  .btn:hover{background:var(--terra-2);}
-  .btn:active{transform:translateY(1px);}
-  .btn .arw{font-size:.95em;}
-  .pill{font-family:var(--sans);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:999px;padding:5px 11px;white-space:nowrap;}
-  .label{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--terra);color:#FBF3E5;text-decoration:none;font-weight:700;font-size:.9rem;padding:11px 18px;border-radius:9px;box-shadow:0 6px 14px rgba(180,86,47,.22);transition:background .2s ease,transform .1s ease}
+  .btn:hover{background:var(--terra-2)}
+  .btn:active{transform:translateY(1px)}
+  .pill{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:999px;padding:5px 11px;white-space:nowrap;flex:none}
+  .label{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+  .star{color:var(--terra)}
+  .price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin:0 0 14px}
+  .price b{font-family:var(--serif);font-weight:800;font-size:1.2rem;color:var(--terra)}
 
-  /* ---------- photo slot ---------- */
-  .photo{width:100%;aspect-ratio:16/10;border-radius:12px;object-fit:cover;display:block;background:linear-gradient(135deg,#EFE4CA,#E3D3AE);}
-  .photo-ph{width:100%;aspect-ratio:16/10;border-radius:12px;background:linear-gradient(135deg,#EFE4CA,#E4D4B0);display:grid;place-items:center;color:#A9906A;gap:6px;text-align:center;}
-  .photo-ph svg{width:30px;height:30px;opacity:.7;}
-  .photo-ph span{font-size:.72rem;letter-spacing:.04em;}
+  /* ---------- filters ---------- */
+  .dir{margin-top:44px}
+  .filters{background:var(--paper);border:1px solid rgba(180,86,47,.16);border-radius:16px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:14px}
+  .frow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .frow__lab{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);width:96px;flex:none}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--espresso);border:1.5px solid var(--tan);border-radius:999px;padding:8px 14px;font-family:var(--sans);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .18s ease;line-height:1}
+  .chip:hover{border-color:var(--terra)}
+  .chip svg{width:17px;height:17px;color:var(--terra);flex:none;transition:color .18s ease}
+  .chip.on{background:var(--terra);color:#FBF3E5;border-color:var(--terra)}
+  .chip.on svg{color:#FBF3E5}
+  .count{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.95rem;margin:16px 2px 14px}
 
-  /* ---------- offer card ---------- */
-  .offer{position:relative;overflow:hidden;background:var(--offer);border:2px dashed var(--terra);border-radius:18px;padding:16px;}
-  .offer .ribbon{position:absolute;top:16px;right:-40px;transform:rotate(45deg);background:var(--terra);color:#FBF3E5;font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 44px;box-shadow:0 3px 8px rgba(56,39,24,.2);}
-  .offer .body{padding:14px 4px 4px;}
-  .offer .kicker{font-size:1.02rem;display:flex;align-items:center;gap:7px;}
-  .offer h3{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.42rem;margin:6px 0 8px;line-height:1.1;}
-  .offer p{font-size:.92rem;line-height:1.5;color:var(--ink);margin-bottom:16px;}
-  .offer .deal{display:flex;align-items:center;gap:13px;margin:15px 0 16px;}
-  .promo{font-family:var(--serif);font-weight:800;color:var(--terra);font-size:1.4rem;line-height:1;}
-  .promo sup{font-size:.62em;}
-  .code{font-size:.66rem;font-weight:700;letter-spacing:.13em;color:var(--espresso);border:1.5px solid var(--terra);border-radius:8px;padding:8px 12px;background:rgba(180,86,47,.06);}
+  /* ---------- grid + cards ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:20px}
+  .card{background:var(--paper);border-radius:16px;padding:14px;box-shadow:0 10px 24px rgba(56,39,24,.07);display:flex;flex-direction:column}
+  .card .photo{width:100%;aspect-ratio:16/10;border-radius:12px;object-fit:cover;background:linear-gradient(135deg,#EFE4CA,#E3D3AE)}
+  .photo--ph{display:grid;place-items:center;color:#A9906A;font-family:var(--serif);font-style:italic;font-size:1.05rem;background:linear-gradient(135deg,#EFE4CA,#E4D4B0)}
+  .card__top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 2px 4px}
+  .card__top .cc{font-size:1rem;display:inline-flex;align-items:center;gap:6px;min-width:0}
+  .card h3{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.4rem;margin:2px 2px 5px;line-height:1.1}
+  .card .city{margin:0 2px 9px}
+  .card p{font-size:.9rem;line-height:1.5;color:var(--ink);margin:0 2px 13px}
+  .amen{display:flex;flex-wrap:wrap;gap:7px;margin:0 2px 13px}
+  .amen__i{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:rgba(180,86,47,.09);color:var(--terra)}
+  .amen__i svg{width:18px;height:18px}
+  .card .price{margin-top:auto}
+  .card .btn{margin:0 2px;align-self:flex-start}
+  .empty{text-align:center;color:var(--muted);font-family:var(--serif);font-style:italic;font-size:1.05rem;padding:40px 10px}
 
-  /* ---------- address cards ---------- */
-  .cards{display:flex;flex-direction:column;gap:18px;}
-  .card{background:var(--paper);border-radius:16px;padding:14px;box-shadow:0 10px 24px rgba(56,39,24,.07);}
-  .card .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 2px 4px;}
-  .card .top .cc{font-size:1rem;display:inline-flex;align-items:center;gap:6px;}
-  .card h3{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.42rem;margin:2px 2px 5px;line-height:1.1;}
-  .card .city{margin:0 2px 9px;}
-  .card p{font-size:.92rem;line-height:1.5;color:var(--ink);margin:0 2px 15px;}
-  .card .btn{margin:0 2px;}
-  .star{color:var(--terra);}
-
-  /* ---------- footer / airmail ---------- */
-  .airmail{margin-top:40px;border-radius:22px;padding:9px;
-    background:repeating-linear-gradient(45deg,#B23A2E 0 13px,#F4ECD7 13px 19px,#26417B 19px 32px,#F4ECD7 32px 38px);}
-  .env{background:var(--espresso);border-radius:14px;padding:26px 22px;text-align:center;color:#EFE2C9;}
-  .env .par{font-size:.92rem;letter-spacing:.06em;color:var(--gold);margin-bottom:8px;}
-  .env h2{font-family:var(--serif);font-weight:700;color:#F3E7CF;font-size:1.55rem;margin-bottom:8px;}
-  .env .sub{font-size:.9rem;color:#CDBFA6;line-height:1.5;margin-bottom:18px;}
-  .env form{display:flex;gap:9px;max-width:320px;margin:0 auto 20px;}
-  .env input{flex:1;min-width:0;background:#2C1E12;border:1px solid #55402A;border-radius:999px;padding:12px 18px;color:#EFE2C9;font-family:var(--sans);font-size:.9rem;}
-  .env input::placeholder{color:#9C8A6E;}
-  .env input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(202,158,82,.22);}
-  .env .ok{flex:none;width:46px;height:46px;border-radius:50%;border:none;background:var(--gold);color:#2C1E12;font-family:var(--sans);font-weight:800;font-size:.85rem;cursor:pointer;transition:transform .1s ease,background .2s ease;}
-  .env .ok:hover{background:#D8AE63;}
-  .env .ok:active{transform:translateY(1px);}
-  .env .social{display:flex;justify-content:center;gap:22px;margin-bottom:12px;}
-  .env .social a{color:var(--gold);text-decoration:none;font-weight:700;font-size:.92rem;}
-  .env .social a:hover{text-decoration:underline;text-underline-offset:3px;}
-  .env .mail{color:#EFE2C9;text-decoration:none;font-size:.92rem;}
-  .env .mail:hover{text-decoration:underline;text-underline-offset:3px;}
-  .env .aff{font-family:var(--serif);font-style:italic;font-size:.8rem;color:#B29B78;margin-top:14px;}
-
-  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--terra);outline-offset:2px;}
-  .price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin:0 2px 14px;} .price b{font-family:var(--serif);font-weight:800;font-size:1.2rem;color:var(--terra);} </style>
-
+  /* ---------- footer par-avion ---------- */
+  .airmail{max-width:560px;margin:44px auto 0;border-radius:22px;padding:9px;
+    background:repeating-linear-gradient(45deg,#B23A2E 0 13px,#F4ECD7 13px 19px,#26417B 19px 32px,#F4ECD7 32px 38px)}
+  .env{background:var(--espresso);border-radius:14px;padding:26px 22px;text-align:center;color:#EFE2C9}
+  .env .par{font-size:.92rem;letter-spacing:.06em;color:var(--gold);margin-bottom:8px}
+  .env h2{font-family:var(--serif);font-weight:700;color:#F3E7CF;font-size:1.55rem;margin-bottom:8px}
+  .env .sub{font-size:.9rem;color:#CDBFA6;line-height:1.5;margin-bottom:18px}
+  .env form{display:flex;gap:9px;max-width:320px;margin:0 auto 20px}
+  .env input{flex:1;min-width:0;background:#2C1E12;border:1px solid #55402A;border-radius:999px;padding:12px 18px;color:#EFE2C9;font-family:var(--sans);font-size:.9rem}
+  .env input::placeholder{color:#9C8A6E}
+  .env input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(202,158,82,.22)}
+  .env .ok{flex:none;width:46px;height:46px;border-radius:50%;border:none;background:var(--gold);color:#2C1E12;font-family:var(--sans);font-weight:800;font-size:.85rem;cursor:pointer;transition:transform .1s ease,background .2s ease}
+  .env .ok:hover{background:#D8AE63}
+  .env .ok:active{transform:translateY(1px)}
+  .env .social{display:flex;justify-content:center;gap:22px;margin-bottom:12px}
+  .env .social a{color:var(--gold);text-decoration:none;font-weight:700;font-size:.92rem}
+  .env .social a:hover{text-decoration:underline;text-underline-offset:3px}
+  .env .mail{color:#EFE2C9;text-decoration:none;font-size:.92rem}
+  .env .aff{font-family:var(--serif);font-style:italic;font-size:.8rem;color:#B29B78;margin-top:14px}
+</style>
+</head>
+<body>
 <div class="wrap">
-  <div class="page">
+  <div class="shell">
 
-    <!-- ============ BADGES HAUT ============ -->
-    <div class="topbar">
-      <div class="stamp"><b>Visa<br>2026<br>en off</b></div>
-      <svg class="compass" viewBox="0 0 56 56" aria-hidden="true">
-        <circle cx="28" cy="28" r="25" fill="none" stroke="var(--terra)" stroke-width="1.4"/>
-        <circle cx="28" cy="28" r="21" fill="none" stroke="var(--terra)" stroke-width=".7" opacity=".55"/>
-        <g stroke="var(--terra)" stroke-width="1">
-          <line x1="28" y1="3" x2="28" y2="7.5"/>
-          <line x1="28" y1="48.5" x2="28" y2="53"/>
-          <line x1="3" y1="28" x2="7.5" y2="28"/>
-          <line x1="48.5" y1="28" x2="53" y2="28"/>
-        </g>
-        <polygon points="36.5,19.5 32.5,28 36.5,36.5 28,32.5 19.5,36.5 23.5,28 19.5,19.5 28,23.5" fill="var(--gold)"/>
-        <polygon points="28,10 32.2,23.8 46,28 32.2,32.2 28,46 23.8,32.2 10,28 23.8,23.8" fill="var(--terra)"/>
-        <polygon points="28,10 28,28 23.8,23.8" fill="#8a3d20"/>
-        <circle cx="28" cy="28" r="2.3" fill="var(--espresso)"/>
-        <circle cx="28" cy="28" r=".8" fill="var(--gold)"/>
-        <text x="28" y="7">N</text>
-        <text x="49" y="28">E</text>
-        <text x="28" y="49">S</text>
-        <text x="7" y="28">O</text>
-      </svg>
-    </div>
-
-    <!-- ============ HERO ============ -->
-    <header class="hero">
-      <div class="ey script">le carnet de</div>
-      <h1>Mel en off</h1>
-      <div class="divider">
-        <svg class="divider__line" viewBox="0 0 320 24" preserveAspectRatio="none" fill="none" aria-hidden="true">
-          <path d="M4 10 C 90 25, 232 25, 316 12" stroke="var(--terra)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+    <!-- ============ EN-TÊTE ============ -->
+    <header class="head">
+      <div class="topbar">
+        <div class="stamp"><b>Visa<br>2026<br>en off</b></div>
+        <svg class="compass" viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="28" cy="28" r="25" fill="none" stroke="var(--terra)" stroke-width="1.4"/>
+          <circle cx="28" cy="28" r="21" fill="none" stroke="var(--terra)" stroke-width=".7" opacity=".55"/>
+          <g stroke="var(--terra)" stroke-width="1">
+            <line x1="28" y1="3" x2="28" y2="7.5"/><line x1="28" y1="48.5" x2="28" y2="53"/>
+            <line x1="3" y1="28" x2="7.5" y2="28"/><line x1="48.5" y1="28" x2="53" y2="28"/>
+          </g>
+          <polygon points="36.5,19.5 32.5,28 36.5,36.5 28,32.5 19.5,36.5 23.5,28 19.5,19.5 28,23.5" fill="var(--gold)"/>
+          <polygon points="28,10 32.2,23.8 46,28 32.2,32.2 28,46 23.8,32.2 10,28 23.8,23.8" fill="var(--terra)"/>
+          <polygon points="28,10 28,28 23.8,23.8" fill="#8a3d20"/>
+          <circle cx="28" cy="28" r="2.3" fill="var(--espresso)"/><circle cx="28" cy="28" r=".8" fill="var(--gold)"/>
+          <text x="28" y="7">N</text><text x="49" y="28">E</text><text x="28" y="49">S</text><text x="7" y="28">O</text>
         </svg>
-        <svg class="divider__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 4 L11 7 L2 10 L4.5 7 Z" fill="var(--terra)"/></svg>
       </div>
-      <p class="tagline">Mes adresses coups de cœur, dénichées aux quatre coins du monde et testées pour de vrai.</p>
-      <!-- Contact collaborations (sous la bio) -->
-      <a class="collab" href="mailto:contact@melnourdi.fr">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
-        <span>Collaborations · <b>contact@melnourdi.fr</b></span>
-      </a>
+      <div class="hero">
+        <div class="ey script">le carnet de</div>
+        <h1>Mel en off</h1>
+        <div class="divider">
+          <svg class="divider__line" viewBox="0 0 320 24" preserveAspectRatio="none" fill="none" aria-hidden="true">
+            <path d="M4 10 C 90 25, 232 25, 316 12" stroke="var(--terra)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+          </svg>
+          <svg class="divider__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 4 L11 7 L2 10 L4.5 7 Z" fill="var(--terra)"/></svg>
+        </div>
+        <p class="tagline">Mes adresses coups de cœur, dénichées aux quatre coins du monde et testées pour de vrai.</p>
+        <a class="collab" href="mailto:contact@melnourdi.fr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+          <span>Collaborations · <b>contact@melnourdi.fr</b></span>
+        </a>
+      </div>
     </header>
 
-    <!-- ============ OFFRE DU MOMENT ============
-         Bloc mis en avant. Change le nom, le texte, le code promo et le lien. -->
-    <section class="sec">
-      <div class="sec-head"><h2>Offre du moment</h2></div>
+    <!-- ============ OFFRE DU MOMENT ============ -->
+    <section class="offer-wrap">
       <div class="offer">
         <span class="ribbon">Offre du moment</span>
-        <!-- Remplace .photo-ph par : <img class="photo" src="ta-photo.jpg" alt="Bloom House"> -->
-        <img class="photo" src="images/bloom.jpg" alt="Chambre — Bloom House, Paris" loading="lazy">
+        <img class="photo" src="images/bloom.jpg" alt="Bloom House, Paris" loading="lazy" style="border-radius:12px;aspect-ratio:16/10;object-fit:cover">
         <div class="body">
           <div class="kicker"><span class="script">ne la rate pas</span> <span class="star">✦</span></div>
           <h3>Bloom House · Paris</h3>
-          <p>Deux nuits avec petit-déjeuner et accès spa — une échappée fleurie à prix doux.</p>
-          <div class="price">À partir de <b>189€</b> · 2 nuits</div><a class="btn" href="#" rel="nofollow sponsored">En profiter <span class="arw">↗</span></a>
+          <p>Spa, piscine intérieure et échappée fleurie à deux pas du centre.</p>
+          <div class="amen" id="offer-amen"></div>
+          <div class="price">À partir de <b>189€</b> · 2 nuits</div>
+          <a class="btn" href="#" rel="nofollow sponsored">En profiter <span>↗</span></a>
         </div>
       </div>
     </section>
 
-    <!-- ============ MES ADRESSES ============
-         Copie un bloc <article class="card"> pour ajouter une adresse.
-         Change la pill (HÔTEL / TABLE / SPA…), la ville, le texte, le lien affilié. -->
-    <section class="sec">
-      <div class="sec-head"><h2>Mes adresses</h2></div>
-      <div class="cards">
-
-        <article class="card">
-          <img class="photo" src="images/the-hotel-brussels.jpg" alt="The Hotel Brussels — vue sur la Grand-Place" loading="lazy">
-          <div class="top">
-            <span class="cc"><span class="star">★</span> <span class="script">coup de cœur</span></span>
-            <span class="pill">Hôtel</span>
-          </div>
-          <h3>The Hotel Brussels</h3>
-          <div class="city label">Bruxelles</div>
-          <p>Vue plongeante sur la ville depuis les étages hauts — design, central et confortable.</p>
-          <div class="price">À partir de <b>145€</b> · la nuit</div><a class="btn" href="#" rel="nofollow sponsored">Réserver <span class="arw">↗</span></a>
-        </article>
-
-        <article class="card">
-          <img class="photo" src="images/roscioli.jpg" alt="Roscioli — carbonara, Rome" loading="lazy">
-          <div class="top">
-            <span class="cc"><span class="star">★</span> <span class="script">coup de cœur</span></span>
-            <span class="pill">Table</span>
-          </div>
-          <h3>Roscioli</h3>
-          <div class="city label">Rome</div>
-          <p>La meilleure carbonara de ma vie, au comptoir. Réserve à l'avance, ça vaut le coup.</p>
-          <div class="price">À partir de <b>35€</b> · par personne</div><a class="btn" href="#" rel="nofollow sponsored">Voir la table <span class="arw">↗</span></a>
-        </article>
-
+    <!-- ============ LE CARNET (filtrable) ============ -->
+    <section class="dir">
+      <div class="sec-head"><h2>Le carnet</h2></div>
+      <div class="filters">
+        <div class="frow"><span class="frow__lab">Pays</span><div class="chips" id="chips-country"></div></div>
+        <div class="frow"><span class="frow__lab">Équipements</span><div class="chips" id="chips-amen"></div></div>
       </div>
+      <div class="count" id="count"></div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>Aucune adresse ne correspond — enlève un filtre ✨</div>
     </section>
 
     <!-- ============ FOOTER PAR-AVION ============ -->
@@ -218,10 +200,7 @@
           <input type="email" placeholder="Ton email" aria-label="Ton email">
           <button class="ok" type="submit">OK</button>
         </form>
-        <div class="social">
-          <a href="#">Instagram</a>
-          <a href="#">TikTok</a>
-        </div>
+        <div class="social"><a href="#">Instagram</a><a href="#">TikTok</a></div>
         <a class="mail" href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a>
         <div class="aff">Certains liens sont affiliés — merci de me soutenir ♡</div>
       </div>
@@ -229,3 +208,126 @@
 
   </div>
 </div>
+
+<script>
+/* ===== Icônes équipements ===== */
+const AMEN = {
+  piscine:{label:"Piscine", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17.5c1.4 0 1.4 1.2 2.8 1.2s1.4-1.2 2.8-1.2 1.4 1.2 2.8 1.2 1.4-1.2 2.8-1.2 1.4 1.2 2.8 1.2 1.4-1.2 2.8-1.2"/><path d="M2 21c1.4 0 1.4 1 2.8 1s1.4-1 2.8-1"/><path d="M8.5 15V6a2 2 0 0 1 4 0v9"/><path d="M8.5 10.5h4"/></svg>'},
+  spa:{label:"Spa", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.7 1.9 1.7 4.6 0 6.5-1.7-1.9-1.7-4.6 0-6.5Z"/><path d="M12 9.5c2.6-1.1 5.2-.5 7 1.6-1.8 2.1-4.4 2.7-7 1.6m0-3.2c-2.6-1.1-5.2-.5-7 1.6 1.8 2.1 4.4 2.7 7 1.6"/><path d="M4.5 15.5C7 18.5 9.5 20 12 20s5-1.5 7.5-4.5"/></svg>'},
+  massage:{label:"Massage", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7.5" r="2.3"/><path d="M3.5 20c1.6-4 4.8-6.5 9-6.5 2 0 3.4.5 4.5 1.3"/><path d="M14.3 12.8c1-.9 2.3-1.1 3.5-.6M15.8 15.4c1-.9 2.3-1.1 3.5-.6"/></svg>'},
+  hammam:{label:"Hammam", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><path d="M5.5 20.5a6.5 6.5 0 0 1 13 0"/><path d="M9 6.5c-.9-.9-.9-1.9 0-2.8M12 6.5c-.9-.9-.9-1.9 0-2.8M15 6.5c-.9-.9-.9-1.9 0-2.8"/></svg>'}
+};
+
+/* ===== Mes adresses (ajoute/duplique librement) ===== */
+const SPOTS = [
+  {name:"The Hotel Brussels", city:"Bruxelles", country:"Belgique", type:"Hôtel", fav:false,
+   desc:"Vue plongeante sur la ville depuis les étages hauts — design & central.",
+   price:'À partir de <b>145€</b> · la nuit', img:"images/the-hotel-brussels.jpg",
+   amenities:["piscine","spa","hammam"], link:"#"},
+  {name:"Roscioli", city:"Rome", country:"Italie", type:"Table", fav:true,
+   desc:"La meilleure carbonara de ma vie, au comptoir. Réserve à l'avance.",
+   price:'À partir de <b>35€</b> · par personne', img:"images/roscioli.jpg",
+   amenities:[], link:"#"},
+  {name:"Riad Melhoun", city:"Marrakech", country:"Maroc", type:"Riad", fav:true,
+   desc:"Patio, plunge pool et hammam privatif au cœur de la médina.",
+   price:'À partir de <b>120€</b> · la nuit', img:null,
+   amenities:["piscine","spa","hammam","massage"], link:"#"},
+  {name:"Casa Cook", city:"Rhodes", country:"Grèce", type:"Hôtel", fav:false,
+   desc:"Piscine à débordement face à la mer Égée, ambiance bohème et douce.",
+   price:'À partir de <b>160€</b> · la nuit', img:null,
+   amenities:["piscine","spa"], link:"#"},
+  {name:"Le Bain Douche", city:"Paris", country:"France", type:"Table", fav:false,
+   desc:"Institution parisienne, cuisine de marché et ambiance feutrée.",
+   price:'À partir de <b>45€</b> · par personne', img:null,
+   amenities:[], link:"#"}
+];
+
+/* ===== Rendu ===== */
+function amenRow(list){
+  if(!list.length) return "";
+  return '<div class="amen">'+list.map(function(a){return '<span class="amen__i" title="'+AMEN[a].label+'">'+AMEN[a].icon+'</span>';}).join("")+'</div>';
+}
+document.getElementById("offer-amen").outerHTML = amenRow(["spa","piscine","massage"]);
+
+const grid = document.getElementById("grid");
+const cards = SPOTS.map(function(s){
+  const el = document.createElement("article");
+  el.className = "card";
+  const photo = s.img
+    ? '<img class="photo" src="'+s.img+'" alt="'+s.name+'" loading="lazy">'
+    : '<div class="photo photo--ph"><span>'+s.city+'</span></div>';
+  const cc = s.fav
+    ? '<span class="star">★</span> <span class="script">coup de cœur</span>'
+    : '<span class="script">à découvrir</span>';
+  const btn = (s.type==="Table") ? "Voir la table" : "Réserver";
+  el.innerHTML =
+    photo +
+    '<div class="card__top"><span class="cc">'+cc+'</span><span class="pill">'+s.type+'</span></div>'+
+    '<h3>'+s.name+'</h3>'+
+    '<div class="city label">'+s.city+' · '+s.country+'</div>'+
+    '<p>'+s.desc+'</p>'+
+    amenRow(s.amenities)+
+    '<div class="price">'+s.price+'</div>'+
+    '<a class="btn" href="'+s.link+'" rel="nofollow sponsored">'+btn+' <span>↗</span></a>';
+  grid.appendChild(el);
+  return {el:el, country:s.country, amenities:s.amenities};
+});
+
+/* ===== Filtres ===== */
+let fCountry = null;
+const fAmen = new Set();
+const countEl = document.getElementById("count");
+const emptyEl = document.getElementById("empty");
+
+function apply(){
+  let n = 0;
+  cards.forEach(function(c){
+    const okC = !fCountry || c.country===fCountry;
+    let okA = true;
+    fAmen.forEach(function(a){ if(c.amenities.indexOf(a)<0) okA = false; });
+    const show = okC && okA;
+    c.el.hidden = !show;
+    if(show) n++;
+  });
+  countEl.textContent = n + (n>1 ? " adresses" : " adresse");
+  emptyEl.hidden = n>0;
+}
+
+/* chips pays */
+const ccBox = document.getElementById("chips-country");
+const countries = SPOTS.map(function(s){return s.country;}).filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
+function mkCountryChip(label, val){
+  const b = document.createElement("button");
+  b.className = "chip" + (val===null ? " on" : "");
+  b.type = "button";
+  b.textContent = label;
+  b.addEventListener("click", function(){
+    fCountry = val;
+    ccBox.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on");});
+    b.classList.add("on");
+    apply();
+  });
+  ccBox.appendChild(b);
+}
+mkCountryChip("Tous", null);
+countries.forEach(function(c){ mkCountryChip(c, c); });
+
+/* chips équipements */
+const caBox = document.getElementById("chips-amen");
+Object.keys(AMEN).forEach(function(key){
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.type = "button";
+  b.innerHTML = AMEN[key].icon + "<span>" + AMEN[key].label + "</span>";
+  b.addEventListener("click", function(){
+    if(fAmen.has(key)){ fAmen.delete(key); b.classList.remove("on"); }
+    else { fAmen.add(key); b.classList.add("on"); }
+    apply();
+  });
+  caBox.appendChild(b);
+});
+
+apply();
+</script>
+</body>
+</html>
