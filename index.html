@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mel en off — Le carnet</title>
-<meta name="description" content="Mel en off — mes adresses voyage testées : hôtels, spas, tables. Filtre par pays et par envie.">
+<title>Mel en off · Le carnet</title>
+<meta name="description" content="Mel en off · mes adresses voyage testées : hôtels, spas, tables. Filtre par pays, type et équipement.">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
@@ -55,8 +55,10 @@
 
   /* ---------- offre du moment ---------- */
   .offer-wrap{max-width:560px;margin:38px auto 0}
-  .offer{position:relative;overflow:hidden;background:var(--offer);border:2px dashed var(--terra);border-radius:18px;padding:16px}
-  .offer .ribbon{position:absolute;top:16px;right:-40px;transform:rotate(45deg);background:var(--terra);color:#FBF3E5;font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 44px;box-shadow:0 3px 8px rgba(56,39,24,.2);z-index:2}
+  .offer{position:relative;background:var(--offer);border:2px dashed var(--terra);border-radius:18px;padding:16px}
+  .offer__media{position:relative;border-radius:12px;overflow:hidden}
+  .offer__media .photo{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:linear-gradient(135deg,#EFE4CA,#E3D3AE)}
+  .badge{position:absolute;top:12px;left:12px;background:var(--terra);color:#FBF3E5;padding:7px 14px;border-radius:999px;font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 4px 12px rgba(56,39,24,.32);z-index:2}
   .offer .body{padding:14px 4px 4px}
   .offer .kicker{font-size:1.02rem;display:flex;align-items:center;gap:7px}
   .offer h3{font-family:var(--serif);font-weight:800;color:var(--espresso);font-size:1.42rem;margin:6px 0 8px;line-height:1.1}
@@ -69,6 +71,7 @@
   .pill{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1.5px solid var(--terra);border-radius:999px;padding:5px 11px;white-space:nowrap;flex:none}
   .label{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
   .star{color:var(--terra)}
+  .heart{width:16px;height:16px;color:var(--terra);flex:none}
   .price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin:0 0 14px}
   .price b{font-family:var(--serif);font-weight:800;font-size:1.2rem;color:var(--terra)}
 
@@ -76,14 +79,17 @@
   .dir{margin-top:44px}
   .filters{background:var(--paper);border:1px solid rgba(180,86,47,.16);border-radius:16px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:14px}
   .frow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-  .frow__lab{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);width:96px;flex:none}
+  .frow__lab{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);width:104px;flex:none}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--espresso);border:1.5px solid var(--tan);border-radius:999px;padding:8px 14px;font-family:var(--sans);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .18s ease;line-height:1}
   .chip:hover{border-color:var(--terra)}
   .chip svg{width:17px;height:17px;color:var(--terra);flex:none;transition:color .18s ease}
   .chip.on{background:var(--terra);color:#FBF3E5;border-color:var(--terra)}
   .chip.on svg{color:#FBF3E5}
-  .count{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.95rem;margin:16px 2px 14px}
+  .count-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:16px 2px 14px}
+  .count{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.95rem}
+  .reset{background:none;border:none;color:var(--terra);font-family:var(--sans);font-size:.82rem;font-weight:700;cursor:pointer;padding:0}
+  .reset:hover{text-decoration:underline;text-underline-offset:3px}
 
   /* ---------- grid + cards ---------- */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:20px}
@@ -165,8 +171,10 @@
     <!-- ============ OFFRE DU MOMENT ============ -->
     <section class="offer-wrap">
       <div class="offer">
-        <span class="ribbon">Offre du moment</span>
-        <img class="photo" src="images/bloom.jpg" alt="Bloom House, Paris" loading="lazy" style="border-radius:12px;aspect-ratio:16/10;object-fit:cover">
+        <div class="offer__media">
+          <img class="photo" src="images/bloom.jpg" alt="Bloom House, Paris" loading="lazy">
+          <span class="badge">Offre du moment</span>
+        </div>
         <div class="body">
           <div class="kicker"><span class="script">ne la rate pas</span> <span class="star">✦</span></div>
           <h3>Bloom House · Paris</h3>
@@ -183,11 +191,12 @@
       <div class="sec-head"><h2>Le carnet</h2></div>
       <div class="filters">
         <div class="frow"><span class="frow__lab">Pays</span><div class="chips" id="chips-country"></div></div>
+        <div class="frow"><span class="frow__lab">Type</span><div class="chips" id="chips-type"></div></div>
         <div class="frow"><span class="frow__lab">Équipements</span><div class="chips" id="chips-amen"></div></div>
       </div>
-      <div class="count" id="count"></div>
+      <div class="count-row"><span class="count" id="count"></span><button class="reset" id="reset" type="button" hidden>Réinitialiser</button></div>
       <div class="grid" id="grid"></div>
-      <div class="empty" id="empty" hidden>Aucune adresse ne correspond — enlève un filtre ✨</div>
+      <div class="empty" id="empty" hidden>Aucune adresse ne correspond, enlève un filtre ✨</div>
     </section>
 
     <!-- ============ FOOTER PAR-AVION ============ -->
@@ -202,7 +211,7 @@
         </form>
         <div class="social"><a href="#">Instagram</a><a href="#">TikTok</a></div>
         <a class="mail" href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a>
-        <div class="aff">Certains liens sont affiliés — merci de me soutenir ♡</div>
+        <div class="aff">Certains liens sont affiliés, merci de me soutenir ♡</div>
       </div>
     </footer>
 
@@ -217,17 +226,18 @@ const AMEN = {
   massage:{label:"Massage", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7.5" r="2.3"/><path d="M3.5 20c1.6-4 4.8-6.5 9-6.5 2 0 3.4.5 4.5 1.3"/><path d="M14.3 12.8c1-.9 2.3-1.1 3.5-.6M15.8 15.4c1-.9 2.3-1.1 3.5-.6"/></svg>'},
   hammam:{label:"Hammam", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><path d="M5.5 20.5a6.5 6.5 0 0 1 13 0"/><path d="M9 6.5c-.9-.9-.9-1.9 0-2.8M12 6.5c-.9-.9-.9-1.9 0-2.8M15 6.5c-.9-.9-.9-1.9 0-2.8"/></svg>'}
 };
+const HEART = '<svg class="heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
 
-/* ===== Mes adresses (ajoute/duplique librement) ===== */
+/* ===== Mes adresses (ajoute / duplique librement) ===== */
 const SPOTS = [
+  {name:"Château de Maubreuil", city:"Carquefou", country:"France", type:"Hôtel", fav:true,
+   desc:"Château 5 étoiles aux portes de Nantes : parc majestueux, spa et grande table.",
+   price:'À partir de <b>240€</b> · la nuit', img:"images/maubreuil.jpg",
+   amenities:["spa","piscine","hammam","massage"], link:"#"},
   {name:"The Hotel Brussels", city:"Bruxelles", country:"Belgique", type:"Hôtel", fav:false,
-   desc:"Vue plongeante sur la ville depuis les étages hauts — design & central.",
+   desc:"Vue plongeante sur la ville depuis les étages hauts, design et central.",
    price:'À partir de <b>145€</b> · la nuit', img:"images/the-hotel-brussels.jpg",
    amenities:["piscine","spa","hammam"], link:"#"},
-  {name:"Roscioli", city:"Rome", country:"Italie", type:"Table", fav:true,
-   desc:"La meilleure carbonara de ma vie, au comptoir. Réserve à l'avance.",
-   price:'À partir de <b>35€</b> · par personne', img:"images/roscioli.jpg",
-   amenities:[], link:"#"},
   {name:"Riad Melhoun", city:"Marrakech", country:"Maroc", type:"Riad", fav:true,
    desc:"Patio, plunge pool et hammam privatif au cœur de la médina.",
    price:'À partir de <b>120€</b> · la nuit', img:null,
@@ -236,7 +246,7 @@ const SPOTS = [
    desc:"Piscine à débordement face à la mer Égée, ambiance bohème et douce.",
    price:'À partir de <b>160€</b> · la nuit', img:null,
    amenities:["piscine","spa"], link:"#"},
-  {name:"Le Bain Douche", city:"Paris", country:"France", type:"Table", fav:false,
+  {name:"Le Bain Douche", city:"Paris", country:"France", type:"Restaurant", fav:false,
    desc:"Institution parisienne, cuisine de marché et ambiance feutrée.",
    price:'À partir de <b>45€</b> · par personne', img:null,
    amenities:[], link:"#"}
@@ -257,9 +267,9 @@ const cards = SPOTS.map(function(s){
     ? '<img class="photo" src="'+s.img+'" alt="'+s.name+'" loading="lazy">'
     : '<div class="photo photo--ph"><span>'+s.city+'</span></div>';
   const cc = s.fav
-    ? '<span class="star">★</span> <span class="script">coup de cœur</span>'
+    ? HEART+' <span class="script">coup de cœur</span>'
     : '<span class="script">à découvrir</span>';
-  const btn = (s.type==="Table") ? "Voir la table" : "Réserver";
+  const btn = (s.type==="Restaurant") ? "Voir la table" : "Réserver";
   el.innerHTML =
     photo +
     '<div class="card__top"><span class="cc">'+cc+'</span><span class="pill">'+s.type+'</span></div>'+
@@ -270,49 +280,56 @@ const cards = SPOTS.map(function(s){
     '<div class="price">'+s.price+'</div>'+
     '<a class="btn" href="'+s.link+'" rel="nofollow sponsored">'+btn+' <span>↗</span></a>';
   grid.appendChild(el);
-  return {el:el, country:s.country, amenities:s.amenities};
+  return {el:el, country:s.country, type:s.type, amenities:s.amenities};
 });
 
 /* ===== Filtres ===== */
-let fCountry = null;
+let fCountry = null, fType = null;
 const fAmen = new Set();
 const countEl = document.getElementById("count");
 const emptyEl = document.getElementById("empty");
+const resetEl = document.getElementById("reset");
 
 function apply(){
   let n = 0;
   cards.forEach(function(c){
     const okC = !fCountry || c.country===fCountry;
+    const okT = !fType || c.type===fType;
     let okA = true;
     fAmen.forEach(function(a){ if(c.amenities.indexOf(a)<0) okA = false; });
-    const show = okC && okA;
+    const show = okC && okT && okA;
     c.el.hidden = !show;
     if(show) n++;
   });
   countEl.textContent = n + (n>1 ? " adresses" : " adresse");
   emptyEl.hidden = n>0;
+  resetEl.hidden = !(fCountry || fType || fAmen.size);
 }
 
-/* chips pays */
-const ccBox = document.getElementById("chips-country");
-const countries = SPOTS.map(function(s){return s.country;}).filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
-function mkCountryChip(label, val){
-  const b = document.createElement("button");
-  b.className = "chip" + (val===null ? " on" : "");
-  b.type = "button";
-  b.textContent = label;
-  b.addEventListener("click", function(){
-    fCountry = val;
-    ccBox.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on");});
-    b.classList.add("on");
-    apply();
-  });
-  ccBox.appendChild(b);
-}
-mkCountryChip("Tous", null);
-countries.forEach(function(c){ mkCountryChip(c, c); });
+function uniq(arr){ return arr.filter(function(v,i,a){return a.indexOf(v)===i;}); }
 
-/* chips équipements */
+/* chips à choix unique (pays, type) */
+function singleChips(box, values, onPick){
+  function mk(label, val, active){
+    const b = document.createElement("button");
+    b.className = "chip" + (active ? " on" : "");
+    b.type = "button";
+    b.textContent = label;
+    b.addEventListener("click", function(){
+      box.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      onPick(val);
+      apply();
+    });
+    box.appendChild(b);
+  }
+  mk("Tous", null, true);
+  values.forEach(function(v){ mk(v, v, false); });
+}
+singleChips(document.getElementById("chips-country"), uniq(SPOTS.map(function(s){return s.country;})).sort(), function(v){ fCountry = v; });
+singleChips(document.getElementById("chips-type"), uniq(SPOTS.map(function(s){return s.type;})).sort(), function(v){ fType = v; });
+
+/* chips équipements (multi) */
 const caBox = document.getElementById("chips-amen");
 Object.keys(AMEN).forEach(function(key){
   const b = document.createElement("button");
@@ -325,6 +342,18 @@ Object.keys(AMEN).forEach(function(key){
     apply();
   });
   caBox.appendChild(b);
+});
+
+/* réinitialiser */
+resetEl.addEventListener("click", function(){
+  fCountry = null; fType = null; fAmen.clear();
+  ["chips-country","chips-type"].forEach(function(id){
+    const chips = document.getElementById(id).querySelectorAll(".chip");
+    chips.forEach(function(x){ x.classList.remove("on"); });
+    if(chips[0]) chips[0].classList.add("on");
+  });
+  caBox.querySelectorAll(".chip").forEach(function(x){ x.classList.remove("on"); });
+  apply();
 });
 
 apply();
