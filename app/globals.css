@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Mel en off, carnet de voyage. Design system.
+   Mobile-first, dessine a 390px, desktop en elargissement.
+   ========================================================= */
+
+@layer base {
+  :root {
+    --papier: #fbf6ec;
+    --carte: #fffdfa;
+    --sable: #f6efe5;
+    --bord: #e9ddcc;
+    --bord2: #dcc9ac;
+    --terracotta: #c0755a;
+    --vert: #23483c;
+    --brique: #a34f3c;
+    --dore: #e3cfa8;
+    --dore2: #8c6a3f;
+    --encre: #241e1a;
+    --texte: #4a403a;
+    --texte2: #8c7f73;
+    --texte3: #9c8768;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    color: var(--texte);
+    background-color: var(--papier);
+    /* Trame de points discrete facon papier a pois */
+    background-image: radial-gradient(rgba(160, 140, 110, 0.13) 1px, transparent 1px);
+    background-size: 14px 14px;
+    font-family: var(--font-karla), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--dore);
+    color: var(--encre);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* --- Typographie --- */
+  .h1 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 1.04;
+    color: var(--encre);
+    letter-spacing: -0.01em;
+  }
+  .h2 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--encre);
+  }
+  .h3 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1.15;
+    color: var(--encre);
+  }
+  .surtitre {
+    font-family: var(--font-karla), sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--texte3);
+  }
+  .signature {
+    font-family: var(--font-belle), cursive;
+    line-height: 1;
+  }
+
+  /* --- Surfaces --- */
+  .carte {
+    background: var(--carte);
+    border: 1px solid var(--bord);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(70, 52, 30, 0.05);
+  }
+
+  /* --- Double filet en tete de section --- */
+  .filets {
+    height: 4px;
+    border-top: 1px solid var(--bord2);
+    border-bottom: 1px solid var(--bord2);
+  }
+  .filets-clair {
+    height: 4px;
+    border-top: 1px solid rgba(255, 253, 250, 0.4);
+    border-bottom: 1px solid rgba(255, 253, 250, 0.4);
+  }
+
+  /* --- Separateur centre par une fleur --- */
+  .sep-fleur {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--terracotta);
+  }
+  .sep-fleur::before,
+  .sep-fleur::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--bord2);
+  }
+
+  /* --- Photo posee comme un tirage --- */
+  .tirage {
+    background: #fff;
+    padding: 9px;
+    box-shadow: 0 10px 24px rgba(70, 52, 30, 0.14);
+    border-radius: 3px;
+  }
+  .tirage-gauche {
+    transform: rotate(-2deg);
+  }
+  .tirage-droite {
+    transform: rotate(2deg);
+  }
+
+  /* --- Tampon rond incline --- */
+  .tampon {
+    font-family: var(--font-karla), sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--terracotta);
+    border: 1.5px solid var(--terracotta);
+    border-radius: 999px;
+    width: 74px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px;
+    background: rgba(251, 246, 236, 0.72);
+    transform: rotate(-12deg);
+  }
+
+  /* --- Puces (chips) --- */
+  .puce {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--bord2);
+    background: var(--carte);
+    color: var(--texte);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .puce[aria-pressed="true"],
+  .puce.active {
+    background: var(--vert);
+    border-color: var(--vert);
+    color: var(--papier);
+  }
+  .puce-contour {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    min-height: 30px;
+    border-radius: 999px;
+    border: 1px solid var(--bord2);
+    background: transparent;
+    color: var(--texte2);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .puce-brique {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(163, 79, 60, 0.16);
+    border: 1px solid rgba(163, 79, 60, 0.5);
+    color: #f2d9d0;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* --- Boutons pilule, cible minimale 44px --- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-family: var(--font-karla), sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.06s ease, opacity 0.15s ease;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-vert {
+    background: var(--vert);
+    color: var(--papier);
+    border: 1px solid var(--vert);
+  }
+  .btn-terracotta {
+    background: var(--terracotta);
+    color: #fff;
+    border: 1px solid var(--terracotta);
+  }
+  .btn-contour {
+    background: transparent;
+    color: var(--vert);
+    border: 1px solid var(--vert);
+  }
+  .btn-contour-clair {
+    background: transparent;
+    color: var(--papier);
+    border: 1px solid rgba(251, 246, 236, 0.5);
+  }
+
+  /* --- Bouton rond 44px --- */
+  .btn-rond {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--bord2);
+    background: var(--carte);
+    color: var(--encre);
+    cursor: pointer;
+  }
+
+  /* --- Champ de saisie --- */
+  .champ {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    border-radius: 16px;
+    border: 1px solid var(--bord2);
+    background: var(--carte);
+    color: var(--texte);
+    font-size: 16px;
+    font-family: var(--font-karla), sans-serif;
+  }
+  textarea.champ {
+    padding: 14px 16px;
+    line-height: 1.55;
+    resize: vertical;
+  }
+  .champ::placeholder {
+    color: var(--texte3);
+  }
+
+  /* --- Citation a filet gauche --- */
+  .citation {
+    border-left: 2px solid var(--terracotta);
+    padding-left: 14px;
+    color: var(--texte);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@layer utilities {
+  /* Masquer la barre de defilement du carrousel */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* =========================================================
+   Animations (touche luxe). Desactivees si l'utilisateur
+   prefere reduire les animations.
+   ========================================================= */
+@keyframes montee {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes traitPousse {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Apparition au defilement, pilotee par le composant Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Entree du hero, en cascade */
+.anim-hero {
+  animation: montee 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.anim-d1 {
+  animation-delay: 0.08s;
+}
+.anim-d2 {
+  animation-delay: 0.18s;
+}
+.anim-d3 {
+  animation-delay: 0.28s;
+}
+.anim-d4 {
+  animation-delay: 0.38s;
+}
+
+/* Le trait terracotta qui se dessine sous le titre */
+.trait-anim {
+  transform-origin: left center;
+  animation: traitPousse 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s both;
+}
+
+/* Micro-lift des cartes (uniquement sur appareils a survol, jamais requis) */
+@media (hover: hover) {
+  .lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px rgba(70, 52, 30, 0.1);
+  }
+  .btn {
+    transition: transform 0.06s ease, filter 0.2s ease, opacity 0.15s ease;
+  }
+  .btn:hover {
+    filter: brightness(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .anim-hero,
+  .trait-anim {
+    animation: none;
+  }
+}
