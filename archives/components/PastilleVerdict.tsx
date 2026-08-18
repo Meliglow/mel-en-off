@@ -1,4 +1,4 @@
-import { Verdict, labelVerdict } from "@/lib/types";
+import { Verdict, labelVerdict } from "@/archives/lib/types";
 
 const STYLES: Record<Verdict, string> = {
   "coup de coeur": "bg-vert text-papier",

@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LIEUX } from "@/lib/data";
-import { appliquer, bascule, ecrireFiltres } from "@/lib/filtres";
+import { LIEUX } from "@/archives/lib/data";
+import { appliquer, bascule, ecrireFiltres } from "@/archives/lib/filtres";
 import {
   AUDIENCES,
   Budget,
@@ -14,18 +14,9 @@ import {
   Filtres,
   PAYS,
   villesPour,
-} from "@/lib/types";
+} from "@/archives/lib/types";
 
-const RECENTES: { label: string; filtres: Filtres }[] = [
-  {
-    label: "Restaurants à Lisbonne",
-    filtres: { country: ["Portugal"], city: ["Lisbonne"], cat: ["restaurant"], budget: [], tags: [] },
-  },
-  {
-    label: "Spas, budget €€€",
-    filtres: { country: [], city: [], cat: ["spa"], budget: ["€€€"], tags: [] },
-  },
-];
+const RECENTES: { label: string; filtres: Filtres }[] = [];
 
 export default function EcranRecherche() {
   const router = useRouter();

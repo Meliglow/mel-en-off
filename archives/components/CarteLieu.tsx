@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lieu, labelCategorie } from "@/lib/types";
+import { Lieu, labelCategorie } from "@/archives/lib/types";
 import Placeholder from "./Placeholder";
 import PastilleVerdict from "./PastilleVerdict";
 

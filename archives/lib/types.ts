@@ -19,12 +19,12 @@ export interface Lieu {
   sponsored: boolean;
   quartier?: string;
   reservation?: string;
-  horaires?: string; // ex "Tous les jours, 19h-23h"
-  adresse?: string; // ex "Rue de la Kasbah, Marrakech"
-  tel?: string; // ex "+212 524 00 12 34"
-  site?: string; // lien du site officiel, ex "https://riadyasmine.com"
-  photos?: string[]; // chemins dans /public, ex ["/lieux/riad-1.jpg"]. Si vide, emplacement affiche.
-  video?: string; // chemin d'une video dans /public, ex "/lieux/riad.mp4"
+  horaires?: string; // horaires d'ouverture
+  adresse?: string; // adresse postale complete
+  tel?: string; // numero de telephone
+  site?: string; // lien du site officiel, adresse du site officiel
+  photos?: string[]; // chemins dans /public, chemins dans le dossier public. Si vide, emplacement affiche.
+  video?: string; // chemin d'une video dans /public, chemin dans le dossier public
 }
 
 export interface Filtres {
@@ -43,15 +43,9 @@ export const CATEGORIES: { value: Categorie; label: string; labelSing: string }[
 ];
 
 // Hierarchie pays -> villes
-export const PAYS = ["Maroc", "France", "Portugal", "Indonésie", "Belgique"];
+export const PAYS: string[] = [];
 
-export const VILLES_PAR_PAYS: Record<string, string[]> = {
-  Maroc: ["Marrakech"],
-  France: ["Paris"],
-  Portugal: ["Lisbonne"],
-  Indonésie: ["Bali"],
-  Belgique: ["Bruxelles"],
-};
+export const VILLES_PAR_PAYS: Record<string, string[]> = {};
 
 export const VILLES = Object.values(VILLES_PAR_PAYS).flat();
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { LIEUX } from "@/lib/data";
-import { appliquer, bascule, FILTRES_VIDES } from "@/lib/filtres";
+import { LIEUX } from "@/archives/lib/data";
+import { appliquer, bascule, FILTRES_VIDES } from "@/archives/lib/filtres";
 import {
   AUDIENCE_TAGS,
   AUDIENCES,
@@ -13,7 +13,7 @@ import {
   Filtres,
   PAYS,
   villesPour,
-} from "@/lib/types";
+} from "@/archives/lib/types";
 
 export default function PanneauFiltres({
   initial,

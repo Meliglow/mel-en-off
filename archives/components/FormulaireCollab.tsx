@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { bascule } from "@/lib/filtres";
+import { bascule } from "@/archives/lib/filtres";
 
 const TYPES_LIEU = ["Restaurant", "Spa", "Hôtel ou maison d'hôtes", "Activité"];
 const SOUHAITS = [
@@ -69,7 +69,7 @@ export default function FormulaireCollab() {
           <label htmlFor="collab-ville" className="surtitre">
             Ville
           </label>
-          <input id="collab-ville" className="champ mt-2" value={ville} onChange={(e) => setVille(e.target.value)} placeholder="Marrakech, Paris..." />
+          <input id="collab-ville" className="champ mt-2" value={ville} onChange={(e) => setVille(e.target.value)} placeholder="La ville de votre établissement" />
         </div>
         <div>
           <label htmlFor="collab-nom" className="surtitre">

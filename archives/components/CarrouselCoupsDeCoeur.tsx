@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Categorie, CATEGORIES, Lieu } from "@/lib/types";
+import { Categorie, CATEGORIES, Lieu } from "@/archives/lib/types";
 import CarteLieu from "./CarteLieu";
 import Puce from "./Puce";
 

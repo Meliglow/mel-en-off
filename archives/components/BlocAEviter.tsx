@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lieu, labelCategorie } from "@/lib/types";
+import { Lieu, labelCategorie } from "@/archives/lib/types";
 
 // Bloc sur fond encre. N'est rendu qu'apres un filtrage suffisant (voir ResultatsClient).
 export default function BlocAEviter({
