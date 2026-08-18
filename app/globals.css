@@ -562,9 +562,10 @@
     clip-path: inset(0 -2% 0 0);
   }
 }
-.note-marge-texte.attente {
-  clip-path: inset(0 100% 0 0);
-}
+/* Regle de securite : le texte n'est JAMAIS masque par defaut. Seule la classe
+   .visible declenche le trace, en partant du masque. Si l'observateur ne se
+   declenche pas, le texte est simplement la, sans animation. Jamais de bloc
+   vide. */
 .note-marge-texte.visible {
   animation: ecrire 1.4s cubic-bezier(0.32, 0.72, 0.35, 1) both;
 }
@@ -597,11 +598,8 @@
   transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Le tampon dateur ne s'encre qu'une fois entre dans l'ecran.
-   Il attend hors champ, sinon on le verrait apparaitre puis se rejouer. */
-.tampon-date.attente {
-  opacity: 0;
-}
+/* Meme regle de securite pour le tampon : lisible par defaut, l'encrage part
+   du transparent uniquement quand .visible arrive. */
 .tampon-date.visible {
   animation: encrer 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
@@ -668,8 +666,7 @@
   .tampon-date.visible {
     animation: none;
   }
-  .tampon-date,
-  .tampon-date.attente {
+  .tampon-date {
     opacity: 0.82;
     transform: rotate(-8deg);
   }
@@ -690,7 +687,6 @@
   }
   /* L'ecriture de la note s'affiche entiere, sans se tracer. */
   .note-marge-texte,
-  .note-marge-texte.attente,
   .note-marge-texte.visible {
     animation: none;
     clip-path: none;

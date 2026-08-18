@@ -15,9 +15,9 @@ export default function TamponDate({ date }: { date: string }) {
   return (
     <span
       ref={ref}
-      className={`tampon-date ${etat === "attente" ? "attente" : ""} ${
-        etat === "visible" ? "visible" : ""
-      } ${etat === "immediat" ? "immediat" : ""}`}
+      className={`tampon-date ${etat === "visible" ? "visible" : ""} ${
+        etat === "immediat" ? "immediat" : ""
+      }`}
     >
       Testé en
       <b>{moisEtAnnee(date)}</b>

@@ -25,9 +25,7 @@ export default function NoteEnMarge() {
         <Trombone className="absolute -top-4 right-5 h-11 w-5 text-texte3" />
         <p
           ref={ref}
-          className={`note-marge-texte ${etat === "attente" ? "attente" : ""} ${
-            etat === "visible" ? "visible" : ""
-          }`}
+          className={`note-marge-texte ${etat === "visible" ? "visible" : ""}`}
         >
           {texte}
         </p>
