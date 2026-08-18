@@ -39,7 +39,9 @@ export default function Polaroid({
         src={src}
         alt={alt}
         loading={premierEcran ? "eager" : "lazy"}
-        fetchPriority={premierEcran ? "high" : "auto"}
+        // React 18 ne transmet pas fetchPriority en camelCase : on passe
+        // l attribut HTML tel quel.
+        {...{ fetchpriority: premierEcran ? "high" : "auto" }}
         decoding="async"
       />
       <figcaption>
