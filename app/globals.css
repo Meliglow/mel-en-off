@@ -418,7 +418,7 @@
     border-radius: 3px;
     background-color: var(--carte);
     padding: 18px 44px 20px 34px;
-    background-position: 0 39px;
+    background-position: 0 18px;
   }
   .note-marge::before {
     content: "";

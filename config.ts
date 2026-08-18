@@ -69,7 +69,7 @@ export const TITRES_DU_DIMANCHE: string[] = [
    ------------------------------------------------------------------------- */
 export const RESEAUX = {
   instagram: "https://instagram.com/melenoff",
-  tiktok: "https://tiktok.com/@melenoff",
+  tiktok: "https://tiktok.com/@mel_enoff",
 };
 
 /* -------------------------------------------------------------------------

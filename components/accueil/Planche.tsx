@@ -35,10 +35,6 @@ export default function Planche() {
           </Reveal>
         ))}
       </div>
-
-      <p className="mt-6 max-w-lecture text-[15px] italic leading-relaxed text-texte2">
-        Mais tout ne passe pas sur les réseaux. Le carnet complet est dans la lettre.
-      </p>
     </section>
   );
 }

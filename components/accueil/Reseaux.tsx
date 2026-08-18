@@ -49,7 +49,7 @@ const COMPTES = [
   },
   {
     nom: "TikTok",
-    pseudo: "@melenoff",
+    pseudo: "@mel_enoff",
     lien: RESEAUX.tiktok,
     phrase: "Les tests en vidéo, sur place, sans montage flatteur.",
     icone: <IconTikTok />,

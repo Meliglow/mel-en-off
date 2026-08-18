@@ -48,9 +48,11 @@ export default function Hero() {
         <div>
           <IconEnveloppe />
 
-          {/* Le titre est ecrit a la main, comme la signature. */}
-          <h1 className="mt-3 font-main text-[54px] leading-[1.05] text-encre carnet:text-[64px]">
-            EN <span className="surligne">OFF</span>
+          {/* Le serif du site, agrandi. L'ecriture a la main tenait la
+              signature, pas un titre : trop haute sur la ligne, le surlignage
+              tombait sous les lettres et ca devenait illisible. */}
+          <h1 className="h1 mt-3 text-[42px] carnet:text-[54px]">
+            La <span className="surligne">lettre</span>
           </h1>
 
           <p className="mt-4 max-w-lecture text-[15px] leading-relaxed text-texte">
