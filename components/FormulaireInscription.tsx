@@ -51,12 +51,6 @@ export default function FormulaireInscription({
         return;
       }
 
-      // Sert uniquement aux trois questions de la page /merci.
-      try {
-        sessionStorage.setItem("en-off-email", email.trim().toLowerCase());
-      } catch {
-        // Navigation privee : ce n'est pas grave, les questions seront masquees.
-      }
       router.push("/merci");
     } catch {
       setErreur("La connexion a échoué. Réessaie dans un instant.");

@@ -27,9 +27,7 @@ export default function ConfidentialitePage() {
         <div>
           <h2 className="h3">Ce que je collecte</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Quand tu t&apos;inscris à la lettre : ton prénom et ton email. Si tu réponds aux trois
-            questions après ton inscription, la destination, la compagnie et l&apos;intention que tu
-            as choisies. Rien d&apos;autre.
+            Quand tu t&apos;inscris à la lettre : ton prénom et ton email. Rien d&apos;autre.
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Quand un professionnel écrit depuis la page Collaborations : son nom, son
@@ -91,9 +89,8 @@ export default function ConfidentialitePage() {
             a pas de bandeau à accepter.
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Une seule information technique est gardée par ton navigateur, le temps de ta visite :
-            ton email, juste après l&apos;inscription, pour pouvoir rattacher tes réponses aux trois
-            questions. Elle disparaît quand tu fermes l&apos;onglet.
+            Ton navigateur ne garde rien non plus : aucune donnée n&apos;est stockée sur ton
+            appareil par ce site.
           </p>
         </div>
       </section>
