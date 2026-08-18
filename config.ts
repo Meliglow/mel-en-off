@@ -113,15 +113,9 @@ export const PHOTOS_PLANCHE = [
    UNE SEULE par page, jamais deux. Deux ou trois lignes maximum.
    Texte vide : la note ne s'affiche pas du tout.
    ------------------------------------------------------------------------- */
-export const NOTE_EN_MARGE = "";
-
-/* Exemple :
-
 export const NOTE_EN_MARGE =
   "À Abidjan, le prix du taxi se fixe avant de monter, jamais en arrivant. " +
   "Trois fois sur quatre, ça divise la course par deux.";
-
-*/
 
 /* -------------------------------------------------------------------------
    7. LA LISTE EN OFF (MailerLite)
