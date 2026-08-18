@@ -73,6 +73,15 @@ export const RESEAUX = {
 };
 
 /* -------------------------------------------------------------------------
+   3 bis. LE NOMBRE D'INSCRITS (sous la promesse du hero)
+
+   S'affiche en gras juste sous le texte. Laisser vide pour ne rien afficher.
+   A ne renseigner que si le chiffre est vrai : tout le site repose sur le
+   fait que ce qui est ecrit est verifie.
+   ------------------------------------------------------------------------- */
+export const NOMBRE_INSCRITS = "+600 inscrits";
+
+/* -------------------------------------------------------------------------
    4. LE PORTRAIT DE MEL (en haut de la page d'accueil)
 
    Le fichier se depose dans public/photos/, comme les autres.

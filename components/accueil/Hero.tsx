@@ -2,7 +2,7 @@ import FormulaireInscription from "@/components/FormulaireInscription";
 import Polaroid from "@/components/Polaroid";
 import { compteurs } from "@/lib/adresses";
 import { cheminPhoto } from "@/lib/types";
-import { PORTRAIT_MEL } from "@/config";
+import { NOMBRE_INSCRITS, PORTRAIT_MEL } from "@/config";
 
 function IconEnveloppe() {
   return (
@@ -73,12 +73,9 @@ export default function Hero() {
                 La <span className="surligne-main">lettre</span>
               </h1>
 
-              <p className="signature mt-1 text-[28px] leading-tight text-terracotta carnet:mt-3 carnet:text-[30px]">
-                Mel
-              </p>
             </div>
 
-            {portrait && <div className="w-[124px] shrink-0 carnet:hidden">{photo(false)}</div>}
+            {portrait && <div className="w-[150px] shrink-0 carnet:hidden">{photo(false)}</div>}
           </div>
 
           <p className="mt-5 max-w-lecture text-[15px] leading-relaxed text-texte carnet:mt-4">
@@ -89,6 +86,15 @@ export default function Hero() {
             que j&apos;ai testées. Je teste, je note la date, je te dis ce que j&apos;en pense. Tu
             n&apos;as plus qu&apos;à réserver.
           </p>
+
+          {/* La signature ferme le texte, comme au bas d'une lettre. */}
+          <p className="signature mt-4 text-[28px] leading-tight text-terracotta carnet:text-[30px]">
+            Mel
+          </p>
+
+          {NOMBRE_INSCRITS.trim() !== "" && (
+            <p className="mt-3 text-[16px] font-bold text-encre">{NOMBRE_INSCRITS}</p>
+          )}
 
           {/* Le compteur vient des donnees. Source vide, pas de compteur. */}
           {testees > 0 && (
