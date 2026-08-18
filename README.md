@@ -1,93 +1,133 @@
-# Mel en off ✦
+# EN OFF, melnourdi.fr
 
-Le carnet d'adresses de voyage de **Mel Nourdi**. Restaurants, spas, hôtels et activités testés pour de vrai, avec les coups de cœur et les adresses à éviter, ville par ville.
+La page d'accueil a un seul travail : collecter des emails pour la lettre **EN OFF**. Le
+reste du site, ce sont les pages de contenu qui donnent envie de s'inscrire.
 
-Application **Next.js (App Router) + TypeScript + Tailwind**, pensée mobile d'abord (dessinée à 390px), le desktop est un simple élargissement.
+---
 
-> L'ancienne landing statique reste dans le repo sous `index.html` (sauvegarde). Vercel déploie désormais l'app Next.js.
-
-## Lancer en local
-
-```bash
-npm install
-npm run dev      # http://localhost:3000
-```
-
-```bash
-npm run build && npm start   # build de production
-```
-
-## Structure
-
-```
-app/
-  layout.tsx            polices (Cormorant, Karla, La Belle Aurore) + canevas mobile
-  page.tsx              accueil : Hero, coups de cœur, recherche, newsletter
-  resultats/            le carnet filtrable (état des filtres dans l'URL)
-  lieux/[id]/           fiche d'un lieu (galerie, avis, similaires)
-  collab/               formulaire de collaboration
-  globals.css          design system (couleurs, typo, vocabulaire carnet)
-components/             Hero, CarrouselCoupsDeCoeur, CarteLieu, Puce, PastilleVerdict,
-                        BarreFiltres, PanneauFiltres, BlocAEviter, Newsletter, FormulaireCollab...
-lib/
-  types.ts             types + libellés (Categorie, Verdict, Budget, Filtres)
-  data.ts              LIEUX : le tableau des adresses (à éditer)
-  filtres.ts           lecture/écriture des filtres dans l'URL + application
-```
+# Partie 1, pour Mel
 
 ## Ajouter ou modifier une adresse
 
-Tout se passe dans **`lib/data.ts`**. Chaque lieu suit ce format :
+1. Ouvre ton **Google Sheet**, ajoute ta ligne, ou corrige celle qui existe.
+2. Ouvre le **lien de republication** (voir plus bas), le site se remet à jour tout seul en
+   une minute environ.
 
-```ts
-{
-  id: "slug-unique",
-  name: "Nom du lieu",
-  city: "Marrakech",           // doit exister dans VILLES (lib/types.ts)
-  country: "Maroc",
-  cat: "restaurant",           // restaurant | spa | hotel | activite
-  verdict: "coup de coeur",    // coup de coeur | correct | a eviter
-  budget: "€€",                // € | €€ | €€€
-  tags: ["rooftop", "local"],  // ambiance, alimente les filtres
-  reasons: [],                 // motifs, seulement si verdict = "a eviter"
-  accroche: "Une phrase courte pour le carrousel.",
-  note: "Mon avis long, à la première personne.",
-  sponsored: false,            // true = badge doré « Mise en avant »
-  quartier: "Kasbah",
-  reservation: "Conseillée le soir",
-}
+Tu n'as jamais besoin de toucher au code pour ça.
+
+### Les colonnes du tableau, dans l'ordre
+
+| Colonne | Ce qu'on y met |
+|---|---|
+| `nom` | le nom du lieu |
+| `ville` | la ville, écrite pareil à chaque fois |
+| `pays` | le pays |
+| `categorie` | `spa`, `restaurant`, `hotel`, `petit-dejeuner`... écris `spa` pour que ça remonte dans la page Spas |
+| `zone` | la région ou le quartier, par exemple `Île-de-France` |
+| `scene` | la scène, ce qu'on voit et ce qu'on ressent en arrivant |
+| `verdict` | ton verdict, en une ou deux phrases |
+| `a_savoir_avant` | ce qu'il faut savoir avant d'y aller |
+| `prix_paye` | ce que tu as payé, par exemple `90 EUR` |
+| `date_du_test` | **obligatoire**, format `2026-06-12` ou `12/06/2026` |
+| `invitee` | `oui` si tu as été invitée, sinon `non` |
+| `recalee` | `oui` si tu ne recommandes pas, sinon `non` |
+| `slug_page` | à laisser vide, il se remplit tout seul |
+| `photo` | le nom du fichier photo, rien d'autre |
+
+**La seule règle qui ne se négocie pas** : une adresse **sans date de test ne s'affiche
+jamais**. Ce n'est pas un bug, c'est le principe du site.
+
+## Ajouter une photo
+
+Tout est expliqué dans [`public/photos/LISEZ-MOI.md`](public/photos/LISEZ-MOI.md). En
+résumé : tu déposes le fichier dans `public/photos/` depuis GitHub, tu le nommes
+`[ville]-[categorie]-[nom-du-lieu]-[aaaammjj].webp`, et tu recopies ce nom dans la colonne
+`photo`.
+
+Une adresse sans photo s'affiche quand même, avec un aplat de couleur. Rien ne casse.
+
+## Changer les textes de la page d'accueil
+
+Tout se passe dans **un seul fichier**, [`config.ts`](config.ts), commenté ligne à ligne :
+
+- la **ville du moment** mise en avant
+- les **trois titres du dimanche**, à changer chaque semaine
+- les **liens Instagram et TikTok**
+- les **identifiants de groupes MailerLite**
+- l'**adresse de contact** des professionnels
+- les **destinations proposées** après l'inscription
+
+Tu modifies, tu enregistres sur GitHub, le site se republie seul.
+
+---
+
+# Partie 2, technique
+
+## La stack
+
+Next.js 14 (App Router) + TypeScript + Tailwind. Trois dépendances de production : `next`,
+`react`, `react-dom`, plus `nodemailer` pour le formulaire professionnel. Aucun CMS, aucune
+base de données, aucun ORM, aucun script de mesure d'audience.
+
+## Les commandes
+
+```bash
+npm install
+npm run dev                 # http://localhost:3000
+npm run build               # build de production, synchronise le Sheet avant
+npm run sync-adresses       # récupère le Sheet, valide, réécrit l'instantané
+npm run optimiser-images    # convertit public/photos en WebP sous 200 Ko
 ```
 
-Pour ajouter une **ville** ou une **catégorie** de filtre : `VILLES` / `CATEGORIES` dans `lib/types.ts`.
+## D'où viennent les adresses
 
-## Photos (à remplacer)
+1. La source de vérité est un **Google Sheet publié au format CSV**, dont l'adresse vit
+   dans `SHEET_ADRESSES_CSV_URL`.
+2. Il est lu **au build**, jamais à la visite.
+3. `data/adresses.json` est l'**instantané versionné**. Si le Sheet est injoignable ou
+   malformé au build, le site se construit quand même avec le dernier instantané valide et
+   affiche un avertissement.
+4. `npm run sync-adresses` fait le tour complet : récupération, validation ligne à ligne,
+   réécriture de l'instantané. Toute ligne sans `date_du_test` est écartée et nommée dans
+   la sortie, comme les photos annoncées mais absentes.
 
-Le site utilise des **emplacements** clairement étiquetés (rôle + ratio), pas de photos générées. Pour mettre les vraies images :
+## Les variables d'environnement
 
-1. Déposer les fichiers dans **`public/`** (ex. `public/portrait-mel.jpg`).
-2. Remplacer le composant `Placeholder` par une image aux endroits voulus.
+À créer sur Vercel, pour les trois environnements (Production, Preview, Development).
 
-Emplacements prévus :
+| Variable | À quoi elle sert |
+|---|---|
+| `SHEET_ADRESSES_CSV_URL` | l'adresse du Google Sheet publié en CSV |
+| `MAILERLITE_API_KEY` | la clé d'API MailerLite, **jamais** dans le code client |
+| `SMTP_USER` | l'adresse Google Workspace qui envoie les messages professionnels |
+| `SMTP_PASSWORD` | son mot de passe d'application |
+| `SMTP_HOST` | facultatif, `smtp.gmail.com` par défaut |
+| `SMTP_PORT` | facultatif, `465` par défaut |
 
-| Où | Rôle | Ratio conseillé |
-| --- | --- | --- |
-| `components/Hero.tsx` | **Portrait de Mel** (le tirage incliné du hero) | vertical 132×172, idéalement une photo portrait |
-| `components/CarteLieu.tsx` | Photo de couverture (carrousel 16:9, résultats 3:2) | paysage |
-| `app/lieux/[id]/FicheClient.tsx` | Galerie de la fiche (3 photos) | 4:5 |
+Les identifiants de groupes MailerLite, eux, sont dans `config.ts` : ils ne sont pas
+secrets, et Mel doit pouvoir les changer sans toucher aux réglages de l'hébergeur.
 
-Exemple de remplacement du portrait dans `Hero.tsx` :
+## Le coût, c'est une contrainte de conception
 
-```tsx
-import Image from "next/image";
-// ...
-<Image src="/portrait-mel.jpg" alt="Mel" width={132} height={172}
-       className="h-[172px] w-[132px] rounded-[2px] object-cover" />
-```
+- **Génération statique uniquement.** Toutes les pages de contenu sont construites au
+  build. Les seules fonctions serveur sont `/api/inscription` et `/api/contact`.
+- **Aucune optimisation d'image à la volée** (`images.unoptimized`). Les photos sont
+  pré-compressées par `npm run optimiser-images` et servies en statique.
+- **Aucun middleware, aucune fonction edge.**
+- **Polices auto-hébergées** : `next/font` télécharge les fichiers au build et les sert
+  depuis le domaine. Aucun appel à un service externe au chargement de la page.
+- **Aucun module payant de l'hébergeur**, aucun add-on, aucun pixel, aucune bannière de
+  cookies.
 
-## Déploiement
+## L'identité visuelle
 
-Vercel (projet `mel-en-off`, domaine `melnourdi.fr`). Vercel détecte Next.js automatiquement, aucun réglage à changer. Le déploiement se fait au push sur `main`.
+Le design system vit dans [`app/globals.css`](app/globals.css) et
+[`tailwind.config.ts`](tailwind.config.ts) : couleurs, typographies, arrondis, ombres,
+espacements. **On n'y ajoute pas de valeur.** Un nouveau bloc se compose à partir de ce qui
+existe déjà.
 
-## Contact / collabs
+## Les archives
 
-**contact@melnourdi.fr**
+[`archives/`](archives/) garde les composants de l'ancien concept d'annuaire (recherche,
+filtres, carrousel). Ils ne sont plus montés sur le site et sont **exclus de la
+compilation** : ils dépendent de l'ancien modèle de données.
