@@ -21,7 +21,9 @@ export default function Planche() {
         Je publie mes tests au fur et à mesure. Les adresses finissent toujours dans la lettre.
       </p>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+      {/* La grille s'adapte au nombre de photos : une seule ne s'etale pas sur
+          toute la largeur, quatre tiennent sur une ligne. */}
+      <div className={`mt-6 grid gap-4 md:gap-5 ${grille(photos.length)}`}>
         {photos.map((p, i) => (
           <Reveal key={p.fichier} rang={i}>
             <Polaroid
@@ -39,4 +41,11 @@ export default function Planche() {
       </p>
     </section>
   );
+}
+
+function grille(nombre: number): string {
+  if (nombre === 1) return "max-w-[300px]";
+  if (nombre === 2) return "grid-cols-2 md:max-w-[620px]";
+  if (nombre === 3) return "grid-cols-2 md:grid-cols-3";
+  return "grid-cols-2 md:grid-cols-4";
 }

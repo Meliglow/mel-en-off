@@ -81,18 +81,22 @@ export const RESEAUX = {
    ------------------------------------------------------------------------- */
 export const PORTRAIT_MEL = {
   /** Le nom du fichier seul, par exemple "portrait-mel-20260612.webp". */
-  fichier: "",
+  fichier: "abidjan-atelier-pagne.webp",
   /** La legende manuscrite sous la photo, courte. */
-  legende: "Ravenne, juillet",
+  legende: "l'atelier, Abidjan",
 };
 
 /* -------------------------------------------------------------------------
-   5. LA PLANCHE DE PHOTOS (bas de la page d'accueil)
+   5. LA PLANCHE DE PHOTOS (bas de la page d'accueil, "En ce moment")
 
-   Quatre photos, comme des polaroids poses sur la table.
-   Liste vide, ou moins de quatre photos : le bloc entier disparait.
+   Les dernieres photos, posees comme des polaroids sur la table.
+   Quatre, c'est la bonne mesure, mais le bloc s'adapte : avec une seule
+   photo elle reste a sa taille, elle ne s'etale pas sur toute la largeur.
+   Liste vide : le bloc entier disparait.
    ------------------------------------------------------------------------- */
-export const PHOTOS_PLANCHE: { fichier: string; legende: string }[] = [];
+export const PHOTOS_PLANCHE: { fichier: string; legende: string }[] = [
+  { fichier: "abidjan-atelier-pagne.webp", legende: "l'atelier, Abidjan" },
+];
 
 /* Exemple, quand les photos sont pretes :
 
