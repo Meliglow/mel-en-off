@@ -15,7 +15,7 @@ export default function EnTetePage({
       {surtitre && <p className="surtitre mt-3">{surtitre}</p>}
       <h1 className="h1 mt-3">{titre}</h1>
       {chapo && (
-        <p className="mt-3 text-[16px] leading-relaxed text-texte md:max-w-canvas">{chapo}</p>
+        <p className="mt-3 text-[16px] leading-relaxed text-texte md:max-w-lecture">{chapo}</p>
       )}
     </header>
   );

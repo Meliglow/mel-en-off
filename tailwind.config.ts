@@ -43,8 +43,12 @@ const config: Config = {
         tirage: "0 10px 24px rgba(70,52,30,.14)",
       },
       maxWidth: {
+        /** La largeur d'un formulaire, il ne s'etire jamais au-dela. */
         canvas: "440px",
-        large: "760px",
+        /** La largeur de la page entiere. */
+        large: "1120px",
+        /** La largeur de lecture d'un paragraphe, en nombre de caracteres. */
+        lecture: "62ch",
       },
     },
   },

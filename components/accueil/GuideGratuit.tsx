@@ -8,7 +8,7 @@ export default function GuideGratuit() {
       <div className="rounded-carte border border-bord bg-sable p-5 text-center shadow-douce md:p-8">
         <p className="surtitre">Guide gratuit</p>
         <h2 className="h2 mt-2">Les 5 meilleurs spas d&apos;Île-de-France</h2>
-        <p className="mx-auto mt-2 text-[15px] leading-relaxed text-texte md:max-w-canvas">
+        <p className="mx-auto mt-2 text-[15px] leading-relaxed text-texte md:max-w-lecture">
           Testés, notés, avec ce que j&apos;ai payé dans chacun et la date. Plus ceux que j&apos;ai
           écartés.
         </p>

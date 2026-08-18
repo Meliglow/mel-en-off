@@ -17,11 +17,16 @@ export default function FicheAdresse({ adresse }: { adresse: Adresse }) {
         className="aspect-[4/5] w-full"
       />
 
-      <div className="p-4">
-        <h3 className="h3">{adresse.nom}</h3>
+      <div className="relative p-4">
+        {/* L'animation de la fiche, c'est ce tampon qui s'encre. Rien d'autre. */}
+        <div className="absolute right-4 top-4">
+          <TamponDate date={adresse.date_du_test} />
+        </div>
+
+        <h3 className="h3 pr-24">{adresse.nom}</h3>
 
         {adresse.categorie && (
-          <p className="mt-1 text-[12px] font-medium text-texte2">
+          <p className="mt-1 pr-24 text-[12px] font-medium text-texte2">
             {adresse.categorie}
             {adresse.ville && ` · ${adresse.ville}`}
           </p>
@@ -40,14 +45,11 @@ export default function FicheAdresse({ adresse }: { adresse: Adresse }) {
           </div>
         )}
 
-        {/* L'animation de la fiche, c'est le tampon qui s'encre. Rien d'autre. */}
-        <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-2">
-          <TamponDate date={adresse.date_du_test} />
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2">
           {adresse.prix_paye && (
-            <span className="puce-contour">
-              payé {adresse.prix_paye} le {date}
-            </span>
+            <span className="puce-contour">payé {adresse.prix_paye}</span>
           )}
+          <span className="puce-contour">testé le {date}</span>
           {adresse.invitee && <span className="puce-contour">invitée, signalé</span>}
         </div>
       </div>

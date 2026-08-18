@@ -45,16 +45,16 @@ export default function AProposPage() {
       <section className="mt-8 px-5">
         <div className="filets" aria-hidden />
         <h2 className="h2 mt-4">Le droit de veto</h2>
-        <p className="citation mt-4 md:max-w-canvas">
+        <p className="citation mt-4 md:max-w-lecture">
           Une invitation ne change pas le verdict. Si l'adresse ne vaut pas le coup, je ne la publie
           pas. Et quand je suis invitée, c'est écrit.
         </p>
-        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-canvas">
+        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-lecture">
           C'est la seule règle qui rend le reste crédible. Un lieu qui m'invite sait, avant que
           j'arrive, que je peux repartir sans rien publier. Personne ne relit mes textes avant moi,
           et personne ne les valide.
         </p>
-        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-canvas">
+        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-lecture">
           Les adresses que j'écarte comptent autant que celles que je recommande. C'est souvent
           celles-là qui t'évitent une mauvaise soirée.
         </p>

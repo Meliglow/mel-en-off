@@ -53,8 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body>
-        {/* Canevas mobile, dessine a 390px, elargi sur grand ecran */}
-        <div className="mx-auto flex min-h-screen w-full max-w-canvas flex-col bg-papier shadow-[0_0_60px_rgba(70,52,30,.06)] md:max-w-large">
+        {/* Le site occupe la page, il n'est plus enferme dans une bande
+            etroite. La largeur de lecture se joue bloc par bloc. */}
+        <div className="mx-auto flex min-h-screen w-full max-w-large flex-col">
           <Navigation />
           <div className="flex-1">{children}</div>
           <PiedDePage />

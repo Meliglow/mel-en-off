@@ -1,4 +1,5 @@
-import TraitTrace from "@/components/TraitTrace";
+import TitreSection from "@/components/TitreSection";
+
 // Bloc 2 : comment je travaille. Trois lignes, chacune dans son encadre.
 const LIGNES = [
   "Je teste tout moi-même, sur place.",
@@ -8,22 +9,20 @@ const LIGNES = [
 
 export default function Methode() {
   return (
-    <section className="mt-10 px-5">
+    <section className="mt-14 px-5">
       <div className="filets" aria-hidden />
-      <h2 className="h2 mt-4">Comment je travaille</h2>
-      {/* L'animation de cette section, c'est ce trait. Rien d'autre ne bouge ici. */}
-      <TraitTrace className="mt-2" />
+      {/* L'animation de cette section, c'est le trait sous le titre. Rien d'autre. */}
+      <TitreSection className="mt-5">Comment je travaille</TitreSection>
 
-      {/* Empilees sur mobile, cote a cote des qu'il y a la place. */}
-      <ul className="mt-4 grid gap-3 md:grid-cols-3">
+      <ul className="mt-6 grid gap-4 md:grid-cols-3">
         {LIGNES.map((ligne) => (
-          <li key={ligne} className="carte p-4 text-[16px] leading-relaxed text-texte">
+          <li key={ligne} className="carte p-5 text-[16px] leading-relaxed text-texte">
             {ligne}
           </li>
         ))}
       </ul>
 
-      <p className="mt-4 text-[14px] italic leading-relaxed text-texte2 md:max-w-canvas">
+      <p className="mt-5 max-w-lecture text-[14px] italic leading-relaxed text-texte2">
         Une invitation ne change pas le verdict. Si l&apos;adresse ne vaut pas le coup, je ne la
         publie pas. Et quand je suis invitée, c&apos;est écrit.
       </p>

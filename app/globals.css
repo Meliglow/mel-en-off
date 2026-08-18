@@ -374,22 +374,28 @@
     padding: 12px 6px 16px;
   }
 
-  /* --- Tampon dateur --- */
+  /* --- Tampon dateur : le mois et l'annee du test --- */
   .tampon-date {
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
+    text-align: center;
     font-family: var(--font-karla), sans-serif;
-    font-weight: 700;
-    font-size: 11px;
-    line-height: 1.2;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 1.35;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: var(--terracotta);
-    border: 1.5px solid var(--terracotta);
-    border-radius: 4px;
-    padding: 5px 10px;
+    border: 2.5px solid var(--terracotta);
+    border-radius: 8px;
+    padding: 6px 10px;
     opacity: 0.82;
-    transform: rotate(-2deg);
+    transform: rotate(-8deg);
+  }
+  .tampon-date b {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
   }
 
   /* --- Note en marge ---
@@ -420,13 +426,7 @@
     color: var(--texte);
   }
 
-  /* --- Trait tracé sous un titre de section --- */
-  .trait-trace {
-    display: block;
-    width: 96px;
-    height: 8px;
-    color: var(--terracotta);
-  }
+  /* --- Trait trace sous un titre de section --- */
   .trait-trace path {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
@@ -486,11 +486,11 @@
 @keyframes encrer {
   from {
     opacity: 0;
-    transform: rotate(-2deg) scale(1.14);
+    transform: rotate(-8deg) scale(1.14);
   }
   to {
     opacity: 0.82;
-    transform: rotate(-2deg) scale(1);
+    transform: rotate(-8deg) scale(1);
   }
 }
 
@@ -589,7 +589,7 @@
   .tampon-date,
   .tampon-date.attente {
     opacity: 0.82;
-    transform: rotate(-2deg);
+    transform: rotate(-8deg);
   }
   .trait-trace path,
   .trait-trace.visible path {

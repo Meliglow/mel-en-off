@@ -97,27 +97,29 @@ export const PHOTOS_PLANCHE: { fichier: string; legende: string }[] = [];
 /* Exemple, quand les photos sont pretes :
 
 export const PHOTOS_PLANCHE = [
-  { fichier: "abidjan-petit-dejeuner-noom-20260612.webp", legende: "Abidjan, juin" },
-  { fichier: "paris-spa-lumiere-20260518.webp", legende: "Paris, mai" },
-  { fichier: "lyon-hotel-cour-20260402.webp", legende: "Lyon, avril" },
-  { fichier: "dakar-restaurant-terrasse-20260310.webp", legende: "Dakar, mars" },
+  { fichier: "abidjan-spa-hammam-20260612.webp", legende: "le hammam, 14 h" },
+  { fichier: "abidjan-marche-pagne-20260610.webp", legende: "le pagne, marché" },
+  { fichier: "abidjan-petit-dejeuner-noom-20260609.webp", legende: "petit déj, Noom" },
+  { fichier: "abidjan-activite-atelier-20260608.webp", legende: "l'atelier" },
 ];
 
 */
 
 /* -------------------------------------------------------------------------
-   6. LA NOTE EN MARGE (page d'accueil)
+   6. LA NOTE EN MARGE (page d'accueil, juste sous les photos)
 
-   Le petit mot manuscrit, comme griffonne dans la marge du carnet.
-   UNE SEULE par page. Laisser le texte vide pour ne pas l'afficher.
-   Deux ou trois lignes maximum, sinon ce n'est plus une note.
+   Le petit mot griffonne a cote des tirages : une astuce de voyage sur la
+   destination du moment. Courte, pratique, du vecu, jamais un slogan.
+   UNE SEULE par page, jamais deux. Deux ou trois lignes maximum.
+   Texte vide : la note ne s'affiche pas du tout.
    ------------------------------------------------------------------------- */
 export const NOTE_EN_MARGE = "";
 
 /* Exemple :
 
 export const NOTE_EN_MARGE =
-  "Je paie mes additions. Quand on m'invite, c'est marqué sur la fiche.";
+  "À Abidjan, le prix du taxi se fixe avant de monter, jamais en arrivant. " +
+  "Trois fois sur quatre, ça divise la course par deux.";
 
 */
 

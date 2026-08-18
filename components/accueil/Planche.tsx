@@ -1,9 +1,11 @@
 import Polaroid from "@/components/Polaroid";
 import Reveal from "@/components/Reveal";
-import { PHOTOS_PLANCHE, RESEAUX } from "@/config";
+import TitreSection from "@/components/TitreSection";
+import { PHOTOS_PLANCHE } from "@/config";
 
 /**
- * La planche de photos, comme des polaroids poses sur la table.
+ * En ce moment : les dernieres photos, posees comme des polaroids sur la table.
+ * Deux par ligne sur telephone, quatre des qu'il y a la place.
  *
  * Sans photo, le bloc entier disparait : pas de cadre vide, pas d'aplat gris.
  */
@@ -12,11 +14,14 @@ export default function Planche() {
   if (photos.length === 0) return null;
 
   return (
-    <section className="mt-12 px-5">
-      <div className="filets" aria-hidden />
-      <h2 className="h2 mt-4">Ce que je rapporte</h2>
+    <section className="mt-14 px-5">
+      <TitreSection>En ce moment</TitreSection>
 
-      <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">
+      <p className="mt-4 max-w-lecture text-[15px] leading-relaxed text-texte">
+        Je publie mes tests au fur et à mesure. Les adresses finissent toujours dans la lettre.
+      </p>
+
+      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
         {photos.map((p, i) => (
           <Reveal key={p.fichier} rang={i}>
             <Polaroid
@@ -29,16 +34,8 @@ export default function Planche() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-[14px] text-texte2">
-        La suite en images sur{" "}
-        <a href={RESEAUX.instagram} target="_blank" rel="noopener noreferrer" className="underline">
-          Instagram
-        </a>{" "}
-        et{" "}
-        <a href={RESEAUX.tiktok} target="_blank" rel="noopener noreferrer" className="underline">
-          TikTok
-        </a>
-        .
+      <p className="mt-6 max-w-lecture text-[15px] italic leading-relaxed text-texte2">
+        Mais tout ne passe pas sur les réseaux. Le carnet complet est dans la lettre.
       </p>
     </section>
   );

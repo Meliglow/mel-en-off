@@ -17,7 +17,7 @@ export default function MerciPage() {
       />
 
       <section className="mt-6 px-5">
-        <p className="citation md:max-w-canvas">
+        <p className="citation md:max-w-lecture">
           Va vérifier ta boîte mail : un premier message t&apos;attend. S&apos;il n&apos;y est pas,
           regarde dans les indésirables, et fais-le glisser dans ta boîte de réception. Ça évitera
           que les suivants s&apos;y perdent aussi.

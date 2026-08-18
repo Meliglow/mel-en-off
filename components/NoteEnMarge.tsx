@@ -16,7 +16,7 @@ export default function NoteEnMarge() {
   return (
     <section className="mt-10 px-5">
       <Reveal>
-        <div className="note-marge lignes md:max-w-canvas">
+        <div className="note-marge lignes md:max-w-lecture">
           <Trombone className="absolute -top-4 right-5 h-11 w-5 text-texte3" />
           <p className="surtitre">Note en marge</p>
           <p className="note-marge-texte mt-2">{texte}</p>
