@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Karla, La_Belle_Aurore } from "next/font/google";
+import Navigation from "@/components/Navigation";
+import PiedDePage from "@/components/PiedDePage";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -24,12 +26,12 @@ const belle = La_Belle_Aurore({
 });
 
 export const metadata: Metadata = {
-  title: "Mel en off · Le carnet d'adresses de Mel Nourdi",
+  title: "EN OFF · La lettre du dimanche de Mel Nourdi",
   description:
-    "Je teste, je trie, je vous dis tout. Restaurants, spas, hôtels et activités testés pour de vrai, et les adresses à éviter, ville par ville.",
+    "Chaque dimanche, les meilleures et les pires adresses que j'ai testées. Je teste, je note la date, je te dis ce que j'en pense.",
   openGraph: {
-    title: "Mel en off",
-    description: "Le carnet d'adresses de voyage de Mel Nourdi. Testé pour de vrai.",
+    title: "EN OFF",
+    description: "La lettre du dimanche de Mel Nourdi. Testé pour de vrai, date à l'appui.",
     type: "website",
   },
 };
@@ -45,8 +47,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${cormorant.variable} ${karla.variable} ${belle.variable}`}>
       <body>
         {/* Canevas mobile, dessine a 390px, elargi sur grand ecran */}
-        <div className="mx-auto min-h-screen w-full max-w-canvas bg-papier shadow-[0_0_60px_rgba(70,52,30,.06)] md:max-w-large">
-          {children}
+        <div className="mx-auto flex min-h-screen w-full max-w-canvas flex-col bg-papier shadow-[0_0_60px_rgba(70,52,30,.06)] md:max-w-large">
+          <Navigation />
+          <div className="flex-1">{children}</div>
+          <PiedDePage />
         </div>
       </body>
     </html>
