@@ -38,15 +38,15 @@ export default function PiedDePage() {
         {PAGES.map((p, i) => (
           <Fragment key={p.href}>
             {i > 0 && <Point />}
-            <Link href={p.href}>{p.label}</Link>
+            <Link href={p.href} className="lien-trait">{p.label}</Link>
           </Fragment>
         ))}
         <Point />
-        <a href={RESEAUX.instagram} target="_blank" rel="noopener noreferrer">
+        <a href={RESEAUX.instagram} target="_blank" rel="noopener noreferrer" className="lien-trait">
           Instagram
         </a>
         <Point />
-        <a href={RESEAUX.tiktok} target="_blank" rel="noopener noreferrer">
+        <a href={RESEAUX.tiktok} target="_blank" rel="noopener noreferrer" className="lien-trait">
           TikTok
         </a>
       </nav>

@@ -81,7 +81,7 @@ export default function Reseaux() {
               href={c.lien}
               target="_blank"
               rel="noopener noreferrer"
-              className={`page-cahier lift block ${c.inclinaison} pt-6`}
+              className={`page-cahier tenue block ${c.inclinaison} pt-6 hover:rotate-0 hover:-translate-y-1`}
             >
               <span className="flex items-center gap-2.5 text-terracotta">
                 {c.icone}

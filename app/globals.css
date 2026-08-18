@@ -93,6 +93,18 @@
   .surligne {
     background-image: linear-gradient(transparent 58%, var(--dore) 58%);
   }
+  /* Variante pour l'ecriture a la main. Cette police a une boite tres haute :
+     l'encre de ses lettres n'occupe que 17 % a 59 % de la hauteur, mesure au
+     canvas. Le trait est donc borne en haut ET en bas, sinon il flotte sous
+     les mots au lieu de passer derriere. */
+  .surligne-main {
+    background-image: linear-gradient(
+      transparent 42%,
+      var(--dore) 42%,
+      var(--dore) 62%,
+      transparent 62%
+    );
+  }
   .signature {
     font-family: var(--font-belle), cursive;
     line-height: 1;
@@ -285,6 +297,10 @@
     color: var(--texte);
     font-size: 16px;
     font-family: var(--font-karla), sans-serif;
+    transition: border-color 0.18s ease;
+  }
+  .champ:focus {
+    border-color: var(--terracotta);
   }
   textarea.champ {
     padding: 14px 16px;
@@ -536,6 +552,51 @@
   transition: none;
 }
 
+/* La note en marge s'ecrit de gauche a droite, comme une main qui la pose.
+   clip-path plutot que largeur : rien ne bouge dans la mise en page. */
+@keyframes ecrire {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 -2% 0 0);
+  }
+}
+.note-marge-texte.attente {
+  clip-path: inset(0 100% 0 0);
+}
+.note-marge-texte.visible {
+  animation: ecrire 1.4s cubic-bezier(0.32, 0.72, 0.35, 1) both;
+}
+
+/* Une carte tenue par un ruban se redresse au survol, comme on remet une
+   feuille droite du bout du doigt. */
+.tenue {
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Un lien dont le trait se dessine sous le mot au survol. */
+.lien-trait {
+  background-image: linear-gradient(var(--terracotta), var(--terracotta));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition: background-size 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (hover: hover) {
+  .lien-trait:hover {
+    background-size: 100% 1px;
+  }
+  /* Le trombone frémit quand on approche de la note. */
+  .note-marge:hover .trombone {
+    transform: rotate(-6deg) translateY(-2px);
+  }
+}
+.trombone {
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 /* Le tampon dateur ne s'encre qu'une fois entre dans l'ecran.
    Il attend hors champ, sinon on le verrait apparaitre puis se rejouer. */
 .tampon-date.attente {
@@ -626,5 +687,21 @@
   }
   .polaroid-droite:hover {
     transform: rotate(2deg);
+  }
+  /* L'ecriture de la note s'affiche entiere, sans se tracer. */
+  .note-marge-texte,
+  .note-marge-texte.attente,
+  .note-marge-texte.visible {
+    animation: none;
+    clip-path: none;
+  }
+  .tenue,
+  .trombone,
+  .lien-trait,
+  .champ {
+    transition: none;
+  }
+  .lien-trait:hover {
+    background-size: 0 1px;
   }
 }

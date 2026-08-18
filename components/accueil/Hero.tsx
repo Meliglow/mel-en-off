@@ -48,11 +48,11 @@ export default function Hero() {
         <div>
           <IconEnveloppe />
 
-          {/* Le serif du site, agrandi. L'ecriture a la main tenait la
-              signature, pas un titre : trop haute sur la ligne, le surlignage
-              tombait sous les lettres et ca devenait illisible. */}
-          <h1 className="h1 mt-3 text-[42px] carnet:text-[54px]">
-            La <span className="surligne">lettre</span>
+          {/* Meme ecriture que la legende des polaroids. En minuscules, pas en
+              capitales : c'est ce qui la rend lisible. Le surlignage a son
+              propre reglage, cale sur les metriques de cette police. */}
+          <h1 className="mt-3 font-main text-[46px] leading-[1.2] text-encre carnet:text-[58px]">
+            La <span className="surligne-main">lettre</span>
           </h1>
 
           <p className="mt-4 max-w-lecture text-[15px] leading-relaxed text-texte">

@@ -5,7 +5,7 @@ export default function Trombone({ className = "" }: { className?: string }) {
       viewBox="0 0 20 44"
       fill="none"
       aria-hidden
-      className={className}
+      className={`trombone ${className}`}
       stroke="currentColor"
       strokeWidth={1.6}
       strokeLinecap="round"
