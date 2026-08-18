@@ -61,24 +61,23 @@ export default function Hero() {
         }
       >
         <div>
-          {/* Sur telephone : titre a gauche, vignette a droite, sur la meme ligne. */}
-          <div className="flex items-start gap-4 carnet:block">
-            <div className="min-w-0 flex-1">
-              <IconEnveloppe />
+          {/* Sur telephone, la vignette flotte a droite : le titre et le texte
+              coulent a cote, puis reprennent toute la largeur en dessous. On
+              voit la photo tout de suite sans sacrifier la lecture. */}
+          {portrait && (
+            <div className="float-right ml-4 mb-2 w-[150px] carnet:hidden">{photo(false)}</div>
+          )}
 
-              {/* Meme ecriture que la legende des polaroids. En minuscules, pas
-                  en capitales : c'est ce qui la rend lisible. Le surlignage a
-                  son propre reglage, cale sur les metriques de cette police. */}
-              <h1 className="mt-2 font-main text-[40px] leading-[1.15] text-encre carnet:mt-3 carnet:text-[58px]">
-                La <span className="surligne-main">lettre</span>
-              </h1>
+          <IconEnveloppe />
 
-            </div>
+          {/* Meme ecriture que la legende des polaroids. En minuscules, pas en
+              capitales : c'est ce qui la rend lisible. Le surlignage a son
+              propre reglage, cale sur les metriques de cette police. */}
+          <h1 className="mt-2 font-main text-[40px] leading-[1.15] text-encre carnet:mt-3 carnet:text-[58px]">
+            La <span className="surligne-main">lettre</span>
+          </h1>
 
-            {portrait && <div className="w-[150px] shrink-0 carnet:hidden">{photo(false)}</div>}
-          </div>
-
-          <p className="mt-5 max-w-lecture text-[15px] leading-relaxed text-texte carnet:mt-4">
+          <p className="mt-3 max-w-lecture text-[15px] leading-relaxed text-texte carnet:mt-4">
             Chaque <strong className="font-semibold text-encre">dimanche</strong>, je te donne{" "}
             <strong className="font-semibold text-encre">
               les meilleures et les pires adresses
@@ -87,14 +86,18 @@ export default function Hero() {
             n&apos;as plus qu&apos;à réserver.
           </p>
 
-          {/* La signature ferme le texte, comme au bas d'une lettre. */}
-          <p className="signature mt-4 text-[28px] leading-tight text-terracotta carnet:text-[30px]">
-            Mel
-          </p>
+          <div className="clear-both" aria-hidden />
 
-          {NOMBRE_INSCRITS.trim() !== "" && (
-            <p className="mt-3 text-[16px] font-bold text-encre">{NOMBRE_INSCRITS}</p>
-          )}
+          {/* La signature ferme le texte, comme au bas d'une lettre. Le nombre
+              d'inscrits se pose au bout de la meme ligne, en petit. */}
+          <div className="mt-4 flex max-w-canvas items-baseline justify-between gap-3">
+            <p className="signature text-[28px] leading-tight text-terracotta carnet:text-[30px]">
+              Mel
+            </p>
+            {NOMBRE_INSCRITS.trim() !== "" && (
+              <p className="text-[13px] font-bold text-encre">{NOMBRE_INSCRITS}</p>
+            )}
+          </div>
 
           {/* Le compteur vient des donnees. Source vide, pas de compteur. */}
           {testees > 0 && (
