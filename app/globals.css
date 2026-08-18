@@ -400,6 +400,12 @@
     text-align: center;
     padding: 12px 6px 16px;
   }
+  /* Vignette de telephone : meme polaroid, legende resserree pour ne pas
+     manger la hauteur du premier ecran. */
+  .polaroid-mini figcaption {
+    font-size: 15px;
+    padding: 9px 3px 11px;
+  }
   /* Quelques mots de plus sur le cadre blanc, sous la legende. Meme ecriture,
      un peu plus petite, alignee a gauche : ca se lit comme une phrase, pas
      comme une etiquette. */

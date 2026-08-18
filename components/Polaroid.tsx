@@ -39,6 +39,7 @@ export default function Polaroid({
         src={src}
         alt={alt}
         loading={premierEcran ? "eager" : "lazy"}
+        fetchPriority={premierEcran ? "high" : "auto"}
         decoding="async"
       />
       <figcaption>
