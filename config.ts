@@ -93,14 +93,33 @@ export const GROUPES_MAILERLITE: Record<string, string> = {
 };
 
 /* -------------------------------------------------------------------------
-   5. LE CONTACT PROFESSIONNEL (page Collaborations)
+   5. LES DESTINATIONS PROPOSEES APRES L'INSCRIPTION (page /merci)
+
+   La premiere des trois questions demande ou la lectrice part en premier.
+   Ce sont des destinations possibles, pas des villes deja testees : on peut
+   tres bien y mettre des villes ou Mel n'est jamais allee, c'est meme le but,
+   ca dit ce qu'il faudra aller tester.
+   Laisser "Je ne sais pas encore" en derniere position.
+   ------------------------------------------------------------------------- */
+export const DESTINATIONS_PROPOSEES: string[] = [
+  "Abidjan",
+  "Paris",
+  "Marseille",
+  "Lyon",
+  "Dakar",
+  "Londres",
+  "Je ne sais pas encore",
+];
+
+/* -------------------------------------------------------------------------
+   6. LE CONTACT PROFESSIONNEL (page Collaborations)
 
    L'adresse qui recoit les demandes des hotels, spas et restaurants.
    ------------------------------------------------------------------------- */
 export const EMAIL_CONTACT_PRO = "contact@melnourdi.fr";
 
 /* -------------------------------------------------------------------------
-   6. REGLAGES DU SITE (a ne changer qu'en connaissance de cause)
+   7. REGLAGES DU SITE (a ne changer qu'en connaissance de cause)
    ------------------------------------------------------------------------- */
 
 /** L'adresse publique du site, utilisee pour les liens partages. */
