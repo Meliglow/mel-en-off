@@ -35,7 +35,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
       <EnTetePage
         surtitre="Le carnet"
         titre={nom}
-        chapo={`Ce que j'ai testé à ${nom}, sur place, avec la date et ce que j'ai payé.`}
+        chapo="Ce que j'ai testé ici, sur place, avec la date de chaque test et ce que j'ai payé."
       />
 
       {/* Ce qui n'a pas marche, en haut : c'est ce qui evite une mauvaise soiree. */}
@@ -79,7 +79,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
       <section className="mt-12 px-5">
         <div className="rounded-carte border border-bord bg-sable p-5">
           <p className="surtitre">La lettre du dimanche</p>
-          <h2 className="h2 mt-2">Le carnet de {nom}, avant tout le monde</h2>
+          <h2 className="h2 mt-2">{nom}, avant tout le monde</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Les nouvelles adresses testées ici partent d&apos;abord dans EN OFF, avec ce que
             j&apos;ai payé et la date.
