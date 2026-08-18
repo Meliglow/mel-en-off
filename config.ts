@@ -144,10 +144,15 @@ export const NOTE_EN_MARGE =
    d'environnement de Vercel (MAILERLITE_API_KEY), pour rester secrete.
    ------------------------------------------------------------------------- */
 export const GROUPES_MAILERLITE: Record<string, string> = {
-  // Le formulaire du haut de la page d'accueil
+  // Le formulaire du haut de la page d'accueil, celui qui vend la lettre
   lettre: "",
-  // Le formulaire du guide gratuit, en bas de la page d'accueil
+  // Le formulaire du guide gratuit, en bas de l'accueil et sur la page Spas
   "guide-spas-idf": "",
+
+  // Les carnets de ville envoient aussi leur propre etiquette, par exemple
+  // "carnet-abidjan". Pour les separer aussi dans MailerLite, ajouter une
+  // ligne par ville, sur ce modele :
+  //   "carnet-abidjan": "123456",
 };
 
 /* -------------------------------------------------------------------------
