@@ -1,9 +1,13 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import SepFleur from "./SepFleur";
-import { RESEAUX } from "@/config";
+import { RESEAUX, ZONE_SPAS_PRINCIPALE } from "@/config";
 
+// Les pages de contenu ne sont plus dans la navigation du haut : elles restent
+// accessibles ici, et donc trouvables par les moteurs de recherche.
 const PAGES = [
+  { href: `/spas/${ZONE_SPAS_PRINCIPALE.slug}`, label: "Les spas" },
+  { href: "/villes", label: "Les villes" },
   { href: "/collaborations", label: "Collaborations" },
   { href: "/a-propos", label: "À propos" },
   { href: "/mentions-legales", label: "Mentions légales" },

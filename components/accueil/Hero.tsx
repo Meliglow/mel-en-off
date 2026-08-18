@@ -48,7 +48,8 @@ export default function Hero() {
         <div>
           <IconEnveloppe />
 
-          <h1 className="h1 mt-3">
+          {/* Le titre est ecrit a la main, comme la signature. */}
+          <h1 className="mt-3 font-main text-[54px] leading-[1.05] text-encre carnet:text-[64px]">
             EN <span className="surligne">OFF</span>
           </h1>
 
@@ -61,9 +62,7 @@ export default function Hero() {
             n&apos;as plus qu&apos;à réserver.
           </p>
 
-          <p className="signature mt-3 text-[30px] leading-tight text-terracotta">
-            Écrit à la main par Mel
-          </p>
+          <p className="signature mt-3 text-[30px] leading-tight text-terracotta">Mel</p>
 
           {/* Le compteur vient des donnees. Source vide, pas de compteur. */}
           {testees > 0 && (

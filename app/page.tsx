@@ -3,6 +3,7 @@ import GuideGratuit from "@/components/accueil/GuideGratuit";
 import Hero from "@/components/accueil/Hero";
 import Methode from "@/components/accueil/Methode";
 import Planche from "@/components/accueil/Planche";
+import Reseaux from "@/components/accueil/Reseaux";
 import VilleDuMoment from "@/components/accueil/VilleDuMoment";
 import NoteEnMarge from "@/components/NoteEnMarge";
 import Reveal from "@/components/Reveal";
@@ -17,6 +18,7 @@ import Reveal from "@/components/Reveal";
 //   ce dimanche  le trait qui se dessine sous le titre
 //   planche      l'apparition, en cascade de 60 ms
 //   note         l'apparition
+//   reseaux      le trait qui se dessine sous le titre
 //   guide        l'apparition
 export default function Accueil() {
   return (
@@ -34,6 +36,8 @@ export default function Accueil() {
       {/* La note en marge se pose juste sous les photos : un mot rapide sur la
           destination du moment, comme griffonne a cote des tirages. */}
       <NoteEnMarge />
+
+      <Reseaux />
 
       <Reveal>
         <GuideGratuit />

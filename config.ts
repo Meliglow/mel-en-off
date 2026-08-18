@@ -68,8 +68,8 @@ export const TITRES_DU_DIMANCHE: string[] = [
    3. LES RESEAUX
    ------------------------------------------------------------------------- */
 export const RESEAUX = {
-  instagram: "https://instagram.com/melnourdi",
-  tiktok: "https://tiktok.com/@melnourdi",
+  instagram: "https://instagram.com/melenoff",
+  tiktok: "https://tiktok.com/@melenoff",
 };
 
 /* -------------------------------------------------------------------------
@@ -83,7 +83,7 @@ export const PORTRAIT_MEL = {
   /** Le nom du fichier seul, par exemple "portrait-mel-20260612.webp". */
   fichier: "abidjan-atelier-pagne.webp",
   /** La legende manuscrite sous la photo, courte. */
-  legende: "l'atelier, Abidjan",
+  legende: "Atelier de pagne à Abidjan",
 };
 
 /* -------------------------------------------------------------------------
@@ -95,7 +95,7 @@ export const PORTRAIT_MEL = {
    Liste vide : le bloc entier disparait.
    ------------------------------------------------------------------------- */
 export const PHOTOS_PLANCHE: { fichier: string; legende: string }[] = [
-  { fichier: "abidjan-atelier-pagne.webp", legende: "l'atelier, Abidjan" },
+  { fichier: "abidjan-atelier-pagne.webp", legende: "Atelier de pagne à Abidjan" },
 ];
 
 /* Exemple, quand les photos sont pretes :
@@ -118,8 +118,8 @@ export const PHOTOS_PLANCHE = [
    Texte vide : la note ne s'affiche pas du tout.
    ------------------------------------------------------------------------- */
 export const NOTE_EN_MARGE =
-  "À Abidjan, le prix du taxi se fixe avant de monter, jamais en arrivant. " +
-  "Trois fois sur quatre, ça divise la course par deux.";
+  "Si on ne peut partir qu'une fois, c'est décembre ou janvier. Mai, juin et " +
+  "juillet reçoivent plus d'eau que toute la saison sèche réunie.";
 
 /* -------------------------------------------------------------------------
    7. LA LISTE EN OFF (MailerLite)
