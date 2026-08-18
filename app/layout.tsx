@@ -45,6 +45,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${cormorant.variable} ${karla.variable} ${belle.variable}`}>
+      <head>
+        {/* Sans JavaScript, les blocs qui attendent leur entree dans l'ecran
+            s'affichent simplement. Rien ne reste invisible. */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}.tampon-date{opacity:.82}.trait-trace path{stroke-dashoffset:0}`}</style>
+        </noscript>
+      </head>
       <body>
         {/* Canevas mobile, dessine a 390px, elargi sur grand ecran */}
         <div className="mx-auto flex min-h-screen w-full max-w-canvas flex-col bg-papier shadow-[0_0_60px_rgba(70,52,30,.06)] md:max-w-large">

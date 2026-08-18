@@ -32,9 +32,12 @@
   body {
     color: var(--texte);
     background-color: var(--papier);
-    /* Trame de points discrete facon papier a pois */
-    background-image: radial-gradient(rgba(160, 140, 110, 0.13) 1px, transparent 1px);
-    background-size: 14px 14px;
+    /* Deux couches : le grain du papier, puis la trame de points existante.
+       Le grain est un bruit SVG encode en ligne, aucun fichier, aucune requete.
+       Son opacite est portee par le SVG lui-meme (0.045). */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E"),
+      radial-gradient(rgba(160, 140, 110, 0.13) 1px, transparent 1px);
+    background-size: 140px 140px, 14px 14px;
     font-family: var(--font-karla), system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
@@ -300,6 +303,142 @@
     font-size: 16px;
     line-height: 1.6;
   }
+
+  /* =======================================================
+     MATIERES DU CARNET
+     Aucune couleur de marque nouvelle : tout est compose
+     avec les variables deja definies plus haut.
+     ======================================================= */
+
+  /* --- Filets de cahier, reserves aux blocs de notes --- */
+  .lignes {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 27px,
+      rgba(160, 140, 110, 0.16) 27px 28px
+    );
+    background-position: 0 6px;
+  }
+
+  /* --- Ruban adhesif, dessine en CSS, jamais une image --- */
+  .ruban {
+    position: relative;
+  }
+  .ruban::before {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    width: 88px;
+    height: 24px;
+    transform: translateX(-50%) rotate(-2deg);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 253, 250, 0.78),
+      rgba(236, 225, 205, 0.62)
+    );
+    border-left: 1px dashed rgba(140, 127, 115, 0.32);
+    border-right: 1px dashed rgba(140, 127, 115, 0.32);
+    box-shadow: 0 1px 3px rgba(70, 52, 30, 0.14);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* --- Polaroid : photo 4:5, cadre blanc epais en bas --- */
+  .polaroid {
+    display: block;
+    background: var(--carte);
+    padding: 8px 8px 0;
+    border-radius: 3px;
+    box-shadow: 0 10px 24px rgba(70, 52, 30, 0.14);
+    transform: rotate(-2deg);
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .polaroid-droite {
+    transform: rotate(2deg);
+  }
+  .polaroid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+  .polaroid figcaption {
+    font-family: var(--font-belle), cursive;
+    font-size: 19px;
+    line-height: 1;
+    color: var(--texte2);
+    text-align: center;
+    padding: 12px 6px 16px;
+  }
+
+  /* --- Tampon dateur --- */
+  .tampon-date {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-karla), sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terracotta);
+    border: 1.5px solid var(--terracotta);
+    border-radius: 4px;
+    padding: 5px 10px;
+    opacity: 0.82;
+    transform: rotate(-2deg);
+  }
+
+  /* --- Note en marge ---
+     Le filet vertical est celui d'un vrai cahier : un trait fin, en retrait
+     du bord, pas un bandeau colle contre l'arete. */
+  .note-marge {
+    position: relative;
+    border: 1px solid var(--bord);
+    border-radius: 3px;
+    background-color: var(--carte);
+    padding: 18px 44px 20px 34px;
+  }
+  .note-marge::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 22px;
+    width: 1px;
+    background: var(--terracotta);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .note-marge-texte {
+    font-family: var(--font-belle), cursive;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--texte);
+  }
+
+  /* --- Trait tracé sous un titre de section --- */
+  .trait-trace {
+    display: block;
+    width: 96px;
+    height: 8px;
+    color: var(--terracotta);
+  }
+  .trait-trace path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .trait-trace.visible path {
+    animation: tracer 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  /* Deja visible au chargement : le trait est simplement la, sans se dessiner. */
+  .trait-trace.immediat path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
 }
 
 @layer utilities {
@@ -337,17 +476,55 @@
   }
 }
 
-/* Apparition au defilement, pilotee par le composant Reveal */
+@keyframes tracer {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Le tampon s'encre : il arrive plus grand et transparent, il finit a 82 %. */
+@keyframes encrer {
+  from {
+    opacity: 0;
+    transform: rotate(-2deg) scale(1.14);
+  }
+  to {
+    opacity: 0.82;
+    transform: rotate(-2deg) scale(1);
+  }
+}
+
+/* Apparition au defilement, pilotee par le composant Reveal.
+   Le decalage entre voisins est pose en ligne par le composant. */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: translateY(14px);
+  transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
   transform: none;
+}
+/* Deja visible au premier affichage : on montre sans animer, pour ne rien
+   faire bouger dans le premier ecran. */
+.reveal.immediat {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Le tampon dateur ne s'encre qu'une fois entre dans l'ecran.
+   Il attend hors champ, sinon on le verrait apparaitre puis se rejouer. */
+.tampon-date.attente {
+  opacity: 0;
+}
+.tampon-date.visible {
+  animation: encrer 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.tampon-date.immediat {
+  animation: none;
 }
 
 /* Entree du hero, en cascade */
@@ -388,16 +565,45 @@
   .btn:hover {
     filter: brightness(1.04);
   }
+  /* Le polaroid se redresse et se souleve, au survol seulement. */
+  .polaroid:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 16px 30px rgba(70, 52, 30, 0.16);
+  }
 }
 
+/* Aucun mouvement pour qui demande a en avoir moins. Le contenu s'affiche
+   normalement : rien n'est cache, rien n'attend un declencheur. */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal.visible {
     opacity: 1;
     transform: none;
     transition: none;
   }
   .anim-hero,
-  .trait-anim {
+  .trait-anim,
+  .tampon-date.visible {
     animation: none;
+  }
+  .tampon-date,
+  .tampon-date.attente {
+    opacity: 0.82;
+    transform: rotate(-2deg);
+  }
+  .trait-trace path,
+  .trait-trace.visible path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .polaroid {
+    transition: none;
+  }
+  .polaroid:hover {
+    transform: rotate(-2deg);
+    box-shadow: 0 10px 24px rgba(70, 52, 30, 0.14);
+  }
+  .polaroid-droite:hover {
+    transform: rotate(2deg);
   }
 }

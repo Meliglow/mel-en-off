@@ -1,3 +1,4 @@
+import TraitTrace from "@/components/TraitTrace";
 // Bloc 2 : comment je travaille. Trois lignes, chacune dans son encadre.
 const LIGNES = [
   "Je teste tout moi-même, sur place.",
@@ -10,6 +11,8 @@ export default function Methode() {
     <section className="mt-10 px-5">
       <div className="filets" aria-hidden />
       <h2 className="h2 mt-4">Comment je travaille</h2>
+      {/* L'animation de cette section, c'est ce trait. Rien d'autre ne bouge ici. */}
+      <TraitTrace className="mt-2" />
 
       {/* Empilees sur mobile, cote a cote des qu'il y a la place. */}
       <ul className="mt-4 grid gap-3 md:grid-cols-3">

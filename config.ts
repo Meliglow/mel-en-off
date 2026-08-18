@@ -65,7 +65,7 @@ export const TITRES_DU_DIMANCHE: string[] = [
 */
 
 /* -------------------------------------------------------------------------
-   3. LES RESEAUX (pied de page uniquement)
+   3. LES RESEAUX
    ------------------------------------------------------------------------- */
 export const RESEAUX = {
   instagram: "https://instagram.com/melnourdi",
@@ -73,7 +73,56 @@ export const RESEAUX = {
 };
 
 /* -------------------------------------------------------------------------
-   4. LA LISTE EN OFF (MailerLite)
+   4. LE PORTRAIT DE MEL (en haut de la page d'accueil)
+
+   Le fichier se depose dans public/photos/, comme les autres.
+   Tant que "fichier" est vide, le portrait ne s'affiche pas du tout et la
+   page se replie proprement sur une colonne. Aucun cadre vide.
+   ------------------------------------------------------------------------- */
+export const PORTRAIT_MEL = {
+  /** Le nom du fichier seul, par exemple "portrait-mel-20260612.webp". */
+  fichier: "",
+  /** La legende manuscrite sous la photo, courte. */
+  legende: "Ravenne, juillet",
+};
+
+/* -------------------------------------------------------------------------
+   5. LA PLANCHE DE PHOTOS (bas de la page d'accueil)
+
+   Quatre photos, comme des polaroids poses sur la table.
+   Liste vide, ou moins de quatre photos : le bloc entier disparait.
+   ------------------------------------------------------------------------- */
+export const PHOTOS_PLANCHE: { fichier: string; legende: string }[] = [];
+
+/* Exemple, quand les photos sont pretes :
+
+export const PHOTOS_PLANCHE = [
+  { fichier: "abidjan-petit-dejeuner-noom-20260612.webp", legende: "Abidjan, juin" },
+  { fichier: "paris-spa-lumiere-20260518.webp", legende: "Paris, mai" },
+  { fichier: "lyon-hotel-cour-20260402.webp", legende: "Lyon, avril" },
+  { fichier: "dakar-restaurant-terrasse-20260310.webp", legende: "Dakar, mars" },
+];
+
+*/
+
+/* -------------------------------------------------------------------------
+   6. LA NOTE EN MARGE (page d'accueil)
+
+   Le petit mot manuscrit, comme griffonne dans la marge du carnet.
+   UNE SEULE par page. Laisser le texte vide pour ne pas l'afficher.
+   Deux ou trois lignes maximum, sinon ce n'est plus une note.
+   ------------------------------------------------------------------------- */
+export const NOTE_EN_MARGE = "";
+
+/* Exemple :
+
+export const NOTE_EN_MARGE =
+  "Je paie mes additions. Quand on m'invite, c'est marqué sur la fiche.";
+
+*/
+
+/* -------------------------------------------------------------------------
+   7. LA LISTE EN OFF (MailerLite)
 
    Les identifiants de groupe se trouvent dans MailerLite, dans l'adresse de
    la page du groupe : app.mailerlite.com/subscribers/groups/XXXXXXXX
@@ -93,7 +142,7 @@ export const GROUPES_MAILERLITE: Record<string, string> = {
 };
 
 /* -------------------------------------------------------------------------
-   5. LES DESTINATIONS PROPOSEES APRES L'INSCRIPTION (page /merci)
+   8. LES DESTINATIONS PROPOSEES APRES L'INSCRIPTION (page /merci)
 
    La premiere des trois questions demande ou la lectrice part en premier.
    Ce sont des destinations possibles, pas des villes deja testees : on peut
@@ -112,14 +161,14 @@ export const DESTINATIONS_PROPOSEES: string[] = [
 ];
 
 /* -------------------------------------------------------------------------
-   6. LE CONTACT PROFESSIONNEL (page Collaborations)
+   9. LE CONTACT PROFESSIONNEL (page Collaborations)
 
    L'adresse qui recoit les demandes des hotels, spas et restaurants.
    ------------------------------------------------------------------------- */
 export const EMAIL_CONTACT_PRO = "contact@melnourdi.fr";
 
 /* -------------------------------------------------------------------------
-   7. REGLAGES DU SITE (a ne changer qu'en connaissance de cause)
+  10. REGLAGES DU SITE (a ne changer qu'en connaissance de cause)
    ------------------------------------------------------------------------- */
 
 /** L'adresse publique du site, utilisee pour les liens partages. */

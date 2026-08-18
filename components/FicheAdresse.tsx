@@ -1,4 +1,5 @@
 import Photo from "./Photo";
+import TamponDate from "./TamponDate";
 import { Adresse, formaterDate } from "@/lib/types";
 
 // Le gabarit d'une adresse, partage par les pages categorie et les pages ville.
@@ -39,13 +40,14 @@ export default function FicheAdresse({ adresse }: { adresse: Adresse }) {
           </div>
         )}
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        {/* L'animation de la fiche, c'est le tampon qui s'encre. Rien d'autre. */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-2">
+          <TamponDate date={adresse.date_du_test} />
           {adresse.prix_paye && (
             <span className="puce-contour">
               payé {adresse.prix_paye} le {date}
             </span>
           )}
-          <span className="puce-contour">testé le {date}</span>
           {adresse.invitee && <span className="puce-contour">invitée, signalé</span>}
         </div>
       </div>

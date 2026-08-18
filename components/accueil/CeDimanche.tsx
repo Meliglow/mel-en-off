@@ -1,3 +1,4 @@
+import TraitTrace from "@/components/TraitTrace";
 import { TITRES_DU_DIMANCHE } from "@/config";
 
 // Bloc 4 : les trois titres du prochain envoi.
@@ -10,6 +11,7 @@ export default function CeDimanche() {
     <section className="mt-10 px-5">
       <div className="filets" aria-hidden />
       <h2 className="h2 mt-4">Dans EN OFF ce dimanche</h2>
+      <TraitTrace className="mt-2" />
 
       <ul className="mt-4 grid gap-3 md:grid-cols-3">
         {titres.map((titre) => (

@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Point de bascule propre au carnet : au-dela, le portrait du hero passe
+      // a droite du texte. En dessous, il reste au-dessus.
+      screens: {
+        carnet: "900px",
+      },
       colors: {
         papier: "#FBF6EC",
         carte: "#FFFDFA",

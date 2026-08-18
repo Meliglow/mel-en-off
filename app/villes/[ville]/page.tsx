@@ -87,7 +87,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
           <div className="mt-5 md:max-w-canvas">
             <FormulaireInscription
               source={`carnet-${slugifier(nom)}`}
-              libelleBouton="Recevoir EN OFF →"
+              libelleBouton="Recevoir la newsletter →"
             />
           </div>
         </div>
