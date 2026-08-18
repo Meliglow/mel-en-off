@@ -1,17 +1,22 @@
 import Polaroid from "@/components/Polaroid";
 import Reveal from "@/components/Reveal";
 import TitreSection from "@/components/TitreSection";
-import { PHOTOS_PLANCHE } from "@/config";
+import { NOTE_EN_MARGE, PHOTOS_PLANCHE } from "@/config";
 
 /**
  * En ce moment : les dernieres photos, posees comme des polaroids sur la table.
  * Deux par ligne sur telephone, quatre des qu'il y a la place.
+ *
+ * La note du carnet est ecrite sur le cadre blanc du PREMIER polaroid, sous la
+ * legende. Une seule par page, jamais sur les autres.
  *
  * Sans photo, le bloc entier disparait : pas de cadre vide, pas d'aplat gris.
  */
 export default function Planche() {
   const photos = PHOTOS_PLANCHE.filter((p) => p.fichier.trim() !== "");
   if (photos.length === 0) return null;
+
+  const note = NOTE_EN_MARGE.trim();
 
   return (
     <section className="mt-14 px-5">
@@ -30,6 +35,7 @@ export default function Planche() {
               fichier={p.fichier}
               legende={p.legende}
               alt={p.legende}
+              note={i === 0 && note ? note : undefined}
               inclinaison={i % 2 === 0 ? "gauche" : "droite"}
             />
           </Reveal>
@@ -40,7 +46,7 @@ export default function Planche() {
 }
 
 function grille(nombre: number): string {
-  if (nombre === 1) return "max-w-[300px]";
+  if (nombre === 1) return "max-w-[340px]";
   if (nombre === 2) return "grid-cols-2 md:max-w-[620px]";
   if (nombre === 3) return "grid-cols-2 md:grid-cols-3";
   return "grid-cols-2 md:grid-cols-4";

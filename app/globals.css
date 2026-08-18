@@ -400,6 +400,18 @@
     text-align: center;
     padding: 12px 6px 16px;
   }
+  /* Quelques mots de plus sur le cadre blanc, sous la legende. Meme ecriture,
+     un peu plus petite, alignee a gauche : ca se lit comme une phrase, pas
+     comme une etiquette. */
+  .polaroid-note {
+    display: block;
+    margin-top: 12px;
+    padding: 0 4px;
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--texte);
+    text-align: left;
+  }
 
   /* --- Tampon dateur : le mois et l'annee du test --- */
   .tampon-date {
@@ -425,38 +437,10 @@
     letter-spacing: 0.02em;
   }
 
-  /* --- Note en marge ---
-     Le filet vertical est celui d'un vrai cahier : un trait fin, en retrait
-     du bord, pas un bandeau colle contre l'arete. */
-  .note-marge {
-    position: relative;
-    border: 1px solid var(--bord);
-    border-radius: 3px;
-    background-color: var(--carte);
-    padding: 18px 44px 20px 34px;
-    background-position: 0 18px;
-  }
-  .note-marge::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 22px;
-    width: 1px;
-    background: var(--terracotta);
-    opacity: 0.45;
-    pointer-events: none;
-  }
   /* --- Ecriture a la main, calee sur les filets du cahier ---
      La hauteur de ligne vaut exactement l'ecart entre deux filets (28px),
      sinon le texte flotte au lieu de se poser dessus. */
   .ecriture {
-    font-family: var(--font-belle), cursive;
-    font-size: 21px;
-    line-height: 28px;
-    color: var(--texte);
-  }
-  .note-marge-texte {
     font-family: var(--font-belle), cursive;
     font-size: 21px;
     line-height: 28px;
@@ -552,23 +536,6 @@
   transition: none;
 }
 
-/* La note en marge s'ecrit de gauche a droite, comme une main qui la pose.
-   clip-path plutot que largeur : rien ne bouge dans la mise en page. */
-@keyframes ecrire {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 -2% 0 0);
-  }
-}
-/* Regle de securite : le texte n'est JAMAIS masque par defaut. Seule la classe
-   .visible declenche le trace, en partant du masque. Si l'observateur ne se
-   declenche pas, le texte est simplement la, sans animation. Jamais de bloc
-   vide. */
-.note-marge-texte.visible {
-  animation: ecrire 1.4s cubic-bezier(0.32, 0.72, 0.35, 1) both;
-}
 
 /* Une carte tenue par un ruban se redresse au survol, comme on remet une
    feuille droite du bout du doigt. */
@@ -588,10 +555,6 @@
 @media (hover: hover) {
   .lien-trait:hover {
     background-size: 100% 1px;
-  }
-  /* Le trombone frémit quand on approche de la note. */
-  .note-marge:hover .trombone {
-    transform: rotate(-6deg) translateY(-2px);
   }
 }
 .trombone {
@@ -684,12 +647,6 @@
   }
   .polaroid-droite:hover {
     transform: rotate(2deg);
-  }
-  /* L'ecriture de la note s'affiche entiere, sans se tracer. */
-  .note-marge-texte,
-  .note-marge-texte.visible {
-    animation: none;
-    clip-path: none;
   }
   .tenue,
   .trombone,

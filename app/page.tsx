@@ -5,7 +5,6 @@ import Methode from "@/components/accueil/Methode";
 import Planche from "@/components/accueil/Planche";
 import Reseaux from "@/components/accueil/Reseaux";
 import VilleDuMoment from "@/components/accueil/VilleDuMoment";
-import NoteEnMarge from "@/components/NoteEnMarge";
 import Reveal from "@/components/Reveal";
 
 // La page d'accueil n'a qu'un seul travail : collecter des emails pour EN OFF.
@@ -17,7 +16,6 @@ import Reveal from "@/components/Reveal";
 //   ville        l'apparition
 //   ce dimanche  le trait qui se dessine sous le titre
 //   planche      l'apparition, en cascade de 60 ms
-//   note         l'apparition
 //   reseaux      le trait qui se dessine sous le titre
 //   guide        l'apparition
 export default function Accueil() {
@@ -32,10 +30,6 @@ export default function Accueil() {
       <CeDimanche />
 
       <Planche />
-
-      {/* La note en marge se pose juste sous les photos : un mot rapide sur la
-          destination du moment, comme griffonne a cote des tirages. */}
-      <NoteEnMarge />
 
       <Reseaux />
 

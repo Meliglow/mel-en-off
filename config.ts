@@ -110,12 +110,12 @@ export const PHOTOS_PLANCHE = [
 */
 
 /* -------------------------------------------------------------------------
-   6. LA NOTE EN MARGE (page d'accueil, juste sous les photos)
+   6. LA NOTE DU CARNET (ecrite sur le premier polaroid)
 
-   Le petit mot griffonne a cote des tirages : une astuce de voyage sur la
-   destination du moment. Courte, pratique, du vecu, jamais un slogan.
-   UNE SEULE par page, jamais deux. Deux ou trois lignes maximum.
-   Texte vide : la note ne s'affiche pas du tout.
+   Le petit mot ecrit sur le cadre blanc du premier polaroid, sous sa
+   legende : une astuce de voyage sur la destination du moment. Courte,
+   pratique, du vecu, jamais un slogan. Deux ou trois lignes maximum.
+   UNE SEULE par page. Texte vide : rien ne s'affiche.
    ------------------------------------------------------------------------- */
 export const NOTE_EN_MARGE =
   "Si on ne peut partir qu'une fois, c'est décembre ou janvier. Mai, juin et " +
