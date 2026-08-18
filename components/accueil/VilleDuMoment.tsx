@@ -13,17 +13,18 @@ export default function VilleDuMoment() {
       <div className="filets" aria-hidden />
       <p className="surtitre mt-3">La ville du moment</p>
 
-      <div className="carte mt-3 overflow-hidden">
+      {/* Photo au-dessus sur mobile, photo a gauche des qu'il y a la place. */}
+      <div className="carte mt-3 grid overflow-hidden md:grid-cols-2 md:items-center">
         <Photo
           fichier={ville.photo}
           alt={`${ville.nom}, la ville du moment`}
-          className="aspect-[4/5] w-full"
+          className="aspect-[4/5] w-full md:h-full"
         />
-        <div className="p-4">
+        <div className="p-4 md:p-6">
           <h2 className="h2">{ville.nom}</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">{ville.phrase}</p>
           <Link href={`/villes/${ville.slug}`} className="btn btn-contour mt-4 w-full">
-            Voir le carnet de {ville.nom}
+            Voir le carnet
           </Link>
         </div>
       </div>

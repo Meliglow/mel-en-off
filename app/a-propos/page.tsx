@@ -15,7 +15,7 @@ export default function AProposPage() {
         chapo="Je m'appelle Mel. Je teste des adresses, et je te dis ce que j'en pense, sans arrondir les angles."
       />
 
-      <section className="mt-8 px-5">
+      <section className="mt-8 grid gap-3 px-5 md:grid-cols-3">
         <div className="carte p-5">
           <h2 className="h3">Je teste tout moi-même, sur place.</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
@@ -25,7 +25,7 @@ export default function AProposPage() {
           </p>
         </div>
 
-        <div className="carte mt-3 p-5">
+        <div className="carte p-5">
           <h2 className="h3">Chaque adresse porte la date où je l'ai testée.</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Un lieu change, une équipe part, une carte se transforme. La date te dit à quel moment
@@ -33,7 +33,7 @@ export default function AProposPage() {
           </p>
         </div>
 
-        <div className="carte mt-3 p-5">
+        <div className="carte p-5">
           <h2 className="h3">Je dis ce que j'ai payé.</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Le prix fait partie du verdict. Une adresse peut être très bien à quarante euros et
@@ -45,16 +45,16 @@ export default function AProposPage() {
       <section className="mt-8 px-5">
         <div className="filets" aria-hidden />
         <h2 className="h2 mt-4">Le droit de veto</h2>
-        <p className="citation mt-4">
+        <p className="citation mt-4 md:max-w-canvas">
           Une invitation ne change pas le verdict. Si l'adresse ne vaut pas le coup, je ne la publie
           pas. Et quand je suis invitée, c'est écrit.
         </p>
-        <p className="mt-4 text-[15px] leading-relaxed text-texte">
+        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-canvas">
           C'est la seule règle qui rend le reste crédible. Un lieu qui m'invite sait, avant que
           j'arrive, que je peux repartir sans rien publier. Personne ne relit mes textes avant moi,
           et personne ne les valide.
         </p>
-        <p className="mt-4 text-[15px] leading-relaxed text-texte">
+        <p className="mt-4 text-[15px] leading-relaxed text-texte md:max-w-canvas">
           Les adresses que j'écarte comptent autant que celles que je recommande. C'est souvent
           celles-là qui t'évitent une mauvaise soirée.
         </p>

@@ -23,7 +23,9 @@ export default function Hero() {
   const { testees, recalees } = compteurs();
 
   return (
-    <section className="flex min-h-[calc(100svh-84px)] flex-col justify-center px-5 py-8 md:min-h-0 md:py-12">
+    // Sur grand ecran, le hero reste sur la largeur de lecture du carnet et se
+    // centre, au lieu d'etirer les champs sur toute la page.
+    <section className="mx-auto flex min-h-[calc(100svh-84px)] w-full flex-col justify-center px-5 py-8 md:min-h-0 md:max-w-canvas md:py-14">
       <div className="flex justify-center">
         <IconEnveloppe />
       </div>

@@ -55,7 +55,7 @@ export default function TroisQuestions() {
     return (
       <div className="carte mt-8 p-5" role="status">
         <p className="h3">Merci, c&apos;est noté.</p>
-        <p className="mt-2 text-[15px] leading-relaxed text-texte">
+        <p className="mt-2 text-[15px] leading-relaxed text-texte md:max-w-canvas">
           Je t&apos;enverrai en priorité ce qui correspond à ce que tu prépares.
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function TroisQuestions() {
     <section className="mt-10 px-5">
       <div className="filets" aria-hidden />
       <h2 className="h2 mt-4">Trois questions, si tu as trente secondes</h2>
-      <p className="mt-2 text-[15px] leading-relaxed text-texte">
+      <p className="mt-2 text-[15px] leading-relaxed text-texte md:max-w-canvas">
         Pour t&apos;envoyer ce qui te sert vraiment. Tu peux aussi ne rien répondre, ton
         inscription est déjà valable.
       </p>

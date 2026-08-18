@@ -15,7 +15,7 @@ export default function ConfidentialitePage() {
         chapo="Ce que je collecte, pourquoi, et comment tu peux repartir avec tes données."
       />
 
-      <section className="mt-8 flex flex-col gap-8 px-5">
+      <section className="mt-8 grid gap-8 px-5 md:grid-cols-2 md:gap-x-8">
         <div>
           <h2 className="h3">Qui traite tes données</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">

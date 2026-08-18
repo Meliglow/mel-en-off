@@ -15,7 +15,7 @@ export default function EnOffPage() {
         chapo="Une lettre par semaine, écrite à la main, sur ce que j'ai testé pour de vrai."
       />
 
-      <section className="mt-8 px-5">
+      <section className="mt-8 grid gap-3 px-5 md:grid-cols-3">
         <div className="carte p-5">
           <h2 className="h3">Ce qu'il y a dedans</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
@@ -25,7 +25,7 @@ export default function EnOffPage() {
           </p>
         </div>
 
-        <div className="carte mt-3 p-5">
+        <div className="carte p-5">
           <h2 className="h3">À quel rythme</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Le dimanche. Une seule lettre, et les emails que je t'envoie quand j'ai quelque chose à
@@ -33,7 +33,7 @@ export default function EnOffPage() {
           </p>
         </div>
 
-        <div className="carte mt-3 p-5">
+        <div className="carte p-5">
           <h2 className="h3">Pour qui</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Pour toi qui prépares un voyage ou une sortie, et qui n'as pas envie de passer deux

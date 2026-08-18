@@ -11,7 +11,7 @@ export default function CeDimanche() {
       <div className="filets" aria-hidden />
       <h2 className="h2 mt-4">Dans EN OFF ce dimanche</h2>
 
-      <ul className="mt-4 flex flex-col gap-3">
+      <ul className="mt-4 grid gap-3 md:grid-cols-3">
         {titres.map((titre) => (
           <li key={titre} className="carte p-4">
             <p className="text-[16px] leading-relaxed text-texte">{titre}</p>

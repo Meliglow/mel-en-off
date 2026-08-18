@@ -56,7 +56,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
         {recommandees.length > 0 && (
           <>
             <h2 className="h2">Ce que je recommande</h2>
-            <div className="mt-4 flex flex-col gap-4">
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
               {recommandees.map((a) => (
                 <FicheAdresse key={a.slug_page} adresse={a} />
               ))}
@@ -67,7 +67,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
         {recalees.length > 0 && (
           <div className={recommandees.length > 0 ? "mt-10" : ""}>
             <h2 className="h2">Les recalées</h2>
-            <div className="mt-4 flex flex-col gap-4">
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
               {recalees.map((a) => (
                 <FicheAdresse key={a.slug_page} adresse={a} />
               ))}
@@ -84,7 +84,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
             Les nouvelles adresses testées ici partent d&apos;abord dans EN OFF, avec ce que
             j&apos;ai payé et la date.
           </p>
-          <div className="mt-5">
+          <div className="mt-5 md:max-w-canvas">
             <FormulaireInscription
               source={`carnet-${slugifier(nom)}`}
               libelleBouton="Recevoir EN OFF →"

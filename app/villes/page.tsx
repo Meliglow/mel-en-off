@@ -26,7 +26,7 @@ export default function VillesPage() {
             et c'est là que tout sort en premier.
           </Bientot>
         ) : (
-          <ul className="flex flex-col gap-3">
+          <ul className="grid gap-3 md:grid-cols-2">
             {liste.map((v) => (
               <li key={v.slug}>
                 <Link href={`/villes/${v.slug}`} className="carte lift flex items-center justify-between gap-3 p-4">

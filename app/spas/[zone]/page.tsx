@@ -49,7 +49,7 @@ export default function PageSpas({ params }: { params: { zone: string } }) {
             {recommandees.length > 0 && (
               <>
                 <h2 className="h2">Ceux que je recommande</h2>
-                <div className="mt-4 flex flex-col gap-4">
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
                   {recommandees.map((a) => (
                     <FicheAdresse key={a.slug_page} adresse={a} />
                   ))}
@@ -63,7 +63,7 @@ export default function PageSpas({ params }: { params: { zone: string } }) {
                 <p className="mt-2 text-[15px] leading-relaxed text-texte2">
                   Testés aussi, et je n&apos;y retourne pas.
                 </p>
-                <div className="mt-4 flex flex-col gap-4">
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
                   {recalees.map((a) => (
                     <FicheAdresse key={a.slug_page} adresse={a} />
                   ))}
