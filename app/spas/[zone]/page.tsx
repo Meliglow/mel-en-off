@@ -76,7 +76,7 @@ export default function PageSpas({ params }: { params: { zone: string } }) {
 
       <GuideGratuit />
 
-      <NonTeste sujet={nom} />
+      <NonTeste />
     </main>
   );
 }

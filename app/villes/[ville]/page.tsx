@@ -93,7 +93,7 @@ export default function PageVille({ params }: { params: { ville: string } }) {
         </div>
       </section>
 
-      <NonTeste sujet={nom} />
+      <NonTeste complement={`à ${nom}`} />
     </main>
   );
 }
