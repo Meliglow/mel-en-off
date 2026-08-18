@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/sync-adresses.mjs --build",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync-adresses": "node scripts/sync-adresses.mjs",
+    "optimiser-images": "node scripts/optimiser-images.mjs"
   },
   "dependencies": {
     "next": "14.2.35",
@@ -19,6 +22,7 @@
     "@types/react-dom": "18.3.0",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.47",
+    "sharp": "^0.35.3",
     "tailwindcss": "3.4.14",
     "typescript": "5.6.3"
   }

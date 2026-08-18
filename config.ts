@@ -1,0 +1,114 @@
+/* =========================================================================
+   LE FICHIER DE MEL
+
+   C'est le seul fichier a modifier pour changer les textes qui bougent
+   souvent : la ville mise en avant, les titres de la lettre du dimanche,
+   les liens des reseaux, l'adresse de contact.
+
+   Regle : on ne change que ce qui est entre guillemets, on ne touche pas
+   aux noms a gauche des deux-points, ni aux virgules.
+
+   Les adresses testees, elles, ne vivent PAS ici : elles vivent dans le
+   Google Sheet (voir LISEZ-MOI.md).
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. LA VILLE DU MOMENT (bloc 3 de la page d'accueil)
+
+   Une seule ville mise en avant sur la page d'accueil.
+   Pour ne mettre aucune ville en avant, remplacer tout le bloc par :
+       export const VILLE_DU_MOMENT: VilleDuMoment | null = null;
+   Le bloc disparait alors de la page d'accueil, proprement.
+   ------------------------------------------------------------------------- */
+export interface VilleDuMoment {
+  /** Le nom affiche, tel qu'on l'ecrit. */
+  nom: string;
+  /** L'adresse de la page, en minuscules et sans accent. Doit correspondre
+   *  a la ville ecrite dans le Google Sheet (Abidjan donne abidjan). */
+  slug: string;
+  /** Une seule phrase, celle qui donne envie de cliquer. */
+  phrase: string;
+  /** Le nom du fichier photo depose dans public/photos/. Laisser "" si
+   *  aucune photo n'est prete : un aplat de couleur prend sa place. */
+  photo: string;
+}
+
+export const VILLE_DU_MOMENT: VilleDuMoment | null = null;
+
+/* Exemple, a recopier en remplacant null ci-dessus quand la ville est prete :
+
+export const VILLE_DU_MOMENT: VilleDuMoment | null = {
+  nom: "Abidjan",
+  slug: "abidjan",
+  phrase: "Trois semaines sur place, et la liste de ce que je referais demain.",
+  photo: "abidjan-ville-cocody-20260612.webp",
+};
+
+*/
+
+/* -------------------------------------------------------------------------
+   2. LES TROIS TITRES DU DIMANCHE (bloc 4 de la page d'accueil)
+
+   Ce sont les trois sujets du prochain envoi. A changer chaque semaine.
+   Pour masquer le bloc, laisser la liste vide : []
+   ------------------------------------------------------------------------- */
+export const TITRES_DU_DIMANCHE: string[] = [];
+
+/* Exemple :
+
+export const TITRES_DU_DIMANCHE: string[] = [
+  "Le spa a 90 euros que je ne referai pas",
+  "Trois petits dejeuners a Abidjan, un seul vaut le detour",
+  "Ce que je regarde avant de reserver un hotel",
+];
+
+*/
+
+/* -------------------------------------------------------------------------
+   3. LES RESEAUX (pied de page uniquement)
+   ------------------------------------------------------------------------- */
+export const RESEAUX = {
+  instagram: "https://instagram.com/melnourdi",
+  tiktok: "https://tiktok.com/@melnourdi",
+};
+
+/* -------------------------------------------------------------------------
+   4. LA LISTE EN OFF (MailerLite)
+
+   Les identifiants de groupe se trouvent dans MailerLite, dans l'adresse de
+   la page du groupe : app.mailerlite.com/subscribers/groups/XXXXXXXX
+   C'est le nombre XXXXXXXX qu'on recopie ici, entre guillemets.
+
+   Tant qu'un identifiant est vide, l'inscription fonctionne quand meme :
+   la personne entre dans la liste avec son etiquette de source, sans groupe.
+
+   La cle d'API, elle, ne vit PAS ici : elle est dans les variables
+   d'environnement de Vercel (MAILERLITE_API_KEY), pour rester secrete.
+   ------------------------------------------------------------------------- */
+export const GROUPES_MAILERLITE: Record<string, string> = {
+  // Le formulaire du haut de la page d'accueil
+  lettre: "",
+  // Le formulaire du guide gratuit, en bas de la page d'accueil
+  "guide-spas-idf": "",
+};
+
+/* -------------------------------------------------------------------------
+   5. LE CONTACT PROFESSIONNEL (page Collaborations)
+
+   L'adresse qui recoit les demandes des hotels, spas et restaurants.
+   ------------------------------------------------------------------------- */
+export const EMAIL_CONTACT_PRO = "contact@melnourdi.fr";
+
+/* -------------------------------------------------------------------------
+   6. REGLAGES DU SITE (a ne changer qu'en connaissance de cause)
+   ------------------------------------------------------------------------- */
+
+/** L'adresse publique du site, utilisee pour les liens partages. */
+export const URL_SITE = "https://melnourdi.fr";
+
+/** La categorie du Google Sheet qui alimente les pages /spas/...
+ *  Autrement dit : ce qu'il faut ecrire dans la colonne "categorie". */
+export const CATEGORIE_SPAS = "spa";
+
+/** La zone mise en avant dans la navigation, pour la page /spas/... */
+export const ZONE_SPAS_PRINCIPALE = { nom: "Île-de-France", slug: "ile-de-france" };
