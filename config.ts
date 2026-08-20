@@ -68,8 +68,8 @@ export const TITRES_DU_DIMANCHE: string[] = [
    3. LES RESEAUX
    ------------------------------------------------------------------------- */
 export const RESEAUX = {
-  instagram: "https://instagram.com/melenoff",
-  tiktok: "https://tiktok.com/@mel_enoff",
+  instagram: "https://instagram.com/melnourdi",
+  tiktok: "https://tiktok.com/@melnourdi",
 };
 
 /* -------------------------------------------------------------------------

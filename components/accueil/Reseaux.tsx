@@ -41,7 +41,7 @@ function IconTikTok() {
 const COMPTES = [
   {
     nom: "Instagram",
-    pseudo: "@melenoff",
+    pseudo: "@melnourdi",
     lien: RESEAUX.instagram,
     phrase: "Les adresses en stories, et ce qui n'est pas encore écrit.",
     icone: <IconInstagram />,
@@ -49,7 +49,7 @@ const COMPTES = [
   },
   {
     nom: "TikTok",
-    pseudo: "@mel_enoff",
+    pseudo: "@melnourdi",
     lien: RESEAUX.tiktok,
     phrase: "Les tests en vidéo, sur place, sans montage flatteur.",
     icone: <IconTikTok />,
