@@ -49,13 +49,8 @@ export default function MentionsLegalesPage() {
         <div>
           <h2 className="h3">Hébergement</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723,
-            États-Unis. Site : vercel.com
-          </p>
-          <p className="mt-2 text-[15px] leading-relaxed text-texte2">
-            <AComplete>
-              vérifier l&apos;adresse de l&apos;hébergeur sur vercel.com/legal avant publication
-            </AComplete>
+            Le site est hébergé par Railway Corporation, 548 Market St PMB 68956,
+            San Francisco, California 94104, États-Unis. Site : railway.com
           </p>
         </div>
 
