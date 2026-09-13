@@ -131,29 +131,13 @@ export const NOTE_EN_MARGE =
   "juillet reçoivent plus d'eau que toute la saison sèche réunie.";
 
 /* -------------------------------------------------------------------------
-   7. LA LISTE EN OFF (MailerLite)
+   7. LA LISTE EN OFF (Brevo)
 
-   Les identifiants de groupe se trouvent dans MailerLite, dans l'adresse de
-   la page du groupe : app.mailerlite.com/subscribers/groups/XXXXXXXX
-   C'est le nombre XXXXXXXX qu'on recopie ici, entre guillemets.
-
-   Tant qu'un identifiant est vide, l'inscription fonctionne quand meme :
-   la personne entre dans la liste avec son etiquette de source, sans groupe.
-
-   La cle d'API, elle, ne vit PAS ici : elle est dans les variables
-   d'environnement de Vercel (MAILERLITE_API_KEY), pour rester secrete.
+   L'identifiant correspond a la liste « Mel Nourdi · Newsletter » dans Brevo.
+   La cle d'API ne vit PAS ici : elle est dans les variables d'environnement
+   de Railway (BREVO_API_KEY), pour rester secrete.
    ------------------------------------------------------------------------- */
-export const GROUPES_MAILERLITE: Record<string, string> = {
-  // Le formulaire du haut de la page d'accueil, celui qui vend la lettre
-  lettre: "",
-  // Le formulaire du guide gratuit, en bas de l'accueil et sur la page Spas
-  "guide-spas-idf": "",
-
-  // Les carnets de ville envoient aussi leur propre etiquette, par exemple
-  // "carnet-abidjan". Pour les separer aussi dans MailerLite, ajouter une
-  // ligne par ville, sur ce modele :
-  //   "carnet-abidjan": "123456",
-};
+export const LISTE_BREVO_NEWSLETTER = 9;
 
 /* -------------------------------------------------------------------------
    8. LE CONTACT PROFESSIONNEL (page Collaborations)

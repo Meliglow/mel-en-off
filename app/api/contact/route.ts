@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { EMAIL_CONTACT_PRO } from "@/config";
 
 // Le formulaire professionnel de /collaborations.
-// Il envoie un email et n'ecrit JAMAIS dans MailerLite : un hotel qui nous
+// Il envoie un email et n'ecrit JAMAIS dans Brevo Contacts : un hotel qui nous
 // ecrit ne doit pas atterrir dans la liste des lectrices.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -62,13 +61,10 @@ export async function POST(requete: Request) {
     return echec("Merci de cocher la case avant d'envoyer.", 400);
   }
 
-  const hote = process.env.SMTP_HOST || "smtp.gmail.com";
-  const port = Number(process.env.SMTP_PORT || 465);
-  const utilisateur = process.env.SMTP_USER;
-  const motDePasse = process.env.SMTP_PASSWORD;
+  const cle = process.env.BREVO_API_KEY;
 
-  if (!utilisateur || !motDePasse) {
-    console.error("SMTP_USER ou SMTP_PASSWORD absente : envoi impossible.");
+  if (!cle) {
+    console.error("BREVO_API_KEY absente : envoi impossible.");
     return echec("L'envoi est momentanément indisponible.", 503);
   }
 
@@ -85,20 +81,22 @@ export async function POST(requete: Request) {
   ];
 
   try {
-    const transport = nodemailer.createTransport({
-      host: hote,
-      port,
-      secure: port === 465,
-      auth: { user: utilisateur, pass: motDePasse },
+    const reponse = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        "api-key": cle,
+      },
+      body: JSON.stringify({
+        sender: { name: "Site melnourdi.fr", email: "contact@melnourdi.fr" },
+        to: [{ email: EMAIL_CONTACT_PRO }],
+        replyTo: { name: nom, email },
+        subject: `Collaboration : ${etablissement}${corps.ville ? `, ${corps.ville.trim()}` : ""}`,
+        textContent: lignes.join("\n"),
+      }),
     });
-
-    await transport.sendMail({
-      from: `"Site melnourdi.fr" <${utilisateur}>`,
-      to: EMAIL_CONTACT_PRO,
-      replyTo: `"${nom}" <${email}>`,
-      subject: `Collaboration : ${etablissement}${corps.ville ? `, ${corps.ville.trim()}` : ""}`,
-      text: lignes.join("\n"),
-    });
+    if (!reponse.ok) throw new Error(`Brevo a repondu ${reponse.status}`);
   } catch (erreur) {
     console.error("Envoi du message professionnel impossible :", erreur);
     return echec("Le message n'a pas pu partir. Réessayez dans un instant.", 502);

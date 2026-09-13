@@ -53,7 +53,7 @@ Tout se passe dans **un seul fichier**, [`config.ts`](config.ts), commenté lign
 - la **ville du moment** mise en avant
 - les **trois titres du dimanche**, à changer chaque semaine
 - les **liens Instagram et TikTok**
-- les **identifiants de groupes MailerLite**
+- l'**identifiant de la liste Brevo**
 - l'**adresse de contact** des professionnels
 - les **destinations proposées** après l'inscription
 
@@ -66,7 +66,7 @@ Tu modifies, tu enregistres sur GitHub, le site se republie seul.
 ## La stack
 
 Next.js 14 (App Router) + TypeScript + Tailwind. Trois dépendances de production : `next`,
-`react`, `react-dom`, plus `nodemailer` pour le formulaire professionnel. Aucun CMS, aucune
+`react`, `react-dom`. Aucun CMS, aucune
 base de données, aucun ORM, aucun script de mesure d'audience.
 
 ## Les commandes
@@ -93,19 +93,15 @@ npm run optimiser-images    # convertit public/photos en WebP sous 200 Ko
 
 ## Les variables d'environnement
 
-À créer sur Vercel, pour les trois environnements (Production, Preview, Development).
+À créer sur Railway, dans l'environnement de production.
 
 | Variable | À quoi elle sert |
 |---|---|
 | `SHEET_ADRESSES_CSV_URL` | l'adresse du Google Sheet publié en CSV |
-| `MAILERLITE_API_KEY` | la clé d'API MailerLite, **jamais** dans le code client |
-| `SMTP_USER` | l'adresse Google Workspace qui envoie les messages professionnels |
-| `SMTP_PASSWORD` | son mot de passe d'application |
-| `SMTP_HOST` | facultatif, `smtp.gmail.com` par défaut |
-| `SMTP_PORT` | facultatif, `465` par défaut |
+| `BREVO_API_KEY` | la clé d'API Brevo commune aux inscriptions et aux messages professionnels, **jamais** dans le code client |
 
-Les identifiants de groupes MailerLite, eux, sont dans `config.ts` : ils ne sont pas
-secrets, et Mel doit pouvoir les changer sans toucher aux réglages de l'hébergeur.
+L'identifiant de la liste Brevo est dans `config.ts` : il n'est pas secret et peut être
+changé sans toucher aux réglages de l'hébergeur.
 
 ## Le coût, c'est une contrainte de conception
 

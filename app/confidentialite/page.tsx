@@ -48,8 +48,8 @@ export default function ConfidentialitePage() {
         <div>
           <h2 className="h3">Qui d&apos;autre y a accès</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            La lettre est envoyée avec MailerLite, qui héberge la liste des inscrites pour mon
-            compte. Le site est hébergé par Vercel. Personne d&apos;autre. Je ne vends ni ne loue
+            La lettre est envoyée avec Brevo, qui héberge la liste des inscrites pour mon
+            compte. Le site est hébergé par Railway. Personne d&apos;autre. Je ne vends ni ne loue
             aucune donnée, jamais.
           </p>
         </div>

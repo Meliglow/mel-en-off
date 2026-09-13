@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { GROUPES_MAILERLITE } from "@/config";
+import { LISTE_BREVO_NEWSLETTER } from "@/config";
 
 // Seule fonction serveur du site avec le contact professionnel.
 // Node, jamais edge : les fonctions edge sont exclues.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const API_MAILERLITE = "https://connect.mailerlite.com/api/subscribers";
+const API_BREVO = "https://api.brevo.com/v3/contacts";
 
 // Validation volontairement simple, la meme des deux cotes.
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -44,52 +44,40 @@ export async function POST(requete: Request) {
     return echec("Il faut cocher la case pour recevoir la lettre.", 400);
   }
 
-  const cle = process.env.MAILERLITE_API_KEY;
+  const cle = process.env.BREVO_API_KEY;
   if (!cle) {
-    console.error("MAILERLITE_API_KEY absente : inscription impossible.");
+    console.error("BREVO_API_KEY absente : inscription impossible.");
     return echec("L'inscription est momentanément indisponible.", 503);
   }
 
-  const groupe = GROUPES_MAILERLITE[source];
-  const champs: Record<string, string> = { source };
-  if (prenom) champs.name = prenom;
-  if (corps.destination) champs.destination = corps.destination;
-  if (corps.compagnie) champs.compagnie = corps.compagnie;
-  if (corps.intention) champs.intention = corps.intention;
+  const attributes: Record<string, string> = {};
+  if (prenom) attributes.PRENOM = prenom;
 
-  const base: Record<string, unknown> = { email };
-  if (groupe) base.groups = [groupe];
-
-  // MailerLite cree ou met a jour l'abonne sur cette meme route :
-  // une adresse deja inscrite n'est donc pas une erreur.
-  let reponse = await envoyer(cle, { ...base, fields: champs });
-
-  // Si un champ personnalise n'existe pas encore dans MailerLite, on
-  // reessaie sans les champs : l'inscription passe quand meme.
-  if (reponse.status === 422) {
-    reponse = await envoyer(cle, base);
-  }
-
-  if (!reponse.ok) {
-    const detail = await reponse.text();
-    console.error(`MailerLite a repondu ${reponse.status} : ${detail}`);
-    return echec("L'inscription n'a pas pu aboutir. Réessaie dans un instant.", 502);
-  }
-
-  return NextResponse.json({ ok: true });
-}
-
-function envoyer(cle: string, charge: Record<string, unknown>) {
-  return fetch(API_MAILERLITE, {
+  // Brevo cree le contact ou met a jour l'adresse deja connue, puis l'ajoute
+  // a la liste Mel Nourdi · Newsletter.
+  const reponse = await fetch(API_BREVO, {
     method: "POST",
     headers: {
       "content-type": "application/json",
       accept: "application/json",
-      authorization: `Bearer ${cle}`,
+      "api-key": cle,
     },
-    body: JSON.stringify(charge),
+    body: JSON.stringify({
+      email,
+      attributes,
+      listIds: [LISTE_BREVO_NEWSLETTER],
+      updateEnabled: true,
+    }),
     cache: "no-store",
   });
+
+  if (!reponse.ok) {
+    const detail = await reponse.text();
+    console.error(`Brevo a repondu ${reponse.status} : ${detail.slice(0, 300)}`);
+    return echec("L'inscription n'a pas pu aboutir. Réessaie dans un instant.", 502);
+  }
+
+  return NextResponse.json({ ok: true });
 }
 
 function echec(message: string, statut: number) {
