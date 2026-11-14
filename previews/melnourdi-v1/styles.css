@@ -44,8 +44,16 @@ details p,dialog p,.dialog-list{font-size:14px}
 .highlight{white-space:normal}
 .hero .highlight{white-space:nowrap}
 /* Portrait fourni par Mel le 14 novembre 2026. */
-.portrait-with-photo{position:relative;padding:0;overflow:hidden;background:var(--paper)}
-.portrait-with-photo .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
-.portrait-with-photo .portrait-bottom{position:absolute;bottom:20px;left:20px;right:20px;background:var(--paper);padding:14px 18px;border:0;border-radius:6px}
-.portrait-with-photo .portrait-bottom strong{font-size:42px}
-@media(max-width:767px){.portrait-with-photo{aspect-ratio:1.1;min-height:0}.portrait-with-photo .portrait-bottom{bottom:14px;left:14px;right:14px;padding:10px 14px}.portrait-with-photo .portrait-bottom strong{font-size:30px}}
+.portrait-with-photo{width:min(100%,280px);justify-self:center;aspect-ratio:auto;min-height:0;padding:0;border:0;background:transparent;border-radius:0}
+.portrait-with-photo .hero-photo{width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:center 40%;border-radius:64px 10px 10px 10px}
+.portrait-with-photo .portrait-bottom{padding:12px 0 0;border:0;align-items:center}
+.portrait-with-photo .portrait-bottom strong{font-size:26px;letter-spacing:-1px}
+.portrait-with-photo .portrait-bottom span{font-size:10px}
+@media(max-width:767px){
+  .portrait-with-photo{width:100%;justify-self:start;flex-direction:row;justify-content:flex-start;align-items:center;gap:16px}
+  .portrait-with-photo .hero-photo{width:80px;height:80px;flex-shrink:0;border-radius:50%}
+  .portrait-with-photo .portrait-bottom{padding:0;flex-direction:column;align-items:flex-start;gap:4px}
+  .portrait-with-photo .portrait-bottom strong{font-size:22px}
+  .portrait-with-photo .portrait-bottom span{font-size:11px}
+  .portrait-with-photo .portrait-bottom span br{display:block}
+}
