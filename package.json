@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/sync-adresses.mjs --build",
+    "prebuild": "node scripts/sync-adresses.mjs --build && node scripts/prepare-site.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

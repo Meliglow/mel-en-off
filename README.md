@@ -1,6 +1,16 @@
-# EN OFF, melnourdi.fr
+# Mel Nourdi — site personnel
 
-La page d'accueil a un seul travail : collecter des emails pour la lettre **EN OFF**. Le
+## Version du 14 novembre 2026
+
+Le nouvel accueil et la page `/liens` reprennent le design validé et le portrait fourni par Mel. Sources : `previews/melnourdi-v1/`. `npm run build` prépare les fichiers publics avec `scripts/prepare-site.mjs`, puis construit Next.js. Les réécritures dans `next.config.mjs` servent ces pages en priorité ; les anciennes pages et API restent disponibles.
+
+La publication sur Railway depuis `main` est autorisée par Mel. Le guide « 7 choses à faire pour vendre ton offre », les nouvelles inscriptions email et les ventes restent à finaliser. La version publique indique leur disponibilité à venir ; les formulaires de démonstration ne sont pas publiés. Le contact sur mesure utilise `contact@melnourdi.fr`.
+
+Vérification locale : `npm run build`, puis `npm run start -- --port 4180`. Les fichiers de `public/melnourdi/` sont générés et ignorés par Git. Ne pas les modifier directement. Pour retrouver l'ancien accueil, retirer les deux réécritures `beforeFiles` ; ses sources Next.js sont conservées.
+
+## Documentation historique des pages EN OFF
+
+L'ancienne page d'accueil avait pour rôle de collecter des emails pour la lettre **EN OFF**. Le
 reste du site, ce sont les pages de contenu qui donnent envie de s'inscrire.
 
 ---

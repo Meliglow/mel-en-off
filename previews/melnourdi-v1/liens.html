@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f9f7f2">
+  <meta name="description" content="Les liens de Mel Nourdi : site, guide gratuit, communauté email et formation réservation.">
+  <title>Les liens de Mel Nourdi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="liens.css">
+  <script src="liens.js" defer></script>
+</head>
+<body class="links-page">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="diagonal" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></symbol>
+    <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+    <symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="laptop" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="m4 16-2 4h20l-2-4M9 20h6"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </svg>
+  <div class="preview-bar"><span>Aperçu · page de liens</span><span>Formulaires non connectés</span></div>
+  <main class="links-shell">
+    <header class="links-profile">
+      <img class="profile-photo" src="assets/mel-nourdi-business.webp" alt="Portrait de Mel Nourdi" width="1200" height="1200" fetchpriority="high">
+      <h1>Mel Nourdi<span>.</span></h1>
+      <p>Business, IA et formations pratiques.</p>
+      <span class="profile-caption">Des conseils à mettre en pratique.</span>
+    </header>
+
+    <nav class="links-stack" aria-label="Les liens de Mel Nourdi">
+      <a class="site-link link-row" href="index.html">
+        <svg class="row-icon"><use href="#globe"/></svg>
+        <span class="link-copy"><strong>Découvrir mon site</strong><span>Mon univers, mes formations et mes services</span></span>
+        <svg class="row-arrow"><use href="#diagonal"/></svg>
+      </a>
+
+      <button class="guide-link" data-panel="guide" aria-haspopup="dialog">
+        <span class="guide-content"><span class="free-label">Ton guide gratuit</span><strong>7 choses à faire<br>pour vendre<br>ton offre</strong><span class="guide-action">Je découvre le guide<svg><use href="#arrow"/></svg></span></span>
+        <span class="guide-book" aria-hidden="true"><span class="book-brand">melnourdi.</span><span class="book-number">7<span>.</span></span><span class="book-bottom">Vendre<br>ton offre</span></span>
+      </button>
+
+      <button class="community-link link-row" data-panel="community" aria-haspopup="dialog">
+        <svg class="row-icon"><use href="#mail"/></svg>
+        <span class="link-copy"><strong>Rejoindre la communauté</strong><span>Mes conseils et mes nouvelles par email</span></span>
+        <svg class="row-arrow"><use href="#arrow"/></svg>
+      </button>
+
+      <a class="booking-link link-row" href="index.html#formations">
+        <svg class="row-icon"><use href="#laptop"/></svg>
+        <span class="link-copy"><span class="coming-label">Formation en préparation</span><strong>Je souhaite créer mon propre logiciel de réservation</strong></span>
+        <svg class="row-arrow"><use href="#diagonal"/></svg>
+      </a>
+    </nav>
+    <footer class="links-footer"><a href="index.html" aria-label="Melnourdi, retour au site">melnourdi.</a><button data-panel="privacy">Confidentialité</button></footer>
+  </main>
+
+  <dialog id="links-dialog" aria-labelledby="panel-title">
+    <button class="dialog-close" aria-label="Fermer la fenêtre"><svg><use href="#close"/></svg></button>
+    <div id="panel-content"></div>
+  </dialog>
+  <template id="guide-panel">
+    <span class="panel-label">Guide gratuit · en préparation</span>
+    <h2 id="panel-title">7 choses à faire pour vendre ton offre</h2>
+    <p>Un guide pour t’aider à clarifier ton offre, savoir quoi dire et faciliter le passage à l’achat.</p>
+    <p class="dialog-notice">Le guide est en préparation. Le téléchargement n’est pas encore disponible.</p>
+    <p>En attendant, tu peux rejoindre ma communauté email.</p>
+    <button class="button button-dark" data-switch="community">Rejoindre la communauté<svg class="end-icon"><use href="#arrow"/></svg></button>
+  </template>
+  <template id="community-panel">
+    <span class="panel-label">La communauté, par email</span>
+    <h2 id="panel-title">On garde le contact ?</h2>
+    <p>Mes conseils business, mes découvertes et les nouvelles de mes formations et produits digitaux, dans ta boîte mail.</p>
+    <form id="community-form" class="contact-form">
+      <label for="community-firstname">Ton prénom <span>(facultatif)</span></label>
+      <input id="community-firstname" name="firstName" autocomplete="given-name" maxlength="80" placeholder="Ton prénom">
+      <label for="community-email">Ton adresse email</label>
+      <input id="community-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="toi@exemple.fr">
+      <p class="community-consent">En t’inscrivant, tu choisis de recevoir mes emails de conseils et mes offres. Tu pourras te désinscrire à tout moment.</p>
+      <button class="button button-dark" type="submit">Je rejoins la communauté<svg class="end-icon"><use href="#arrow"/></svg></button>
+      <p class="demo-note">Aperçu uniquement : aucune inscription n’est enregistrée et aucun email n’est envoyé.</p>
+      <p class="form-feedback" role="status" tabindex="-1" hidden></p>
+    </form>
+  </template>
+  <template id="privacy-panel"><h2 id="panel-title">Confidentialité</h2><p>Cet aperçu local ne collecte, ne transmet et ne conserve aucune information saisie. Les inscriptions ne sont pas actives.</p><p>Avant la mise en ligne, les informations sur le traitement des données et le service d’envoi d’emails seront précisées.</p></template>
+  <noscript><p class="noscript-note">Active JavaScript pour ouvrir les informations du guide et le formulaire de démonstration.</p><style>[data-panel]{display:none}</style></noscript>
+</body>
+</html>
