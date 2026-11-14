@@ -2,6 +2,7 @@
 import { mkdir, readFile, writeFile, copyFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = path.join(root, 'previews/melnourdi-v1');
@@ -71,5 +72,14 @@ linksScript = linksScript.slice(0, linksScript.indexOf("document.addEventListene
 await writeFile(path.join(output, 'liens.js'), linksScript);
 for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
+}
+// Refresh cached CSS/JS when a deployment changes their contents.
+for (const name of ['index.html', 'liens.html']) {
+  let html = await readFile(path.join(output, name), 'utf8');
+  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js']) {
+    const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
+    html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
+  }
+  await writeFile(path.join(output, name), html);
 }
 console.log('Melnourdi: production landing and /liens prepared (sales/signups pending).');
