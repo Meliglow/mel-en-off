@@ -1,29 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Karla, La_Belle_Aurore } from "next/font/google";
 import Navigation from "@/components/Navigation";
 import PiedDePage from "@/components/PiedDePage";
 import "./globals.css";
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const karla = Karla({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-karla",
-  display: "swap",
-});
-
-const belle = La_Belle_Aurore({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-belle",
-  display: "swap",
-});
+import "./legacy-fonts.css";
 
 export const metadata: Metadata = {
   title: "EN OFF · La lettre du dimanche de Mel Nourdi",
@@ -44,7 +23,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${cormorant.variable} ${karla.variable} ${belle.variable}`}>
+    <html lang="fr">
       <head>
         {/* Sans JavaScript, les blocs qui attendent leur entree dans l'ecran
             s'affichent simplement. Rien ne reste invisible. */}
