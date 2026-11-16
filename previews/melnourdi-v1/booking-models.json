@@ -1,0 +1,27 @@
+{
+  "specialiste": {
+    "label": "Signature", "brand": "studio.", "tag": "Spécialiste beauté", "headline": "Un moment pour toi.", "intro": "Choisis ton soin et le créneau qui te convient. On te guide, simplement.", "photo": "specialiste.jpg", "alt": "Soin du visage, visuel d’illustration", "color": "#173f42", "multiple": false,
+    "services": [
+      { "id": "visage", "name": "Soin du visage", "description": "Un temps dédié à ta routine beauté.", "category": "Visage", "minutes": 45, "price": 55 },
+      { "id": "eclat", "name": "Soin éclat", "description": "Un rituel visage en version longue.", "category": "Visage", "minutes": 60, "price": 75 },
+      { "id": "regard", "name": "Mise en beauté du regard", "description": "Une séance consacrée aux sourcils.", "category": "Regard", "minutes": 30, "price": 35 }
+    ]
+  },
+  "institut": {
+    "label": "Douceur", "brand": "maison douce", "tag": "Institut de beauté", "headline": "Du temps pour toi.", "intro": "Un soin, une épilation, ou les deux. Compose ton rendez-vous au même endroit.", "photo": "institut.jpg", "alt": "Espace spa, visuel d’illustration", "color": "#354b3e", "multiple": true,
+    "services": [
+      { "id": "sourcils", "name": "Épilation sourcils", "description": "Épilation à la cire.", "category": "Épilation", "minutes": 15, "price": 12 },
+      { "id": "jambes", "name": "Demi-jambes", "description": "Épilation à la cire.", "category": "Épilation", "minutes": 30, "price": 25 },
+      { "id": "aisselles", "name": "Aisselles", "description": "Épilation à la cire.", "category": "Épilation", "minutes": 15, "price": 15 },
+      { "id": "visage", "name": "Rituel visage", "description": "Une pause beauté à l’institut.", "category": "Soin", "minutes": 60, "price": 65 }
+    ]
+  },
+  "maquillage": {
+    "label": "Studio", "brand": "STUDIO / MUSE", "tag": "Makeup studio", "headline": "Ton prochain look.", "intro": "Une occasion particulière ou juste l’envie. Choisis ta mise en beauté, on s’occupe du reste.", "photo": "maquillage.jpg", "alt": "Produits de maquillage, visuel d’illustration", "color": "#672d46", "multiple": false,
+    "services": [
+      { "id": "naturel", "name": "Mise en beauté naturelle", "description": "Un maquillage pour le quotidien ou une occasion.", "category": "Makeup", "minutes": 60, "price": 70 },
+      { "id": "soiree", "name": "Maquillage soirée", "description": "Une mise en beauté pour ton événement.", "category": "Événement", "minutes": 75, "price": 90 },
+      { "id": "mariee", "name": "Essai mariée", "description": "Un rendez-vous d’essai pour préparer ton look.", "category": "Mariée", "minutes": 90, "price": 110 }
+    ]
+  }
+}

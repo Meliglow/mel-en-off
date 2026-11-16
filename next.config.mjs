@@ -14,6 +14,10 @@ const nextConfig = {
       beforeFiles: [
         { source: "/", destination: "/melnourdi/index.html" },
         { source: "/liens", destination: "/melnourdi/liens.html" },
+        { source: "/logiciel-reservation", destination: "/melnourdi/reservation.html" },
+        { source: "/demos/specialiste", destination: "/melnourdi/demo-specialiste.html" },
+        { source: "/demos/institut", destination: "/melnourdi/demo-institut.html" },
+        { source: "/demos/maquillage", destination: "/melnourdi/demo-maquillage.html" },
       ],
     };
   },

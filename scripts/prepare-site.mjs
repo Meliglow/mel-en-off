@@ -82,4 +82,31 @@ for (const name of ['index.html', 'liens.html']) {
   }
   await writeFile(path.join(output, name), html);
 }
-console.log('Melnourdi: production landing and /liens prepared (sales/signups pending).');
+// The offer and demo pages are independent of the older preview-only forms.
+let offer = common(await readFile(path.join(source, 'reservation.html'), 'utf8'), '/logiciel-reservation')
+  .replace('href="reservation.css"', 'href="/melnourdi/reservation.css"')
+  .replace('src="reservation.js"', 'src="/melnourdi/reservation.js"');
+for (const asset of ['reservation.css', 'reservation.js', 'booking.css', 'booking.js']) {
+  await copyFile(path.join(source, asset), path.join(output, asset));
+}
+const models = JSON.parse(await readFile(path.join(source, 'booking-models.json'), 'utf8'));
+const demoTemplate = await readFile(path.join(source, 'booking.html'), 'utf8');
+const demoFiles = [];
+const escapeHtml = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+for (const [key, model] of Object.entries(models)) {
+  const tokens = { KEY: key, LABEL: model.label, BRAND: model.brand, TAG: model.tag, HEADLINE: model.headline, INTRO: model.intro, PHOTO: model.photo, ALT: model.alt };
+  let html = demoTemplate.replace(/\{\{([A-Z]+)\}\}/g, (match, token) => token === 'DATA' ? JSON.stringify(model).replaceAll('<', '\\u003c') : escapeHtml(tokens[token] ?? match));
+  const name = `demo-${key}.html`;
+  await writeFile(path.join(output, name), html);
+  demoFiles.push(name);
+}
+await writeFile(path.join(output, 'reservation.html'), offer);
+for (const name of ['reservation.html', ...demoFiles]) {
+  let html = await readFile(path.join(output, name), 'utf8');
+  for (const asset of ['styles.css', 'reservation.css', 'reservation.js', 'booking.css', 'booking.js']) {
+    const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
+    html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
+  }
+  await writeFile(path.join(output, name), html);
+}
+console.log('Melnourdi: landing, /liens, booking offer and three isolated demos prepared.');

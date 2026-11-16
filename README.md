@@ -1,5 +1,13 @@
 # Mel Nourdi — site personnel
 
+## Offre réservation — 16 novembre 2026
+
+Page `/logiciel-reservation` : création d’un outil beauté personnalisé à 395 € au lancement, tarif prévu ensuite 455 €. Démonstrations distinctes : `/demos/specialiste`, `/demos/institut`, `/demos/maquillage`. Les liens d’accueil et de `/liens` dirigent vers cette prestation ; la formation reste séparée.
+
+Sources dans `previews/melnourdi-v1/` : `reservation.html/css/js`, `booking.html/css/js`, `booking-models.json`. Le script `prepare-site.mjs` génère les quatre pages dans le dossier public, puis Next.js les sert par réécriture. Ne pas modifier les sorties générées. Voir `previews/melnourdi-v1/RESERVATION.md` pour le périmètre, les sources et la vérification.
+
+Les démos ne réservent rien, ne transmettent pas de coordonnées, n’appellent pas Google Agenda et ne prennent aucun paiement. Le bouton commercial ouvre un email vers `contact@melnourdi.fr`. La synchronisation, les confirmations réelles et les éventuels paiements sont à configurer pour chaque outil client, séparément de ces démonstrations.
+
 ## Version du 14 novembre 2026
 
 Le nouvel accueil et la page `/liens` reprennent le design validé et le portrait fourni par Mel. Sources : `previews/melnourdi-v1/`. `npm run build` prépare les fichiers publics avec `scripts/prepare-site.mjs`, puis construit Next.js. Les réécritures dans `next.config.mjs` servent ces pages en priorité ; les anciennes pages et API restent disponibles.
