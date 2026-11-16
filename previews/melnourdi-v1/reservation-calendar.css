@@ -83,3 +83,8 @@
 .google-receipt-heading img{width:32px;height:32px}.google-receipt-heading strong{font-size:14px}.google-receipt-heading div>span{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.calendar-preview *,.sales-demo-tabs button::after{animation:none!important;transition:none!important}.calendar-bridge circle{opacity:0}}
+
+/* Keep the calendar typography compact and the launch offer next to the headline. */
+.calendar-preview,.calendar-preview *{line-height:1.3}
+.offer-motion .sales-hero{grid-template-rows:auto 1fr}
+@media(max-width:700px){.offer-motion .sales-hero{grid-template-rows:auto auto auto}}
