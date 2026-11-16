@@ -44,3 +44,9 @@ Avant ouverture complète : accès et chiffrement autorisés/configurés, expéd
 - Contrôle navigateur : réservation mobile, acompte, report dans agenda, modification/annulation, fiches clientes ; configurateur complet sans envoi ; ordinateur et petits écrans. Aucun vrai dossier de cliente créé.
 
 La synchronisation éditoriale des adresses garde son avertissement historique (variable de Sheet absente) ; elle ne concerne pas cette offre.
+
+## Mise en scène et lancement — 16 novembre 2026
+
+Hero sans photo générique : illustration HTML du parcours cliente, planning et Google Agenda. Séquence au défilement en trois vues, navigation accessible et adaptation mobile ; version statique avec préférence de mouvements réduits. Données fictives et connexion optionnelle explicitement indiquées. Offre destinée aux cinq premières commandes validées, sans faux compteur.
+
+Choix de règlement de la création : 1 fois ou 3 fois, conservé dans le configurateur, le récapitulatif et les données validées côté serveur. Lancement : 96,67 € + 96,67 € + 96,66 € = 290 € TTC ; standard : 3 × 140 € = 420 € TTC. Hors options et fonctionnement. Dates confirmées dans la proposition ; aucun paiement connecté ni encaissement effectué. Les blocages de production décrits plus haut restent inchangés.
