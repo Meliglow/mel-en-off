@@ -1,0 +1,66 @@
+{
+  "version": "2026-11-16-v2",
+  "launchPrice": 290,
+  "standardPrice": 420,
+  "launchLimit": 5,
+  "currency": "EUR",
+  "taxLabel": "TTC",
+  "maxServices": 15,
+  "callMinutes": 45,
+  "notificationEmail": "contact@melnourdi.fr",
+  "senderEmail": "contact@melnourdi.fr",
+  "headline": "Ton propre logiciel de réservation. À ton image.",
+  "intro": "Tes soins, tes disponibilités et un agenda simple à gérer. Je crée ton espace, je le personnalise et je te montre comment t’en servir. Tes clientes réservent en ligne, avec un acompte si tu choisis l’option paiement.",
+  "launchDescription": "290 € TTC au lieu de 420 € TTC pour les 5 premières commandes validées.",
+  "serviceFeeEnabled": false,
+  "domainServiceFee": 2,
+  "emailEnabled": false,
+  "termsApproved": false,
+  "deliveryTerms": "Le délai est confirmé dans ta proposition, avant commande.",
+  "maintenanceTerms": "Maintenance et nouvelles fonctionnalités font l’objet de prestations distinctes.",
+  "accessTerms": "Comptes à ton nom. Droits d’utilisation et modalités de remise des accès précisés avant commande.",
+  "options": [
+    {
+      "id": "google",
+      "label": "Connexion Google Agenda",
+      "price": 39,
+      "description": "Retrouve tes rendez-vous dans ton agenda Google et prends en compte les indisponibilités configurées.",
+      "scope": "Un compte Google et un agenda de destination."
+    },
+    {
+      "id": "reminder",
+      "label": "Rappel automatique par email",
+      "price": 10,
+      "description": "Envoie un rappel à tes clientes avant leur rendez-vous.",
+      "scope": "Un scénario standard et un modèle. Frais éventuels du service d’envoi séparés."
+    },
+    {
+      "id": "payment",
+      "label": "Acompte et paiement en ligne",
+      "price": null,
+      "description": "Propose un acompte ou le règlement de la prestation à la réservation.",
+      "scope": "Selon ton pays, ton compte de paiement et la compatibilité de la solution."
+    },
+    {
+      "id": "questionnaire",
+      "label": "Questionnaire avant rendez-vous",
+      "price": null,
+      "description": "Retrouve les informations utiles à la séance dans la fiche cliente.",
+      "scope": "Les questions et les prestations concernées sont définies ensemble."
+    },
+    {
+      "id": "followup",
+      "label": "Email après rendez-vous",
+      "price": null,
+      "description": "Prépare un message de remerciement, de conseils ou de suivi.",
+      "scope": "Un scénario et un modèle à définir selon ton besoin."
+    },
+    {
+      "id": "newsletter",
+      "label": "Newsletter",
+      "price": null,
+      "description": "Un formulaire d’inscription et un modèle d’email à tes couleurs.",
+      "scope": "La rédaction régulière des campagnes n’est pas incluse."
+    }
+  ]
+}

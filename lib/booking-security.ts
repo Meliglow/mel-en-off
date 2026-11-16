@@ -1,0 +1,11 @@
+import { createHmac, timingSafeEqual } from 'node:crypto';
+import { NextResponse } from 'next/server';
+const visits = new Map<string, {count:number;expires:number}>();
+export function secureJson(body: unknown, status=200) { return NextResponse.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin'}}); }
+export function safeOrigin(request: Request) { const origin = request.headers.get('origin'); if (!origin) return false; const allowed = process.env.NODE_ENV === 'production' ? ['https://melnourdi.fr','https://www.melnourdi.fr'] : ['http://localhost:4181','http://127.0.0.1:4181','http://localhost:3000']; return allowed.includes(origin); }
+export function rateLimit(request: Request, scope: string, limit=10, window=15*60*1000) { const ip=(request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown').slice(0,80); const id=scope+ip; const now=Date.now(); if (visits.size>5000) for(const [k,v] of visits) if(v.expires<now)visits.delete(k); let visit=visits.get(id); if (!visit || visit.expires<now) {visit={count:0,expires:now+window};visits.set(id,visit);} return ++visit.count<=limit; }
+export function digest(value: string) { const secret=process.env.BOOKING_DATA_KEY; if (!secret) throw new Error('Accès non configuré.'); return createHmac('sha256',secret).update(value).digest('hex'); }
+export function equal(a:string,b:string) { const x=Buffer.from(a), y=Buffer.from(b); return x.length===y.length && timingSafeEqual(x,y); }
+export function adminToken() { const payload=Buffer.from(JSON.stringify({exp:Date.now()+8*3600000})).toString('base64url'); return payload+'.'+digest('admin:'+payload); }
+export function isAdmin(request:Request) { try { const token=request.headers.get('cookie')?.split(';').map(x=>x.trim()).find(x=>x.startsWith('mn_admin='))?.slice(9) || '';const [payload,signature]=token.split('.');return Boolean(payload && signature && equal(signature,digest('admin:'+payload)) && JSON.parse(Buffer.from(payload,'base64url').toString()).exp>Date.now()); }catch{return false;} }
+export async function limitedBody(request:Request) { if(Number(request.headers.get('content-length')||0)>25000)throw new Error('Demande trop volumineuse.');const text=await request.text();if(Buffer.byteLength(text)>25000)throw new Error('Demande trop volumineuse.');return JSON.parse(text); }

@@ -1,0 +1,25 @@
+// Local-only integration test. Synthetic records and ephemeral credentials; no external calls.
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+import {randomBytes,scryptSync} from 'node:crypto';
+import {mkdtemp,readFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+const dir=await mkdtemp(path.join(tmpdir(),'melnourdi-local-test-'));
+const password='local-synthetic-test-only',salt=randomBytes(16).toString('hex');
+const server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port','4182'],{windowsHide:true,stdio:'ignore',env:{...process.env,BREVO_API_KEY:'',BOOKING_DATA_DIR:dir,BOOKING_DATA_KEY:randomBytes(32).toString('hex'),BOOKING_ADMIN_PASSWORD_HASH:salt+':'+scryptSync(password,salt,64).toString('hex')}});
+const base='http://127.0.0.1:4182/api/booking';let cookie='';
+async function request(route,body,extra={}){const response=await fetch(base+route,{method:body?'POST':'GET',headers:{Origin:'https://melnourdi.fr','Content-Type':'application/json',...(cookie?{Cookie:cookie}:{}),...extra.headers},...(body?{body:JSON.stringify(body)}:{}),...extra});return{response,body:await response.json()};}
+try{let ready=false;for(let i=0;i<50;i++){try{const r=await fetch(base+'/config');if(r.ok){ready=true;break;}}catch{}await new Promise(r=>setTimeout(r,200));}assert.ok(ready,'Local test server must start');
+assert.equal((await request('/admin')).response.status,401);
+assert.equal((await request('/requests',{}, {headers:{Origin:'https://invalid.example','Content-Type':'application/json'}})).response.status,403);
+assert.equal((await request('/admin/session',{password:'wrong'})).response.status,401);
+const login=await request('/admin/session',{password});assert.equal(login.response.status,200);cookie=login.response.headers.get('set-cookie').split(';')[0];assert.ok(login.response.headers.get('set-cookie').includes('HttpOnly'));
+const payload={fields:{country:'FR',team:'solo',location:'salon',domainOwned:'no',domainHelp:'no',businessName:'Synthetic test',softwareUsed:'no',businessEmail:'synthetic@example.test',firstName:'Synthetic',lastName:'Test',phone:'+33600000000',contactPreference:'email',serviceCount:'6'},options:[],consent:true};
+const ids=[];
+for(let i=0;i<6;i++){const key=randomBytes(16).toString('hex'),body={...payload,fields:{...payload.fields,businessName:'Synthetic '+i},idempotencyKey:key};const headers={Origin:'https://melnourdi.fr','Content-Type':'application/json',Cookie:cookie,'X-Forwarded-For':'192.0.2.'+(i+1)};const result=await request('/requests',body,{headers});assert.equal(result.response.status,200,JSON.stringify(result.body));const duplicate=await request('/requests',body,{headers});assert.equal(duplicate.body.reference,result.body.reference);ids.push(result.body.reference);if(i<5){assert.equal(result.body.knownSubtotal,290);const update=await request('/admin',{reference:result.body.reference,status:'Commandée',orderConfirmed:true,agreedTotal:290},{method:'PATCH'});assert.equal(update.response.status,200,JSON.stringify(update.body));const again=await request('/admin',{reference:result.body.reference,status:'En préparation'},{method:'PATCH'});assert.equal(again.response.status,200);}else assert.equal(result.body.knownSubtotal,420);}
+const state=await request('/admin');assert.equal(state.body.launchUsed,5);assert.equal(state.body.requests.length,6);assert.ok(state.body.requests.every(r=>r.email.receipt.status==='not_configured'));assert.ok(!JSON.stringify(state.body).includes('fingerprint'));const offer=await request('/config');assert.equal(offer.body.currentPrice,420);assert.equal(offer.body.launchAvailable,false);assert.ok(!('notificationEmail'in offer.body));assert.equal(offer.body.paymentReady,false);
+const invalidFinal=await request('/admin',{reference:ids[0],status:'Publiée'},{method:'PATCH'});assert.equal(invalidFinal.response.status,400);const invalidNewFinal=await request('/admin',{reference:ids[5],status:'Publiée',orderConfirmed:true,agreedTotal:420},{method:'PATCH'});assert.equal(invalidNewFinal.response.status,400);const after=await request('/admin');assert.equal(after.body.requests[0].status,'En préparation');assert.equal(after.body.requests[5].status,'Nouvelle');assert.ok(!after.body.requests[5].orderValidated);
+const ciphertext=await readFile(path.join(dir,'requests.enc'));assert.equal(ciphertext.subarray(0,4).toString(),'MNR1');assert.ok(!ciphertext.includes(Buffer.from('synthetic@example.test')));await request('/admin/session',null,{method:'DELETE'});
+console.log('PASS: local API auth, CSRF, persistence encryption, request deduplication, five launch orders, full-price transition, private data filtering, disabled email/payment, final-approval guard.');
+}finally{server.kill();await new Promise(resolve=>{server.once('exit',resolve);setTimeout(resolve,3000);});const absolute=path.resolve(dir);assert.ok(absolute.startsWith(path.resolve(tmpdir())+path.sep)&&path.basename(absolute).startsWith('melnourdi-local-test-'));await rm(absolute,{recursive:true,force:true});}

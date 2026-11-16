@@ -1,0 +1,4 @@
+import { secureJson,rateLimit } from '@/lib/booking-security';
+export const dynamic='force-dynamic';
+// No registrar call or purchase while the OVH connection is not authorized/configured.
+export async function GET(request:Request){if(!rateLimit(request,'domain:',20))return secureJson({message:'Réessaie dans quelques minutes.'},429);const domain=new URL(request.url).searchParams.get('domain')||'';if(!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(fr|com)$/.test(domain))return secureJson({message:'Indique un domaine en .fr ou .com, sans https://.'},400);return secureJson({domain,status:'unverified',price:null,renewal:null,currency:null,tax:null,message:'La disponibilité n’a pas pu être vérifiée. Nous la confirmerons avec toi.',notice:'Le domaine n’est réservé qu’après validation de l’achat dans ton propre compte fournisseur.'});}

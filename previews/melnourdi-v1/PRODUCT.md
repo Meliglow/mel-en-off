@@ -1,5 +1,7 @@
 # Melnourdi — aperçu de l’accueil
 
+Actualisation du 16 novembre 2026 : voir `RESERVATION-V2.md` pour l’offre à 290 € TTC / 420 € TTC, la démo Lodyva, les acomptes simulés, le configurateur et les connexions encore désactivées. La page de vente suit AIDA, avec priorité mobile. Ne pas nommer les fournisseurs ou outils de création dans le parcours commercial. Les paragraphes ci-dessous conservent le contexte de l’accueil et des formations, pas le statut du nouveau logiciel.
+
 Actualisation du 14 novembre 2026 : design validé, portrait fourni intégré à l’accueil et aux liens, publication autorisée. La version publique est générée sans les formulaires de démonstration ; inscriptions, guide et ventes sont indiqués comme à venir. Les mentions d’aperçu ci-dessous décrivent le brief et la maquette d’origine.
 
 ## Register

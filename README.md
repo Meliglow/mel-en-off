@@ -2,11 +2,11 @@
 
 ## Offre réservation — 16 novembre 2026
 
-Page `/logiciel-reservation` : création d’un outil beauté personnalisé à 395 € au lancement, tarif prévu ensuite 455 €. Démonstrations distinctes : `/demos/specialiste`, `/demos/institut`, `/demos/maquillage`. Les liens d’accueil et de `/liens` dirigent vers cette prestation ; la formation reste séparée.
+Page `/logiciel-reservation` : 290 € TTC pour les cinq premières commandes validées, puis 420 € TTC. Démo principale `/demo-lodyva` : ongles, cils et massages, côté cliente et côté professionnelle, acompte simulé. Configurateur `/configurer-reservation`. La formation reste séparée.
 
-Sources dans `previews/melnourdi-v1/` : `reservation.html/css/js`, `booking.html/css/js`, `booking-models.json`. Le script `prepare-site.mjs` génère les quatre pages dans le dossier public, puis Next.js les sert par réécriture. Ne pas modifier les sorties générées. Voir `previews/melnourdi-v1/RESERVATION.md` pour le périmètre, les sources et la vérification.
+Sources dans `previews/melnourdi-v1/` : `reservation-v2.html`, `offer-v2.js/css`, `lodyva.html/css/js`, `configurer.html/css/js`. `prepare-site.mjs` génère les pages publiques servies par réécriture. Voir `previews/melnourdi-v1/RESERVATION-V2.md` pour le périmètre et les limites actuelles. Ne pas modifier les sorties générées.
 
-Les démos ne réservent rien, ne transmettent pas de coordonnées, n’appellent pas Google Agenda et ne prennent aucun paiement. Le bouton commercial ouvre un email vers `contact@melnourdi.fr`. La synchronisation, les confirmations réelles et les éventuels paiements sont à configurer pour chaque outil client, séparément de ces démonstrations.
+Les démos ne transmettent aucune réservation, n’appellent pas Google Agenda et ne prennent aucun paiement. La collecte directe et l’administration privée nécessitent l’autorisation de configurer leurs secrets ; elles restent désactivées en production. Le configurateur permet de télécharger la demande et de l’envoyer manuellement à `contact@melnourdi.fr`. Emails automatiques et paiement réel sont à connecter. Ne pas confondre la démo professionnelle publique avec l’administration privée des demandes.
 
 ## Version du 14 novembre 2026
 

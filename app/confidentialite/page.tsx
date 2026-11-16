@@ -3,8 +3,8 @@ import EnTetePage from "@/components/EnTetePage";
 import { EMAIL_CONTACT_PRO } from "@/config";
 
 export const metadata = {
-  title: "Confidentialité · EN OFF",
-  description: "Ce que deviennent tes données quand tu t'inscris à EN OFF.",
+  title: "Confidentialité · Melnourdi",
+  description: "Les données utilisées pour tes demandes de projet et les services Melnourdi.",
 };
 
 export default function ConfidentialitePage() {
@@ -16,6 +16,32 @@ export default function ConfidentialitePage() {
       />
 
       <section className="mt-8 grid gap-8 px-5 md:grid-cols-2 md:gap-x-8">
+        <div className="md:col-span-2">
+          <h2 className="h3">Ton projet de logiciel de réservation</h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-texte">
+            Le configurateur recueille tes coordonnées professionnelles, les informations sur ton
+            activité et les options choisies pour étudier ta demande et préparer une proposition.
+            Le brouillon reste en mémoire dans la page jusqu’à son envoi ; recharger ou fermer
+            la page l’efface. Une demande enregistrée reçoit une référence et est conservée dans
+            l’espace privé de Mel, sur le stockage du site Railway. Elle ne t’inscrit pas à une newsletter.
+            N’indique aucun mot de passe, numéro de carte, dossier ou donnée de santé d’une cliente.
+          </p>
+          <p className="mt-2 text-[15px] leading-relaxed text-texte">
+            Les demandes sont utilisées pour préparer le projet demandé et suivre les échanges.
+            Tu peux demander leur accès, correction ou suppression à contact@melnourdi.fr.
+            Si les notifications email sont activées, Brevo traite les messages nécessaires au suivi.
+            Les demandes ne sont pas vendues ou utilisées pour créer des audiences publicitaires.
+          </p>
+        </div>
+        <div className="md:col-span-2">
+          <h2 className="h3">La démonstration Lodyva</h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-texte">
+            La démonstration utilise uniquement des profils et rendez-vous fictifs. Elle ne transmet
+            aucune réservation, ne réalise aucun paiement et n’envoie aucun email. Les modifications
+            restent en mémoire dans la page et disparaissent au rechargement. L’administration privée
+            de Melnourdi utilise un cookie de connexion nécessaire, limité à huit heures.
+          </p>
+        </div>
         <div>
           <h2 className="h3">Qui traite tes données</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
@@ -89,8 +115,8 @@ export default function ConfidentialitePage() {
             a pas de bandeau à accepter.
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Ton navigateur ne garde rien non plus : aucune donnée n&apos;est stockée sur ton
-            appareil par ce site.
+            Les brouillons du configurateur et les simulations restent uniquement en mémoire dans
+            la page ouverte. Le cookie de connexion de l’administration est réservé à cet espace privé.
           </p>
         </div>
       </section>
