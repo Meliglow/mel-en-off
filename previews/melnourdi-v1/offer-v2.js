@@ -5,7 +5,7 @@ fetch('/api/booking/config').then(response=>response.ok?response.json():null).th
   document.querySelectorAll('[data-current-price]').forEach(element=>{element.textContent=config.currentPrice;});
   document.querySelectorAll('[data-launch-comparison]').forEach(element=>{element.textContent=config.launchAvailable?`Au lieu de ${config.standardPrice} € ${config.taxLabel} · tarif standard`:'Tarif standard de création';});
   document.querySelectorAll('[data-launch-label]').forEach(element=>{element.textContent=config.launchAvailable?`Pour les ${config.launchLimit} premières commandes validées`:'Configuration standard';});
-  document.querySelectorAll('[data-launch-ribbon]').forEach(element=>{element.textContent=config.launchAvailable?`Lancement · ${config.launchLimit} premières professionnelles`:'Ton logiciel de réservation personnalisé';});
+  document.querySelectorAll('[data-launch-ribbon]').forEach(element=>{element.textContent=config.launchAvailable?`Lancement · ${config.launchLimit} premiers projets`:'Ton logiciel de réservation personnalisé';});
   document.querySelectorAll('.launch-invitation,.launch-hero-note').forEach(element=>{element.hidden=!config.launchAvailable;});
   const cents=Math.round(config.currentPrice*100), first=Math.ceil(cents/3), last=cents-2*first;
   const money=value=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(value/100);

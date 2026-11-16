@@ -15,7 +15,7 @@ const nextConfig = {
         { source: "/", destination: "/melnourdi/index.html" },
         { source: "/liens", destination: "/melnourdi/liens.html" },
         { source: "/logiciel-reservation", destination: "/melnourdi/reservation.html" },
-        { source: "/demo-lodyva", destination: "/melnourdi/lodyva.html" },
+        { source: "/demo-reservation", destination: "/melnourdi/lodyva.html" },
         { source: "/configurer-reservation", destination: "/melnourdi/configurer.html" },
         { source: "/administration-reservations", destination: "/melnourdi/administration.html" },
         { source: "/demos/specialiste", destination: "/melnourdi/demo-specialiste.html" },
@@ -29,6 +29,7 @@ const nextConfig = {
   // l'hebergeur, sans middleware ni fonction edge.
   async redirects() {
     return [
+      { source: "/demo-lodyva", destination: "/demo-reservation", permanent: true },
       { source: "/liens.html", destination: "/liens", permanent: true },
       { source: "/collab", destination: "/collaborations", permanent: true },
       { source: "/resultats", destination: "/", permanent: true },

@@ -50,3 +50,11 @@ La synchronisation éditoriale des adresses garde son avertissement historique (
 Hero sans photo générique : illustration HTML du parcours cliente, planning et Google Agenda. Séquence au défilement en trois vues, navigation accessible et adaptation mobile ; version statique avec préférence de mouvements réduits. Données fictives et connexion optionnelle explicitement indiquées. Offre destinée aux cinq premières commandes validées, sans faux compteur.
 
 Choix de règlement de la création : 1 fois ou 3 fois, conservé dans le configurateur, le récapitulatif et les données validées côté serveur. Lancement : 96,67 € + 96,67 € + 96,66 € = 290 € TTC ; standard : 3 × 140 € = 420 € TTC. Hors options et fonctionnement. Dates confirmées dans la proposition ; aucun paiement connecté ni encaissement effectué. Les blocages de production décrits plus haut restent inchangés.
+
+## Visuel, vidéos et fonctions — 16 novembre 2026
+
+Nom Lodyva retiré de la présentation et de la démonstration ; adresse publique /demo-reservation, ancienne adresse redirigée. Image de studio beauté et espace de travail générée, sans marque réelle. Deux vidéos sans voix (20 s et 16 s), montages des écrans de démonstration, lecteur natif et textes explicatifs. Lecture uniquement après une action de la personne.
+
+La section au défilement présente six fonctions : réservation, planning, Google Agenda, fiches clientes, acomptes et rappels. Les options restent indiquées comme telles. Public : entrepreneurs et prestataires de beauté. Paiement de la création en 1 ou 3 fois conservé ; aucune nouvelle connexion de paiement, collecte ou email activée.
+
+Contrôles : compilation réussie, lecture réelle des deux vidéos dans le navigateur, sélection entre les vidéos, six panneaux et navigation mobile, absence de débordement à 390 et 320 px. La préférence de mouvements réduits conserve une présentation statique et les textes des six fonctions.
