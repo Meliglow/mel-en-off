@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { productMontage } from '../previews/melnourdi-v1/reservation-montage.mjs';
+import { salesHero, salesBenefits } from '../previews/melnourdi-v1/reservation-sales.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = path.join(root, 'previews/melnourdi-v1');
@@ -85,6 +86,8 @@ for (const name of ['index.html', 'liens.html']) {
 }
 // The offer and demo pages are independent of the older preview-only forms.
 let offer = common(await readFile(path.join(source, 'reservation-v2.html'), 'utf8'), '/logiciel-reservation')
+  .replace('{{SALES_HERO}}', salesHero)
+  .replace('{{SALES_BENEFITS}}', salesBenefits)
   .replace('{{HERO_PRODUCT}}', productMontage('hero','hero'))
   .replace('{{SCROLL_PRODUCT}}', productMontage('story','story'))
   .replace('href="reservation.css"', 'href="/melnourdi/reservation.css"')
@@ -93,7 +96,7 @@ for (const asset of ['reservation.css', 'reservation.js', 'booking.css', 'bookin
   await copyFile(path.join(source, asset), path.join(output, asset));
 }
 await copyFile(path.join(root,'lib/booking-validation.mjs'),path.join(output,'booking-validation.mjs'));
-for (const name of ['administration.css','administration.js','mobile-polish.css','reservation-motion.css','reservation-motion.js','reservation-media.css','reservation-media.js']) await copyFile(path.join(source,name),path.join(output,name));
+for (const name of ['administration.css','administration.js','mobile-polish.css','reservation-motion.css','reservation-motion.js','reservation-media.css','reservation-media.js','reservation-sales.css','reservation-sales.js']) await copyFile(path.join(source,name),path.join(output,name));
 const extraFiles=['lodyva.html','configurer.html','administration.html'];
 for (const name of extraFiles) await copyFile(path.join(source,name),path.join(output,name));
 const models = JSON.parse(await readFile(path.join(source, 'booking-models.json'), 'utf8'));
@@ -111,8 +114,8 @@ await writeFile(path.join(output, 'reservation.html'), offer);
 for (const name of ['reservation.html', ...demoFiles,...extraFiles]) {
   let html = await readFile(path.join(output, name), 'utf8');
   if(['reservation.html','lodyva.html','configurer.html'].includes(name))html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/mobile-polish.css"></head>');
-  if(name==='reservation.html')html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/reservation-motion.css"><link rel="stylesheet" href="/melnourdi/reservation-media.css"></head>').replace('</body>','<script src="/melnourdi/reservation-motion.js" defer></script><script src="/melnourdi/reservation-media.js" defer></script></body>');
-  for (const asset of ['styles.css', 'reservation.css', 'reservation.js', 'booking.css', 'booking.js','offer-v2.css','offer-v2.js','deposit.css','lodyva.css','lodyva.js','configurer.css','configurer.js','administration.css','administration.js','mobile-polish.css','reservation-motion.css','reservation-motion.js','reservation-media.css','reservation-media.js']) {
+  if(name==='reservation.html')html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/reservation-motion.css"><link rel="stylesheet" href="/melnourdi/reservation-media.css"><link rel="stylesheet" href="/melnourdi/reservation-sales.css"></head>').replace('</body>','<script src="/melnourdi/reservation-motion.js" defer></script><script src="/melnourdi/reservation-media.js" defer></script><script src="/melnourdi/reservation-sales.js" defer></script></body>');
+  for (const asset of ['styles.css', 'reservation.css', 'reservation.js', 'booking.css', 'booking.js','offer-v2.css','offer-v2.js','deposit.css','lodyva.css','lodyva.js','configurer.css','configurer.js','administration.css','administration.js','mobile-polish.css','reservation-motion.css','reservation-motion.js','reservation-media.css','reservation-media.js','reservation-sales.css','reservation-sales.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
   }

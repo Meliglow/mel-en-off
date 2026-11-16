@@ -58,3 +58,11 @@ Nom Lodyva retiré de la présentation et de la démonstration ; adresse publiqu
 La section au défilement présente six fonctions : réservation, planning, Google Agenda, fiches clientes, acomptes et rappels. Les options restent indiquées comme telles. Public : entrepreneurs et prestataires de beauté. Paiement de la création en 1 ou 3 fois conservé ; aucune nouvelle connexion de paiement, collecte ou email activée.
 
 Contrôles : compilation réussie, lecture réelle des deux vidéos dans le navigateur, sélection entre les vidéos, six panneaux et navigation mobile, absence de débordement à 390 et 320 px. La préférence de mouvements réduits conserve une présentation statique et les textes des six fonctions.
+
+## Bannière centrée sur le produit — 16 novembre 2026
+
+La demande commerciale prime sur le visuel de studio : bannière remplacée par trois vues animées du logiciel (planning synchronisé, acompte réglable de 1 à 100 %, personnalisation). Pause manuelle, navigation directe, suspension pendant les interactions et préférence de mouvements réduits. Montants illustratifs, option de paiement clairement indiquée.
+
+Arguments de vente agrandis en quatre blocs : réservation 24 h/24, domaine et identité, pourcentage des acomptes, synchronisation. Prix standard 420 € barré ; offre 290 € limitée aux cinq premières commandes validées. Mel a explicitement choisi de ne pas ajouter de minuteur. Section des six fonctions et vidéos conservées.
+
+Grand portrait retiré en attendant la nouvelle image, absente du message. Texte de présentation conservé et agrandi. FAQ étendue à onze questions. Contrôles : compilation, calcul des acomptes aux bornes, navigation et stabilité des vues, absence de débordement à 390/320 px, FAQ et absence du portrait.
