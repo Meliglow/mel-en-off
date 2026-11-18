@@ -1,8 +1,8 @@
 {
-  "version": "2026-11-16-v2",
+  "version": "2026-11-18-v3",
   "launchPrice": 290,
-  "standardPrice": 420,
-  "launchLimit": 5,
+  "standardPrice": 390,
+  "launchLimit": 10,
   "currency": "EUR",
   "taxLabel": "TTC",
   "maxServices": 15,
@@ -11,35 +11,42 @@
   "senderEmail": "contact@melnourdi.fr",
   "headline": "Tes clientes réservent. Ton logiciel prend le relais.",
   "intro": "Prise de rendez-vous en ligne, agenda centralisé, acomptes automatiques au pourcentage de ton choix : tu gardes la main, même quand tu es occupé.",
-  "launchDescription": "290 € TTC au lieu de 420 € TTC pour les 5 premières commandes validées.",
+  "launchDescription": "290 € TTC au lieu de 390 € TTC pour les 10 premières commandes, jusqu’au 31 décembre 2026.",
   "serviceFeeEnabled": false,
   "domainServiceFee": 2,
   "emailEnabled": false,
   "termsApproved": false,
-  "deliveryTerms": "Le délai est confirmé dans ta proposition, avant commande.",
-  "maintenanceTerms": "Maintenance et nouvelles fonctionnalités font l’objet de prestations distinctes.",
+  "deliveryTerms": "Mise en ligne au plus tard 7 jours après réception de ton questionnaire complet.",
+  "maintenanceTerms": "Hébergement et maintenance inclus la première année, puis 9 € TTC par mois.",
   "accessTerms": "Comptes à ton nom. Droits d’utilisation et modalités de remise des accès précisés avant commande.",
   "options": [
     {
       "id": "google",
       "label": "Connexion Google Agenda",
-      "price": 39,
+      "price": 49,
       "description": "Retrouve tes rendez-vous dans ton agenda Google et prends en compte les indisponibilités configurées.",
       "scope": "Un compte Google et un agenda de destination."
     },
     {
       "id": "reminder",
       "label": "Rappel automatique par email",
-      "price": 10,
+      "price": 29,
       "description": "Envoie un rappel à tes clientes avant leur rendez-vous.",
       "scope": "Un scénario standard et un modèle. Frais éventuels du service d’envoi séparés."
     },
     {
+      "id": "domain",
+      "label": "Ton nom de domaine",
+      "price": 15,
+      "description": "Mise en place de ton logiciel sur ton adresse à toi, par exemple reservation.ton-institut.fr.",
+      "scope": "Le nom de domaine reste à ton nom ; son renouvellement annuel est à ta charge."
+    },
+    {
       "id": "payment",
-      "label": "Acompte et paiement en ligne",
-      "price": null,
-      "description": "Propose un acompte ou le règlement de la prestation à la réservation.",
-      "scope": "Selon ton pays, ton compte de paiement et la compatibilité de la solution."
+      "label": "Acompte en ligne",
+      "price": 0,
+      "description": "Ta cliente règle un acompte au pourcentage de ton choix pour confirmer son rendez-vous. Inclus dans la base.",
+      "scope": "Paiement par ton propre compte Stripe ; les frais de transaction restent à ta charge."
     },
     {
       "id": "questionnaire",
@@ -62,5 +69,15 @@
       "description": "Un formulaire d’inscription et un modèle d’email à tes couleurs.",
       "scope": "La rédaction régulière des campagnes n’est pas incluse."
     }
-  ]
+  ],
+  "launchEndsAt": "2026-12-31T23:59:59+01:00",
+  "launchPlacesLeft": 10,
+  "hostingMonthly": 9,
+  "packPrice": 79,
+  "packOptions": [
+    "google",
+    "reminder",
+    "domain"
+  ],
+  "deliveryDays": 7
 }

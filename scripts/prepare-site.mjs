@@ -85,13 +85,11 @@ for (const name of ['index.html', 'liens.html']) {
   await writeFile(path.join(output, name), html);
 }
 // The offer and demo pages are independent of the older preview-only forms.
-let offer = common(await readFile(path.join(source, 'reservation-v2.html'), 'utf8'), '/logiciel-reservation')
-  .replace('{{SALES_HERO}}', salesHero)
-  .replace('{{SALES_BENEFITS}}', salesBenefits)
-  .replace('{{HERO_PRODUCT}}', productMontage('hero','hero'))
-  .replace('{{SCROLL_PRODUCT}}', productMontage('story','story'))
-  .replace('href="reservation.css"', 'href="/melnourdi/reservation.css"')
-  .replace('</head>', '<link rel="stylesheet" href="/melnourdi/deposit.css"></head>');
+// Page de vente v3 (18 novembre 2026) : page autonome, styles et scripts intégrés.
+// Les chiffres de l'offre viennent de config/booking-offer.json. L'ancienne v2 reste dans previews/ pour revenir en arrière.
+const offerConfig = JSON.parse(await readFile(path.join(root, 'config/booking-offer.json'), 'utf8'));
+const publicOffer = { launchPrice: offerConfig.launchPrice, standardPrice: offerConfig.standardPrice, launchLimit: offerConfig.launchLimit, launchPlacesLeft: offerConfig.launchPlacesLeft, launchEndsAt: offerConfig.launchEndsAt, hostingMonthly: offerConfig.hostingMonthly, packPrice: offerConfig.packPrice, packOptions: offerConfig.packOptions, options: offerConfig.options.map(({ id, label, price, description }) => ({ id, label, price, description })) };
+let offer = replaceRequired(common(await readFile(path.join(source, 'reservation-v3.html'), 'utf8'), '/logiciel-reservation'), '{{OFFER_JSON}}', JSON.stringify(publicOffer).replaceAll('<', '\\u003c'), 'offer data');
 for (const asset of ['reservation.css', 'reservation.js', 'booking.css', 'booking.js','offer-v2.css','offer-v2.js','deposit.css','lodyva.css','lodyva.js','lodyva-schedule.mjs','configurer.css','configurer.js']) {
   await copyFile(path.join(source, asset), path.join(output, asset));
 }
@@ -113,8 +111,7 @@ for (const [key, model] of Object.entries(models)) {
 await writeFile(path.join(output, 'reservation.html'), offer);
 for (const name of ['reservation.html', ...demoFiles,...extraFiles]) {
   let html = await readFile(path.join(output, name), 'utf8');
-  if(['reservation.html','lodyva.html','configurer.html'].includes(name))html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/mobile-polish.css"></head>');
-  if(name==='reservation.html')html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/reservation-motion.css"><link rel="stylesheet" href="/melnourdi/reservation-media.css"><link rel="stylesheet" href="/melnourdi/reservation-sales.css"><link rel="stylesheet" href="/melnourdi/reservation-calendar.css"></head>').replace('</body>','<script src="/melnourdi/reservation-motion.js" defer></script><script src="/melnourdi/reservation-media.js" defer></script><script src="/melnourdi/reservation-sales.js" defer></script></body>');
+  if(['lodyva.html','configurer.html'].includes(name))html=html.replace('</head>','<link rel="stylesheet" href="/melnourdi/mobile-polish.css"></head>');
   for (const asset of ['styles.css', 'reservation.css', 'reservation.js', 'booking.css', 'booking.js','offer-v2.css','offer-v2.js','deposit.css','lodyva.css','lodyva.js','configurer.css','configurer.js','administration.css','administration.js','mobile-polish.css','reservation-motion.css','reservation-motion.js','reservation-media.css','reservation-media.js','reservation-sales.css','reservation-sales.js','reservation-calendar.css']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);

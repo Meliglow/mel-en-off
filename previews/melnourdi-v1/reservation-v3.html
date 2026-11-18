@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ton logiciel de réservation à ton nom — melnourdi.</title>
+  <meta name="description" content="Ton propre logiciel de réservation, à ton nom, en ligne en 7 jours maximum. Acompte en ligne inclus, zéro commission. Offre de lancement : 290 € pour les 10 premières.">
+  <style>
+    @font-face{font-family:Manrope;src:url("/melnourdi/assets/manrope-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
+    :root{--ink:#161616;--cream:#F9F7F2;--line:#ECE7DC;--muted:#45423C;--soft:#6B665C;--lime:#E8F06E;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+    .kicker{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;margin:0}
+    h1,h2,h3{margin:0;letter-spacing:-.04em;font-weight:800;line-height:1.05}
+    h2{font-size:clamp(30px,3.8vw,50px)}
+    .lead{font-size:17px;color:var(--muted);margin:0;line-height:1.6}
+    .stack{display:flex;flex-direction:column}
+    .head{display:flex;flex-direction:column;gap:14px;max-width:720px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:800;border-radius:14px;padding:16px 24px;font-size:16px;border:1.5px solid var(--ink);cursor:pointer;transition:transform .15s ease,box-shadow .2s ease;min-height:48px}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(22,22,22,.45)}
+    .btn-dark{background:var(--ink);color:var(--cream)}
+    .btn-light{background:#fff;color:var(--ink)}
+    .btn-lime{background:var(--lime);color:var(--ink)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px}
+    .hover{transition:transform .25s ease,box-shadow .25s ease}
+    .hover:hover{transform:translateY(-4px);box-shadow:0 22px 44px -22px rgba(22,22,22,.28)}
+    .grid{display:grid;gap:20px}
+    .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center}
+    .check{flex:none;width:18px;height:18px;margin-top:3px}
+    section{scroll-margin-top:70px}
+
+    /* Animations */
+    @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    @keyframes pop{0%,10%{opacity:0;transform:translateY(14px) scale(.96)}18%,82%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(-6px)}}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}70%{box-shadow:0 0 0 10px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+    @keyframes slot{0%,22%{background:#fff;color:#1F2A22}30%,100%{background:#2F4A3A;color:#fff}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes track{from{left:0}to{left:calc(100% - 20px)}}
+    @keyframes bubble{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+    .a-up{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+    .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.45s}
+    .a-pop{animation:pop 6s ease-in-out infinite}
+    .a-float{animation:float 6s ease-in-out infinite}
+    .a-spin{animation:spin 16s linear infinite}
+    .a-bubble{animation:bubble .55s cubic-bezier(.2,.7,.2,1) both}
+    @supports (animation-timeline: view()){.reveal{animation:up linear both;animation-timeline:view();animation-range:entry 0% cover 22%}}
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+    /* Barre d'urgence */
+    .bar{position:sticky;top:0;z-index:30;background:var(--ink);color:var(--cream)}
+    .bar .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px}
+    .bar-text{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+    .dot{width:8px;height:8px;border-radius:50%;background:#E5484D;flex:none;animation:pulse 1.8s infinite}
+    .bar strong{color:var(--lime)}
+    .timer{display:flex;align-items:center;gap:6px}
+    .timer small{font-size:12px;color:#CFCBC2;margin-right:4px}
+    .t{display:inline-flex;align-items:baseline;gap:2px;background:#2A2A2A;border-radius:6px;padding:4px 7px;font-variant-numeric:tabular-nums}
+    .t b{font-size:14px}.t i{font-style:normal;font-size:10px;color:#CFCBC2}
+    .bar .btn{padding:9px 16px;font-size:13px;border-radius:999px;min-height:40px;border:none}
+
+    .short{display:none}
+    @media (max-width:600px){
+      .bar .wrap{padding-top:8px;padding-bottom:8px;gap:8px;flex-wrap:nowrap}
+      .bar .long{display:none}.bar .short{display:inline}
+      .bar-text{font-size:13px;gap:8px}
+      .timer{gap:3px}.timer small{display:none}.bar .t{padding:3px 5px}.bar .t b{font-size:12px}.bar .t i{font-size:9px}
+      .bar .btn{padding:7px 12px;min-height:36px;font-size:12px;white-space:nowrap}
+      .bar .wrap>div:last-child{gap:8px!important;flex-wrap:nowrap!important}
+      section{scroll-margin-top:64px}
+      .badge{top:-4px;left:-6px;right:auto;bottom:auto;width:84px;height:84px}
+    }
+    @media (max-width:420px){.bar .btn{display:none}}
+    /* Nav */
+    .nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:22px;padding-bottom:22px}
+    .logo{text-decoration:none;font-weight:800;font-size:24px;letter-spacing:-.03em}
+    .logo span{background:var(--lime);padding:0 2px}
+    .nav-links{display:flex;flex-wrap:wrap;gap:24px;font-size:14px;font-weight:600}
+    .nav-links a{text-decoration:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:56px;align-items:center;padding-top:40px;padding-bottom:96px}
+    .chip{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;border:1px solid #DAD5CA;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;background:#fff}
+    .hero h1{font-size:clamp(40px,5.4vw,74px);line-height:1.02;letter-spacing:-.045em}
+    .hl{background:linear-gradient(transparent 58%,var(--lime) 58%)}
+    .hero p{font-size:19px;color:var(--muted);max-width:540px;margin:0}
+    .proofs{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;color:var(--muted);font-weight:600}
+    .proofs span{display:inline-flex;align-items:center;gap:7px}
+    .phone-zone{position:relative;display:flex;justify-content:center;padding:30px 0;min-height:560px}
+    .phone-bg{position:absolute;inset:40px 30px;background:var(--lime);border-radius:40px;transform:rotate(-4deg)}
+    .phone{position:relative;width:min(340px,100%);background:#EEF1EA;border-radius:34px;border:8px solid var(--ink);box-shadow:0 40px 80px -30px rgba(22,22,22,.45);overflow:hidden;color:#1F2A22}
+    .phone-in{padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px}
+    .ph-row{background:#fff;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center}
+    .slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .slots span{background:#fff;border-radius:10px;padding:10px 0;text-align:center;font-size:13px;font-weight:700}
+    .slots .off{background:#E2E6DD;color:#8D998F;text-decoration:line-through}
+    .slots .on{animation:slot 6s ease-in-out infinite}
+    .ph-btn{background:#2F4A3A;color:#fff;text-align:center;padding:14px;border-radius:999px;font-weight:700;font-size:14px}
+    .notif{position:absolute;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 18px 40px -16px rgba(22,22,22,.35);display:flex;gap:10px;align-items:flex-start;z-index:2}
+    .notif .ic{flex:none;width:34px;height:34px;border-radius:10px;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800}
+    .gcal{position:absolute;bottom:4px;left:0;background:var(--ink);color:var(--cream);border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 18px 40px -16px rgba(22,22,22,.45);z-index:2}
+    .badge{position:absolute;right:0;bottom:80px;width:112px;height:112px;z-index:2}
+    @media (max-width:520px){.badge{width:88px;height:88px;bottom:110px}.notif{max-width:230px}}
+
+    .marquee{background:var(--ink);color:var(--cream);overflow:hidden;padding:16px 0}
+    .marquee div{display:flex;gap:48px;width:max-content;font-size:15px;font-weight:700;white-space:nowrap;animation:marquee 28s linear infinite}
+    .marquee em{font-style:normal;color:var(--lime)}
+
+    /* Avant / après */
+    .pain li{display:flex;gap:12px;font-size:17px;color:var(--muted)}
+    .pain ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+    .x{flex:none;width:26px;height:26px;border-radius:50%;background:#FCE3E3;color:#B42318;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .ba{background:#fff;border-radius:28px;padding:22px;border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;min-height:500px}
+    .seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:#F1EEE8;padding:5px;border-radius:999px}
+    .seg button{border:none;border-radius:999px;padding:11px 14px;font-size:14px;font-weight:800;background:transparent;color:var(--muted);cursor:pointer;transition:background .25s,color .25s}
+    .seg button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+    .ba-head{display:flex;align-items:center;gap:10px;padding:4px 0 12px;border-bottom:1px solid #F0ECE3}
+    .tags{display:flex;flex-wrap:wrap;gap:5px}
+    .tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px}
+    .t-ig{background:#FBE3EE;color:#9D2A5C}.t-wa{background:#DDF3E4;color:#1E6B3A}.t-tt{background:#E6E6E6;color:#161616}.t-sms{background:#E3ECFB;color:#1F4FA8}
+    .msg{align-self:flex-start;background:#F1EEE8;border-radius:18px 18px 18px 4px;padding:12px 16px;font-size:15px;max-width:85%}
+    .msg small{display:block;font-size:11px;color:var(--soft);margin-top:4px}
+    .msg.bad{background:#FCE3E3}
+    .ok{display:flex;gap:12px;align-items:center;border-radius:16px;padding:12px 14px;background:#F6F4EF}
+    .ok .ic{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--lime)}
+    .ok b{display:block;font-size:14px}.ok span{font-size:13px;color:var(--muted)}
+    [hidden]{display:none!important}
+
+    /* Comparatif */
+    .vs-dark{background:var(--ink);color:var(--cream);border:none}
+    .vs-dark p{color:#DAD5CA}
+    .pill{align-self:flex-start;background:var(--lime);color:var(--ink);font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px}
+
+    /* Calculateur */
+    .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:32px;padding:clamp(24px,4vw,40px)}
+    .range{display:flex;flex-direction:column;gap:10px}
+    .range-top{display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:700}
+    .range output{background:var(--lime);padding:2px 10px;border-radius:999px;font-variant-numeric:tabular-nums;white-space:nowrap;align-self:flex-start}
+    input[type=range]{width:100%;accent-color:var(--ink);height:28px}
+    .calc-res{background:var(--ink);color:var(--cream);border-radius:26px;padding:34px;display:flex;flex-direction:column;gap:22px}
+    .calc-res small{font-size:14px;color:#CFCBC2}
+    .big{font-size:clamp(42px,5vw,60px);font-weight:800;letter-spacing:-.04em;color:var(--lime);font-variant-numeric:tabular-nums;line-height:1.05}
+
+    /* Histoire */
+    .dark{background:var(--ink);color:var(--cream)}
+    .dark .lead{color:#DAD5CA}
+    .photo{border-radius:28px;overflow:hidden;aspect-ratio:4/5;max-height:560px;background:#1F1F1F}
+    .photo img{width:100%;height:100%;object-fit:cover}
+    .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .stats div{border:1px solid #3A3833;border-radius:18px;padding:18px}
+    .stats b{display:block;font-size:30px;color:var(--lime)}
+    .stats span{font-size:13px;color:#CFCBC2}
+
+    /* Modèles */
+    .tpl-top{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end}
+    .tpl-pick{display:flex;gap:6px;background:#fff;border:1px solid var(--line);padding:6px;border-radius:999px}
+    .tpl-pick button{border:none;border-radius:999px;padding:11px 18px;font-size:14px;font-weight:800;background:transparent;color:var(--ink);cursor:pointer;min-height:44px}
+    .tpl-pick button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+    .namebar{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;background:var(--lime);border-radius:20px;padding:16px 20px}
+    .namebar label{font-weight:800;font-size:15px}
+    .namebar input{flex:1 1 240px;min-width:0;font:inherit;font-size:16px;font-weight:700;padding:12px 16px;border-radius:12px;border:1.5px solid var(--ink);background:#fff;color:var(--ink)}
+    .mock{--bg:#EEF1EA;--surface:#fff;--primary:#2F4A3A;--on:#fff;--text:#1F2A22;--mut:#55655A;--font:var(--serif);--weight:400;--style:normal;--r:28px;--rr:18px;--br:999px;
+      border-radius:var(--r);overflow:hidden;border:1px solid rgba(0,0,0,.07);box-shadow:0 40px 80px -40px rgba(22,22,22,.35);background:var(--bg);color:var(--text);transition:background .45s,color .45s,border-radius .45s}
+    .mock *{transition:background-color .45s,color .45s,border-radius .45s,border-color .45s}
+    .mock[data-tpl="signature"]{--bg:#F4EEE6;--surface:#FFFDF9;--primary:#1E1B18;--on:#F4EEE6;--text:#1E1B18;--mut:#6A5E54;--style:italic;--r:6px;--rr:2px;--br:2px}
+    .mock[data-tpl="studio"]{--bg:#FFEDE7;--surface:#fff;--primary:#B4321B;--on:#fff;--text:#1A1110;--mut:#6B4A43;--font:Manrope,sans-serif;--weight:800;--r:30px;--rr:20px;--br:14px}
+    .browser{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 20px;border-bottom:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.55)}
+    .browser i{width:11px;height:11px;border-radius:50%;background:#E5E1D8;display:inline-block}
+    .url{margin-left:10px;font-size:13px;color:var(--soft);background:#fff;border-radius:999px;padding:5px 14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;max-width:100%}
+    .view{margin-left:auto;display:flex;gap:4px;background:#fff;padding:4px;border-radius:999px;border:1px solid rgba(0,0,0,.08)}
+    .view button{border:none;border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:800;background:transparent;color:var(--muted);cursor:pointer;min-height:36px}
+    .view button[aria-pressed="true"]{background:var(--primary);color:var(--on)}
+    .m-client{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;padding:clamp(22px,4vw,40px)}
+    .m-brand{font-family:var(--font);font-weight:var(--weight);font-size:24px}
+    .m-kick{font-size:12px;letter-spacing:.16em;font-weight:700;color:var(--mut)}
+    .m-title{font-family:var(--font);font-weight:var(--weight);font-style:var(--style);font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em}
+    .m-btn{align-self:flex-start;background:var(--primary);color:var(--on);padding:15px 26px;border-radius:var(--br);font-weight:700;font-size:15px}
+    .m-photo{height:150px;border-radius:var(--rr);background:url("/melnourdi/assets/institut.jpg") center/cover;display:flex;align-items:flex-end;padding:14px}
+    .m-photo span{background:rgba(255,255,255,.92);color:#161616;font-size:12px;font-weight:800;padding:7px 13px;border-radius:999px}
+    .m-row{background:var(--surface);border-radius:var(--rr);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .m-row small{display:block;font-size:13px;color:var(--mut)}
+    .m-admin{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;padding:clamp(18px,3vw,32px)}
+    .a-card{background:var(--surface);border-radius:var(--rr);padding:20px;display:flex;flex-direction:column;gap:6px}
+    .a-card h3{font-size:16px;letter-spacing:-.01em;margin-bottom:4px}
+    .a-line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid rgba(0,0,0,.07);font-size:14px}
+    .a-line small{display:block;color:var(--mut);font-size:12.5px}
+    .edit{flex:none;font-size:12px;font-weight:800;color:var(--primary);border:1.5px solid var(--primary);border-radius:999px;padding:4px 10px}
+    .add{margin-top:6px;text-align:center;font-size:13px;font-weight:800;color:var(--primary);border:1.5px dashed var(--primary);border-radius:var(--br);padding:10px}
+    .paid{display:inline-block;margin-top:3px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#DDF3E4;color:#1E6B3A}
+    .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .tiles span{aspect-ratio:1;border-radius:var(--rr);background:url("/melnourdi/assets/institut.jpg") center/cover}
+    .tiles span:nth-child(2){background-image:url("/melnourdi/assets/specialiste.jpg")}
+    .tiles span:nth-child(3){background-image:url("/melnourdi/assets/maquillage.jpg")}
+    .tiles .plus{background:none;border:1.5px dashed var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800}
+    .toggle{position:relative;flex:none;width:42px;height:24px;border-radius:999px;background:var(--primary)}
+    .toggle::after{content:"";position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chips span{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #DAD5CA;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700}
+
+    /* Fonctions */
+    .feat{background:var(--cream);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line)}
+    .feat-top{display:flex;justify-content:space-between;align-items:center}
+    .feat-top b{font-size:26px;font-variant-numeric:tabular-nums}
+    .ftag{font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px;background:#fff;color:var(--muted);border:1px solid #DAD5CA}
+    .ftag.in{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+    .feat h3{font-size:18px;letter-spacing:-.01em}
+    .feat p{margin:0;font-size:14.5px;color:var(--muted)}
+
+    /* Étapes */
+    .trackline{position:relative;height:4px;background:#E2DDD2;border-radius:999px;margin:6px 0 -10px}
+    .trackline span{position:absolute;top:-8px;left:0;width:20px;height:20px;border-radius:50%;background:var(--lime);border:2px solid var(--ink);animation:track 4.5s ease-in-out infinite alternate}
+    .step{border-top:2px solid var(--ink);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+    .step b{font-size:14px}.step h3{font-size:21px;letter-spacing:-.02em}.step p{margin:0;font-size:15px;color:var(--muted)}
+
+    /* Offre */
+    .offer{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;align-items:start}
+    .base{background:var(--ink);color:var(--cream);border-radius:30px;padding:34px;display:flex;flex-direction:column;gap:20px}
+    .base-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;font-weight:800;letter-spacing:.08em}
+    .price{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+    .price b{font-size:68px;letter-spacing:-.05em;line-height:1}
+    .price s{font-size:22px;color:#9C978D}
+    .base ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:15px}
+    .base li{display:flex;gap:10px}
+    .places{border-top:1px solid #3A3833;padding-top:18px;display:flex;flex-direction:column;gap:10px}
+    .places div:first-child{display:flex;justify-content:space-between;font-size:14px;font-weight:700}
+    .places-bar{height:10px;border-radius:999px;background:#2E2C28;overflow:hidden}
+    .places-bar i{display:block;height:100%;border-radius:999px;background:var(--lime);transition:width .4s}
+    .opt{width:100%;text-align:left;color:var(--ink);cursor:pointer;border-radius:18px;padding:16px 18px;background:#fff;border:1.5px solid #E2DDD2;transition:border-color .2s,background .2s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .opt[aria-pressed="true"]{border-color:var(--ink)}
+    .opt:disabled{cursor:default;opacity:.7}
+    .opt-l{display:flex;align-items:center;gap:12px}
+    .box{flex:none;width:24px;height:24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:#fff;color:transparent;border:1.5px solid #BDB7AB}
+    .opt[aria-pressed="true"] .box{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+    .opt strong{display:block;font-size:15px}.opt small{display:block;font-size:13px;color:var(--soft)}
+    .opt .p{font-weight:800;font-size:15px;white-space:nowrap}
+    .pack{border:2px dashed var(--ink);border-radius:22px;padding:20px}
+    .pack[aria-pressed="true"]{background:var(--lime);border-style:solid}
+    .reco{font-size:12px;font-weight:800;background:var(--ink);color:var(--lime);padding:3px 8px;border-radius:999px;margin-left:6px;white-space:nowrap}
+    .total{background:#fff;border:1.5px solid var(--ink);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;margin-top:6px}
+    .total-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+    .total-top b{font-size:36px;letter-spacing:-.03em}
+    .note{font-size:13px;color:var(--soft);margin:0}
+    .err{color:#B42318;font-weight:700;font-size:14px;margin:0}
+
+    .bonus{background:var(--lime);border-radius:32px;padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:24px}
+    .bonus-1{background:var(--ink);color:var(--cream);border-radius:26px;padding:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:center}
+    .bonus-1 p{color:#DAD5CA}
+    .bubbles{display:flex;flex-direction:column;gap:8px}
+    .bubbles span{align-self:flex-start;background:#F1EEE8;border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:14px}
+    .bubbles .me{align-self:flex-end;background:var(--ink);color:var(--cream);border-radius:16px 16px 4px 16px}
+    .guar{border:1.5px solid var(--ink);border-radius:26px;padding:30px;display:flex;gap:18px;align-items:flex-start}
+    .guar h3{font-size:19px;letter-spacing:-.01em;margin-bottom:8px}.guar p{margin:0;color:var(--muted);font-size:15px}
+
+    .faq{border-bottom:1px solid var(--line)}
+    .faq button{width:100%;background:none;border:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:17px;font-weight:700;color:var(--ink);text-align:left}
+    .faq button span:last-child{flex:none;width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:20px;background:#F1EEE8;transition:transform .25s,background .25s}
+    .faq button[aria-expanded="true"] span:last-child{transform:rotate(45deg);background:var(--lime)}
+    .faq p{margin:0;padding:0 40px 22px 0;font-size:15.5px;color:var(--muted)}
+
+    .final .timer{justify-content:center;gap:10px}
+    .final .t{flex-direction:column;align-items:center;background:#232220;border:1px solid #3A3833;border-radius:16px;padding:14px 18px;min-width:72px}
+    .final .t b{font-size:34px}.final .t i{font-size:12px}
+    footer{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:13px;color:var(--soft);padding-top:32px;padding-bottom:32px}
+    footer div{display:flex;gap:20px;flex-wrap:wrap}
+    footer a{color:var(--soft);min-height:44px;display:inline-flex;align-items:center}
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" fill="currentColor"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></g></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></g></symbol>
+</svg>
+
+<div class="bar" id="top">
+  <div class="wrap">
+    <div class="bar-text" data-live>
+      <span class="dot"></span>
+      <span class="long">Offre de lancement : plus que <strong><span data-places>10</span> places</strong> à <span data-launch>290</span> € au lieu de <span data-standard>390</span> €</span><span class="short"><strong><span data-places>10</span> places</strong> à <span data-launch>290</span> €</span>
+    </div>
+    <div class="bar-text" data-over hidden>L’offre de lancement est terminée. Tarif actuel : <span data-standard>390</span> €</div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="timer" data-live aria-label="Temps restant avant la fin de l’offre de lancement">
+        <small>Fin dans</small>
+        <span class="t"><b data-d>00</b><i>j</i></span><span class="t"><b data-h>00</b><i>h</i></span><span class="t"><b data-m>00</b><i>min</i></span><span class="t"><b data-s>00</b><i>s</i></span>
+      </div>
+      <a class="btn btn-lime" href="#offre">Je réserve ma place</a>
+    </div>
+  </div>
+</div>
+
+<header class="wrap nav">
+  <a class="logo" href="/">melnourdi<span>.</span></a>
+  <nav class="nav-links" aria-label="Sections de la page">
+    <a href="#modeles">Les modèles</a><a href="#fonctions">Ce qu’il y a dedans</a><a href="#offre">L’offre</a><a href="#questions">Questions</a>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="stack" style="gap:26px">
+      <span class="chip a-up"><span style="width:7px;height:7px;border-radius:50%;background:var(--ink)"></span>Pour les pros de la beauté et les indépendantes</span>
+      <h1 class="a-up d1">Ton propre logiciel de réservation, <span class="hl">à ton nom</span>, en ligne en 7 jours maximum.</h1>
+      <p class="a-up d2">Tes clientes réservent et paient leur acompte toutes seules, 24 h/24. Ton agenda se remplit et peut se synchroniser avec Google Agenda. Et toi, tu arrêtes de répondre aux messages à 23 h.</p>
+      <div class="a-up d3" style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn btn-dark" href="#offre">Je réserve ma place à <span data-current>290</span> €</a>
+        <a class="btn btn-light" href="/demo-reservation">Tester la démo</a>
+      </div>
+      <div class="proofs a-up d4">
+        <span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Créé pour mon institut, OJ Clinic</span>
+        <span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Zéro commission</span>
+        <span><svg class="check" style="margin:0"><use href="#i-check"/></svg>1re année incluse, puis <span data-hosting>9</span> €/mois</span>
+      </div>
+    </div>
+
+    <div class="phone-zone" aria-hidden="true">
+      <div class="phone-bg"></div>
+      <div class="phone a-up d2">
+        <div class="phone-in">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--serif);font-size:22px">ton institut</span><span style="font-size:10px;letter-spacing:.14em;font-weight:700;color:#5B6B60">RÉSERVER</span></div>
+          <div class="ph-row"><div><b style="font-size:14px">Manucure semi-permanent</b><br><small style="color:#5B6B60">60 min</small></div><b>40 €</b></div>
+          <div class="stack" style="gap:8px"><span style="font-size:11px;letter-spacing:.12em;font-weight:700;color:#5B6B60">MARDI</span>
+            <div class="slots"><span>09:30</span><span>11:00</span><span class="off">13:00</span><span class="on">14:30</span><span>16:00</span><span>17:30</span></div>
+          </div>
+          <div class="ph-row" style="flex-direction:column;align-items:stretch;gap:8px;font-size:13px"><div style="display:flex;justify-content:space-between"><span style="color:#5B6B60">Acompte (30 %)</span><b>12 €</b></div><div style="display:flex;justify-content:space-between"><span style="color:#5B6B60">À régler sur place</span><b>28 €</b></div></div>
+          <span class="ph-btn">Confirmer et payer l’acompte</span>
+        </div>
+      </div>
+      <div class="notif a-pop" style="top:8px;right:0;width:250px"><span class="ic">m.</span><div><b style="font-size:13px">Nouvelle réservation</b><br><span style="font-size:12px;color:var(--muted)">Camille · mar. 14:30 · Acompte de 12 € reçu</span></div></div>
+      <div class="notif a-pop" style="top:190px;left:0;width:200px;flex-direction:column;gap:4px;animation-delay:3s"><span style="display:flex;gap:2px;color:#E8A400"><svg width="15" height="15"><use href="#i-star"/></svg><svg width="15" height="15"><use href="#i-star"/></svg><svg width="15" height="15"><use href="#i-star"/></svg><svg width="15" height="15"><use href="#i-star"/></svg><svg width="15" height="15"><use href="#i-star"/></svg></span><b style="font-size:13px">Nouvel avis Google</b><span style="font-size:11.5px;color:var(--soft)">Demandé automatiquement après le soin</span></div>
+      <div class="gcal a-float"><svg width="16" height="16"><use href="#i-cal"/></svg>Ajouté à Google Agenda<svg width="14" height="14" style="color:var(--lime)"><use href="#i-check"/></svg></div>
+      <div class="badge a-spin"><svg viewBox="0 0 120 120" width="100%" height="100%"><defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="59" fill="#161616"/><text fill="#F9F7F2" style="font:800 8.6px Manrope,sans-serif;letter-spacing:1.4px"><textPath href="#circ">7 JOURS MAX ✦ À TON NOM ✦ 0 COMMISSION ✦</textPath></text><circle cx="60" cy="60" r="22" fill="#E8F06E"/><text x="60" y="66" text-anchor="middle" fill="#161616" style="font:800 17px Manrope,sans-serif">m.</text></svg></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div>
+    <span>Réservation 24 h/24</span><em>✦</em><span>Acompte anti-lapin</span><em>✦</em><span>Synchro Google Agenda</span><em>✦</em><span>Fichier clientes</span><em>✦</em><span>Ton nom, tes couleurs</span><em>✦</em><span>Zéro commission</span><em>✦</em>
+    <span>Réservation 24 h/24</span><em>✦</em><span>Acompte anti-lapin</span><em>✦</em><span>Synchro Google Agenda</span><em>✦</em><span>Fichier clientes</span><em>✦</em><span>Ton nom, tes couleurs</span><em>✦</em><span>Zéro commission</span><em>✦</em>
+  </div></div>
+
+  <section class="wrap grid g2 pain" style="padding-top:110px;padding-bottom:90px">
+    <div class="stack" style="gap:22px">
+      <p class="kicker">Tu te reconnais ?</p>
+      <h2>Tu fais un métier de soin. Pas un métier de secrétaire.</h2>
+      <ul>
+        <li><span class="x">×</span><span>Tu passes tes soirées à caler des créneaux par message, au lieu de souffler.</span></li>
+        <li><span class="x">×</span><span>Les rendez-vous annulés au dernier moment, ce sont des heures bloquées et payées zéro euro.</span></li>
+        <li><span class="x">×</span><span>Ton carnet, ton Google Agenda et tes messages ne se parlent pas, alors tu as peur du double rendez-vous.</span></li>
+      </ul>
+      <p style="margin:0;font-size:17px;font-weight:700">Résultat : tu perds du temps, de l’argent, et l’image pro que ton travail mérite.</p>
+    </div>
+    <div class="ba reveal">
+      <div class="seg" role="group" aria-label="Comparer avant et après">
+        <button type="button" data-ba="before" aria-pressed="true">Avant</button>
+        <button type="button" data-ba="after" aria-pressed="false">Avec ton logiciel</button>
+      </div>
+      <div class="stack" style="gap:11px" data-panel="before">
+        <div class="ba-head"><span style="width:36px;height:36px;border-radius:50%;background:#F4C6D7;flex:none"></span><div class="stack" style="gap:5px"><b style="font-size:14px">Tes messages · <span style="color:#B42318">4 non lus</span></b><div class="tags"><span class="tag t-ig">Instagram</span><span class="tag t-wa">WhatsApp</span><span class="tag t-tt">TikTok</span><span class="tag t-sms">SMS</span></div></div></div>
+        <div class="msg a-bubble">Coucou, t’as une dispo samedi ?<small><b style="color:#9D2A5C">Instagram</b> · 23:47</small></div>
+        <div class="msg a-bubble" style="animation-delay:.3s">C’est combien déjà la pose complète ?<small><b style="color:#1E6B3A">WhatsApp</b> · 00:12</small></div>
+        <div class="msg a-bubble" style="animation-delay:.55s">Tu peux me redonner l’adresse ?<small><b>TikTok</b> · 08:05</small></div>
+        <div class="msg bad a-bubble" style="animation-delay:.8s">Désolée, je ne peux plus venir finalement…<small style="color:#B42318"><b>SMS</b> · 1 h avant le rendez-vous</small></div>
+      </div>
+      <div class="stack" style="gap:11px" data-panel="after" hidden>
+        <div class="ba-head"><span style="width:36px;height:36px;border-radius:10px;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800;flex:none">m.</span><div><b style="font-size:14px">Ton espace pro</b><br><span style="font-size:12px;color:#2F6B45;font-weight:700">Tout s’est fait sans toi</span></div></div>
+        <div class="ok a-bubble" style="background:#EEF6EF"><span class="ic" style="background:#2F6B45;color:#fff"><svg width="15" height="15"><use href="#i-check"/></svg></span><div><b>Réservation confirmée · 23:47</b><span>Samedi 10:00 · acompte de 15 € reçu</span></div></div>
+        <div class="ok a-bubble" style="animation-delay:.3s"><span class="ic"><svg width="15" height="15"><use href="#i-bell"/></svg></span><div><b>Rappel envoyé automatiquement</b><span>Inès · demain 14:30</span></div></div>
+        <div class="ok a-bubble" style="animation-delay:.55s"><span class="ic"><svg width="15" height="15"><use href="#i-cal"/></svg></span><div><b>Ajouté à Google Agenda</b><span>3 nouveaux rendez-vous synchronisés</span></div></div>
+        <div class="ok a-bubble" style="background:#FFF6DB;animation-delay:.8s"><span class="ic" style="background:#E8A400;color:#fff"><svg width="15" height="15"><use href="#i-star"/></svg></span><div><b>Nouvel avis 5 étoiles</b><span>Demandé tout seul après le soin</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap stack" style="gap:40px;padding-bottom:110px">
+    <div class="head reveal"><p class="kicker">Les solutions que tu as déjà testées</p><h2>Les messages t’épuisent. Les grandes plateformes te noient.</h2></div>
+    <div class="grid g3 reveal">
+      <div class="card hover stack" style="gap:14px"><h3 style="font-size:20px;letter-spacing:-.01em">Les messages privés</h3><p class="lead" style="font-size:15px">Gratuit, oui. Mais tu es joignable jour et nuit, sans acompte, et un oubli suffit pour un double rendez-vous.</p></div>
+      <div class="card hover stack" style="gap:14px"><h3 style="font-size:20px;letter-spacing:-.01em">Les grandes plateformes</h3><p class="lead" style="font-size:15px">Pratiques, mais souvent de 20 à 60 € par mois, et parfois jusqu’à 25 % de commission sur tes nouvelles clientes. En plus, ta cliente réserve sur leur appli, à côté d’autres instituts.</p></div>
+      <div class="card hover vs-dark stack" style="gap:14px"><span class="pill">La nouvelle option</span><h3 style="font-size:20px;letter-spacing:-.01em">Ton logiciel, à ton nom</h3><p style="margin:0;font-size:15px">Ton lien, tes couleurs, tes règles. La 1re année est incluse, puis <span data-hosting>9</span> €/mois, sans aucune commission. Tes clientes ne voient que toi.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:110px">
+    <div class="calc reveal">
+      <div class="stack" style="gap:26px">
+        <div class="stack" style="gap:12px"><p class="kicker">Fais le calcul</p><h2 style="font-size:clamp(28px,3.4vw,44px)">Combien te coûtent les lapins et les messages ?</h2><p class="lead">Bouge les curseurs avec tes propres chiffres.</p></div>
+        <div class="range"><div class="range-top"><label for="c-noshow">Rendez-vous annulés au dernier moment, par mois</label><output for="c-noshow" data-out="noshow">4</output></div><input id="c-noshow" type="range" min="0" max="20" step="1" value="4"></div>
+        <div class="range"><div class="range-top"><label for="c-price">Prix moyen d’une prestation</label><output for="c-price" data-out="price">50 €</output></div><input id="c-price" type="range" min="10" max="150" step="5" value="50"></div>
+        <div class="range"><div class="range-top"><label for="c-dm">Temps passé chaque jour à répondre aux messages</label><output for="c-dm" data-out="dm">30 min</output></div><input id="c-dm" type="range" min="0" max="120" step="5" value="30"></div>
+      </div>
+      <div class="calc-res" aria-live="polite">
+        <div class="stack" style="gap:6px"><small>Ce que les rendez-vous manqués te coûtent par an</small><span class="big" data-res="lost">2 400 €</span></div>
+        <div class="stack" style="gap:6px"><small>Le temps passé sur tes messages par an</small><span style="font-size:40px;font-weight:800;letter-spacing:-.03em" data-res="hours">130 h</span><small>soit environ <span data-res="days">16</span> journées de travail de 8 h</small></div>
+        <div style="border-top:1px solid #3A3833;padding-top:20px;font-size:17px">Ton logiciel est remboursé dès <strong style="color:var(--lime)"><span data-res="be">6</span> rendez-vous sauvés</strong> grâce à l’acompte.</div>
+        <small style="font-size:12px;color:#9C978D">Estimation calculée à partir de tes chiffres, sur 5 jours travaillés par semaine.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap grid g2" style="padding-top:110px;padding-bottom:110px">
+      <div class="photo reveal"><img src="/melnourdi/assets/mel-atelier.webp" alt="Mel dans un atelier de pagne à Abidjan" loading="lazy"></div>
+      <div class="stack" style="gap:22px">
+        <p class="kicker" style="color:var(--lime)">Pourquoi j’ai créé cet outil</p>
+        <h2>Je l’ai d’abord construit pour mon propre institut.</h2>
+        <p class="lead">Je suis Mel, entrepreneuse depuis 2021 et fondatrice d’OJ Clinic, en France et au Gabon. Comme toi, je jonglais entre les messages, les rendez-vous manqués et un agenda éparpillé.</p>
+        <p class="lead">Alors j’ai créé mon propre outil de réservation. Aujourd’hui, je le configure pour toi, à ton nom.</p>
+        <div class="stats"><div><b>+400</b><span>clientes chez OJ Clinic</span></div><div><b>2</b><span>pays, France et Gabon</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="modeles" class="wrap stack" style="gap:30px;padding-top:110px;padding-bottom:110px">
+    <div class="tpl-top">
+      <div class="head reveal" style="max-width:640px"><p class="kicker">3 styles · 100 % personnalisé</p><h2>Choisis ton style. Tout le reste est fait pour toi.</h2><p class="lead">Tes photos, tes prestations, tes prix, tes horaires, ton acompte : je configure tout selon ton besoin. Et tu as ton propre espace admin pour tout modifier toi-même, quand tu veux.</p></div>
+      <div class="tpl-pick" role="group" aria-label="Choisir un style">
+        <button type="button" data-tpl="nature" aria-pressed="true">Nature</button><button type="button" data-tpl="signature" aria-pressed="false">Signature</button><button type="button" data-tpl="studio" aria-pressed="false">Studio</button>
+      </div>
+    </div>
+    <div class="namebar reveal"><label for="inst-name">Essaie avec le nom de ton institut :</label><input id="inst-name" type="text" maxlength="28" placeholder="Ex. Institut Léa" autocomplete="off"></div>
+    <div class="mock" data-tpl="nature" id="mock">
+      <div class="browser"><i></i><i></i><i></i><span class="url" data-url>reservation.ton-institut.fr</span>
+        <div class="view" role="group" aria-label="Choisir la vue"><button type="button" data-view="client" aria-pressed="true">Vue cliente</button><button type="button" data-view="admin" aria-pressed="false">Ton espace admin</button></div>
+      </div>
+      <div class="m-client" data-viewpanel="client">
+        <div class="stack" style="gap:18px;justify-content:center">
+          <span class="m-brand" data-name>ton institut</span>
+          <span class="m-kick" data-kicker>SOINS · MASSAGES · BIEN-ÊTRE</span>
+          <span class="m-title">Un moment rien que pour toi.</span>
+          <span style="font-size:16px;color:var(--mut)">Choisis ton soin, trouve le créneau qui te convient, on s’occupe du reste.</span>
+          <span class="m-btn">Choisir mon soin</span>
+        </div>
+        <div class="stack" style="gap:12px">
+          <div class="m-photo"><span>Ta photo ici</span></div>
+          <div data-services class="stack" style="gap:12px"></div>
+        </div>
+      </div>
+      <div class="m-admin a-bubble" data-viewpanel="admin" hidden>
+        <div class="a-card"><h3>Planning du jour</h3><div data-planning></div></div>
+        <div class="a-card"><h3>Mes prestations</h3><div data-admin-services></div><span class="add">+ Ajouter une prestation</span></div>
+        <div class="a-card"><h3>Mes photos</h3><div class="tiles"><span></span><span></span><span></span><span class="plus">+ Ajouter</span></div></div>
+        <div class="a-card"><h3>Mes réglages</h3>
+          <div class="a-line"><span>Acompte en ligne · 30 %</span><span class="toggle"></span></div>
+          <div class="a-line"><span>Rappel la veille</span><span class="toggle"></span></div>
+          <div class="a-line"><span>Demande d’avis Google</span><span class="toggle"></span></div>
+          <div class="a-line"><span>Synchro Google Agenda</span><span class="toggle"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="chips reveal">
+      <span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Tes photos</span><span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Tes prestations et tes prix</span><span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Tes horaires et tes pauses</span><span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Ton acompte</span><span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Ton logo et tes couleurs</span><span><svg class="check" style="margin:0"><use href="#i-check"/></svg>Ton espace admin</span>
+    </div>
+    <p style="margin:0;font-size:15px;color:var(--muted)"><strong style="color:var(--ink)" data-tplname>Nature</strong> · <span data-tpltag>Doux et naturel</span> · Idéal pour : <span data-tplfit>soins visage, massages, bien-être</span></p>
+  </section>
+
+  <section id="fonctions" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap stack" style="gap:40px;padding-top:110px;padding-bottom:110px">
+      <div class="head reveal"><p class="kicker">Ce qu’il y a dedans</p><h2>Tout ce qu’il faut pour remplir ton agenda. Rien de compliqué.</h2></div>
+      <div class="grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px" data-features></div>
+    </div>
+  </section>
+
+  <section class="wrap stack" style="gap:40px;padding-top:110px;padding-bottom:40px">
+    <div class="head reveal"><p class="kicker">Comment ça se passe</p><h2>Trois étapes. 7 jours maximum. Zéro ligne de code.</h2></div>
+    <div class="trackline" aria-hidden="true"><span></span></div>
+    <div class="grid g3 reveal">
+      <div class="step"><b>01 · Aujourd’hui</b><h3>Tu réserves ta place</h3><p>Tu choisis tes options et tu règles en ligne, en une fois ou en trois fois si ta carte le permet.</p></div>
+      <div class="step"><b>02 · 15 minutes</b><h3>Tu remplis ton questionnaire</h3><p>Ton style, ton logo, tes couleurs, tes photos, tes prestations et tes horaires. C’est tout.</p></div>
+      <div class="step"><b>03 · 7 jours maximum</b><h3>Tu valides, c’est en ligne</h3><p>Je configure, tu vérifies, on ajuste. Tu partages ton lien en bio et les réservations arrivent.</p></div>
+    </div>
+  </section>
+
+  <section id="offre" class="wrap stack" style="gap:36px;padding-top:80px;padding-bottom:110px">
+    <div class="head reveal" style="max-width:760px"><p class="kicker">L’offre de lancement</p><h2 style="font-size:clamp(32px,4vw,54px)">Une base complète. Tu ajoutes seulement ce qui te sert.</h2></div>
+    <div class="offer">
+      <div class="base">
+        <div class="base-top"><span>LOGICIEL DE RÉSERVATION · BASE</span><span class="pill" data-live>Prix de lancement</span></div>
+        <div class="price"><b><span data-current>290</span> €</b><s data-live><span data-standard>390</span> €</s></div>
+        <span style="font-size:14px;color:#CFCBC2" data-live>Pour les <span data-limit>10</span> premières pros, jusqu’au 31 décembre. Ensuite : <span data-standard>390</span> €.</span>
+        <ul>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>1 des 3 styles, à ton nom, avec ton logo, tes couleurs et tes photos</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Jusqu’à 15 prestations, tes horaires et tes pauses</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Agenda, fichier clientes et ton espace admin</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Acompte en ligne au pourcentage de ton choix</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Ton lien de réservation à partager partout</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Email de confirmation automatique</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Mise en ligne en 7 jours maximum</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>1re année d’hébergement et de maintenance incluse</li>
+          <li><svg class="check" style="color:var(--lime)"><use href="#i-check"/></svg>Offert : prise en main en visio avec moi</li>
+        </ul>
+        <div class="places" data-live><div><span>Places restantes</span><span style="color:var(--lime)"><span data-places>10</span> / <span data-limit>10</span></span></div><div class="places-bar"><i data-placesbar style="width:100%"></i></div></div>
+      </div>
+      <div class="stack" style="gap:14px">
+        <button type="button" class="opt pack" data-pack aria-pressed="false">
+          <span class="opt-l"><span class="box">✓</span><span><strong style="font-size:17px">Pack Sérénité <span class="reco">Recommandé</span></strong><small>Google Agenda + rappels automatiques + ton nom de domaine</small></span></span>
+          <span style="display:flex;flex-direction:column;align-items:flex-end"><span class="p" style="font-size:18px">+<span data-packprice>79</span> €</span><s style="font-size:12.5px;color:var(--soft)"><span data-packfull>93</span> €</s></span>
+        </button>
+        <p class="kicker" style="font-size:12px;padding:4px 4px 0">Ou à la carte</p>
+        <div class="stack" style="gap:14px" data-options></div>
+        <div class="total">
+          <div class="total-top"><span style="font-size:15px;font-weight:700">Total aujourd’hui</span><b><span data-total>290</span> €</b></div>
+          <p class="note">Paiement sécurisé par Stripe, en une fois ou en trois fois si ta carte le permet · 1re année d’hébergement incluse, puis <span data-hosting>9</span> €/mois</p>
+          <button type="button" class="btn btn-lime" data-checkout style="font-size:17px;padding:18px">Je réserve ma place · <span data-total>290</span> €</button>
+          <p class="err" data-error role="alert" hidden></p>
+          <p class="note" style="text-align:center">Après le paiement, tu remplis ton questionnaire et je prépare ton logiciel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:100px">
+    <div class="bonus reveal">
+      <div class="stack" style="gap:10px"><p class="kicker" style="color:var(--ink)">Offerts à chaque cliente</p><h2 style="font-size:clamp(28px,3.2vw,42px)">2 bonus pour bien démarrer dès le premier jour</h2></div>
+      <div class="bonus-1 hover">
+        <div class="stack" style="gap:12px"><span class="pill">Bonus 1 · Le plus précieux</span><h3 style="font-size:clamp(24px,2.6vw,32px);letter-spacing:-.03em;line-height:1.1">Ta prise en main en visio, en direct avec moi</h3><p style="margin:0;font-size:16px">On fait le tour ensemble de ton espace et je t’explique comment fonctionne ton logiciel de réservation. Tu repars en sachant tout gérer seule.</p></div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <li style="display:flex;gap:10px"><svg class="check" style="color:var(--lime);margin:0"><use href="#i-check"/></svg>Ajouter et modifier tes prestations</li>
+          <li style="display:flex;gap:10px"><svg class="check" style="color:var(--lime);margin:0"><use href="#i-check"/></svg>Gérer ton agenda et tes fermetures</li>
+          <li style="display:flex;gap:10px"><svg class="check" style="color:var(--lime);margin:0"><use href="#i-check"/></svg>Régler ton acompte et suivre tes paiements</li>
+          <li style="display:flex;gap:10px"><svg class="check" style="color:var(--lime);margin:0"><use href="#i-check"/></svg>Partager ton lien sur Instagram et WhatsApp</li>
+        </ul>
+      </div>
+      <div class="card hover grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:center;border:none">
+        <div class="stack" style="gap:10px"><span class="pill" style="background:var(--ink);color:var(--lime)">Bonus 2</span><h3 style="font-size:clamp(22px,2.4vw,28px);letter-spacing:-.03em">Tes messages prêts à copier</h3><p class="lead" style="font-size:15.5px">Tous les messages que tu envoies à tes clientes, déjà écrits : tu copies, tu colles, c’est envoyé.</p></div>
+        <div class="bubbles"><span>Ton rendez-vous est confirmé pour samedi 10 h. À très vite !</span><span class="me">Petit rappel : on se voit demain à 14 h 30.</span><span>Merci pour ta visite ! Ton avis compte beaucoup pour moi.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));padding-bottom:110px">
+    <div class="guar"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><h3>Satisfaite ou remboursée avant la mise en ligne</h3><p>Tu vois ton logiciel avant qu’il soit en ligne. S’il ne te plaît pas, même après nos ajustements, je te rembourse intégralement.</p></div></div>
+    <div class="guar"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><h3>En ligne en 7 jours maximum</h3><p>Ton logiciel est en ligne au plus tard 7 jours après réception de ton questionnaire complet.</p></div></div>
+  </section>
+
+  <section id="questions" style="background:#fff;border-top:1px solid var(--line)">
+    <div class="wrap stack" style="max-width:860px;gap:30px;padding-top:110px;padding-bottom:110px">
+      <h2 style="font-size:clamp(30px,3.4vw,44px)">Tes questions, mes réponses</h2>
+      <div data-faq></div>
+    </div>
+  </section>
+
+  <section class="dark final">
+    <div class="wrap stack" style="align-items:center;text-align:center;gap:26px;padding-top:110px;padding-bottom:110px">
+      <h2 style="font-size:clamp(36px,5vw,66px);max-width:860px">Ta prochaine réservation peut porter <span style="color:var(--lime)">ton nom</span>.</h2>
+      <div class="timer" data-live aria-label="Temps restant avant la fin de l’offre de lancement"><span class="t"><b data-d>00</b><i>jours</i></span><span class="t"><b data-h>00</b><i>heures</i></span><span class="t"><b data-m>00</b><i>minutes</i></span><span class="t"><b data-s>00</b><i>secondes</i></span></div>
+      <p style="margin:0;font-size:16px;color:#DAD5CA" data-live>Plus que <strong style="color:var(--lime)"><span data-places>10</span> places</strong> à <span data-launch>290</span> €. Ensuite, le prix passe à <span data-standard>390</span> €.</p>
+      <a class="btn btn-lime" href="#offre" style="font-size:18px;padding:19px 32px;border:none">Je réserve ma place maintenant</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap"><span>© 2026 melnourdi · Mel Nourdi</span><div><a href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a><a href="/mentions-legales">Mentions légales</a><a href="/confidentialite">Confidentialité</a></div></footer>
+
+<script id="offer-data" type="application/json">{{OFFER_JSON}}</script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const setAll = (sel, v) => $$(sel).forEach(n => { n.textContent = v; });
+  const fmt = n => Math.round(n).toLocaleString('fr-FR');
+
+  let offer = {};
+  try { offer = JSON.parse($('#offer-data').textContent); } catch (e) { offer = {}; }
+  const launchPrice = offer.launchPrice ?? 290, standardPrice = offer.standardPrice ?? 390;
+  const limit = offer.launchLimit ?? 10, placesLeft = Math.max(0, Math.min(limit, offer.launchPlacesLeft ?? limit));
+  const ends = Date.parse(offer.launchEndsAt || '2026-12-31T23:59:59+01:00');
+  const hosting = offer.hostingMonthly ?? 9, packPrice = offer.packPrice ?? 79, packIds = offer.packOptions || ['google', 'reminder', 'domain'];
+  const options = (offer.options || []).filter(o => typeof o.price === 'number' && o.price > 0);
+
+  setAll('[data-launch]', launchPrice); setAll('[data-standard]', standardPrice); setAll('[data-limit]', limit);
+  setAll('[data-places]', placesLeft); setAll('[data-hosting]', hosting); setAll('[data-packprice]', packPrice);
+  setAll('[data-packfull]', options.filter(o => packIds.includes(o.id)).reduce((n, o) => n + o.price, 0));
+  $$('[data-placesbar]').forEach(b => { b.style.width = Math.round(placesLeft / limit * 100) + '%'; });
+
+  let live = true;
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    const diff = Math.max(0, ends - Date.now());
+    live = diff > 0 && placesLeft > 0;
+    $$('[data-live]').forEach(n => { n.hidden = !live; });
+    $$('[data-over]').forEach(n => { n.hidden = live; });
+    setAll('[data-d]', pad(Math.floor(diff / 864e5))); setAll('[data-h]', pad(Math.floor(diff % 864e5 / 36e5)));
+    setAll('[data-m]', pad(Math.floor(diff % 36e5 / 6e4))); setAll('[data-s]', pad(Math.floor(diff % 6e4 / 1e3)));
+    setAll('[data-current]', live ? launchPrice : standardPrice);
+    renderTotal();
+  }
+
+  // Avant / après
+  $$('[data-ba]').forEach(b => b.addEventListener('click', () => {
+    $$('[data-ba]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    $$('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== b.dataset.ba; });
+  }));
+
+  // Calculateur
+  const cN = $('#c-noshow'), cP = $('#c-price'), cD = $('#c-dm');
+  function calc() {
+    const n = +cN.value, p = +cP.value, d = +cD.value, hours = d * 5 * 52 / 60;
+    $('[data-out="noshow"]').textContent = n; $('[data-out="price"]').textContent = p + ' €'; $('[data-out="dm"]').textContent = d + ' min';
+    $('[data-res="lost"]').textContent = fmt(n * p * 12) + ' €'; $('[data-res="hours"]').textContent = fmt(hours) + ' h';
+    $('[data-res="days"]').textContent = fmt(hours / 8);
+    $('[data-res="be"]').textContent = Math.max(1, Math.ceil((live ? launchPrice : standardPrice) / Math.max(1, p)));
+  }
+  [cN, cP, cD].forEach(i => i.addEventListener('input', calc));
+
+  // Modèles
+  const TPL = {
+    nature: { name: 'Nature', tag: 'Doux et naturel', fit: 'soins visage, massages, bien-être', kicker: 'SOINS · MASSAGES · BIEN-ÊTRE', services: [['Soin visage éclat', '60 min', '55 €'], ['Massage relaxant', '75 min', '70 €'], ['Rituel mains', '45 min', '35 €']] },
+    signature: { name: 'Signature', tag: 'Chic et élégant', fit: 'esthétique, cils, électrolyse', kicker: 'ESTHÉTIQUE · REGARD · PEAU', services: [['Rehaussement de cils', '75 min', '60 €'], ['Électrolyse', '15 min', '45 €'], ['Soin signature', '90 min', '95 €']] },
+    studio: { name: 'Studio', tag: 'Graphique et punchy', fit: 'ongles, nail art, coiffure', kicker: 'NAILS · ART · COLOR', services: [['Pose de gel', '90 min', '65 €'], ['Nail art (2 ongles)', '20 min', '10 €'], ['Semi-permanent', '60 min', '40 €']] }
+  };
+  let tpl = 'nature', view = 'client';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'ton-institut';
+  function renderMock() {
+    const t = TPL[tpl], name = $('#inst-name').value.trim() || 'ton institut';
+    $('#mock').dataset.tpl = tpl;
+    $$('[data-tpl]', $('.tpl-pick')).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tpl === tpl)));
+    $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+    $$('[data-viewpanel]').forEach(p => { p.hidden = p.dataset.viewpanel !== view; });
+    $('[data-name]').textContent = name;
+    $('[data-url]').textContent = (view === 'admin' ? 'admin.' : 'reservation.') + slugify(name) + '.fr';
+    $('[data-kicker]').textContent = t.kicker;
+    $('[data-tplname]').textContent = t.name; $('[data-tpltag]').textContent = t.tag; $('[data-tplfit]').textContent = t.fit;
+    $('[data-services]').innerHTML = t.services.map(s => `<div class="m-row"><div><b style="font-size:15px">${esc(s[0])}</b><small>${esc(s[1])}</small></div><b style="font-size:16px">${esc(s[2])}</b></div>`).join('');
+    $('[data-admin-services]').innerHTML = t.services.map(s => `<div class="a-line"><div><b>${esc(s[0])}</b><small>${esc(s[1])} · ${esc(s[2])}</small></div><span class="edit">Modifier</span></div>`).join('');
+    $('[data-planning]').innerHTML = [['09:30', 'Sarah', 0, false], ['11:00', 'Emma', 1, true], ['14:30', 'Camille', 2, true]].map(r => `<div class="a-line" style="justify-content:flex-start;align-items:flex-start"><b style="font-variant-numeric:tabular-nums">${r[0]}</b><div><b>${esc(t.services[r[2]][0])}</b><small>${r[1]}</small>${r[3] ? '<span class="paid">Acompte reçu</span>' : ''}</div></div>`).join('');
+  }
+  $$('.tpl-pick [data-tpl]').forEach(b => b.addEventListener('click', () => { tpl = b.dataset.tpl; renderMock(); }));
+  $$('[data-view]').forEach(b => b.addEventListener('click', () => { view = b.dataset.view; renderMock(); }));
+  $('#inst-name').addEventListener('input', renderMock);
+
+  // Fonctions
+  const FEATS = [
+    ['La réservation 24 h/24', 'Ton lien à mettre en bio Instagram, sur WhatsApp et sur Google. Tes clientes réservent même quand tu travailles.', 1],
+    ['L’agenda central', 'Tous tes rendez-vous au même endroit. Durées, pauses et jours de fermeture sont gérés automatiquement.', 1],
+    ['Le fichier clientes', 'Coordonnées, historique et notes pour chaque cliente, au même endroit.', 1],
+    ['Ton espace admin', 'Tu modifies toi-même tes prestations, tes prix, tes photos et tes horaires, depuis ton téléphone.', 1],
+    ['L’acompte anti-lapin', 'Ta cliente paie un acompte en ligne pour confirmer. Tu choisis le pourcentage, le solde est calculé tout seul.', 1],
+    ['La synchro Google Agenda', 'Chaque réservation apparaît dans ton Google Agenda. Tes indisponibilités bloquent les créneaux.', 0],
+    ['Les rappels automatiques', 'Un email de rappel la veille, envoyé sans que tu aies à y penser.', 0],
+    ['Ton nom de domaine', 'reservation.ton-institut.fr, pour une image 100 % pro.', 0]
+  ];
+  $('[data-features]').innerHTML = FEATS.map((f, i) => `<div class="feat hover"><div class="feat-top"><b>${String(i + 1).padStart(2, '0')}</b><span class="ftag${f[2] ? ' in' : ''}">${f[2] ? 'Inclus' : 'Option'}</span></div><h3>${f[0]}</h3><p>${f[1]}</p></div>`).join('');
+
+  // Offre
+  let pack = false; const chosen = new Set();
+  $('[data-options]').innerHTML = options.map(o => `<button type="button" class="opt" data-opt="${esc(o.id)}" aria-pressed="false"><span class="opt-l"><span class="box">✓</span><span><strong>${esc(o.label)}</strong><small>${esc(o.description || '')}</small></span></span><span class="p" data-optprice>+${o.price} €</span></button>`).join('');
+  function renderTotal() {
+    let total = live ? launchPrice : standardPrice;
+    if (pack) total += packPrice;
+    $('[data-pack]').setAttribute('aria-pressed', String(pack));
+    $$('[data-opt]').forEach(b => {
+      const o = options.find(x => x.id === b.dataset.opt), inPack = pack && packIds.includes(o.id), on = inPack || chosen.has(o.id);
+      b.disabled = inPack; b.setAttribute('aria-pressed', String(on));
+      $('[data-optprice]', b).textContent = inPack ? 'Inclus' : '+' + o.price + ' €';
+      if (on && !inPack) total += o.price;
+    });
+    setAll('[data-total]', fmt(total));
+  }
+  $('[data-pack]').addEventListener('click', () => { pack = !pack; renderTotal(); });
+  $$('[data-opt]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.opt; chosen.has(id) ? chosen.delete(id) : chosen.add(id); renderTotal(); }));
+
+  const pay = $('[data-checkout]'), err = $('[data-error]');
+  pay.addEventListener('click', async () => {
+    err.hidden = true; pay.disabled = true; const label = pay.innerHTML; pay.textContent = 'Ouverture du paiement…';
+    try {
+      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ options: [...chosen], pack }) });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.url) { location.href = data.url; return; }
+      if (res.status === 503) { location.href = '/configurer-reservation'; return; }
+      throw new Error(data.message || 'Le paiement est momentanément indisponible.');
+    } catch (e) {
+      err.textContent = e.message + ' Tu peux aussi m’écrire à contact@melnourdi.fr.'; err.hidden = false;
+      pay.disabled = false; pay.innerHTML = label; renderTotal();
+    }
+  });
+
+  // FAQ
+  const FAQ = [
+    ['Est-ce que je dois savoir coder ?', 'Non. Tu remplis un questionnaire avec ton logo, tes couleurs, tes photos, tes prestations et tes horaires. Je m’occupe de tout le reste.'],
+    ['Est-ce que je paie un abonnement ?', `La première année est incluse dans ton installation. À partir de la 2e année, l’hébergement et la maintenance coûtent ${hosting} €/mois : serveur, mises à jour, sauvegardes et support. Aucune commission sur tes réservations, jamais.`],
+    ['Je peux tout modifier moi-même ?', 'Oui. Tu as ton propre espace admin pour changer tes prestations, tes prix, tes photos, tes horaires et ton acompte, depuis ton téléphone.'],
+    ['Ça marche sur téléphone ?', 'Oui. Tes clientes réservent depuis leur téléphone, et toi tu gères ton agenda depuis le tien.'],
+    ['J’utilise déjà une plateforme, je fais comment ?', 'Tu peux garder les deux pendant la transition, puis basculer quand tu es prête. Ton lien fonctionne en parallèle.'],
+    ['Et les frais sur les acomptes ?', 'Les acomptes arrivent directement sur ton propre compte Stripe, qui prend ses frais de transaction. Je ne prends rien sur tes encaissements.'],
+    ['Combien de temps avant que ce soit en ligne ?', 'Au plus tard 7 jours après réception de ton questionnaire complet. Tu vois ton logiciel et tu le valides avant la mise en ligne.'],
+    [`Pourquoi seulement ${limit} places ?`, 'Je configure chaque logiciel moi-même. Pour tenir le délai de 7 jours, je limite le nombre de lancements.'],
+    ['Que se passe-t-il après ?', `Une fois les ${limit} places parties, ou après le 31 décembre, la base passe à ${standardPrice} €.`]
+  ];
+  $('[data-faq]').innerHTML = FAQ.map((f, i) => `<div class="faq"><button type="button" aria-expanded="${i === 0}" aria-controls="faq-${i}"><span>${esc(f[0])}</span><span aria-hidden="true">+</span></button><p id="faq-${i}"${i === 0 ? '' : ' hidden'}>${esc(f[1])}</p></div>`).join('');
+  $$('.faq button').forEach(b => b.addEventListener('click', () => { const open = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', String(open)); b.nextElementSibling.hidden = !open; }));
+
+  renderMock(); tick(); calc(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
