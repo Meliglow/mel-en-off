@@ -97,3 +97,5 @@
 .hero-link-guide{text-align:left;line-height:1.35}
 .free-badge{margin-left:auto;flex-shrink:0;background:var(--ink);color:var(--lime);border-radius:30px;padding:3px 10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
 @media(max-width:767px){.hero h1{font-size:clamp(24px,6.6vw,28px);margin-top:14px}.hero .hero-intro{font-size:15px}.hero-link-guide{font-size:13px!important}}
+.pain-section{padding-bottom:28px}.courses-section{padding-top:28px}.course-info .tag{margin-bottom:14px}
+@media(max-width:767px){.pain-section{padding-bottom:16px}.courses-section{padding-top:16px}}
