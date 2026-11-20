@@ -53,7 +53,7 @@ export default function ConfidentialitePage() {
         <div>
           <h2 className="h3">Ce que je collecte</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Quand tu t&apos;inscris à la lettre : ton prénom et ton email. Rien d&apos;autre.
+            Quand tu t&apos;inscris à ma newsletter ou demandes le guide offert : ton email, et ton prénom si tu le donnes. Rien d&apos;autre.
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Quand un professionnel écrit depuis la page Collaborations : son nom, son
@@ -65,8 +65,7 @@ export default function ConfidentialitePage() {
         <div>
           <h2 className="h3">Pourquoi</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Pour t&apos;envoyer la lettre EN OFF et mes emails, et pour t&apos;envoyer en priorité
-            ce qui correspond à ce que tu prépares. La base légale est ton consentement, donné en
+            Pour te donner accès au guide offert et t&apos;envoyer ma newsletter et mes emails. La base légale est ton consentement, donné en
             cochant la case du formulaire. Tu peux le retirer à tout moment.
           </p>
         </div>

@@ -26,6 +26,8 @@ function common(html, canonical) {
     .replaceAll('href="liens.css"', 'href="/melnourdi/liens.css"')
     .replaceAll('src="app.js"', 'src="/melnourdi/app.js"')
     .replaceAll('src="liens.js"', 'src="/melnourdi/liens.js"')
+    .replaceAll('href="lead.css"', 'href="/melnourdi/lead.css"')
+    .replaceAll('src="lead.js"', 'src="/melnourdi/lead.js"')
     .replaceAll('src="assets/', 'src="/melnourdi/assets/')
     .replaceAll('href="index.html', 'href="/');
 }
@@ -55,11 +57,14 @@ links = links.replace('<button data-panel="privacy">Confidentialité</button>', 
 links = links.replace(/<template id="privacy-panel">[\s\S]*?<\/template>/, '');
 links = links.replace(/<noscript>[\s\S]*?<\/noscript>/, '<noscript><p class="noscript-note">Le guide gratuit et les inscriptions email seront disponibles prochainement.</p><style>[data-panel]{display:none}</style></noscript>');
 
-for (const [name, html] of [['index.html', home], ['liens.html', links]]) {
+// Guide offert (20 novembre 2026) : accessible après inscription email, non indexé.
+let guide = common(await readFile(path.join(source, 'guide.html'), 'utf8'), '/guide-offert');
+guide = guide.replace('</head>', '  <meta name="robots" content="noindex">\n</head>');
+for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide]]) {
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
-for (const name of ['styles.css', 'liens.css']) await copyFile(path.join(source, name), path.join(output, name));
+for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js']) await copyFile(path.join(source, name), path.join(output, name));
 await writeFile(path.join(output, 'release.css'), 'button:disabled,input:disabled{cursor:not-allowed;opacity:.6}.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}.links-footer .privacy-link{font-size:10px;font-weight:400;letter-spacing:normal;color:var(--muted)}');
 for (const name of ['index.html','liens.html']) {
   const html = await readFile(path.join(output, name), 'utf8');
@@ -76,9 +81,9 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
 }
 // Refresh cached CSS/JS when a deployment changes their contents.
-for (const name of ['index.html', 'liens.html']) {
+for (const name of ['index.html', 'liens.html', 'guide.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
-  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js']) {
+  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
   }

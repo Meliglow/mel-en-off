@@ -8,6 +8,8 @@
   <meta name="description" content="Aperçu de Melnourdi : formations pratiques, outils sur mesure et journal de bord d’entrepreneuse.">
   <title>melnourdi. — Apprendre à créer, ou me confier ton projet</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lead.css">
+  <script src="lead.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -29,7 +31,7 @@
   <header class="site-header wrap">
     <a class="wordmark" href="#" aria-label="Melnourdi, accueil">melnourdi<span>.</span></a>
     <nav aria-label="Navigation principale">
-      <a href="#formations">Formations</a><a href="/logiciel-reservation">Réservation beauté</a><a href="#sur-mesure">Sur mesure</a><a href="#gratuit">Gratuit</a>
+      <a href="#formations">Formations</a><a href="/logiciel-reservation">Logiciel de réservation</a><a href="#sur-mesure">Sur mesure</a><a href="#gratuit">Guide offert</a>
     </nav>
     <button class="account-button" data-dialog="account"><svg><use href="#user"/></svg><span>Mon espace</span></button>
   </header>
@@ -45,6 +47,7 @@
           <a class="button button-lime" href="#formations"><svg><use href="#laptop"/></svg>Je veux apprendre<svg class="end-icon"><use href="#arrow"/></svg></a>
           <a class="button button-outline" href="#sur-mesure"><svg><use href="#tool"/></svg>Je préfère déléguer<svg class="end-icon"><use href="#arrow"/></svg></a>
         </div>
+        <a class="hero-guide" href="#gratuit"><span class="hero-guide-badge">Guide offert</span><span>7 choses à savoir avant de vendre ton offre sur les réseaux</span><svg><use href="#arrow"/></svg></a>
       </div>
       <div class="portrait-space portrait-with-photo">
         <img class="hero-photo" src="assets/mel-nourdi-business.webp" alt="Portrait de Mel Nourdi" width="1200" height="1200" fetchpriority="high">
@@ -52,10 +55,15 @@
       </div>
     </section>
 
-    <section class="free-section wrap" id="gratuit" aria-labelledby="free-title">
+    <section class="free-section lead-section wrap" id="gratuit" aria-labelledby="free-title">
       <div class="free-icon" aria-hidden="true"><svg><use href="#mail"/></svg></div>
-      <div class="free-copy"><span class="text-tag">Les ressources gratuites</span><h2 id="free-title">7 choses à faire pour vendre ton offre</h2><p>En attendant, suis la préparation de ma première formation et reçois les nouvelles de son lancement.</p></div>
-      <a class="text-link" href="#liste-attente">Être au courant<svg><use href="#arrow"/></svg></a>
+      <div class="free-copy"><span class="text-tag">Le guide offert</span><h2 id="free-title">7 choses à savoir avant de vendre ton offre sur les réseaux</h2><p>L’accroche, la recherche, les partages, le message privé, ta liste email : les 7 points à régler avant ta prochaine vidéo, avec une action concrète pour chacun. Laisse ton email et le guide s’ouvre tout de suite.</p></div>
+      <form class="lead-form" data-lead-form novalidate>
+        <label class="lead-label" for="lead-email">Ton adresse email</label>
+        <div class="lead-row"><input id="lead-email" name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required maxlength="254"><button class="button button-dark" type="submit">Recevoir le guide<svg class="end-icon"><use href="#arrow"/></svg></button></div>
+        <label class="lead-consent"><input type="checkbox" name="consentement" required><span>J’accepte de recevoir le guide et la newsletter de Mel par email. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+        <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
+      </form>
     </section>
 
     <section class="courses-section wrap section-space" id="formations" aria-labelledby="courses-title">
@@ -98,11 +106,6 @@
         <li><span class="step-number">02</span><div><h3>On définit le projet.</h3><p>Un échange, puis une proposition avec le périmètre, le budget et les délais.</p></div></li>
         <li><span class="step-number">03</span><div><h3>Je passe à la réalisation.</h3><p>Après validation, on avance vers un outil que tu pourras prendre en main.</p></div></li>
       </ol>
-    </section>
-
-    <section class="about-section wrap" id="a-propos" aria-labelledby="about-title">
-      <figure><img src="assets/mel-atelier.webp" alt="Mel participant à un atelier de pagne à Abidjan" loading="lazy" width="632" height="950"><figcaption>À l’atelier de pagne, Abidjan.</figcaption></figure>
-      <div class="about-copy"><span class="text-tag">Derrière melnourdi.</span><h2 id="about-title">Des projets, des essais.<br>Et ce que j’en retiens.</h2><p>J’entreprends depuis 2021. J’ai créé mon site, une automatisation et mon propre outil de gestion pour mon activité.</p><p>Ici, je partage ce que j’apprends en chemin. Les outils que je construis, les choix que je fais, et aussi les découvertes qui font partie de ma vie.</p><p class="about-signature">On en parle au fil des projets.<span>Mel.</span></p></div>
     </section>
 
     <section class="faq-section wrap section-space" aria-labelledby="faq-title">

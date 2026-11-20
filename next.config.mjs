@@ -14,6 +14,7 @@ const nextConfig = {
       beforeFiles: [
         { source: "/", destination: "/melnourdi/index.html" },
         { source: "/liens", destination: "/melnourdi/liens.html" },
+        { source: "/guide-offert", destination: "/melnourdi/guide.html" },
         { source: "/logiciel-reservation", destination: "/melnourdi/reservation.html" },
         { source: "/demo-reservation", destination: "/melnourdi/lodyva.html" },
         { source: "/configurer-reservation", destination: "/melnourdi/configurer.html" },
