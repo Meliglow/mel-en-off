@@ -92,3 +92,8 @@
   .hero-links{width:100%;max-width:none;margin-top:20px}
   .hero-links .button{width:100%;min-height:56px;font-size:14px;border-radius:12px;padding-inline:18px}
 }
+/* Titre réduit et bouton du guide (retours du 20 nov., 21 h 44) */
+.hero h1{font-size:clamp(28px,2.7vw,38px);line-height:1.22}
+.hero-link-guide{text-align:left;line-height:1.35}
+.free-badge{margin-left:auto;flex-shrink:0;background:var(--ink);color:var(--lime);border-radius:30px;padding:3px 10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:767px){.hero h1{font-size:clamp(24px,6.6vw,28px);margin-top:14px}.hero .hero-intro{font-size:15px}.hero-link-guide{font-size:13px!important}}
