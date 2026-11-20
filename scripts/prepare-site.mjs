@@ -28,6 +28,8 @@ function common(html, canonical) {
     .replaceAll('src="liens.js"', 'src="/melnourdi/liens.js"')
     .replaceAll('href="lead.css"', 'href="/melnourdi/lead.css"')
     .replaceAll('src="lead.js"', 'src="/melnourdi/lead.js"')
+    .replaceAll('href="signature.css"', 'href="/melnourdi/signature.css"')
+    .replaceAll('src="signature.js"', 'src="/melnourdi/signature.js"')
     .replaceAll('src="assets/', 'src="/melnourdi/assets/')
     .replaceAll('href="index.html', 'href="/');
 }
@@ -64,7 +66,7 @@ for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
-for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js']) await copyFile(path.join(source, name), path.join(output, name));
+for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js', 'signature.css', 'signature.js']) await copyFile(path.join(source, name), path.join(output, name));
 await writeFile(path.join(output, 'release.css'), 'button:disabled,input:disabled{cursor:not-allowed;opacity:.6}.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}.links-footer .privacy-link{font-size:10px;font-weight:400;letter-spacing:normal;color:var(--muted)}');
 for (const name of ['index.html','liens.html']) {
   const html = await readFile(path.join(output, name), 'utf8');
@@ -83,7 +85,7 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
 // Refresh cached CSS/JS when a deployment changes their contents.
 for (const name of ['index.html', 'liens.html', 'guide.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
-  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js']) {
+  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
   }
