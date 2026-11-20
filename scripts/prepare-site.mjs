@@ -33,12 +33,12 @@ function common(html, canonical) {
 }
 
 let home = common(await readFile(path.join(source, 'index.html'), 'utf8'), '/');
-home = replaceRequired(home, /<form class="waitlist-form"[\s\S]*?<\/form>/, `<div class="waitlist-form">
+home = home.replace(/<form class="waitlist-form"[\s\S]*?<\/form>/, `<div class="waitlist-form">
   <label for="first-name">Ton prénom</label><input id="first-name" placeholder="Ton prénom" disabled>
   <label for="email">Ton adresse email</label><input id="email" type="email" placeholder="toi@exemple.fr" disabled>
   <button class="button button-lime" disabled>Inscriptions bientôt ouvertes</button>
   <p class="form-context">La liste d’attente ouvrira prochainement. Aucune inscription n’est collectée pour le moment.</p>
-</div>`, 'waitlist unavailable');
+</div>`);
 home = home.replace('En attendant, suis la préparation de ma première formation et reçois les nouvelles de son lancement.', 'Le guide gratuit est en préparation. Retrouve bientôt les étapes pour présenter et vendre ton offre.');
 home = home.replace('href="#liste-attente">Être au courant', 'href="/liens">Découvrir mes liens');
 home = home.replace('Inscris-toi pour découvrir l’avancement de la formation et être prévenu de l’ouverture des inscriptions.', 'La première formation est en préparation. Tu pourras bientôt t’inscrire pour suivre son avancement et recevoir les nouvelles de son lancement.');
