@@ -34,6 +34,25 @@
 
 <main id="top">
 
+<section class="order after-pay" id="commande" hidden>
+  <div class="wrap">
+    <div class="order-copy">
+      <p class="eyebrow" style="color:var(--ink)">Étape 2 sur 2</p>
+      <h2>Ta place est réservée. <em class="s">Parle-moi de ton activité.</em></h2>
+      <p class="lead">6 questions rapides pour que je prépare ton logiciel. Ensuite, je te contacte sous 24 h.</p>
+    </div>
+    <form class="quiz" id="quiz" novalidate>
+      <div class="q-top"><span id="q-count">Question 1 sur 6</span><span id="q-mood">C’est parti</span></div>
+      <div class="progress"><i id="q-bar"></i></div>
+      <div id="q-body"></div>
+      <div class="q-nav" id="q-nav">
+        <button class="linkbtn" type="button" id="q-back">Retour</button>
+        <button class="btn btn-lime" type="submit" id="q-next" disabled>Continuer</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 <!-- 1. ACCROCHE -->
 <section class="hero">
   <div class="wrap">
@@ -288,13 +307,13 @@
   </div>
 </section>
 
-<!-- 12. CTA FINAL + PRÉ-COMMANDE -->
+<!-- 12. CTA FINAL + PAIEMENT -->
 <section class="order" id="precommande">
   <div class="wrap">
     <div class="order-copy">
       <p class="eyebrow" style="color:var(--ink)">Ta place</p>
       <h2>Ta prochaine réservation peut porter <em class="s">ton</em> nom.</h2>
-      <p class="lead">Réponds à 7 questions rapides, ça prend deux minutes. Ensuite, tu passes au paiement sécurisé pour bloquer ta place à 290 €.</p>
+      <p class="lead">Laisse tes coordonnées et paie en ligne pour bloquer ta place à 290 €. Juste après, 6 questions rapides pour préparer ton logiciel.</p>
       <ul>
         <li><b>290 €</b> tout inclus, au lieu de 390 €</li>
         <li>Plus que <b class="js-left-plain">15</b> places sur 20 à ce prix</li>
@@ -303,14 +322,20 @@
       </ul>
       <p class="ask">Une question avant de te lancer ? Écris-moi : <a href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a></p>
     </div>
-    <form class="quiz" id="quiz" novalidate>
-      <div class="q-top"><span id="q-count">Question 1 sur 7</span><span id="q-mood">C’est parti</span></div>
-      <div class="progress"><i id="q-bar"></i></div>
-      <div id="q-body"></div>
-      <div class="q-nav" id="q-nav">
-        <button class="linkbtn" type="button" id="q-back">Retour</button>
-        <button class="btn btn-lime" type="submit" id="q-next" disabled>Continuer</button>
+    <form class="quiz pay-form" id="pay-form" novalidate>
+      <div class="q-top"><span>Étape 1 sur 2 · Paiement</span><span>2 minutes</span></div>
+      <div class="qs"><h3>Tes coordonnées</h3><p class="hint">Pour ta facture et pour te contacter après le paiement.</p>
+      <div class="fields">
+        <div class="field"><label for="p-prenom">Ton prénom</label><input id="p-prenom" name="prenom" autocomplete="given-name" required maxlength="60"></div>
+        <div class="field"><label for="p-nom">Ton nom</label><input id="p-nom" name="nom" autocomplete="family-name" required maxlength="80"></div>
+        <div class="field full"><label for="p-email">Ton email</label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+        <div class="field full"><label for="p-tel">Ton téléphone</label><input id="p-tel" name="tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78" required maxlength="30"></div>
+        <div class="field full"><label for="p-activite">Nom de ton activité</label><input id="p-activite" name="activite" required maxlength="120"></div>
       </div>
+      <div class="total"><span>Ton logiciel, tout inclus</span><b>290 €</b></div>
+      <p class="hint" style="margin:0">Paiement sécurisé, en une fois ou en 3 fois si tu es éligible.</p>
+      <p class="q-err" id="pay-err" role="alert" hidden></p></div>
+      <div class="q-nav"><span></span><button class="btn btn-lime" type="submit" id="pay-btn">Payer 290 € et réserver ma place</button></div>
     </form>
   </div>
 </section>
@@ -363,7 +388,7 @@ if('IntersectionObserver' in window && !reduce){
 /* Retour de paiement */
 (()=>{const q=new URLSearchParams(location.search).get('paiement');if(!q)return;
   const box=document.createElement('div');box.className='pay-back';box.setAttribute('role','status');
-  box.innerHTML=q==='ok'?'<b>Merci, ta place est réservée !</b><span>Tu reçois ta confirmation par email. Je te contacte sous 24 h pour lancer la création de ton logiciel.</span>':'<b>Paiement interrompu.</b><span>Ta place n’est pas encore réservée. Tu peux reprendre quand tu veux, ou m’écrire à contact@melnourdi.fr.</span>';
+  box.innerHTML=q==='ok'?'<b>Merci, ta place est réservée !</b><span>Ta confirmation arrive par email. Dernière étape : réponds aux 6 questions juste en dessous.</span>':q==='attente'?'<b>Ta demande est bien reçue.</b><span>Je te recontacte sous 24 h pour finaliser ta place. En attendant, réponds aux 6 questions juste en dessous.</span>':'<b>Paiement interrompu.</b><span>Ta place n’est pas encore réservée. Tu peux reprendre quand tu veux, ou m’écrire à contact@melnourdi.fr.</span>';
   const m=document.querySelector('main');m.prepend(box);})();
 
 /* ===== Le vrai logiciel : accroche + démo ===== */
@@ -404,10 +429,26 @@ const STEPS=[
   {id:'univers',mood:'La partie fun',title:'Ton univers, c’est plutôt…',hint:'On affinera ensemble avec ton logo et tes photos.',type:'vibe',opts:[
     ['doux','Doux et nude',['#FBF6F2','#EAD3C6','#B5735A']],['nature','Nature et sauge',['#F5F8F4','#D5E2D6','#5E7D6A']],['glam','Glam rose',['#FCF6F8','#F2D9E0','#C77D93']],['luxe','Noir et or',['#F7F4EE','#B08D57','#1E1E1E']],['lavande','Lavande',['#F7F6FC','#DEDAF2','#7E73B8']],['sais','Je ne sais pas encore',['#EEEEEE','#DDDDDD','#BBBBBB']]]},
   {id:'outils',mood:'Presque fini',title:'Tu as déjà…',type:'yn',rows:[['site','Un site internet'],['domaine','Un nom de domaine'],['paiement','Un compte pour encaisser en ligne'],['logo','Un logo']]},
-  {id:'contact',mood:'Dernière étape',title:'Où je peux te répondre ?',type:'fields'},
-  {id:'recap',mood:'Prêt ?',title:'Ton récap',type:'recap'}
+  {id:'recap',mood:'Dernière étape',title:'Ton récap',type:'recap'}
 ];
 const LABEL=(st,v)=>{const o=(st.opts||[]).find(o=>o[0]===v);return o?o[1]:v};
+const CT=()=>{try{return JSON.parse(sessionStorage.getItem('mn-contact')||'{}')}catch(e){return {}}};
+/* Étape 1 : coordonnées puis paiement */
+(()=>{const f=document.getElementById('pay-form');if(!f)return;const err=document.getElementById('pay-err'),btn=document.getElementById('pay-btn');
+  f.addEventListener('submit',e=>{e.preventDefault();const v=k=>f.elements[k].value.trim();
+    const c={prenom:v('prenom'),nom:v('nom'),email:v('email'),tel:v('tel'),activite:v('activite')};
+    const bad=!c.prenom||!c.nom||!c.activite?'Indique ton prénom, ton nom et ton activité.':!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)?'Vérifie ton adresse email.':!/^[+\d][\d\s().-]{7,24}$/.test(c.tel)?'Vérifie ton numéro de téléphone.':'';
+    if(bad){err.textContent=bad;err.hidden=false;return}
+    err.hidden=true;btn.disabled=true;btn.textContent='Ouverture du paiement…';
+    try{sessionStorage.setItem('mn-contact',JSON.stringify(c))}catch(e){}
+    fetch('/api/commande',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contact:c,website:''})})
+      .then(r=>r.json().then(j=>({ok:r.ok,j})))
+      .then(({ok,j})=>{if(ok&&j.url){location.href=j.url;return}if(ok){location.href='?paiement=attente#commande';return}throw Error(j.message||'Envoi impossible.')})
+      .catch(x=>{err.textContent=(x.message||'Envoi impossible.')+' Réessaie, ou écris-moi à contact@melnourdi.fr.';err.hidden=false;btn.disabled=false;btn.textContent='Payer 290 € et réserver ma place'});
+  });})();
+/* Étape 2 : le questionnaire n'apparaît qu'après le paiement */
+(()=>{const q=new URLSearchParams(location.search).get('paiement');const sec=document.getElementById('commande');
+  if(sec&&(q==='ok'||q==='attente')){sec.hidden=false;setTimeout(()=>sec.scrollIntoView({behavior:'instant',block:'start'}),60)}})();
 let cur=0;
 const body=document.getElementById('q-body'),bar=document.getElementById('q-bar'),cnt=document.getElementById('q-count'),mood=document.getElementById('q-mood'),next=document.getElementById('q-next'),back=document.getElementById('q-back'),nav=document.getElementById('q-nav');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -446,19 +487,17 @@ function render(){
     const s=i=>STEPS[i];
     const multi=(i)=>(A[s(i).id]||[]).map(v=>LABEL(s(i),v)).join(', ');
     h+=`<div class="recap">
-      <div><span>Activité</span><span>${esc(A.activite)} · ${LABEL(s(0),A.metier)}</span></div>
+      <div><span>Activité</span><span>${LABEL(s(0),A.metier)}</span></div>
       <div><span>Praticiennes</span><span>${LABEL(s(1),A.equipe)}</span></div>
       <div><span>Tes priorités</span><span>${multi(3)}</span></div>
       <div><span>Univers</span><span>${LABEL(s(4),A.univers)}</span></div>
-      <div><span>Contact</span><span>${esc(A.prenom)} ${esc(A.nom)} · ${esc(A.email)} · ${esc(A.tel)}</span></div>
+      
     </div>
-    <div class="total"><span>Création sur mesure</span><b>${PRIX} €</b></div>
-    <p class="hint" style="margin:0">1re année d’hébergement et de maintenance incluse, puis 9 €/mois.</p>
-    <p class="hint" style="margin:0">Paiement sécurisé, en une fois ou en 3 fois si tu es éligible.</p><p class="q-err" id="q-err" role="alert" hidden></p>`;
+    <p class="hint" style="margin:0">Tu pourras tout préciser avec moi pendant notre call vidéo.</p><p class="q-err" id="q-err" role="alert" hidden></p>`;
   }
   h+='</div>';
   body.innerHTML=h;
-  next.innerHTML=st.type==='recap'?`Passer au paiement · ${PRIX} €`:(cur===STEPS.length-2?'Voir mon récap':'Continuer');
+  next.innerHTML=st.type==='recap'?'Envoyer mes réponses':(cur===STEPS.length-2?'Voir mon récap':'Continuer');
   next.disabled=!valid(st);
   bind(st);
 }
@@ -493,16 +532,16 @@ document.getElementById('quiz').addEventListener('submit',e=>{
   const st=STEPS[cur];
   if(!valid(st))return;
   if(st.type==='recap'){
-    const ans=STEPS.filter(s=>!['contact','recap'].includes(s.id)).map(s=>{
+    const ans=STEPS.filter(s=>s.id!=='recap').map(s=>{
       if(s.type==='yn')return [s.title,s.rows.map(r=>r[1]+' : '+(A['o_'+r[0]]||'?')).join(', ')];
       const v=A[s.id];return [s.title,Array.isArray(v)?v.map(x=>LABEL(s,x)).join(', '):LABEL(s,v||'')];});
-    const err=document.getElementById('q-err');next.disabled=true;next.textContent='Ouverture du paiement…';
+    const err=document.getElementById('q-err');next.disabled=true;next.textContent='Envoi…';
     const done=()=>{bar.style.width='100%';cnt.textContent='Terminé';mood.textContent='Merci !';
-      body.innerHTML=`<div class="qs done"><span class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Merci ${esc(A.prenom)} !</h3><p class="hint" style="margin:0;max-width:40ch">Ta demande est bien arrivée. Je te recontacte sous 24 h par email ou par téléphone pour finaliser ta place à ${PRIX} €.</p></div>`;nav.hidden=true};
-    fetch('/api/commande',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contact:{prenom:A.prenom,nom:A.nom,email:A.email,tel:A.tel,activite:A.activite,insta:A.insta||''},answers:ans,website:''})})
+      body.innerHTML=`<div class="qs done"><span class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Merci${CT().prenom?' '+esc(CT().prenom):''} !</h3><p class="hint" style="margin:0;max-width:40ch">C’est noté ! Je lance la préparation de ton logiciel et je te contacte sous 24 h pour caler notre call vidéo.</p></div>`;nav.hidden=true};
+    fetch('/api/commande',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({questionnaire:true,session:new URLSearchParams(location.search).get('session')||'',contact:CT(),answers:ans,website:''})})
       .then(r=>r.json().then(j=>({ok:r.ok,j})))
-      .then(({ok,j})=>{if(ok&&j.url){location.href=j.url;return}if(ok){done();return}throw Error(j.message||'Envoi impossible.')})
-      .catch(e=>{err.textContent=(e.message||'Envoi impossible.')+' Réessaie, ou écris-moi à contact@melnourdi.fr.';err.hidden=false;next.disabled=false;next.textContent=`Passer au paiement · ${PRIX} €`});
+      .then(({ok,j})=>{if(ok){done();return}throw Error(j.message||'Envoi impossible.')})
+      .catch(e=>{err.textContent=(e.message||'Envoi impossible.')+' Réessaie, ou écris-moi à contact@melnourdi.fr.';err.hidden=false;next.disabled=false;next.textContent='Envoyer mes réponses'});
     return;
   }
   go(1);

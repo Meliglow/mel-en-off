@@ -3,8 +3,10 @@ import { EMAIL_CONTACT_PRO } from "@/config";
 import { safeOrigin, rateLimit, limitedBody } from "@/lib/booking-security";
 
 // Commande du logiciel de réservation depuis /logiciel-reservation.
-// 1. Envoie à Mel les réponses du questionnaire et les coordonnées (Brevo).
-// 2. Ouvre une page de paiement sécurisée (variable STRIPE_SECRET_KEY sur Railway).
+// Étape 1 (avant paiement) : coordonnées → email à Mel (Brevo) + page de paiement
+//   sécurisée (variable STRIPE_SECRET_KEY sur Railway).
+// Étape 2 (après paiement, { questionnaire: true }) : réponses du questionnaire → email à Mel,
+//   avec le statut du paiement vérifié auprès de l'organisme de paiement.
 // Le prix est fixé ici, jamais par le navigateur. Les moyens de paiement
 // proposés (carte, paiement en 3 fois…) sont ceux activés dans le tableau de bord.
 export const runtime = "nodejs";
@@ -28,6 +30,7 @@ export async function POST(request: Request) {
   let body: any;
   try { body = await limitedBody(request); } catch { return json({ message: "Demande illisible." }, 400); }
   if (clean(body?.website)) return json({ ok: true, pending: true });
+  if (body?.questionnaire === true) return questionnaire(body);
 
   const c = body?.contact || {};
   const contact = {
@@ -38,9 +41,7 @@ export async function POST(request: Request) {
   if (!EMAIL.test(contact.email)) return json({ message: "Vérifie ton adresse email." }, 400);
   if (!TEL.test(contact.tel)) return json({ message: "Vérifie ton numéro de téléphone." }, 400);
 
-  const answers: [string, string][] = Array.isArray(body?.answers)
-    ? body.answers.slice(0, 20).map((r: unknown) => (Array.isArray(r) ? [clean(r[0], 80), clean(r[1], 400)] : ["", ""])).filter((r: string[]) => r[0])
-    : [];
+  const answers = readAnswers(body);
 
   // 1. Mel reçoit la demande tout de suite, même si le paiement n'aboutit pas.
   const brevo = process.env.BREVO_API_KEY;
@@ -49,7 +50,7 @@ export async function POST(request: Request) {
       `Prénom : ${contact.prenom}`, `Nom : ${contact.nom}`, `Email : ${contact.email}`, `Téléphone : ${contact.tel}`,
       `Activité : ${contact.activite}`, `Instagram : ${contact.insta || "non précisé"}`, "",
       ...answers.map(([q, r]) => `${q} : ${r}`), "",
-      process.env.STRIPE_SECRET_KEY ? "Le client a été envoyé vers la page de paiement. Vérifie le paiement dans ton tableau de bord avant de lancer la création." : "Paiement en ligne pas encore activé : recontacte ce client.",
+      process.env.STRIPE_SECRET_KEY ? "Le client a été envoyé vers la page de paiement. Le questionnaire suivra une fois le paiement fait." : "Paiement en ligne pas encore activé : recontacte ce client.",
     ];
     try {
       await fetch("https://api.brevo.com/v3/smtp/email", {
@@ -59,7 +60,7 @@ export async function POST(request: Request) {
           sender: { name: "Site melnourdi.fr", email: "contact@melnourdi.fr" },
           to: [{ email: EMAIL_CONTACT_PRO }],
           replyTo: { name: `${contact.prenom} ${contact.nom}`, email: contact.email },
-          subject: `Logiciel de réservation : ${contact.prenom} ${contact.nom} (${contact.activite})`,
+          subject: `Logiciel de réservation, nouvelle commande : ${contact.prenom} ${contact.nom} (${contact.activite})`,
           textContent: lignes.join("\n"),
         }),
       });
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
   const p = new URLSearchParams();
   p.set("mode", "payment");
   p.set("locale", "fr");
-  p.set("success_url", `${SITE}/logiciel-reservation?paiement=ok#commande`);
+  p.set("success_url", `${SITE}/logiciel-reservation?paiement=ok&session={CHECKOUT_SESSION_ID}#commande`);
   p.set("cancel_url", `${SITE}/logiciel-reservation?paiement=annule#precommande`);
   p.set("customer_email", contact.email);
   p.set("customer_creation", "always");
@@ -102,4 +103,58 @@ export async function POST(request: Request) {
   } catch {
     return json({ ok: true, pending: true });
   }
+}
+
+function readAnswers(body: any): [string, string][] {
+  return Array.isArray(body?.answers)
+    ? body.answers.slice(0, 20).map((r: unknown) => (Array.isArray(r) ? [clean(r[0], 80), clean(r[1], 400)] : ["", ""])).filter((r: string[]) => r[0])
+    : [];
+}
+
+async function questionnaire(body: any) {
+  const answers = readAnswers(body);
+  if (!answers.length) return json({ message: "Réponds au moins à une question." }, 400);
+  const c = body?.contact || {};
+  let who = [clean(c.prenom, 60), clean(c.nom, 80)].filter(Boolean).join(" ");
+  let email = clean(c.email, 254).toLowerCase();
+  let tel = clean(c.tel, 30);
+  let paiement = "non vérifié";
+  const session = clean(body?.session, 200);
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (key && /^cs_[A-Za-z0-9_]+$/.test(session)) {
+    try {
+      const r = await fetch(`https://api.stripe.com/v1/checkout/sessions/${session}`, { headers: { Authorization: `Bearer ${key}` } });
+      const s = await r.json();
+      if (r.ok) {
+        paiement = s.payment_status === "paid" ? "payé ✔" : `statut : ${s.payment_status}`;
+        const d = s.customer_details || {};
+        who = d.name || who; email = (d.email || email).toLowerCase(); tel = d.phone || tel;
+      }
+    } catch { /* on envoie quand même les réponses */ }
+  }
+  const brevo = process.env.BREVO_API_KEY;
+  if (!brevo) return json({ message: "L'envoi est momentanément indisponible." }, 503);
+  const lignes = [
+    `Client : ${who || "non précisé"}`, `Email : ${email || "non précisé"}`, `Téléphone : ${tel || "non précisé"}`,
+    `Activité : ${clean(c.activite, 120) || "non précisée"}`, `Paiement : ${paiement}`, "",
+    ...answers.map(([q, r]) => `${q} : ${r}`),
+  ];
+  try {
+    const r = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { accept: "application/json", "content-type": "application/json", "api-key": brevo },
+      body: JSON.stringify({
+        sender: { name: "Site melnourdi.fr", email: "contact@melnourdi.fr" },
+        to: [{ email: EMAIL_CONTACT_PRO }],
+        ...(EMAIL.test(email) ? { replyTo: { name: who || email, email } } : {}),
+        subject: `Logiciel de réservation, questionnaire : ${who || email || "client"} (${paiement})`,
+        textContent: lignes.join("\n"),
+      }),
+    });
+    if (!r.ok) throw new Error(String(r.status));
+  } catch (e) {
+    console.error("Email du questionnaire impossible", e);
+    return json({ message: "L'envoi n'a pas pu partir." }, 502);
+  }
+  return json({ ok: true });
 }

@@ -1196,3 +1196,9 @@ footer .f-links a,footer .f-links button{display:inline-flex;align-items:center;
 .notif .ic{font-size:13px}
 .chaos small,.msg small,.badge{font-size:max(.74rem,12px)}
 section[id],#precommande,#offre,#demo{scroll-margin-top:84px}
+/* v15 : sections resserrées */
+section{padding-block:clamp(40px,6vw,72px)}
+.hero{padding-block:clamp(28px,5vw,64px)}
+.sec-head{margin-bottom:clamp(20px,3vw,32px)}
+.pay-form .total{margin:14px 0 6px}
+.after-pay{padding-top:24px}
