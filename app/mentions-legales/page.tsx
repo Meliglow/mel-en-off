@@ -3,7 +3,7 @@ import EnTetePage from "@/components/EnTetePage";
 import { EMAIL_CONTACT_PRO, URL_SITE } from "@/config";
 
 export const metadata = {
-  title: "Mentions légales · EN OFF",
+  title: "Mentions légales · Mel Nourdi",
   description: "Mentions légales du site melnourdi.fr.",
 };
 

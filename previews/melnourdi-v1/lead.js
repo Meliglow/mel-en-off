@@ -1,6 +1,6 @@
-// Guide offert : inscription par email (consentement obligatoire), puis accès au guide.
+// Guide gratuit : inscription par email (consentement obligatoire), puis accès au guide.
 (() => {
-  const GUIDE = '/guide-offert';
+  const GUIDE = '/guide-gratuit';
   const KEY = 'melnourdi-guide';
   const remember = () => { try { localStorage.setItem(KEY, '1'); } catch (e) {} };
   document.addEventListener('submit', async (event) => {

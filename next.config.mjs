@@ -14,7 +14,7 @@ const nextConfig = {
       beforeFiles: [
         { source: "/", destination: "/melnourdi/index.html" },
         { source: "/liens", destination: "/melnourdi/liens.html" },
-        { source: "/guide-offert", destination: "/melnourdi/guide.html" },
+        { source: "/guide-gratuit", destination: "/melnourdi/guide.html" },
         { source: "/logiciel-reservation", destination: "/melnourdi/logiciel.html" },
         { source: "/demo-reservation", destination: "/melnourdi/lodyva.html" },
         { source: "/configurer-reservation", destination: "/melnourdi/configurer.html" },
@@ -31,6 +31,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/demo-lodyva", destination: "/demo-reservation", permanent: true },
+      { source: "/guide-offert", destination: "/guide-gratuit", permanent: true },
       { source: "/liens.html", destination: "/liens", permanent: true },
       { source: "/collab", destination: "/collaborations", permanent: true },
       { source: "/resultats", destination: "/", permanent: true },

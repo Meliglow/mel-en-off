@@ -59,8 +59,8 @@ links = links.replace('<button data-panel="privacy">Confidentialité</button>', 
 links = links.replace(/<template id="privacy-panel">[\s\S]*?<\/template>/, '');
 links = links.replace(/<noscript>[\s\S]*?<\/noscript>/, '<noscript><p class="noscript-note">Le guide gratuit et les inscriptions email seront disponibles prochainement.</p><style>[data-panel]{display:none}</style></noscript>');
 
-// Guide offert (20 novembre 2026) : accessible après inscription email, non indexé.
-let guide = common(await readFile(path.join(source, 'guide.html'), 'utf8'), '/guide-offert');
+// Guide gratuit (20 novembre 2026, adresse /guide-gratuit depuis le 21) : accessible après inscription email, non indexé.
+let guide = common(await readFile(path.join(source, 'guide.html'), 'utf8'), '/guide-gratuit');
 guide = guide.replace('</head>', '  <meta name="robots" content="noindex">\n</head>');
 // Page de vente du logiciel (21 novembre 2026), servie sur /logiciel-reservation.
 const logiciel = common(await readFile(path.join(source, 'logiciel.html'), 'utf8'), '/logiciel-reservation');
