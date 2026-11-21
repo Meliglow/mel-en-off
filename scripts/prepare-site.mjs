@@ -62,11 +62,13 @@ links = links.replace(/<noscript>[\s\S]*?<\/noscript>/, '<noscript><p class="nos
 // Guide offert (20 novembre 2026) : accessible après inscription email, non indexé.
 let guide = common(await readFile(path.join(source, 'guide.html'), 'utf8'), '/guide-offert');
 guide = guide.replace('</head>', '  <meta name="robots" content="noindex">\n</head>');
-for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide]]) {
+// Page de vente du logiciel (21 novembre 2026), servie sur /logiciel-reservation.
+const logiciel = common(await readFile(path.join(source, 'logiciel.html'), 'utf8'), '/logiciel-reservation');
+for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide], ['logiciel.html', logiciel]]) {
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
-for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js', 'signature.css', 'signature.js']) await copyFile(path.join(source, name), path.join(output, name));
+for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js']) await copyFile(path.join(source, name), path.join(output, name));
 await writeFile(path.join(output, 'release.css'), 'button:disabled,input:disabled{cursor:not-allowed;opacity:.6}.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}.links-footer .privacy-link{font-size:10px;font-weight:400;letter-spacing:normal;color:var(--muted)}');
 for (const name of ['index.html','liens.html']) {
   const html = await readFile(path.join(output, name), 'utf8');
@@ -83,9 +85,9 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
 }
 // Refresh cached CSS/JS when a deployment changes their contents.
-for (const name of ['index.html', 'liens.html', 'guide.html']) {
+for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
-  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js']) {
+  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
   }
