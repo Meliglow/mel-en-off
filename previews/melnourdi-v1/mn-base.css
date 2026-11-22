@@ -11,9 +11,9 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--cream)}
 a{color:inherit}
 h1,h2,h3{line-height:1.08;letter-spacing:-.03em;text-wrap:balance;margin:0}
@@ -1185,9 +1185,10 @@ footer .f-links a,footer .f-links button{display:inline-flex;align-items:center;
 /* Démo du hero : sur mobile, les notifications passent sous le téléphone au lieu de le couvrir */
 @media (max-width:700px){
   .hero-visual{padding-bottom:84px}
-  .hero-visual .notif{top:auto!important;bottom:6px!important;left:50%!important;right:auto!important;transform:translateX(-50%);max-width:min(300px,86vw);width:max-content}
+  .hero-visual .notif{top:auto!important;bottom:6px!important;left:50%!important;right:auto!important;transform:none;translate:-50% 0;animation:none!important;max-width:min(300px,calc(100vw - 48px));width:max-content}
   .hero-visual .notif.n2{z-index:5}
-  .hero-visual .try-hint{position:absolute;bottom:22px;left:0;right:0;text-align:center}
+  .hero-visual .try-hint{position:absolute;bottom:22px;left:50%;right:auto;transform:translateX(-50%);text-align:center;white-space:normal;width:max-content;max-width:calc(100vw - 48px)}
+  .hero-visual:not(.using) .notif{opacity:0}
   .hero-visual.using .try-hint{opacity:0}
 }
 /* Lisibilité : aucun texte sous 12 px hors écrans de démo */
@@ -1202,3 +1203,21 @@ section{padding-block:clamp(40px,6vw,72px)}
 .sec-head{margin-bottom:clamp(20px,3vw,32px)}
 .pay-form .total{margin:14px 0 6px}
 .after-pay{padding-top:24px}
+
+/* Tableau comparatif : en cartes empilées sur mobile, sans défilement horizontal */
+@media (max-width:640px){
+  .compare-wrap{overflow:visible;border:0;background:none;border-radius:0}
+  .compare{min-width:0}
+  .compare thead{display:none}
+  .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
+  .compare tr{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin-bottom:12px;overflow:hidden}
+  .compare td{padding:10px 14px;border-bottom:1px solid var(--line)}
+  .compare tr td:last-child{border-bottom:0}
+  .compare td:first-child{font-weight:800;font-size:1rem;color:var(--ink)}
+  .compare td:nth-child(n+2)::before{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--soft);margin-bottom:4px}
+  .compare td:nth-child(2)::before{content:"Messages privés"}
+  .compare td:nth-child(3)::before{content:"Grandes plateformes"}
+  .compare td:nth-child(4)::before{content:"Ton logiciel";color:var(--ink)}
+  .compare td.neg+td.neg{border-left:0}
+  .scroll-hint{display:none!important}
+}
