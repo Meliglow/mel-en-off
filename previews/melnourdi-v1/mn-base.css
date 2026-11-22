@@ -1221,3 +1221,6 @@ section{padding-block:clamp(40px,6vw,72px)}
   .compare td.neg+td.neg{border-left:0}
   .scroll-hint{display:none!important}
 }
+
+/* Accueil : cible soulignée en citron */
+.eyebrow-u{color:var(--ink);text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:4px;text-underline-offset:5px;text-decoration-skip-ink:none}
