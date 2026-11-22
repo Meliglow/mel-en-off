@@ -142,6 +142,11 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .lt-shots{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
 .lt-shots img{width:100%;height:auto;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:#fff}
 .lt-sec .faq{max-width:none}
+.lt-news{margin-top:22px;background:var(--ink);color:var(--cream);border-radius:26px;padding:20px;display:grid;gap:10px}
+.lt-news h2{margin:0;font-size:1.4rem;color:#fff;letter-spacing:-.02em}
+.lt-news>p{margin:0;color:#E4DFD3;font-size:.95rem}
+.lt-news .gift-form{box-shadow:none;padding:16px;border-radius:20px;border-color:var(--paper);color:var(--ink)}
+.lt-news .lead-feedback{color:var(--ink)}
 .lt-offer-ctas .btn{width:100%;justify-content:center;padding-inline:.4em;font-size:.92rem;white-space:nowrap}
 .lt-proof{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .lt-proof figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:12px;font-weight:800;font-size:.9rem;line-height:1.3}
@@ -206,7 +211,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     </div>
   </a>
   <div class="lt-offer-ctas">
-    <a class="btn btn-ghost" href="/logiciel-reservation#demo">Teste la démo</a>
+    <a class="btn btn-ghost" href="/logiciel-reservation#demo">Teste le logiciel</a>
     <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
   </div>
 
@@ -232,6 +237,19 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <img src="/melnourdi/assets/mn-b8499efc6f.webp" alt="Message WhatsApp d’une cliente du 18 novembre 2026 : « Ça fait deux mois que je teste et j’ai réduit les lapins de moitié ! » et « le logiciel est hyper intuitif »" width="620" height="983" loading="lazy">
       <img src="/melnourdi/assets/mn-ae3e684b2e.webp" alt="Message WhatsApp de Camille du 20 novembre 2026 : « c’est une pépite ! Plus besoin de gérer les appels »" width="620" height="628" loading="lazy">
     </div>
+  </section>
+
+  <section class="lt-news" id="communaute">
+    <p class="eyebrow" style="color:var(--lime);margin:0">La newsletter</p>
+    <h2>Rejoins la communauté.</h2>
+    <p>Chaque semaine, des conseils concrets pour gagner du temps, trouver des clients et mieux vendre quand tu travailles à ton compte.</p>
+    <form class="gift-form" data-lead-form data-lead-kind="newsletter" data-lead-source="newsletter-accueil" novalidate>
+      <label class="g-lbl" for="news-email">Ton adresse email</label>
+      <input id="news-email" name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required maxlength="254">
+      <label class="g-consent"><input type="checkbox" name="consentement" required><span>J’accepte de recevoir la newsletter de Mel par email. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+      <button class="btn btn-lime" type="submit">Je rejoins la communauté →</button>
+      <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
+    </form>
   </section>
 
   <section class="lt-sec" id="faq">

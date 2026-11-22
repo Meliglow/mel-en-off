@@ -11,7 +11,7 @@
     const say = (text) => { feedback.textContent = text; feedback.hidden = false; };
     const email = form.elements.email.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { say('Vérifie ton adresse email.'); form.elements.email.focus(); return; }
-    if (!form.elements.consentement.checked) { say('Coche la case pour recevoir le guide.'); form.elements.consentement.focus(); return; }
+    if (!form.elements.consentement.checked) { say(form.dataset.leadKind === 'newsletter' ? 'Coche la case pour recevoir la lettre.' : 'Coche la case pour recevoir le guide.'); form.elements.consentement.focus(); return; }
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true;
     say('Un instant…');
@@ -19,10 +19,11 @@
       const response = await fetch('/api/inscription', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, consentement: true, source: 'guide-7-choses-reseaux' }),
+        body: JSON.stringify({ email, consentement: true, source: form.dataset.leadSource || 'guide-7-choses-reseaux' }),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw new Error(data.message || '');
+      if (form.dataset.leadKind === 'newsletter') { say('C’est fait ! Bienvenue dans la communauté. Tu recevras la prochaine lettre par email.'); form.reset(); button.disabled = false; return; }
       remember();
       say('C’est fait ! Ton guide s’ouvre…');
       window.location.href = GUIDE;
