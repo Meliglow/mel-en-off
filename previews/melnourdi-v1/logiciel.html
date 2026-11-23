@@ -19,6 +19,27 @@
   <link rel="stylesheet" href="/melnourdi/mn-base.css">
   <style>@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap}@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin-ext.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0100-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 </style>
+<style>
+.field textarea,.field select{font:500 1rem var(--sans);padding:.85em 1em;border-radius:14px;border:1.5px solid var(--line);background:var(--cream);color:var(--ink);width:100%;resize:vertical;line-height:1.45}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:2.4em}
+.field textarea:focus,.field select:focus{outline:none;border-color:var(--ink);background-color:var(--paper)}
+.field textarea::placeholder,.field input::placeholder{color:#A9A398}
+@media (max-width:480px){.fields{grid-template-columns:1fr}}
+.yn-row{flex-direction:column;align-items:stretch}
+.yn-q{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.yn-d{font:500 .95rem var(--sans);padding:.7em .9em;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);width:100%}
+.colpick{display:flex;gap:18px;align-items:center}
+.col-wheel{position:relative;width:96px;height:96px;border-radius:50%;flex:none;cursor:pointer;background:conic-gradient(red,#ff0,lime,cyan,blue,#f0f,red);padding:9px}
+.col-wheel input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.col-dot{display:block;width:100%;height:100%;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.col-side{display:grid;gap:6px}.col-side small{color:var(--soft);font-size:.8rem}
+.col-hex{font:700 1rem var(--sans);padding:.6em .8em;border-radius:12px;border:1.5px solid var(--line);background:var(--cream);width:130px;text-transform:uppercase}
+.col-prev{display:flex;gap:10px;align-items:center;background:var(--cream);border-radius:16px;padding:14px}
+.cp-btn{background:var(--c);color:#fff;font-weight:800;border-radius:999px;padding:.55em 1.2em;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.cp-chip{border:1.5px solid var(--c);border-radius:999px;padding:.45em 1em;font-weight:700;font-size:.9rem}
+.col-logo{display:flex;gap:10px;align-items:center;font-weight:600;font-size:.92rem}.col-logo input{width:20px;height:20px;accent-color:var(--ink)}
+.recap>div{display:grid!important;gap:2px;justify-content:stretch!important}.recap>div span:last-child{white-space:normal;text-align:left!important;font-weight:700}
+</style>
 </head>
 <body>
 <div class="urgency" role="status">
@@ -39,10 +60,10 @@
     <div class="order-copy">
       <p class="eyebrow" style="color:var(--ink)">Étape 2 sur 2</p>
       <h2>Ta place est réservée. <em class="s">Parle-moi de ton activité.</em></h2>
-      <p class="lead">6 questions rapides pour que je prépare ton logiciel. Ensuite, je te contacte sous 24 h.</p>
+      <p class="lead">Une dizaine de questions (environ 10 minutes) pour que j’installe ton logiciel sans rien te redemander. Ensuite, je t’appelle sous 24 h.</p>
     </div>
     <form class="quiz" id="quiz" novalidate>
-      <div class="q-top"><span id="q-count">Question 1 sur 6</span><span id="q-mood">C’est parti</span></div>
+      <div class="q-top"><span id="q-count">Question 1</span><span id="q-mood">C’est parti</span></div>
       <div class="progress"><i id="q-bar"></i></div>
       <div id="q-body"></div>
       <div class="q-nav" id="q-nav">
@@ -66,7 +87,7 @@
         <a class="btn btn-ghost" href="#demo">Tester le logiciel</a>
       </div>
       <div class="places-mini">
-        <span><span class="js-taken">5</span> places prises sur 20 · 290 € au lieu de 390 €</span>
+        <span>290 € · offre de lancement · <span class="js-left-plain">15</span> places seulement</span>
         <div class="pips js-pips"></div>
       </div>
       <div class="hero-stats">
@@ -261,18 +282,18 @@
       <h2>Tout ce qu’il te faut pour démarrer. <em class="s">Rien à ajouter.</em></h2>
     </div>
     <div class="offer-grid"><div class="stack rv">
-      <div class="stack-row"><span class="ck">✓</span><div><b>Ton logiciel de réservation sur mesure</b><small>Page de réservation à ton nom + admin complet + toutes les fonctionnalités, sans option payante</small></div><span class="v">390 €</span></div>
-      <div class="stack-row"><span class="ck">✓</span><div><b>1re année d’hébergement et de maintenance</b><small>Ton logiciel en ligne, sécurisé et à jour pendant 12 mois</small></div><span class="v">108 €</span></div>
+      <div class="stack-row"><span class="ck">✓</span><div><b>Ton logiciel de réservation sur mesure</b><small>Page de réservation à ton nom + admin complet + toutes les fonctionnalités, sans option payante</small></div><span class="v"></span></div>
+      <div class="stack-row"><span class="ck">✓</span><div><b>1re année d’hébergement et de maintenance</b><small>Ton logiciel en ligne, sécurisé et à jour pendant 12 mois</small></div><span class="v free">Inclus</span></div>
       <div class="stack-row"><span class="ck">✓</span><div><b>Bonus · Call vidéo pour te présenter ton logiciel</b><small>Ajouter une prestation, gérer ton agenda, régler ton acompte, partager ton lien. Tu repars autonome.</small></div><span class="v free">Gratuit</span></div>
       <div class="stack-row"><span class="ck">✓</span><div><b>Bonus · Tes messages clients prêts à copier</b><small>Confirmation, rappel, remerciement, demande d’avis : déjà écrits, tu copies, tu colles.</small></div><span class="v free">Gratuit</span></div>
-      <div class="stack-total"><span class="was">Valeur totale : <s>498 €</s></span><span class="now">290 €</span></div>
-      <p class="stack-only">290 € uniquement pour les 20 premiers pros. Ensuite, 390 €.</p>
+      <div class="stack-total"><span class="was">Offre de lancement</span><span class="now">290 €</span></div>
+      <p class="stack-only">290 € · offre de lancement · <span class="js-left-plain">15</span> places seulement.</p>
     </div>
     <aside class="fomo-card rv">
       <p class="eyebrow">Places de lancement</p>
       <p class="fomo-big"><span class="js-taken">5</span> pros ont déjà <em class="s">pris leur place.</em></p>
       <div class="pips js-pips"></div>
-      <ul class="fomo-list"><li><b>Plus que <span class="js-left-plain">15</span> places</b> à 290 €</li><li><b>Ensuite, 390 €</b> pour le même logiciel</li><li><b>5 mises en ligne par semaine</b> : premiers inscrits, premiers en ligne</li></ul>
+      <ul class="fomo-list"><li><b>Plus que <span class="js-left-plain">15</span> places</b> à 290 €</li><li><b>Offre de lancement</b> : le prix va augmenter ensuite</li><li><b>5 mises en ligne par semaine</b> : premiers inscrits, premiers en ligne</li></ul>
       <a class="btn btn-lime" href="#precommande">Je prends ma place à 290 €</a>
     </aside>
     </div>
@@ -284,9 +305,9 @@
   <div class="wrap">
     <div class="price-card rv" style="max-width:820px">
       <p class="eyebrow">Prix de lancement</p>
-      <div class="amount"><b>290 €</b><s style="font-size:1.4rem;color:#8C877C">390 €</s><span>une fois, tout inclus</span></div>
+      <div class="amount"><b>290 €</b><span>une fois, tout inclus</span></div>
       <div class="urg-grid">
-        <div class="urg"><b>20 places</b><small>Le prix de 290 € est réservé aux 20 premiers. Ensuite, la création passe à 390 €.</small></div>
+        <div class="urg"><b>20 places</b><small>Le prix de 290 € est réservé aux 20 premiers. Ensuite, il augmente.</small></div>
         <div class="urg"><b>5 par semaine</b><small>Je mets en ligne 5 logiciels par semaine au maximum. Premiers inscrits, premiers en ligne.</small></div>
         <div class="urg"><b>Jusqu’au <span class="js-deadline">31/12/2026</span></b><small>Ou avant, dès que la 20e place est prise.</small></div>
       </div>
@@ -318,7 +339,7 @@
       <details><summary>C’est vraiment à mon nom ?</summary><p>Oui. Ta page est sur ton propre nom de domaine, avec ton nom, ton logo et tes couleurs. Les acomptes arrivent sur ton compte à toi. Tes clients ne voient aucune autre marque que la tienne.</p></details>
       <details><summary>Et après la 1re année ?</summary><p>La 1re année d’hébergement et de maintenance est incluse. Ensuite, c’est 9 €/mois TTC (108 € par an) pour que ton logiciel reste en ligne, sécurisé et à jour. Aucune commission sur tes prestations, quel que soit ton chiffre d’affaires.</p></details>
       <details><summary>Combien de temps avant d’être en ligne ?</summary><p>7 jours maximum à partir du moment où tes infos sont complètes (prestations, tarifs, horaires, logo, photos). Je mets en ligne 5 logiciels par semaine : plus tu réserves tôt, plus tu passes tôt.</p></details>
-      <details><summary>Pourquoi seulement 20 places à 290 € ?</summary><p>Parce que je crée chaque logiciel moi-même et que je fais chaque call de présentation moi-même. 20 places, c’est ce que je peux faire bien. Après, le prix passe à 390 €.</p></details>
+      <details><summary>Pourquoi seulement 20 places à 290 € ?</summary><p>Parce que je crée chaque logiciel moi-même et que je fais chaque call de présentation moi-même. 20 places, c’est ce que je peux faire bien. Après, le prix augmente.</p></details>
     </div>
   </div>
 </section>
@@ -329,9 +350,9 @@
     <div class="order-copy">
       <p class="eyebrow" style="color:var(--ink)">Ta place</p>
       <h2>Ta prochaine réservation peut porter <em class="s">ton</em> nom.</h2>
-      <p class="lead">Laisse tes coordonnées et paie en ligne pour bloquer ta place à 290 €. Juste après, 6 questions rapides pour préparer ton logiciel.</p>
+      <p class="lead">Laisse tes coordonnées et paie en ligne pour bloquer ta place à 290 €. Juste après, quelques questions pour préparer ton logiciel.</p>
       <ul>
-        <li><b>290 €</b> tout inclus, au lieu de 390 €</li>
+        <li><b>290 €</b> tout inclus · offre de lancement</li>
         <li>Plus que <b class="js-left-plain">15</b> places sur 20 à ce prix</li>
         <li>1re année incluse, puis 9 €/mois</li>
         <li>Bonus gratuits : call vidéo de présentation + messages prêts à copier</li>
@@ -405,7 +426,7 @@ if('IntersectionObserver' in window && !reduce){
 /* Retour de paiement */
 (()=>{const q=new URLSearchParams(location.search).get('paiement');if(!q)return;
   const box=document.createElement('div');box.className='pay-back';box.setAttribute('role','status');
-  box.innerHTML=q==='ok'?'<b>Merci, ta place est réservée !</b><span>Ta confirmation arrive par email. Dernière étape : réponds aux 6 questions juste en dessous.</span>':q==='attente'?'<b>Ta demande est bien reçue.</b><span>Je te recontacte sous 24 h pour finaliser ta place. En attendant, réponds aux 6 questions juste en dessous.</span>':'<b>Paiement interrompu.</b><span>Ta place n’est pas encore réservée. Tu peux reprendre quand tu veux, ou m’écrire à contact@melnourdi.fr.</span>';
+  box.innerHTML=q==='ok'?'<b>Merci, ta place est réservée !</b><span>Ta confirmation arrive par email. Dernière étape : réponds au questionnaire juste en dessous.</span>':q==='attente'?'<b>Ta demande est bien reçue.</b><span>Je te recontacte sous 24 h pour finaliser ta place. En attendant, réponds au questionnaire juste en dessous.</span>':'<b>Paiement interrompu.</b><span>Ta place n’est pas encore réservée. Tu peux reprendre quand tu veux, ou m’écrire à contact@melnourdi.fr.</span>';
   const m=document.querySelector('main');m.prepend(box);})();
 
 /* ===== Le vrai logiciel : accroche + démo ===== */
@@ -430,22 +451,51 @@ if('IntersectionObserver' in window && !reduce){
   document.getElementById('car-next').onclick=()=>car.scrollBy({left:step(),behavior:'smooth'});
 })();
 
-/* ===== Questionnaire de pré-commande ===== */
+/* ===== Questionnaire d'installation (après paiement) ===== */
 const A={}; // réponses
+const yes=k=>A['o_'+k]==='oui';
 const STEPS=[
   {id:'metier',mood:'C’est parti',title:'Tu es plutôt…',type:'single',opts:[
     ['beaute','Beauté et bien-être','Esthétique, ongles, cils, massage…'],
     ['coiffure','Coiffure ou barbier','Salon ou à domicile'],
     ['sport','Sport et coaching','Coach, yoga, pilates…'],
     ['autre','Autre activité sur RDV','Tatouage, conseil, santé…']]},
+  {id:'activite',mood:'Ta vitrine',title:'Ton activité',type:'form',fields:[
+    {k:'nom_affiche',label:'Le nom affiché sur ta page',req:true,ph:'Ex. : Studio Léa Nails',full:true},
+    {k:'lieu',label:'Tu reçois…',type:'select',req:true,opts:['En salon / institut','À domicile','Les deux','En visio']},
+    {k:'ville',label:'Ta ville',req:true,ph:'Ex. : Lyon 3e'},
+    {k:'adresse',label:'Ton adresse (ou ta zone de déplacement)',ph:'Ex. : 12 rue Paul Bert / Lyon et 15 km autour',full:true},
+    {k:'reseaux',label:'Ton Instagram, TikTok…',ph:'@ton.activite',full:true}]},
   {id:'equipe',mood:'Bien noté',title:'Combien de personnes prennent des rendez-vous ?',type:'single',cls:'three',opts:[['1','Juste moi',''],['2-3','2 à 3',''],['4+','4 ou plus','']]},
+  {id:'equipe_det',when:()=>A.equipe&&A.equipe!=='1',mood:'Ton équipe',title:'Qui fait quoi ?',type:'form',fields:[
+    {k:'equipe_liste',label:'Prénom de chaque personne et les prestations qu’elle fait',type:'area',req:true,ph:'Léa : ongles et cils\nSarah : massages uniquement',full:true}]},
+  {id:'prestations',mood:'Le cœur de ton logiciel',title:'Tes prestations',hint:'Une par ligne : nom, durée, prix. Tu as une carte ou une grille de tarifs ? Envoie-moi juste sa photo à contact@melnourdi.fr.',type:'form',fields:[
+    {k:'presta_liste',label:'Tes prestations',type:'area',req:true,rows:7,ph:'Pose gel · 1 h 30 · 45 €\nRemplissage · 1 h · 35 €\nBeauté des pieds · 45 min · 30 €',full:true},
+    {k:'categories',label:'Tes catégories (facultatif)',ph:'Ex. : Mains, Pieds, Cils',full:true},
+    {k:'pause',label:'Temps de pause entre deux RDV',type:'select',opts:['Aucun','5 min','10 min','15 min','30 min','Ça dépend de la prestation']}]},
+  {id:'horaires',mood:'Ton planning',title:'Tes horaires',type:'form',fields:[
+    {k:'horaires_txt',label:'Tes jours et horaires d’ouverture',type:'area',req:true,rows:4,ph:'Lun au ven : 9 h à 19 h (pause 12 h à 13 h)\nSam : 9 h à 14 h\nDim : fermé',full:true},
+    {k:'fermetures',label:'Tes prochaines fermetures ou vacances (facultatif)',ph:'Ex. : du 24/12 au 2/01',full:true},
+    {k:'delai_min',label:'Réservation au plus tard…',type:'select',opts:['Jusqu’à la dernière minute','2 h avant','24 h avant','48 h avant']},
+    {k:'delai_max',label:'Réservation jusqu’à…',type:'select',opts:['1 mois à l’avance','2 mois à l’avance','3 mois à l’avance','6 mois à l’avance']}]},
+  {id:'acompte',mood:'Fini les lapins',title:'L’acompte',type:'form',fields:[
+    {k:'acompte_pct',label:'Combien tu demandes à la réservation ?',type:'select',req:true,opts:['20 %','30 %','50 %','Le prix total','Pas d’acompte','Je ne sais pas encore'],full:true},
+    {k:'annulation',label:'Ta règle d’annulation (facultatif)',type:'area',rows:3,ph:'Ex. : acompte remboursé si annulation plus de 48 h avant, gardé sinon.',full:true}]},
   {id:'canaux',mood:'On y voit plus clair',title:'Aujourd’hui, tes rendez-vous arrivent par…',hint:'Plusieurs réponses possibles.',type:'multi',opts:[
-    ['insta','Instagram',''],['whatsapp','WhatsApp',''],['tel','Téléphone / SMS',''],['papier','Carnet papier',''],['plateforme','Une plateforme de réservation',''],['autre','Autre','']]},
+    ['insta','Instagram',''],['tiktok','TikTok',''],['whatsapp','WhatsApp',''],['tel','Téléphone / SMS',''],['facebook','Facebook',''],['planity','Planity',''],['treatwell','Treatwell',''],['booksy','Booksy',''],['bouche','Bouche-à-oreille',''],['autre','Autre','']]},
   {id:'priorites',mood:'Ça se dessine',title:'Ce qui compte le plus pour toi',hint:'Choisis-en jusqu’à 3.',type:'multi',max:3,opts:[
-    ['acompte','L’acompte anti-lapin',''],['nuit','Arrêter les messages le soir',''],['equipe','Gérer mon équipe',''],['questionnaire','Le questionnaire par prestation',''],['promos','Lancer des promos',''],['google','La synchro avec mon agenda','']]},
-  {id:'univers',mood:'La partie fun',title:'Ton univers, c’est plutôt…',hint:'On affinera ensemble avec ton logo et tes photos.',type:'vibe',opts:[
-    ['doux','Doux et nude',['#FBF6F2','#EAD3C6','#B5735A']],['nature','Nature et sauge',['#F5F8F4','#D5E2D6','#5E7D6A']],['glam','Glam rose',['#FCF6F8','#F2D9E0','#C77D93']],['luxe','Noir et or',['#F7F4EE','#B08D57','#1E1E1E']],['lavande','Lavande',['#F7F6FC','#DEDAF2','#7E73B8']],['sais','Je ne sais pas encore',['#EEEEEE','#DDDDDD','#BBBBBB']]]},
-  {id:'outils',mood:'Presque fini',title:'Tu as déjà…',type:'yn',rows:[['site','Un site internet'],['domaine','Un nom de domaine'],['paiement','Un compte pour encaisser en ligne'],['logo','Un logo']]},
+    ['commission','0 % de commission',''],['acompte','L’acompte anti-lapin',''],['image','Un logiciel à mon image',''],['nuit','Arrêter les messages le soir',''],['emails','Les emails automatiques',''],['equipe','Gérer mon équipe',''],['questionnaire','Le questionnaire par prestation',''],['promos','Lancer des promos','']]},
+  {id:'couleurs',mood:'La partie fun',title:'Tes couleurs',hint:'Touche le rond pour choisir ta couleur, ou laisse-moi reprendre celles de ton logo.',type:'color'},
+  {id:'outils',mood:'Pour l’installation',title:'Tu as déjà…',type:'yn',rows:[
+    ['site','Un site internet','Son adresse'],
+    ['domaine','Un nom de domaine','Lequel ? (ex. ton-nom.fr)'],
+    ['paiement','Un logiciel de paiement pour prendre les paiements en ligne (carte bancaire, acomptes)','Lequel ?'],
+    ['fichier','Un fichier clients à importer','Il vient d’où ? (Excel, autre logiciel…)'],
+    ['logo','Un logo',''],
+    ['photos','Des photos de tes prestations','']]},
+  {id:'fin',mood:'Dernière question',title:'On s’appelle quand ?',type:'form',fields:[
+    {k:'appel',label:'Tes meilleurs moments pour notre appel de lancement',type:'select',req:true,opts:['En semaine, le matin','En semaine, le midi','En semaine, l’après-midi','En semaine, après 18 h','Le samedi']},
+    {k:'message',label:'Une idée, une demande, une question (facultatif)',type:'area',rows:4,ph:'Ex. : je veux un questionnaire santé avant chaque soin visage.',full:true}]},
   {id:'recap',mood:'Dernière étape',title:'Ton récap',type:'recap'}
 ];
 const LABEL=(st,v)=>{const o=(st.opts||[]).find(o=>o[0]===v);return o?o[1]:v};
@@ -469,16 +519,39 @@ const CT=()=>{try{return JSON.parse(sessionStorage.getItem('mn-contact')||'{}')}
 let cur=0;
 const body=document.getElementById('q-body'),bar=document.getElementById('q-bar'),cnt=document.getElementById('q-count'),mood=document.getElementById('q-mood'),next=document.getElementById('q-next'),back=document.getElementById('q-back'),nav=document.getElementById('q-nav');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
+const VIS=()=>STEPS.filter(s=>!s.when||s.when());
+if(!A.nom_affiche&&CT().activite)A.nom_affiche=CT().activite;
+if(!A.couleur)A.couleur='#C77D93';
 function valid(st){
-  if(st.type==='single'||st.type==='vibe')return !!A[st.id];
+  if(st.type==='single')return !!A[st.id];
   if(st.type==='multi')return (A[st.id]||[]).length>0;
   if(st.type==='yn')return st.rows.every(r=>A['o_'+r[0]]);
-  if(st.type==='fields')return !!(A.prenom&&A.nom&&A.activite&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(A.email||'')&&/^[+\d][\d\s().-]{7,24}$/.test(A.tel||''));
+  if(st.type==='form')return st.fields.every(f=>!f.req||(A[f.k]||'').trim());
+  if(st.type==='color')return !!(A.couleur_logo||A.couleur);
   return true;
 }
+function answerList(){
+  const out=[];
+  VIS().forEach(s=>{
+    if(s.type==='recap')return;
+    if(s.type==='form')s.fields.forEach(f=>{if((A[f.k]||'').trim())out.push([f.label,A[f.k].trim()])});
+    else if(s.type==='yn')s.rows.forEach(r=>{const v=A['o_'+r[0]]||'?';out.push([r[1],v+(v==='oui'&&(A['d_'+r[0]]||'').trim()?' : '+A['d_'+r[0]].trim():'')])});
+    else if(s.type==='color')out.push(['Couleurs',A.couleur_logo?'Reprendre les couleurs du logo':'Couleur principale '+A.couleur]);
+    else{const v=A[s.id];out.push([s.title,Array.isArray(v)?v.map(x=>LABEL(s,x)).join(', '):LABEL(s,v||'')])}
+  });
+  return out;
+}
+function field(f){
+  const v=esc(A[f.k]||''),id='f-'+f.k,lab=`<label for="${id}">${f.label}</label>`;
+  let inp;
+  if(f.type==='area')inp=`<textarea id="${id}" data-k="${f.k}" rows="${f.rows||3}" placeholder="${esc(f.ph||'')}">${v}</textarea>`;
+  else if(f.type==='select')inp=`<select id="${id}" data-k="${f.k}"><option value="">Choisis…</option>${f.opts.map(o=>`<option${A[f.k]===o?' selected':''}>${o}</option>`).join('')}</select>`;
+  else inp=`<input id="${id}" data-k="${f.k}" value="${v}" placeholder="${esc(f.ph||'')}">`;
+  return `<div class="field ${f.full?'full':''}">${lab}${inp}</div>`;
+}
 function render(){
-  const st=STEPS[cur],n=STEPS.length-1;
+  const V=VIS();cur=Math.min(cur,V.length-1);
+  const st=V[cur],n=V.length-1;
   cnt.textContent=st.type==='recap'?'Récapitulatif':`Question ${cur+1} sur ${n}`;
   mood.textContent=st.mood;
   bar.style.width=`${Math.round(cur/n*100)}%`;
@@ -487,74 +560,71 @@ function render(){
   if(st.type==='single'||st.type==='multi'){
     const sel=st.type==='multi'?(A[st.id]||[]):[A[st.id]];
     h+=`<div class="opts ${st.cls||''}">`+st.opts.map(o=>`<button type="button" class="opt ${st.cls?'center':''}" data-v="${o[0]}" aria-pressed="${sel.includes(o[0])}">${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</button>`).join('')+`</div>`;
-  }else if(st.type==='vibe'){
-    h+=`<div class="vibes">`+st.opts.map(o=>`<button type="button" class="vibe" data-v="${o[0]}" aria-pressed="${A[st.id]===o[0]}"><span class="pal">${o[2].map(c=>`<i style="background:${c}"></i>`).join('')}</span>${o[1]}</button>`).join('')+`</div>`;
+  }else if(st.type==='form'){
+    h+=`<div class="fields">${st.fields.map(field).join('')}</div>`;
+  }else if(st.type==='color'){
+    h+=`<div class="colpick"><label class="col-wheel" style="--c:${A.couleur}"><input type="color" id="f-couleur" value="${A.couleur}" aria-label="Choisir ma couleur"><span class="col-dot"></span></label>
+      <div class="col-side"><b>Ta couleur principale</b><input class="col-hex" id="f-hex" value="${A.couleur}" maxlength="7" aria-label="Code couleur"><small>Tu as un code couleur ? Colle-le ici.</small></div></div>
+      <div class="col-prev" style="--c:${A.couleur}"><span class="cp-btn">Réserver</span><span class="cp-chip">Pose gel · 45 €</span></div>
+      <label class="col-logo"><input type="checkbox" id="f-logo-col" ${A.couleur_logo?'checked':''}> Reprends plutôt les couleurs de mon logo</label>`;
   }else if(st.type==='yn'){
-    h+=`<div class="yn">`+st.rows.map(r=>`<div class="yn-row"><span>${r[1]}</span><span class="seg" data-k="o_${r[0]}"><button type="button" data-v="oui" aria-pressed="${A['o_'+r[0]]==='oui'}">Oui</button><button type="button" data-v="non" aria-pressed="${A['o_'+r[0]]==='non'}">Non</button></span></div>`).join('')+`</div><p class="hint" style="margin:0">Pas de souci si c’est non partout : je te guide pour tout.</p><p class="hint dom-note" style="margin:0;color:var(--ink);font-weight:700" ${A.o_domaine==='non'?'':'hidden'}>Pas de nom de domaine ? Je t’envoie par email le site où l’acheter à ton nom (par exemple ton-nom.fr). Il est à ta charge et n’est pas compris dans les 290 €.</p>`;
-  }else if(st.type==='fields'){
-    h+=`<div class="fields">
-      <div class="field"><label for="f-prenom">Ton prénom</label><input id="f-prenom" data-k="prenom" autocomplete="given-name" value="${esc(A.prenom||'')}"></div>
-      <div class="field"><label for="f-nom">Ton nom</label><input id="f-nom" data-k="nom" autocomplete="family-name" value="${esc(A.nom||'')}"></div>
-      <div class="field full"><label for="f-activite">Nom de ton activité</label><input id="f-activite" data-k="activite" value="${esc(A.activite||'')}"></div>
-      <div class="field full"><label for="f-tel">Ton téléphone</label><input id="f-tel" type="tel" data-k="tel" autocomplete="tel" placeholder="06 12 34 56 78" value="${esc(A.tel||'')}"></div>
-      <div class="field full"><label for="f-email">Ton email</label><input id="f-email" type="email" data-k="email" autocomplete="email" value="${esc(A.email||'')}"><span class="err" id="f-err" hidden>Vérifie ton adresse email.</span></div>
-      <div class="field full"><label for="f-insta">Ton Instagram <span style="font-weight:500;color:var(--soft)">(facultatif)</span></label><input id="f-insta" data-k="insta" placeholder="@ton.activite" value="${esc(A.insta||'')}"></div>
-    </div>`;
+    h+=`<div class="yn">`+st.rows.map(r=>`<div class="yn-row"><div class="yn-q"><span>${r[1]}</span><span class="seg" data-k="o_${r[0]}"><button type="button" data-v="oui" aria-pressed="${A['o_'+r[0]]==='oui'}">Oui</button><button type="button" data-v="non" aria-pressed="${A['o_'+r[0]]==='non'}">Non</button></span></div>${r[2]?`<input class="yn-d" data-k="d_${r[0]}" placeholder="${esc(r[2])}" value="${esc(A['d_'+r[0]]||'')}" ${yes(r[0])?'':'hidden'}>`:''}</div>`).join('')+`</div>
+      <p class="hint dom-note" style="margin:0;color:var(--ink);font-weight:700" ${A.o_domaine==='non'?'':'hidden'}>Pas de nom de domaine ? Je t’envoie par email le site où l’acheter à ton nom (par exemple ton-nom.fr). Il est à ta charge et n’est pas compris dans les 290 €.</p>
+      <p class="hint pay-note" style="margin:0" ${A.o_paiement==='non'?'':'hidden'}>Pas de logiciel de paiement ? On le crée ensemble, gratuitement et à ton nom, pendant notre appel.</p>
+      <p class="hint" style="margin:0">Logo et photos : envoie-les-moi à <a href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a>, en précisant ton nom.</p>`;
   }else if(st.type==='recap'){
-    const s=i=>STEPS[i];
-    const multi=(i)=>(A[s(i).id]||[]).map(v=>LABEL(s(i),v)).join(', ');
-    h+=`<div class="recap">
-      <div><span>Activité</span><span>${LABEL(s(0),A.metier)}</span></div>
-      <div><span>Praticiennes</span><span>${LABEL(s(1),A.equipe)}</span></div>
-      <div><span>Tes priorités</span><span>${multi(3)}</span></div>
-      <div><span>Univers</span><span>${LABEL(s(4),A.univers)}</span></div>
-      
-    </div>
-    <p class="hint" style="margin:0">Tu pourras tout préciser avec moi pendant notre call vidéo.</p><p class="q-err" id="q-err" role="alert" hidden></p>`;
+    h+=`<div class="recap">`+answerList().map(([q,r])=>`<div><span>${esc(q)}</span><span>${esc(r).replace(/\n/g,'<br>')}</span></div>`).join('')+`</div>
+    <p class="hint" style="margin:0">Tu pourras tout préciser avec moi pendant notre appel.</p><p class="q-err" id="q-err" role="alert" hidden></p>`;
   }
   h+='</div>';
   body.innerHTML=h;
-  next.innerHTML=st.type==='recap'?'Envoyer mes réponses':(cur===STEPS.length-2?'Voir mon récap':'Continuer');
+  next.innerHTML=st.type==='recap'?'Envoyer mes réponses':(cur===n-1?'Voir mon récap':'Continuer');
   next.disabled=!valid(st);
   bind(st);
 }
 function bind(st){
-  body.querySelectorAll('.opt,.vibe').forEach(b=>b.addEventListener('click',()=>{
+  const upd=()=>{next.disabled=!valid(st)};
+  body.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
     const v=b.dataset.v;
     if(st.type==='multi'){
       let arr=A[st.id]||[];
       if(arr.includes(v))arr=arr.filter(x=>x!==v);else{if(st.max&&arr.length>=st.max)return;arr=[...arr,v]}
       A[st.id]=arr;
-      body.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed',arr.includes(o.dataset.v)));
-      next.disabled=!valid(st);
+      body.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed',arr.includes(o.dataset.v)));upd();
     }else{
       A[st.id]=v;
       body.querySelectorAll('[data-v]').forEach(o=>o.setAttribute('aria-pressed',o.dataset.v===v));
       next.disabled=false;
-      setTimeout(()=>{if(STEPS[cur]===st)go(1)},280);
+      setTimeout(()=>{if(VIS()[cur]===st)go(1)},280);
     }
   }));
   body.querySelectorAll('.seg').forEach(seg=>seg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-    A[seg.dataset.k]=b.dataset.v;const dn=body.querySelector('.dom-note');if(dn)dn.hidden=A.o_domaine!=='non';seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));next.disabled=!valid(st);
+    A[seg.dataset.k]=b.dataset.v;
+    seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    const d=seg.closest('.yn-row').querySelector('.yn-d');if(d)d.hidden=b.dataset.v!=='oui';
+    const dn=body.querySelector('.dom-note');if(dn)dn.hidden=A.o_domaine!=='non';
+    const pn=body.querySelector('.pay-note');if(pn)pn.hidden=A.o_paiement!=='non';
+    upd();
   })));
-  body.querySelectorAll('input[data-k]').forEach(inp=>inp.addEventListener('input',()=>{
-    A[inp.dataset.k]=inp.value.trim();next.disabled=!valid(st);
-    if(inp.dataset.k==='email')document.getElementById('f-err').hidden=!A.email||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(A.email);
-  }));
+  body.querySelectorAll('[data-k]:not(.seg)').forEach(inp=>['input','change'].forEach(ev=>inp.addEventListener(ev,()=>{A[inp.dataset.k]=inp.value;upd()})));
+  const c=body.querySelector('#f-couleur');
+  if(c){const hex=body.querySelector('#f-hex'),lg=body.querySelector('#f-logo-col');
+    const set=v=>{A.couleur=v;body.querySelectorAll('.col-wheel,.col-prev').forEach(e=>e.style.setProperty('--c',v));upd()};
+    c.addEventListener('input',()=>{hex.value=c.value;set(c.value)});
+    hex.addEventListener('input',()=>{let v=hex.value.trim();if(!v.startsWith('#'))v='#'+v;if(/^#[0-9a-f]{6}$/i.test(v)){c.value=v.toLowerCase();set(v.toLowerCase())}});
+    lg.addEventListener('change',()=>{A.couleur_logo=lg.checked;upd()});}
 }
-function go(d){cur=Math.max(0,Math.min(STEPS.length-1,cur+d));render()}
+function go(d){cur=Math.max(0,Math.min(VIS().length-1,cur+d));render();document.getElementById('quiz').scrollIntoView({block:'start',behavior:'smooth'})}
 back.addEventListener('click',()=>go(-1));
 document.getElementById('quiz').addEventListener('submit',e=>{
   e.preventDefault();
-  const st=STEPS[cur];
+  const st=VIS()[cur];
   if(!valid(st))return;
   if(st.type==='recap'){
-    const ans=STEPS.filter(s=>s.id!=='recap').map(s=>{
-      if(s.type==='yn')return [s.title,s.rows.map(r=>r[1]+' : '+(A['o_'+r[0]]||'?')).join(', ')];
-      const v=A[s.id];return [s.title,Array.isArray(v)?v.map(x=>LABEL(s,x)).join(', '):LABEL(s,v||'')];});
+    const ans=answerList();
     const err=document.getElementById('q-err');next.disabled=true;next.textContent='Envoi…';
     const done=()=>{bar.style.width='100%';cnt.textContent='Terminé';mood.textContent='Merci !';
-      body.innerHTML=`<div class="qs done"><span class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Merci${CT().prenom?' '+esc(CT().prenom):''} !</h3><p class="hint" style="margin:0;max-width:40ch">C’est noté ! Je lance la préparation de ton logiciel et je te contacte sous 24 h pour caler notre call vidéo.</p></div>`;nav.hidden=true};
+      body.innerHTML=`<div class="qs done"><span class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Merci${CT().prenom?' '+esc(CT().prenom):''} !</h3><p class="hint" style="margin:0;max-width:40ch">C’est noté ! Je lance la préparation de ton logiciel et je t’appelle sous 24 h. Pense à m’envoyer ton logo et tes photos à contact@melnourdi.fr.</p></div>`;nav.hidden=true};
     fetch('/api/commande',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({questionnaire:true,session:new URLSearchParams(location.search).get('session')||'',contact:CT(),answers:ans,website:''})})
       .then(r=>r.json().then(j=>({ok:r.ok,j})))
       .then(({ok,j})=>{if(ok){done();return}throw Error(j.message||'Envoi impossible.')})

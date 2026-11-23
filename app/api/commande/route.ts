@@ -17,6 +17,7 @@ const SITE = (process.env.PUBLIC_SITE_URL || "https://melnourdi.fr").replace(/\/
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const TEL = /^[+\d][\d\s().-]{7,24}$/;
 
+const cleanMulti = (v: unknown, max = 1500) => (typeof v === "string" ? v.replace(/\r/g, "").replace(/[\u0000-\u0009\u000b-\u001f]/g, " ").trim().slice(0, max) : "");
 const clean = (v: unknown, max = 200) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").trim().slice(0, max) : "");
 
 function json(body: unknown, status = 200) {
@@ -49,7 +50,7 @@ export async function POST(request: Request) {
     const lignes = [
       `Prénom : ${contact.prenom}`, `Nom : ${contact.nom}`, `Email : ${contact.email}`, `Téléphone : ${contact.tel}`,
       `Activité : ${contact.activite}`, `Instagram : ${contact.insta || "non précisé"}`, "",
-      ...answers.map(([q, r]) => `${q} : ${r}`), "",
+      ...answers.map(([q, r]) => (r.includes("\n") ? `${q} :\n${r}\n` : `${q} : ${r}`)), "",
       process.env.STRIPE_SECRET_KEY ? "Le client a été envoyé vers la page de paiement. Le questionnaire suivra une fois le paiement fait." : "Paiement en ligne pas encore activé : recontacte ce client.",
     ];
     try {
@@ -107,7 +108,7 @@ export async function POST(request: Request) {
 
 function readAnswers(body: any): [string, string][] {
   return Array.isArray(body?.answers)
-    ? body.answers.slice(0, 20).map((r: unknown) => (Array.isArray(r) ? [clean(r[0], 80), clean(r[1], 400)] : ["", ""])).filter((r: string[]) => r[0])
+    ? body.answers.slice(0, 40).map((r: unknown) => (Array.isArray(r) ? [clean(r[0], 140), cleanMulti(r[1], 1500)] : ["", ""])).filter((r: string[]) => r[0])
     : [];
 }
 
@@ -137,7 +138,7 @@ async function questionnaire(body: any) {
   const lignes = [
     `Client : ${who || "non précisé"}`, `Email : ${email || "non précisé"}`, `Téléphone : ${tel || "non précisé"}`,
     `Activité : ${clean(c.activite, 120) || "non précisée"}`, `Paiement : ${paiement}`, "",
-    ...answers.map(([q, r]) => `${q} : ${r}`),
+    ...answers.map(([q, r]) => (r.includes("\n") ? `${q} :\n${r}\n` : `${q} : ${r}`)),
   ];
   try {
     const r = await fetch("https://api.brevo.com/v3/smtp/email", {
