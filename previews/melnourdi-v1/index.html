@@ -132,6 +132,15 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .lt-offer h2{font-size:1.35rem;line-height:1.15;letter-spacing:-.02em;margin:0}
 .lt-offer p{margin:0;color:var(--muted);font-size:.93rem}
 .lt-price{font-weight:800;color:var(--ink)!important}
+.urgency.clear b{color:var(--lime)}
+.urgency.clear .wrap{font-size:.82rem;padding-block:7px}
+.lt-hero h1 em.s{background:linear-gradient(transparent 60%,var(--lime) 60%,var(--lime) 92%,transparent 92%);background-size:0% 100%;background-repeat:no-repeat;animation:hlDraw 1s .4s cubic-bezier(.2,.7,.2,1) forwards}
+.lt-ok{list-style:none;margin:6px 0 4px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.lt-ok li{display:flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 9px;font-size:.8rem;font-weight:600;line-height:1.2;opacity:0;transform:translateY(6px);animation:okIn .45s cubic-bezier(.2,.7,.2,1) forwards}
+.lt-ok li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:var(--lime);border:1.5px solid var(--ink);display:grid;place-items:center;font-size:.7rem;font-weight:800}
+.lt-ok li:nth-child(2){animation-delay:.08s}.lt-ok li:nth-child(3){animation-delay:.16s}.lt-ok li:nth-child(4){animation-delay:.24s}.lt-ok li:nth-child(5){animation-delay:.32s}.lt-ok li:nth-child(6){animation-delay:.4s}
+@keyframes okIn{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.lt-ok li{animation:none;opacity:1;transform:none}}
 .lt-prev{position:relative;height:340px;overflow:hidden;margin-top:8px;background:linear-gradient(180deg,var(--paper),#F1EEE6)}
 .lt-prev .phone{position:absolute;left:50%;top:14px;width:300px;transform:translateX(-50%) scale(.72);transform-origin:top center;pointer-events:none}
 .lt-prev-tag{position:absolute;right:12px;top:12px;z-index:3;background:var(--ink);color:var(--cream);font-size:.72rem;font-weight:800;border-radius:999px;padding:.3em .8em}
@@ -184,7 +193,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   </svg>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="urgency clear" role="status">
-  <div class="wrap"><span class="live-dot" aria-hidden="true"></span><span>Pros sur rendez-vous : ton logiciel de réservation à <b>290 €</b> · plus que <b class="js-left-plain">15</b> places</span><a class="urg-link" href="/logiciel-reservation#offre">Voir l’offre →</a></div>
+  <div class="wrap"><span class="live-dot" aria-hidden="true"></span><span>Ton logiciel de réservation à <b>0&nbsp;% de commission</b>, à seulement <b>290&nbsp;€</b>. Plus que <b class="js-left-plain">15</b> places, l’offre finit le 31/12.</span><a class="urg-link" href="/logiciel-reservation#offre">Voir l’offre →</a></div>
 </div>
 
 <main id="contenu" class="lt">
@@ -192,9 +201,8 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   <div class="lt-id"><img src="assets/mel-nourdi-portrait-v3.webp" alt="Portrait de Mel Nourdi" width="56" height="56"><div><b>Mel Nourdi</b><small>Entrepreneure depuis 2021 · Formatrice</small></div></div>
 
   <div class="lt-hero">
-    <p class="eyebrow eyebrow-u">Pour les entrepreneurs à leur compte</p>
-    <h1>Je crée des outils pour te faire gagner&nbsp;<span class="sym">+</span><br>en travaillant&nbsp;<span class="sym">−</span></h1>
-    <p class="lead">Tu travailles sur rendez-vous ? Commence par ton logiciel de réservation à ton nom.</p>
+    <h1>Arrête de payer une plateforme qui montre <em class="s">tes concurrents</em> à tes clients.</h1>
+    <p class="lead">Avec ton propre logiciel de réservation, tes clients réservent chez toi. Pas chez le voisin.</p>
     <div class="lt-who" aria-label="Pour qui"><span>Beauté</span><span>Bien-être</span><span>Coiffure</span><span>Coaching…</span></div>
   </div>
 
@@ -202,7 +210,14 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <div class="lt-offer-top">
       <span class="lt-badge">L’offre du moment</span>
       <h2>Ton logiciel de réservation, à ton nom</h2>
-      <p>Tes clients réservent et paient leur acompte seuls, 24 h/24. Sans commission.</p>
+      <ul class="lt-ok" aria-label="Ce qui est inclus">
+        <li><span><b>0&nbsp;%</b> de commission</span></li>
+        <li><span>Réservation <b>24&nbsp;h/24</b></span></li>
+        <li><span><b>Acompte</b> en ligne</span></li>
+        <li><span><b>Emails</b> automatiques</span></li>
+        <li><span>Tous tes RDV <b>au même endroit</b></span></li>
+        <li><span>À <b>ton nom</b>, tes couleurs</span></li>
+      </ul>
       <p class="lt-price">290 € tout inclus · <span class="js-left-plain">15</span> places sur 20 · en ligne en 7 jours</p>
     </div>
     <div class="lt-prev" aria-hidden="true">
