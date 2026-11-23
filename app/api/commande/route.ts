@@ -31,6 +31,7 @@ export async function POST(request: Request) {
   try { body = await limitedBody(request); } catch { return json({ message: "Demande illisible." }, 400); }
   if (clean(body?.website)) return json({ ok: true, pending: true });
   if (body?.questionnaire === true) return questionnaire(body);
+  if (body?.paye === true) return paiementRecu(body);
 
   const c = body?.contact || {};
   const contact = {
@@ -156,5 +157,55 @@ async function questionnaire(body: any) {
     console.error("Email du questionnaire impossible", e);
     return json({ message: "L'envoi n'a pas pu partir." }, 502);
   }
+  return json({ ok: true });
+}
+
+// Retour de paiement : Mel reçoit « Paiement reçu » dès que le client revient sur le site,
+// même s'il ne remplit pas le questionnaire. Le paiement est vérifié auprès de l'organisme
+// de paiement, et l'email ne part qu'une fois par paiement (marque posée sur le paiement).
+async function paiementRecu(body: any) {
+  const key = process.env.STRIPE_SECRET_KEY;
+  const brevo = process.env.BREVO_API_KEY;
+  const session = clean(body?.session, 200);
+  if (!key || !brevo || !/^cs_[A-Za-z0-9_]+$/.test(session)) return json({ ok: true });
+  try {
+    const r = await fetch(`https://api.stripe.com/v1/checkout/sessions/${session}?expand[]=payment_intent`, { headers: { Authorization: `Bearer ${key}` } });
+    const s = await r.json();
+    if (!r.ok || s.payment_status !== "paid") return json({ ok: true });
+    const pi = s.payment_intent && typeof s.payment_intent === "object" ? s.payment_intent : null;
+    if (pi?.metadata?.notif_mel) return json({ ok: true });
+    const d = s.customer_details || {};
+    const m = s.metadata || {};
+    const who = d.name || [m.prenom, m.nom].filter(Boolean).join(" ") || "client";
+    const email = String(d.email || m.email || "").toLowerCase();
+    const montant = `${((s.amount_total || 0) / 100).toLocaleString("fr-FR", { minimumFractionDigits: 2 })} €`;
+    const lignes = [
+      `Paiement reçu : ${montant}`, "",
+      `Client : ${who}`, `Email : ${email || "non précisé"}`, `Téléphone : ${d.phone || m.tel || "non précisé"}`,
+      `Activité : ${m.activite || "non précisée"}`, `Instagram : ${m.insta || "non précisé"}`, "",
+      `Date : ${new Date((s.created || Date.now() / 1000) * 1000).toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}`,
+      pi?.id ? `Référence du paiement : ${pi.id}` : "",
+      "", "Le questionnaire suivra dans un autre email si le client le remplit.",
+    ];
+    if (pi?.id) {
+      // Marque d'abord, pour ne jamais envoyer deux fois si la page est rechargée.
+      await fetch(`https://api.stripe.com/v1/payment_intents/${pi.id}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "metadata[notif_mel]": new Date().toISOString() }),
+      });
+    }
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { accept: "application/json", "content-type": "application/json", "api-key": brevo },
+      body: JSON.stringify({
+        sender: { name: "Site melnourdi.fr", email: "contact@melnourdi.fr" },
+        to: [{ email: EMAIL_CONTACT_PRO }],
+        ...(EMAIL.test(email) ? { replyTo: { name: who, email } } : {}),
+        subject: `💰 Paiement reçu : ${montant}, ${who}`,
+        textContent: lignes.filter((l, i) => l || lignes[i - 1]).join("\n"),
+      }),
+    });
+  } catch (e) { console.error("Email de paiement impossible", e); }
   return json({ ok: true });
 }
