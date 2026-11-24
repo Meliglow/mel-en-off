@@ -109,9 +109,16 @@ export default function ConfidentialitePage() {
         <div>
           <h2 className="h3">Cookies et mesure d&apos;audience</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
-            Ce site ne dépose aucun cookie publicitaire, n&apos;utilise aucun outil de mesure
-            d&apos;audience et n&apos;embarque aucun script tiers. C&apos;est pour ça qu&apos;il n&apos;y
-            a pas de bandeau à accepter.
+            Ce site ne dépose aucun cookie publicitaire et n&apos;embarque aucun script tiers.
+            C&apos;est pour ça qu&apos;il n&apos;y a pas de bandeau à accepter.
+          </p>
+          <p className="mt-2 text-[15px] leading-relaxed text-texte">
+            Pour savoir quelles pages sont lues, le site compte lui-même ses visites, sans cookie
+            et sans rien enregistrer sur ton téléphone. Il ne garde que des totaux par jour : la
+            page vue, le site d&apos;où tu arrives (par exemple TikTok ou Google), et des étapes
+            comme l&apos;inscription au guide ou le début d&apos;un paiement. Ni ton adresse IP, ni ton
+            email, ni aucun identifiant ne sont conservés. Ces totaux servent seulement à Mel pour
+            améliorer le site, et sont gardés 400 jours au plus.
           </p>
           <p className="mt-2 text-[15px] leading-relaxed text-texte">
             Les brouillons du configurateur et les simulations restent uniquement en mémoire dans

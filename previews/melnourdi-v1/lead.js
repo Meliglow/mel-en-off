@@ -25,6 +25,7 @@
       if (!response.ok || !data.ok) throw new Error(data.message || '');
       if (form.dataset.leadKind === 'newsletter') { say('C’est fait ! Bienvenue dans la communauté. Tu recevras la prochaine lettre par email.'); form.reset(); button.disabled = false; return; }
       remember();
+      if (window.mnStat) window.mnStat('guide_inscrit');
       say('C’est fait ! Ton guide s’ouvre…');
       window.location.href = GUIDE;
     } catch (error) {

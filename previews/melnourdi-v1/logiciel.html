@@ -512,7 +512,7 @@ const CT=()=>{try{return JSON.parse(sessionStorage.getItem('mn-contact')||'{}')}
     try{sessionStorage.setItem('mn-contact',JSON.stringify(c))}catch(e){}
     fetch('/api/commande',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contact:c,website:''})})
       .then(r=>r.json().then(j=>({ok:r.ok,j})))
-      .then(({ok,j})=>{if(ok&&j.url){location.href=j.url;return}if(ok){location.href='?paiement=attente#commande';return}throw Error(j.message||'Envoi impossible.')})
+      .then(({ok,j})=>{if(ok&&window.mnStat)window.mnStat('paiement_lance');if(ok&&j.url){location.href=j.url;return}if(ok){location.href='?paiement=attente#commande';return}throw Error(j.message||'Envoi impossible.')})
       .catch(x=>{err.textContent=(x.message||'Envoi impossible.')+' Réessaie, ou écris-moi à contact@melnourdi.fr.';err.hidden=false;btn.disabled=false;btn.textContent='Payer 290 € et réserver ma place'});
   });})();
 /* Étape 2 : le questionnaire n'apparaît qu'après le paiement */
@@ -637,5 +637,6 @@ document.getElementById('quiz').addEventListener('submit',e=>{
 });
 render();
 </script>
+<script src="/melnourdi/mn-stats.js" defer></script>
 </body>
 </html>
