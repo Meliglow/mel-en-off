@@ -157,7 +157,7 @@ function client(el,opt={}){
     S.book.forEach(x=>x.isNew=false);S.book.push(b);S.lastNew=b;
     S.clients.unshift({n:nm,visits:1,last:U.date,fav:s.id,isNew:true,ans:b.ans,tel:U.info.tel,email:U.info.email});
     const d=new Date(U.date+'T00:00');
-    S.feed.unshift(['+','Nouvelle réservation',`${s.n} · ${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})} à ${toT(U.t)} · ${proBy(pro).n}`],['€',`Acompte reçu · ${eur(b.paid)}`,'Versé directement sur ton compte'],['✓','Ajouté à Google Agenda','Email de confirmation envoyé au client']);
+    S.feed.unshift(['+','Nouvelle réservation',`${s.n} · ${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})} à ${toT(U.t)} · ${proBy(pro).n}`],['€',`Acompte reçu · ${eur(b.paid)}`,'Versé directement sur ton compte'],['✓','Ajouté à ton agenda','Email de confirmation envoyé au client']);
     U.step=7;emit();opt.onBook&&opt.onBook(b)}
   function render(){
     const A=ACT[S.act];el.setAttribute('style',theme());
@@ -271,7 +271,7 @@ function admin(el,opt={}){
       const D0=new Date(U.day+'T00:00'),pros=S.team.filter(p=>U.ap==='all'||p.id===U.ap);
       const mon=add(D0,-((D0.getDay()+6)%7));
       const lbl=U.av==='day'?fmtDay(D0,{weekday:'long',day:'numeric',month:'long'}):U.av==='week'?'Du '+fmtDay(mon,{day:'numeric',month:'short'})+' au '+fmtDay(add(mon,6),{day:'numeric',month:'short'}):fmtDay(D0,{month:'long',year:'numeric'});
-      h+=`<div class="la-h"><h4>Agenda</h4><small>${S.gcal.on?'Synchronisé avec Google Agenda':''}</small></div>`;
+      h+=`<div class="la-h"><h4>Agenda</h4><small></small></div>`;
       h+=`<div class="la-agbar"><div class="la-seg">${[['day','Jour'],['week','Semaine'],['month','Mois']].map(([k,l])=>`<button data-av="${k}" class="${U.av===k?'on':''}">${l}</button>`).join('')}</div><div class="la-agnav"><button data-agn="-1" aria-label="Précédent">‹</button><b>${lbl}</b><button data-agn="1" aria-label="Suivant">›</button><button class="la-tdy" data-agn="0">Aujourd’hui</button></div></div>`;
       h+=`<div class="la-seg la-pf">${[['all','Toute l’équipe'],...S.team.map(p=>[p.id,p.n])].map(([k,l])=>{const p=proBy(k);return `<button data-ap="${k}" class="${U.ap===k?'on':''}">${p?`<i style="background:${p.c}"></i>`:''}${esc(l)}</button>`}).join('')}</div>`;
       const R0=openR(),H0=Math.floor(R0[0][0]/60)*60,H1=Math.ceil(R0[R0.length-1][1]/60)*60,px=U.av==='week'?.8:.9;
@@ -324,7 +324,7 @@ function admin(el,opt={}){
       h+=`<div class="la-h"><h4>Réglages</h4><small>Tout est modifiable, à tout moment</small></div>`;
       h+=`<div class="la-card"><h5>Ton image</h5><div class="la-ups">${upl('logo','Ton logo',S.logo)}${upl('hero','Photo d’accueil',S.hero||IMG[A.img])}</div><small class="la-help">Remplace par tes vraies photos, en un clic.</small></div>`;
       h+=`<div class="la-card"><h5>Ta couleur</h5><div class="la-sw">${SWATCH.map((t,i)=>{const c=(t||A.theme)[0];return `<button data-sw="${i}" class="${!S.color&&S.swatch===i?'on':''}" style="background:${c}" aria-label="Couleur ${i+1}"></button>`}).join('')}<label class="la-pick ${S.color?'on':''}" title="Choisir n’importe quelle couleur"><input type="color" data-color value="${cur}"><span>🎨</span></label></div><small class="la-help">N’importe quelle couleur, par exemple celle de ton logo.</small></div>`;
-      h+=`<div class="la-card la-g"><h5><span class="gdot"></span>Google Agenda</h5>${swRow('Synchronisation',G.on?'Connecté · mise à jour en continu':'Déconnecté','g:on',G.on)}${G.on?`<label class="la-lbl">Agenda utilisé<select class="la-sel" data-gcal>${['Agenda pro','Agenda perso','Maison Éclat'].map(c=>`<option ${G.cal===c?'selected':''}>${c}</option>`).join('')}</select></label>${swRow('Bloquer mes indisponibilités','Un RDV perso dans ton agenda ferme le créneau','g:block',G.block)}${swRow('Ajouter chaque réservation','Le RDV apparaît dans ton agenda avec les infos du client','g:add',G.add)}`:''}</div>`;
+      
       h+=`<div class="la-card"><h5>Emails automatiques aux clients</h5>${swRow('Confirmation','Dès la réservation','n:conf',N.conf)}${swRow('Rappel','24 h avant le rendez-vous','n:rappel',N.rappel)}${swRow('Demande d’avis','Le lendemain du rendez-vous','n:avis',N.avis)}</div>`;
       const opts=(a,b,v)=>{let o='';for(let m=a;m<=b;m+=30)o+=`<option value="${m}" ${m===v?'selected':''}>${hm(m)}</option>`;return o};
       h+=`<div class="la-card"><h5>Horaires</h5><div class="la-2"><label class="la-lbl">Ouverture<select class="la-sel" data-hr="o">${opts(420,720,H.o)}</select></label><label class="la-lbl">Fermeture<select class="la-sel" data-hr="c">${opts(900,1320,H.c)}</select></label></div>${swRow('Pause déjeuner','13h – 14h, aucun RDV','pause',H.pause)}</div>`;

@@ -169,6 +169,8 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .lt-link .arr{margin-left:auto;font-size:1.1rem}
 .lt-gift{margin-top:6px;background:var(--lime);border:1.5px solid var(--ink);border-radius:26px;padding:18px;display:grid;gap:10px}
 .lt-gift h2{font-size:1.2rem;line-height:1.2;margin:0}
+.lt-soft{display:block;text-align:center;color:var(--ink);text-decoration:none;font-size:.92rem;padding:4px 0 2px}.lt-soft b{border-bottom:2px solid var(--ink)}
+.lt-next{margin:26px 0 10px;text-align:center;font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
 .lt-gift .gift-form{box-shadow:none;padding:16px;border-radius:20px}
 .lt-bio{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px 18px}
 .lt-bio summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:36px}
@@ -204,9 +206,24 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 
   <div class="lt-hero">
     <h1>Je construis des outils et des formations pour te faire gagner&nbsp;<span class="sym">+</span><em class="s">d’argent et de temps</em></h1>
-    <p class="lead">En ce moment : ton propre logiciel de réservation, à <b>0&nbsp;% de commission</b>.</p>
-    <div class="lt-who" aria-label="Pour qui"><span>Beauté</span><span>Bien-être</span><span>Coiffure</span><span>Coaching…</span></div>
+    <p class="lead">Commence ici, c’est gratuit.</p>
   </div>
+
+  <section class="lt-gift" id="gratuit">
+    <p class="eyebrow" style="color:var(--ink);margin:0">Le guide gratuit</p>
+    <h2>7 choses à savoir avant de vendre ton offre sur les réseaux.</h2>
+    <form class="gift-form" data-lead-form novalidate>
+      <label class="g-lbl" for="lead-email">Ton adresse email</label>
+      <input id="lead-email" name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required maxlength="254">
+      <label class="g-consent"><input type="checkbox" name="consentement" required><span>J’accepte de recevoir le guide et la newsletter de Mel par email. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+      <button class="btn btn-dark" type="submit">Recevoir le guide gratuit →</button>
+      <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
+      <small class="g-note">Le guide s’ouvre tout de suite après ton inscription.</small>
+    </form>
+    <a class="lt-soft" href="/logiciel-reservation">Tu viens pour le logiciel à 290&nbsp;€ ? <b>C’est ici →</b></a>
+  </section>
+
+  <p class="lt-next" id="logiciel">Mon offre du moment</p>
 
   <a class="lt-offer" href="/logiciel-reservation#demo" aria-label="Ton logiciel de réservation : voir la démo et l’offre">
     <div class="lt-offer-top">
@@ -235,18 +252,6 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 
 
 
-  <section class="lt-gift" id="gratuit">
-    <p class="eyebrow" style="color:var(--ink);margin:0">Le guide gratuit</p>
-    <h2>7 choses à savoir avant de vendre ton offre sur les réseaux.</h2>
-    <form class="gift-form" data-lead-form novalidate>
-      <label class="g-lbl" for="lead-email">Ton adresse email</label>
-      <input id="lead-email" name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required maxlength="254">
-      <label class="g-consent"><input type="checkbox" name="consentement" required><span>J’accepte de recevoir le guide et la newsletter de Mel par email. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
-      <button class="btn btn-dark" type="submit">Recevoir le guide gratuit →</button>
-      <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
-      <small class="g-note">Le guide s’ouvre tout de suite après ton inscription.</small>
-    </form>
-  </section>
 
   <section class="lt-sec" id="avis">
     <p class="eyebrow">Ils l’utilisent</p>
@@ -274,7 +279,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <p class="eyebrow">Tes questions</p>
     <h2>Tu te demandes peut-être…</h2>
     <div class="faq">
-      <details><summary>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel ?</summary><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, connecté à ton Google Agenda. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></details>
+      <details><summary>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel ?</summary><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, et chaque RDV arrive direct dans ton logiciel. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></details>
       <details><summary>Est-ce qu’il faut savoir coder ?</summary><p>Non. Je crée ton logiciel pour toi : tu remplis un questionnaire, je m’occupe du reste.</p></details>
       <details><summary>En combien de temps mon logiciel est-il prêt ?</summary><p>7 jours maximum une fois ton questionnaire complet.</p></details>
       <details><summary>Je peux demander un acompte à mes clients ?</summary><p>Oui, c’est inclus. Tu choisis les prestations concernées et le montant. L’argent arrive directement sur ton compte.</p></details>
@@ -305,7 +310,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <button class="dialog-close" aria-label="Fermer la fenêtre"><svg><use href="#close"/></svg></button>
     <div id="dialog-content"></div>
   </dialog>
-  <template id="course-template"><span class="tag tag-light">Formation en préparation</span><h2 id="dialog-title">Ton propre outil de réservation.</h2><p>Le projet : apprendre à créer un parcours de réservation à ton image et le connecter à Google Agenda.</p><ul class="dialog-list"><li>Des clients qui réservent directement chez toi.</li><li>Une gestion adaptée à ton activité.</li><li>Les étapes de création et de configuration de ton outil.</li></ul><p>Le programme, le format, les prérequis, le prix et les outils nécessaires restent à préciser. Les ventes ne sont pas ouvertes.</p><a href="#gratuit" class="button button-dark" data-close-dialog>Être prévenu du lancement<svg class="end-icon"><use href="#arrow"/></svg></a></template>
+  <template id="course-template"><span class="tag tag-light">Formation en préparation</span><h2 id="dialog-title">Ton propre outil de réservation.</h2><p>Le projet : apprendre à créer un parcours de réservation à ton image.</p><ul class="dialog-list"><li>Des clients qui réservent directement chez toi.</li><li>Une gestion adaptée à ton activité.</li><li>Les étapes de création et de configuration de ton outil.</li></ul><p>Le programme, le format, les prérequis, le prix et les outils nécessaires restent à préciser. Les ventes ne sont pas ouvertes.</p><a href="#gratuit" class="button button-dark" data-close-dialog>Être prévenu du lancement<svg class="end-icon"><use href="#arrow"/></svg></a></template>
   <template id="account-template"><span class="text-tag">Ton futur espace élève</span><h2 id="dialog-title">Tes formations,<br>au même endroit.</h2><p>Une fois les formations disponibles, ce bouton ouvrira ton espace pour retrouver tes cours et tes ressources.</p><p class="dialog-notice">L’espace élève n’est pas encore connecté dans cet aperçu. Aucun compte n’est créé.</p><a class="button button-dark" href="#formations" data-close-dialog>Voir la formation à venir<svg class="end-icon"><use href="#arrow"/></svg></a></template>
   <template id="contact-template"><span class="text-tag">Création sur mesure</span><h2 id="dialog-title">Raconte-moi ton projet.</h2><p>Quelques lignes pour comprendre ton activité et ce dont tu as besoin.</p><form class="contact-form" data-demo-form="contact"><label for="contact-name">Ton prénom</label><input id="contact-name" name="firstName" autocomplete="given-name" required maxlength="80"><label for="contact-email">Ton email</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"><label for="contact-project">Qu’aimerais-tu créer ou simplifier ?</label><textarea id="contact-project" name="project" rows="4" required maxlength="3000"></textarea><p class="demo-note">Aperçu uniquement : ta demande ne sera pas envoyée.</p><button class="button button-dark" type="submit">Envoyer ma demande<svg class="end-icon"><use href="#arrow"/></svg></button><div class="form-feedback" role="status" tabindex="-1" hidden></div></form></template>
 

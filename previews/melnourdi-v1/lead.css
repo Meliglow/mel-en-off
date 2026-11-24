@@ -99,3 +99,12 @@
 @media(max-width:767px){.hero h1{font-size:clamp(24px,6.6vw,28px);margin-top:14px}.hero .hero-intro{font-size:15px}.hero-link-guide{font-size:13px!important}}
 .pain-section{padding-bottom:28px}.courses-section{padding-top:28px}.course-info .tag{margin-bottom:14px}
 @media(max-width:767px){.pain-section{padding-bottom:16px}.courses-section{padding-top:16px}}
+
+.g-merci{background:var(--lime,#E8F06E);border:1.5px solid #161616;border-radius:16px;padding:12px 16px;font-weight:800;font-size:15px;margin:0 0 18px}
+.g-offer{margin-top:36px;background:#161616;color:#F9F7F2;border-radius:24px;padding:22px;display:grid;gap:8px}
+.guide-page .g-offer p{margin:0;line-height:1.5}
+.g-offer-k{font-size:12px!important;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#E8F06E}
+.g-offer-t{font-size:21px!important;font-weight:800;color:#fff}
+.g-offer-t b{color:#E8F06E}
+.g-offer-p{color:#E4DFD3}
+.guide-page .g-offer-btn{justify-self:start;margin-top:6px;background:#E8F06E;color:#161616;border-radius:999px;padding:.8em 1.4em;font-weight:800;text-decoration:none}
