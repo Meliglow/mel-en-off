@@ -1273,3 +1273,5 @@ em.s{font-family:inherit;font-style:normal;font-weight:500;letter-spacing:inheri
 .try-hint::before{content:none}
 h1 em.s,h2 em.s{display:inline-block}
 em.s.s-in{display:inline;color:inherit;font-weight:inherit}
+/* 24/11 : pas de marge blanche autour de la page (bandeau noir bord à bord) */
+body{margin:0}

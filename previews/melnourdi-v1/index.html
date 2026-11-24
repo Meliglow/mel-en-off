@@ -229,6 +229,108 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .mn-how{font-size:.85rem;color:#B9B4A8;text-align:center;line-height:1.45;margin-top:2px}
 .mn-price{margin-top:2px;padding-top:0;border-top:0}
 @media (min-width:900px){.mn{padding-top:56px}}
+
+/* ===== Accueil sur ordinateur (24/11) : le mobile ne change pas, vraie mise en page dès 920 px ===== */
+.mn-guide-txt{display:grid;gap:8px}
+.mn-offer-txt{display:grid;gap:12px}
+.mn-top{display:none}
+@media (min-width:920px){
+  .mn-top{display:block}
+  .mn-top .wrap{max-width:1200px;padding-inline:40px;height:72px}
+  .mn-top-nav{display:flex;gap:30px;margin-left:auto;margin-right:26px;font-weight:700;font-size:.95rem}
+  .mn-top-nav a{color:var(--ink);text-decoration:none;text-underline-offset:7px;text-decoration-thickness:3px}
+  .mn-top-nav a:hover{text-decoration-line:underline;text-decoration-color:var(--lime)}
+  .mn-top .btn{width:auto}
+
+  .mn{max-width:1200px;padding:80px 40px 96px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:clamp(48px,6vw,96px);align-items:center}
+  .mn>*{grid-column:1/-1}
+  .mn h2{font-size:clamp(1.9rem,2.7vw,2.5rem);line-height:1.08;letter-spacing:-.03em}
+
+  /* Haut de page : qui je suis à gauche, par où commencer à droite */
+  .mn>.mn-hero{grid-column:1;padding:0;gap:26px}
+  .mn>.mn-list{grid-column:2;margin:0}
+  .mn-face{width:76px;height:76px;border-width:3px}
+  .mn-name{font-size:1.5rem}
+  .mn-bio{font-size:1rem}
+  .mn-bio br{display:none}
+  .mn-pitch{font-size:clamp(2.5rem,3.9vw,3.4rem);line-height:1.06;letter-spacing:-.04em}
+  .mn-story-link{font-size:1rem}
+  .mn-list{border-radius:26px;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(22,22,22,.45)}
+  .mn-row{padding:20px 22px;min-height:96px;gap:18px}
+  .mn-row+.mn-row::before{left:92px}
+  .mn-tile{width:54px;height:54px;border-radius:15px}
+  .t-ink{font-size:1.02rem}.t-lime{font-size:1.7rem}.t-line{font-size:.86rem}
+  .mn-txt b{font-size:1.1rem}
+  .mn-txt small{font-size:.94rem}
+  .mn-row:hover .mn-chev{color:var(--ink);transform:translateX(3px)}
+  .mn-chev{transition:transform .2s,color .2s}
+
+  /* Guide : promesse à gauche, inscription à droite */
+  .mn-guide{margin-top:104px;padding:60px;border-radius:36px;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:60px;align-items:center;scroll-margin-top:96px}
+  .mn-guide-txt{gap:14px}
+  .mn-guide h2{font-size:clamp(2.1rem,3.1vw,2.75rem)}
+  .mn-guide-sub{font-size:1.08rem}
+  .mn-inside{gap:12px;margin-top:10px}
+  .mn-inside li{font-size:1.08rem}
+  .mn-inside li::before{width:26px;height:26px;font-size:.8rem}
+  .mn-inside-more{font-size:.95rem}
+  .mn-guide .gift-form{margin:0;padding:30px;gap:14px;border-radius:26px;box-shadow:0 24px 50px -30px rgba(22,22,22,.5)}
+  .mn-soft{margin:22px 0 0;text-align:center;font-size:1rem}
+
+  /* Offre : arguments à gauche, logiciel à droite */
+  .mn-offer{margin-top:64px;padding:60px;border-radius:36px;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"txt prev" "ctas prev" "how prev";grid-template-rows:auto auto 1fr;column-gap:60px;row-gap:22px;scroll-margin-top:96px}
+  .mn-offer-txt{grid-area:txt;gap:16px}
+  .mn-offer h2{font-size:clamp(2.1rem,3.1vw,2.75rem)}
+  .mn-offer-sub{font-size:1.08rem;max-width:34em}
+  .mn-checks{gap:14px 20px;margin-top:6px}
+  .mn-checks li{font-size:1rem}
+  .mn-checks li::before{width:20px;height:20px;background-size:13px}
+  .mn-year{gap:12px;margin-top:8px}
+  .mn-year>div{padding:16px 18px;border-radius:18px}
+  .mn-year small{font-size:.82rem}
+  .mn-year b{font-size:1.9rem}
+  .mn-year span{font-size:.85rem}
+  .mn-price{font-size:1rem}
+  .mn-prev{grid-area:prev;height:auto;margin:0;align-self:center;justify-self:center;-webkit-mask-image:none;mask-image:none;position:relative;padding:10px 0}
+  .mn-prev::before{content:"";position:absolute;inset:8% -14% 8%;border-radius:50%;background:radial-gradient(closest-side,rgba(232,240,110,.32),rgba(232,240,110,0));pointer-events:none}
+  .mn-prev .phone{position:relative;left:auto;top:auto;transform:none;width:300px;margin:0 auto}
+  .mn-ctas{grid-area:ctas;display:flex;gap:12px;margin:6px 0 0}
+  .mn-ctas .btn{width:auto;padding:1.05em 1.7em;font-size:1rem}
+  .mn-ctas .btn-lime{order:-1}
+  .mn-how{grid-area:how;text-align:left;font-size:.92rem;align-self:start;margin:0}
+
+  /* Sections : titre à gauche, contenu à droite */
+  .mn-sec{padding-top:112px;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);column-gap:clamp(48px,6vw,96px);row-gap:14px;align-items:start;scroll-margin-top:72px}
+  .mn-sec>*{grid-column:1}
+  #avis{grid-template-rows:auto 1fr}
+  #avis .mn-note{margin:0;font-size:.95rem}
+  #avis .mn-shots{grid-column:2;grid-row:1/span 2;gap:16px}
+  .mn-story{grid-template-rows:auto auto 1fr}
+  .mn-story>.mn-time{grid-column:2;grid-row:1/span 3;margin:0}
+  .mn-story>.btn{align-self:start;margin-top:10px}
+  .mn-story-head img{width:56px;height:56px}
+  .mn-story-lead{font-size:1.5rem;line-height:1.25}
+  .mn-time p{font-size:1.04rem}
+  .mn-when{font-size:.95rem}
+  #faq h2{position:sticky;top:104px}
+  #faq .mn-faq{grid-column:2;grid-row:1}
+  .mn-faq details{padding:0 24px}
+  .mn-faq summary{font-size:1.04rem;padding:20px 0}
+  .mn-faq details p{font-size:1rem;padding-bottom:20px;max-width:40em}
+
+  /* Fin de page */
+  .mn-end{margin-top:112px;padding:56px;border-radius:36px;background:var(--paper);box-shadow:0 0 0 1px var(--line);justify-items:center;text-align:center;gap:16px}
+  .mn-end-txt{font-size:clamp(1.7rem,2.6vw,2.3rem);letter-spacing:-.03em;line-height:1.15}
+  .mn-end .btn{padding:1.05em 1.9em;font-size:1rem}
+  .mn-end-alt{font-size:.98rem}
+}
+@media (min-width:920px) and (max-width:1099px){
+  .mn-guide,.mn-offer{padding:44px;column-gap:40px}
+  .mn-checks{grid-template-columns:1fr}
+}
+/* ===== Ajustements ordinateur ===== */
+.mn-prev{text-decoration:none;color:inherit}
+@media (min-width:920px){footer .wrap{max-width:1200px;padding-inline:40px}}
 </style>
 </head>
 <body>
@@ -249,6 +351,14 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   <div class="wrap"><span>Ton logiciel de réservation à <b>0&nbsp;% de commission</b>, à seulement <b>290&nbsp;€</b>. Plus que <b class="js-left-plain">15</b> places, l’offre finit le 31/12.</span><a class="urg-link" href="/logiciel-reservation#offre">Voir l’offre</a></div>
 </div>
 
+<header class="top mn-top">
+  <div class="wrap">
+    <a class="logo" href="/">melnourdi<span>.</span></a>
+    <nav class="mn-top-nav" aria-label="Menu"><a href="/logiciel-reservation">Logiciel de réservation</a><a href="#gratuit">Guide gratuit</a></nav>
+    <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
+  </div>
+</header>
+
 <main id="contenu" class="mn">
 
   <header class="mn-hero">
@@ -257,7 +367,6 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <div><h1 class="mn-name">Mel Nourdi</h1><p class="mn-bio">Formatrice et entrepreneure<br> depuis 2021.</p></div>
     </div>
     <p class="mn-pitch">Je t’aide à construire un système qui te rapporte <span class="mn-plus" role="img" aria-label="plus"><svg viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="3.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span> de clients et de temps.</p>
-    <a class="mn-story-link" href="#histoire">Découvrir mon histoire</a>
   </header>
 
   <nav class="mn-list" aria-label="Par où commencer">
@@ -271,14 +380,10 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <span class="mn-txt"><b>Le guide gratuit</b><small>7 choses à savoir avant de vendre ton offre sur les réseaux.</small></span>
       <svg class="mn-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
     </a>
-    <a class="mn-row" href="#histoire">
-      <span class="mn-tile t-line" aria-hidden="true">2021</span>
-      <span class="mn-txt"><b>Mon histoire</b><small>Pourquoi j’ai quitté les plateformes, et ce que j’ai construit.</small></span>
-      <svg class="mn-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
   </nav>
 
   <section class="mn-guide" id="gratuit" aria-labelledby="guide-titre">
+    <div class="mn-guide-txt">
     <h2 id="guide-titre">7 choses à savoir avant de vendre ton offre sur les réseaux.</h2>
     <p class="mn-guide-sub">Le guide est gratuit. Il s’ouvre juste après ton inscription.</p>
     <ol class="mn-inside" aria-label="Dans le guide">
@@ -287,6 +392,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <li>Les réseaux sont devenus des moteurs de recherche</li>
     </ol>
     <p class="mn-inside-more">Et 4 autres. Chaque point finit par une action à faire le jour même.</p>
+    </div>
     <form class="gift-form" data-lead-form novalidate>
       <label class="g-lbl" for="lead-email">Ton adresse email</label>
       <input id="lead-email" name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required maxlength="254">
@@ -298,6 +404,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   <p class="mn-soft">Tu viens pour le logiciel à 290&nbsp;€&nbsp;? <a href="/logiciel-reservation#offre">C’est ici</a></p>
 
   <section class="mn-offer" id="logiciel" aria-labelledby="offre-titre">
+    <div class="mn-offer-txt">
     <p class="mn-offer-tag">L’offre du moment</p>
     <h2 id="offre-titre">Arrête de payer une plateforme qui montre tes concurrents à tes clients.</h2>
     <p class="mn-offer-sub">Ton logiciel de réservation, à ton nom. Tes clients réservent chez toi, pas chez le voisin.</p>
@@ -314,6 +421,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <div class="me"><small>Ton logiciel, la 1re année</small><b>290&nbsp;€</b><span>puis 9&nbsp;€/mois, 0&nbsp;% de commission</span></div>
     </div>
     <p class="mn-price">Offre de lancement jusqu’au 31/12. Plus que <b class="js-left-plain">15</b> places sur 20.</p>
+    </div>
     <a class="mn-prev" href="/logiciel-reservation#demo" aria-label="Teste le logiciel de réservation" tabindex="-1">
       <div class="phone" aria-hidden="true"><div class="screen lv-screen"><div class="lv" id="hero-app"></div></div></div>
     </a>
@@ -331,17 +439,6 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <img src="/melnourdi/assets/mn-b8499efc6f.webp" alt="Message WhatsApp d’une cliente du 18 novembre 2026 : « Ça fait deux mois que je teste et j’ai réduit les lapins de moitié ! » et « le logiciel est hyper intuitif »" width="620" height="983" loading="lazy">
       <img src="/melnourdi/assets/mn-ae3e684b2e.webp" alt="Message WhatsApp de Camille du 20 novembre 2026 : « c’est une pépite ! Plus besoin de gérer les appels »" width="620" height="628" loading="lazy">
     </div>
-  </section>
-
-  <section class="mn-sec mn-story" id="histoire" aria-labelledby="histoire-titre">
-    <div class="mn-story-head"><img src="assets/mel-nourdi-portrait-v3.webp" alt="" width="48" height="48" loading="lazy"><h2 id="histoire-titre">Mon histoire</h2></div>
-    <p class="mn-story-lead">J’ai arrêté de payer pour qu’on voie mes concurrents.</p>
-    <ol class="mn-time">
-      <li><span class="mn-when">2021</span><p>Je lance mon activité beauté. Comme beaucoup, je passe par les plateformes de réservation&nbsp;: Planity, Treatwell. Je paie chaque mois, et sur ces plateformes, mes clients voient aussi tous les instituts d’à côté.</p></li>
-      <li><span class="mn-when">Ensuite</span><p>Je construis mes propres outils&nbsp;: mon site, mes automatisations, mon logiciel de réservation. Mes clients réservent chez moi, paient leur acompte seuls, et je ne dépends plus de personne.</p></li>
-      <li><span class="mn-when">Aujourd’hui</span><p><b>Je crée ces outils pour d’autres indépendants, et je te forme à t’en servir pour gagner plus en travaillant moins.</b></p></li>
-    </ol>
-    <a class="btn btn-lime" href="/logiciel-reservation#offre">Je veux mon logiciel</a>
   </section>
 
   <section class="mn-sec" id="faq" aria-labelledby="faq-titre">
