@@ -178,12 +178,15 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .lt-story h2 em.s{background:linear-gradient(transparent 60%,var(--lime) 60%,var(--lime) 92%,transparent 92%)}
 .lt-story p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.6}.lt-story p b{color:var(--ink)}
 .lt-story .btn{justify-self:start;margin-top:4px}
-.lt-top{text-align:center;display:grid;justify-items:center;gap:12px;padding-top:10px}
-.lt-face{width:112px;height:112px;border-radius:50%;object-fit:cover;border:3px solid var(--lime)}
-.lt-name{font-size:clamp(2.2rem,10vw,3rem);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0}
-.lt-pitch{margin:0;font-size:1.06rem;line-height:1.55;color:var(--ink);max-width:34ch}
-.lt-pitch b{background:linear-gradient(transparent 62%,var(--lime) 62%)}
-.lt-pitch a{color:var(--ink);font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.lt-top{display:grid;gap:10px;padding-top:8px}
+.lt-who2{display:flex;align-items:center;gap:14px}
+.lt-face{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--lime);flex:none}
+.lt-name{font-size:clamp(1.9rem,8.5vw,2.6rem);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0}
+.lt-bio2{margin:4px 0 0;font-weight:800;font-size:1rem;color:var(--ink)}
+.lt-pitch{margin:0;font-size:1.2rem;line-height:1.45;color:var(--ink);font-weight:600}
+.lt-pitch .sym{width:1em;height:1em;font-size:.85em;vertical-align:-.08em;margin-right:.2em}
+.lt-pitch b{font-weight:800;background:linear-gradient(transparent 62%,var(--lime) 62%)}
+.lt-story-link{justify-self:start;font-size:.88rem;font-weight:700;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .lt-stats{margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 8px;font-size:.88rem;color:var(--soft)}
 .lt-stats b{color:var(--ink)}.lt-stats i{font-style:normal;color:#C9C3B6}
 .lt-cards{display:grid;gap:10px;margin:22px 0 22px}
@@ -227,9 +230,10 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 <main id="contenu" class="lt">
 
   <div class="lt-top">
-    <img class="lt-face" src="assets/mel-nourdi-portrait-v3.webp" alt="Portrait de Mel Nourdi" width="112" height="112">
-    <h1 class="lt-name">Mel Nourdi</h1>
-    <p class="lt-pitch"><b>Formatrice et entrepreneure depuis 2021.</b> Je t’aide à construire un système qui te rapporte <b>des clients et du temps</b>. <a href="#histoire">Découvrir mon histoire</a></p>
+    <div class="lt-who2"><img class="lt-face" src="assets/mel-nourdi-portrait-v3.webp" alt="Portrait de Mel Nourdi" width="72" height="72"><h1 class="lt-name">Mel Nourdi</h1></div>
+    <p class="lt-bio2">Formatrice et entrepreneure depuis 2021.</p>
+    <p class="lt-pitch">Je t’aide à construire un système qui te rapporte <span class="sym">+</span><b>de clients</b> et <span class="sym">+</span><b>de temps</b>.</p>
+    <a class="lt-story-link" href="#histoire">Découvrir mon histoire →</a>
   </div>
 
   <nav class="lt-cards" aria-label="Par où commencer">
