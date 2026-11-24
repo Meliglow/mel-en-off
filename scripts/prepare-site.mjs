@@ -49,7 +49,6 @@ home = home.replace('Quelques lignes pour comprendre ton activité et ce dont tu
 home = home.replace('L’espace élève n’est pas encore connecté dans cet aperçu. Aucun compte n’est créé.', 'L’espace élève ouvrira avec les formations. Aucun compte ne peut être créé pour le moment.');
 home = home.replace('<button data-dialog="legal">Mentions légales</button>', '<a href="/mentions-legales">Mentions légales</a>');
 home = home.replace('<button data-dialog="privacy">Confidentialité</button>', '<a href="/confidentialite">Confidentialité</a>');
-home = home.replace('<span>© 2026 Mel Nourdi</span>', '<span>© 2026 Mel Nourdi</span><a href="/liens">Tous mes liens</a>');
 home = home.replace(/<noscript>[\s\S]*?<\/noscript>/, '<noscript><p class="noscript-note">Pour une demande de projet, écris à <a href="mailto:contact@melnourdi.fr">contact@melnourdi.fr</a>. Les formations et le guide sont en préparation.</p><style>button[data-dialog]{display:none}</style></noscript>');
 
 let links = common(await readFile(path.join(source, 'liens.html'), 'utf8'), '/liens');
@@ -68,7 +67,7 @@ for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
-for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js']) await copyFile(path.join(source, name), path.join(output, name));
+for (const name of ['styles.css', 'liens.css', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js', 'mn-offre.js']) await copyFile(path.join(source, name), path.join(output, name));
 await writeFile(path.join(output, 'release.css'), 'button:disabled,input:disabled{cursor:not-allowed;opacity:.6}.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}.links-footer .privacy-link{font-size:10px;font-weight:400;letter-spacing:normal;color:var(--muted)}');
 for (const name of ['index.html','liens.html']) {
   const html = await readFile(path.join(output, name), 'utf8');
@@ -87,7 +86,7 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
 // Refresh cached CSS/JS when a deployment changes their contents.
 for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
-  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js']) {
+  for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js', 'mn-offre.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);
     html = html.replaceAll(`/melnourdi/${asset}"`, `/melnourdi/${asset}?v=${version}"`);
   }

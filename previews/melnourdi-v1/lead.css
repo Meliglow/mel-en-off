@@ -108,3 +108,18 @@
 .g-offer-t b{color:#E8F06E}
 .g-offer-p{color:#E4DFD3}
 .guide-page .g-offer-btn{justify-self:start;margin-top:6px;background:#E8F06E;color:#161616;border-radius:999px;padding:.8em 1.4em;font-weight:800;text-decoration:none}
+
+/* ===== Passe design 24/11/2026 : guide aligné sur l'accueil (Manrope seule, étiquette citron, liens lisibles) ===== */
+.guide-page h1 em.s,.guide-gate h1 em.s{font-family:inherit;font-style:normal;font-weight:500;font-size:1em;letter-spacing:inherit;color:color-mix(in oklab,currentColor 58%,transparent)}
+.g-offer-k{justify-self:start;background:#E8F06E;color:#161616!important;font-size:13px!important;font-weight:800;letter-spacing:0;text-transform:none;border-radius:999px;padding:.32em .9em;line-height:1.3;margin:0 0 4px}
+.site-header nav{font-size:15px}
+.site-header nav a{display:inline-flex;align-items:center;min-height:44px}
+.site-footer .footer-bottom{font-size:13px}
+.site-footer .footer-bottom a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px}
+.guide-page h1 em.s,.guide-gate h1 em.s{display:inline-block}
+.site-header nav a{font-size:15px}
+.guide-gate .text-tag{font-size:14px;letter-spacing:0;text-transform:none;color:#161616}
+.guide-gate .lead-consent{font-size:13px;line-height:1.45}
+.guide-page .g-offer-btn{transition:transform .12s ease-out}
+.guide-page .g-offer-btn:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.guide-page .g-offer-btn{transition:none}}

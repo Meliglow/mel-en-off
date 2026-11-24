@@ -32,6 +32,8 @@
       button.disabled = false;
     }
   });
+  // Lien envoyé par email (…/guide-gratuit?acces=email) : la personne est déjà inscrite.
+  try { if (new URLSearchParams(location.search).get('acces') === 'email') remember(); } catch (e) {}
   const gate = document.querySelector('[data-guide-gate]');
   const guide = document.querySelector('[data-guide]');
   if (gate && guide) {

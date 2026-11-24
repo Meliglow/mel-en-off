@@ -217,6 +217,17 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .mn-end-txt{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.3}
 .mn-end-txt b{background:var(--lime);padding:0 .2em;border-radius:.2em}
 .mn-end-alt{font-size:.9rem;font-weight:700;color:var(--muted);text-underline-offset:3px;text-decoration-thickness:1.5px;min-height:32px;display:inline-flex;align-items:center}
+.mn-year{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.mn-year>div{border-radius:16px;padding:12px;display:grid;gap:2px;background:rgba(249,247,242,.06);box-shadow:inset 0 0 0 1px rgba(249,247,242,.12)}
+.mn-year>div.me{background:var(--lime);box-shadow:none;color:var(--ink)}
+.mn-year small{font-size:.75rem;font-weight:700;color:#B9B4A8;line-height:1.3}
+.mn-year .me small{color:#3D3F14}
+.mn-year b{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.mn-year>div:not(.me) b{color:#D9D4C8}
+.mn-year span{font-size:.78rem;color:#B9B4A8;line-height:1.35}
+.mn-year .me span{color:#3D3F14;font-weight:600}
+.mn-how{font-size:.85rem;color:#B9B4A8;text-align:center;line-height:1.45;margin-top:2px}
+.mn-price{margin-top:2px;padding-top:0;border-top:0}
 @media (min-width:900px){.mn{padding-top:56px}}
 </style>
 </head>
@@ -284,7 +295,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
     </form>
   </section>
-  <p class="mn-soft">Tu viens pour le logiciel à 290&nbsp;€ ? <a href="/logiciel-reservation#offre">C’est ici</a></p>
+  <p class="mn-soft">Tu viens pour le logiciel à 290&nbsp;€&nbsp;? <a href="/logiciel-reservation#offre">C’est ici</a></p>
 
   <section class="mn-offer" id="logiciel" aria-labelledby="offre-titre">
     <p class="mn-offer-tag">L’offre du moment</p>
@@ -298,7 +309,11 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <li><span>Tous tes RDV <b>au même endroit</b></span></li>
       <li><span>À <b>ton nom</b>, tes couleurs</span></li>
     </ul>
-    <p class="mn-price"><b>290&nbsp;€</b> tout inclus, offre de lancement jusqu’au 31/12. Plus que <b class="js-left-plain">15</b> places sur 20.</p>
+    <div class="mn-year" aria-label="Ce que tu paies sur un an">
+      <div><small>Une plateforme, sur un an</small><b>≈ 840&nbsp;€</b><span>en moyenne 70&nbsp;€/mois</span></div>
+      <div class="me"><small>Ton logiciel, la 1re année</small><b>290&nbsp;€</b><span>puis 9&nbsp;€/mois, 0&nbsp;% de commission</span></div>
+    </div>
+    <p class="mn-price">Offre de lancement jusqu’au 31/12. Plus que <b class="js-left-plain">15</b> places sur 20.</p>
     <a class="mn-prev" href="/logiciel-reservation#demo" aria-label="Teste le logiciel de réservation" tabindex="-1">
       <div class="phone" aria-hidden="true"><div class="screen lv-screen"><div class="lv" id="hero-app"></div></div></div>
     </a>
@@ -306,6 +321,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       <a class="btn btn-onink" href="/logiciel-reservation#demo">Teste le logiciel</a>
       <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
     </div>
+    <p class="mn-how">Tu remplis un questionnaire, je l’installe pour toi en 7 jours maximum.</p>
   </section>
 
   <section class="mn-sec" id="avis" aria-labelledby="avis-titre">
@@ -321,8 +337,8 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <div class="mn-story-head"><img src="assets/mel-nourdi-portrait-v3.webp" alt="" width="48" height="48" loading="lazy"><h2 id="histoire-titre">Mon histoire</h2></div>
     <p class="mn-story-lead">J’ai arrêté de payer pour qu’on voie mes concurrents.</p>
     <ol class="mn-time">
-      <li><span class="mn-when">2021</span><p>Je lance mon activité beauté. Comme beaucoup, je passe par les plateformes de réservation : Planity, Treatwell. Je paie chaque mois, et sur ces plateformes, mes clients voient aussi tous les instituts d’à côté.</p></li>
-      <li><span class="mn-when">Ensuite</span><p>Je construis mes propres outils : mon site, mes automatisations, mon logiciel de réservation. Mes clients réservent chez moi, paient leur acompte seuls, et je ne dépends plus de personne.</p></li>
+      <li><span class="mn-when">2021</span><p>Je lance mon activité beauté. Comme beaucoup, je passe par les plateformes de réservation&nbsp;: Planity, Treatwell. Je paie chaque mois, et sur ces plateformes, mes clients voient aussi tous les instituts d’à côté.</p></li>
+      <li><span class="mn-when">Ensuite</span><p>Je construis mes propres outils&nbsp;: mon site, mes automatisations, mon logiciel de réservation. Mes clients réservent chez moi, paient leur acompte seuls, et je ne dépends plus de personne.</p></li>
       <li><span class="mn-when">Aujourd’hui</span><p><b>Je crée ces outils pour d’autres indépendants, et je te forme à t’en servir pour gagner plus en travaillant moins.</b></p></li>
     </ol>
     <a class="btn btn-lime" href="/logiciel-reservation#offre">Je veux mon logiciel</a>
@@ -331,21 +347,21 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   <section class="mn-sec" id="faq" aria-labelledby="faq-titre">
     <h2 id="faq-titre">Tes questions</h2>
     <div class="faq mn-faq">
-      <details><summary>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel ?</summary><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, et chaque RDV arrive direct dans ton logiciel. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></details>
-      <details><summary>Il y a des frais après les 290 € ?</summary><p>La 1re année est incluse. Ensuite, c’est 9 €/mois (108 € par an) pour que ton logiciel reste en ligne et à jour. Aucune commission sur tes prestations. Si tu arrêtes, ton logiciel s’arrête, mais ton nom de domaine reste à toi.</p></details>
-      <details><summary>Je ne suis pas dans la beauté. C’est pour moi ?</summary><p>Oui. Le logiciel marche pour tous ceux qui travaillent sur rendez-vous : coiffure, barbier, coaching, yoga, tatouage… Le guide gratuit aussi.</p></details>
-      <details><summary>Est-ce qu’il faut savoir coder ?</summary><p>Non. Je crée ton logiciel pour toi : tu remplis un questionnaire, je m’occupe du reste.</p></details>
-      <details><summary>En combien de temps mon logiciel est-il prêt ?</summary><p>7 jours maximum une fois ton questionnaire complet.</p></details>
-      <details><summary>Je peux demander un acompte à mes clients ?</summary><p>Oui, c’est inclus. Tu choisis les prestations concernées et le montant. L’argent arrive directement sur ton compte.</p></details>
-      <details><summary>Le nom de domaine est à qui ?</summary><p>À toi : c’est toi qui l’achètes et le renouvelles, il n’est pas compris dans les 290 €. Je m’occupe ensuite de le brancher à ton logiciel.</p></details>
-      <details><summary>Je peux payer en plusieurs fois ?</summary><p>Oui, en 3 fois si tu es éligible, directement au moment du paiement. Sinon, en une fois.</p></details>
+      <details><summary>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel&nbsp;?</summary><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, et chaque RDV arrive direct dans ton logiciel. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></details>
+      <details><summary>Il y a des frais après les 290 €&nbsp;?</summary><p>La 1re année est incluse. Ensuite, c’est 9 €/mois (108 € par an) pour que ton logiciel reste en ligne et à jour. Aucune commission sur tes prestations. Si tu arrêtes, ton logiciel s’arrête, mais ton nom de domaine reste à toi.</p></details>
+      <details><summary>Je ne suis pas dans la beauté. C’est pour moi&nbsp;?</summary><p>Oui. Le logiciel marche pour tous ceux qui travaillent sur rendez-vous&nbsp;: coiffure, barbier, coaching, yoga, tatouage… Le guide gratuit aussi.</p></details>
+      <details><summary>Est-ce qu’il faut savoir coder&nbsp;?</summary><p>Non. Je crée ton logiciel pour toi&nbsp;: tu remplis un questionnaire, je m’occupe du reste.</p></details>
+      <details><summary>En combien de temps mon logiciel est-il prêt&nbsp;?</summary><p>7 jours maximum une fois ton questionnaire complet.</p></details>
+      <details><summary>Je peux demander un acompte à mes clients&nbsp;?</summary><p>Oui, c’est inclus. Tu choisis les prestations concernées et le montant. L’argent arrive directement sur ton compte.</p></details>
+      <details><summary>Le nom de domaine est à qui&nbsp;?</summary><p>À toi&nbsp;: c’est toi qui l’achètes et le renouvelles, il n’est pas compris dans les 290 €. Je m’occupe ensuite de le brancher à ton logiciel.</p></details>
+      <details><summary>Je peux payer en plusieurs fois&nbsp;?</summary><p>Oui, en 3 fois si tu es éligible, directement au moment du paiement. Sinon, en une fois.</p></details>
     </div>
   </section>
 
   <section class="mn-end" aria-label="Réserver ta place">
     <p class="mn-end-txt">Plus que <b class="js-left-plain">15</b> places à 290&nbsp;€, jusqu’au&nbsp;31/12.</p>
     <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
-    <a class="mn-end-alt" href="#gratuit">Pas encore prêt ? Commence par le guide gratuit</a>
+    <a class="mn-end-alt" href="#gratuit">Pas encore prêt&nbsp;? Commence par le guide gratuit</a>
   </section>
 
 </main>
@@ -362,17 +378,19 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <button class="dialog-close" aria-label="Fermer la fenêtre"><svg><use href="#close"/></svg></button>
     <div id="dialog-content"></div>
   </dialog>
-  <template id="course-template"><span class="tag tag-light">Formation en préparation</span><h2 id="dialog-title">Ton propre outil de réservation.</h2><p>Le projet : apprendre à créer un parcours de réservation à ton image.</p><ul class="dialog-list"><li>Des clients qui réservent directement chez toi.</li><li>Une gestion adaptée à ton activité.</li><li>Les étapes de création et de configuration de ton outil.</li></ul><p>Le programme, le format, les prérequis, le prix et les outils nécessaires restent à préciser. Les ventes ne sont pas ouvertes.</p><a href="#gratuit" class="button button-dark" data-close-dialog>Être prévenu du lancement<svg class="end-icon"><use href="#arrow"/></svg></a></template>
+  <template id="course-template"><span class="tag tag-light">Formation en préparation</span><h2 id="dialog-title">Ton propre outil de réservation.</h2><p>Le projet&nbsp;: apprendre à créer un parcours de réservation à ton image.</p><ul class="dialog-list"><li>Des clients qui réservent directement chez toi.</li><li>Une gestion adaptée à ton activité.</li><li>Les étapes de création et de configuration de ton outil.</li></ul><p>Le programme, le format, les prérequis, le prix et les outils nécessaires restent à préciser. Les ventes ne sont pas ouvertes.</p><a href="#gratuit" class="button button-dark" data-close-dialog>Être prévenu du lancement<svg class="end-icon"><use href="#arrow"/></svg></a></template>
   <template id="account-template"><span class="text-tag">Ton futur espace élève</span><h2 id="dialog-title">Tes formations,<br>au même endroit.</h2><p>Une fois les formations disponibles, ce bouton ouvrira ton espace pour retrouver tes cours et tes ressources.</p><p class="dialog-notice">L’espace élève n’est pas encore connecté dans cet aperçu. Aucun compte n’est créé.</p><a class="button button-dark" href="#formations" data-close-dialog>Voir la formation à venir<svg class="end-icon"><use href="#arrow"/></svg></a></template>
-  <template id="contact-template"><span class="text-tag">Création sur mesure</span><h2 id="dialog-title">Raconte-moi ton projet.</h2><p>Quelques lignes pour comprendre ton activité et ce dont tu as besoin.</p><form class="contact-form" data-demo-form="contact"><label for="contact-name">Ton prénom</label><input id="contact-name" name="firstName" autocomplete="given-name" required maxlength="80"><label for="contact-email">Ton email</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"><label for="contact-project">Qu’aimerais-tu créer ou simplifier ?</label><textarea id="contact-project" name="project" rows="4" required maxlength="3000"></textarea><p class="demo-note">Aperçu uniquement : ta demande ne sera pas envoyée.</p><button class="button button-dark" type="submit">Envoyer ma demande<svg class="end-icon"><use href="#arrow"/></svg></button><div class="form-feedback" role="status" tabindex="-1" hidden></div></form></template>
+  <template id="contact-template"><span class="text-tag">Création sur mesure</span><h2 id="dialog-title">Raconte-moi ton projet.</h2><p>Quelques lignes pour comprendre ton activité et ce dont tu as besoin.</p><form class="contact-form" data-demo-form="contact"><label for="contact-name">Ton prénom</label><input id="contact-name" name="firstName" autocomplete="given-name" required maxlength="80"><label for="contact-email">Ton email</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"><label for="contact-project">Qu’aimerais-tu créer ou simplifier&nbsp;?</label><textarea id="contact-project" name="project" rows="4" required maxlength="3000"></textarea><p class="demo-note">Aperçu uniquement&nbsp;: ta demande ne sera pas envoyée.</p><button class="button button-dark" type="submit">Envoyer ma demande<svg class="end-icon"><use href="#arrow"/></svg></button><div class="form-feedback" role="status" tabindex="-1" hidden></div></form></template>
 
 
 <script>window.LV_IMG={"visage": "/melnourdi/assets/mn-91b6a1a1ab.webp", "ongles": "/melnourdi/assets/mn-128bc1c921.webp", "cils": "/melnourdi/assets/mn-7353823adf.webp", "epil": "/melnourdi/assets/mn-7c21f3e93a.webp", "massage": "/melnourdi/assets/mn-4a2a536e23.webp", "t_awa": "/melnourdi/assets/mn-2513ea0282.webp", "t_ines": "/melnourdi/assets/mn-35e5123c9e.webp", "t_priya": "/melnourdi/assets/mn-6e617e2803.webp"};</script>
 <script src="/melnourdi/mn-lv.js"></script>
+<script src="/melnourdi/mn-offre.js"></script>
 <script>
-/* ===== RÉGLAGES DE L'OFFRE : à mettre à jour à chaque vente ===== */
-const PLACES_TOTAL = 20;
-const PLACES_PRISES = 5;          // nombre réel de places vendues
+/* Les chiffres de l'offre se changent dans mn-offre.js (un seul endroit pour tout le site). */
+const OFFRE = window.MN_OFFRE || { total: 20, prises: 5 };
+const PLACES_TOTAL = OFFRE.total;
+const PLACES_PRISES = OFFRE.prises;
 const PLACES_RESTANTES = PLACES_TOTAL - PLACES_PRISES;
 document.querySelectorAll('.js-left-plain').forEach(e=>e.textContent=PLACES_RESTANTES);
 LV.client(document.getElementById('hero-app'),{});

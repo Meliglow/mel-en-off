@@ -1263,3 +1263,13 @@ section{padding-block:clamp(40px,6vw,72px)}
   .compare td:not(.me):not(:first-child){opacity:.8}
   .cr-cols b{font-size:1.6rem}
 }
+
+/* ===== Passe design 24/11/2026 : une seule police (Manrope), titres de section en casse normale, pas d'émoji ===== */
+em.s{font-family:inherit;font-style:normal;font-weight:500;letter-spacing:inherit;color:color-mix(in oklab,currentColor 58%,transparent)}
+.review.real .big em.s,.shot figcaption em.s{color:inherit;font-weight:inherit}
+.eyebrow{font-size:.9rem;letter-spacing:0;text-transform:none;color:var(--soft)}
+.cr-eyebrow{font-size:.9rem;letter-spacing:0;text-transform:none}
+.step .when{font-size:.86rem;letter-spacing:0;text-transform:none}
+.try-hint::before{content:none}
+h1 em.s,h2 em.s{display:inline-block}
+em.s.s-in{display:inline;color:inherit;font-weight:inherit}
