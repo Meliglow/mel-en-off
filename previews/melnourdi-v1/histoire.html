@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F9F7F2">
+  <meta name="description" content="Qui est Mel Nourdi ? Du recrutement à mes boutiques, de la beauté jusqu’en Afrique, jusqu’à mon propre logiciel de réservation.">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Mel Nourdi">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Mon histoire · Mel Nourdi">
+  <meta property="og:description" content="Du recrutement à mes boutiques, de la beauté jusqu’en Afrique, jusqu’à mon propre logiciel de réservation.">
+  <meta property="og:url" content="https://melnourdi.fr/mon-histoire">
+  <meta property="og:image" content="https://melnourdi.fr/melnourdi/assets/og-accueil-v2.jpg">
+  <title>Mon histoire · Mel Nourdi</title>
+  <link rel="stylesheet" href="/melnourdi/mn-base.css">
+  <style>@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap}@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin-ext.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0100-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* ===== Page « Mon histoire » (24/11) ===== */
+.skip-link{position:fixed;top:8px;left:8px;background:var(--lime);padding:10px 16px;z-index:99;border-radius:999px;font-weight:800}
+.skip-link:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;padding:0}
+header.top .btn{width:auto}
+.h-nav{display:none}
+@media (min-width:920px){
+  header.top .wrap{max-width:1200px;padding-inline:40px;height:72px}
+  .h-nav{display:flex;gap:30px;margin-left:auto;margin-right:26px;font-weight:700;font-size:.95rem}
+  .h-nav a{color:var(--ink);text-decoration:none;text-underline-offset:7px;text-decoration-thickness:3px}
+  .h-nav a:hover,.h-nav a[aria-current]{text-decoration-line:underline;text-decoration-color:var(--lime)}
+}
+
+.st{max-width:680px;margin:0 auto;padding:40px 20px 24px}
+.st-hero{display:grid;justify-items:center;text-align:center;gap:14px;padding-bottom:8px}
+.st-face{width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid var(--lime);box-shadow:0 14px 30px -18px rgba(22,22,22,.5)}
+.st-hero h1{font-size:clamp(2.2rem,8.5vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:1.04}
+.st-hero h1 em{font-style:normal;background:linear-gradient(transparent 60%,var(--lime) 60%,var(--lime) 92%,transparent 92%)}
+.st-intro{font-size:1.12rem;line-height:1.6;color:var(--muted);text-align:left;margin-top:6px}
+.st-intro b{color:var(--ink)}
+
+.st-ch{padding-top:52px;display:grid;gap:16px;scroll-margin-top:90px}
+.st-num{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:800;color:var(--ink);background:var(--lime);border-radius:999px;padding:.3em .85em;line-height:1.3}
+.st-ch h2{font-size:clamp(1.65rem,6vw,2.3rem);font-weight:800;letter-spacing:-.033em;line-height:1.1}
+.st-ch p{font-size:1.06rem;line-height:1.72;color:var(--muted);margin:0}
+.st-ch p b{color:var(--ink)}
+
+.st-fig{margin:8px 0 0;display:grid;gap:10px}
+.st-fig img{width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 1px var(--line);display:block;aspect-ratio:4/3;object-fit:cover}
+.st-fig figcaption{font-size:.88rem;font-weight:600;color:var(--soft);line-height:1.4}
+
+.st-facts{margin-top:52px;background:var(--ink);color:var(--cream);border-radius:28px;padding:26px 22px;display:grid;gap:16px}
+.st-facts h2{color:#fff;font-size:1.4rem;font-weight:800;letter-spacing:-.025em;line-height:1.15}
+.st-facts ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.st-facts li{background:rgba(249,247,242,.06);box-shadow:inset 0 0 0 1px rgba(249,247,242,.12);border-radius:18px;padding:14px;display:grid;gap:4px;align-content:start}
+.st-facts li b{font-size:1.7rem;font-weight:800;letter-spacing:-.035em;line-height:1.05;color:var(--lime)}
+.st-facts li span{font-size:.88rem;font-weight:600;line-height:1.35;color:#D9D4C8}
+
+.st-quote{margin:8px 0 0;background:var(--lime);border-radius:28px;padding:26px 22px 22px;display:grid;gap:10px}
+.st-ch .st-quote p{margin:0;font-size:clamp(1.35rem,5vw,1.75rem);font-weight:800;letter-spacing:-.03em;line-height:1.22;color:var(--ink)!important}
+.st-quote footer{all:unset;display:block;font-size:.92rem;font-weight:700;color:#3D3F14;line-height:1.4}
+
+.st-next{padding:60px 0 8px;display:grid;gap:16px}
+.st-next h2{font-size:clamp(1.65rem,6vw,2.3rem);font-weight:800;letter-spacing:-.033em;line-height:1.1}
+.st-next>p{font-size:1.06rem;line-height:1.6;color:var(--muted);margin:0}
+.st-cards{display:grid;gap:12px}
+.st-card{display:grid;gap:8px;border-radius:24px;padding:22px 20px;text-decoration:none;color:var(--ink);transition:transform .2s}
+.st-card:hover{transform:translateY(-2px)}
+.st-card b{font-size:1.2rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.st-card small{font-size:.95rem;line-height:1.45;font-weight:500}
+.st-card span{font-weight:800;font-size:.95rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+.st-card.dark{background:var(--ink);color:var(--cream)}.st-card.dark b{color:#fff}.st-card.dark small{color:#D9D4C8}.st-card.dark span{color:var(--lime)}
+.st-card.lime{background:var(--lime)}
+.st-card:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+footer{margin-top:48px}
+footer .wrap{align-items:center}
+.f-links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.f-links a{color:var(--soft);font-size:.85rem;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.f-links a:hover{color:var(--ink)}
+
+@media (min-width:920px){
+  .st{max-width:760px;padding-top:80px}
+  .st-face{width:128px;height:128px}
+  .st-intro{font-size:1.2rem;text-align:center}
+  .st-ch{padding-top:80px;gap:18px}
+  .st-ch p{font-size:1.12rem}
+  .st-fig{margin:14px -60px 0}
+  .st-fig img{border-radius:28px}
+  .st-fig figcaption{padding-inline:60px}
+  .st-facts{margin:80px -60px 0;padding:44px 48px;border-radius:36px}
+  .st-facts h2{font-size:1.8rem}
+  .st-facts ul{grid-template-columns:repeat(4,1fr);gap:14px}
+  .st-facts li{padding:18px}
+  .st-facts li b{font-size:2.1rem}
+  .st-quote{margin:14px -60px 0;padding:44px 60px 38px;border-radius:36px}
+  .st-next{padding-top:96px}
+  .st-cards{grid-template-columns:1fr 1fr;margin-inline:-60px;gap:16px}
+  .st-card{padding:28px 26px;border-radius:28px}
+  footer .wrap{max-width:1200px;padding-inline:40px}
+}
+@media (prefers-reduced-motion:reduce){.st-card{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/">melnourdi<span>.</span></a>
+    <nav class="h-nav" aria-label="Menu"><a href="/logiciel-reservation">Logiciel de réservation</a><a href="/#gratuit">Guide gratuit</a><a href="/mon-histoire" aria-current="page">Mon histoire</a></nav>
+    <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
+  </div>
+</header>
+
+<main id="contenu" class="st">
+
+  <header class="st-hero">
+    <img class="st-face" src="assets/mel-nourdi-portrait-v3.webp" alt="Portrait de Mel Nourdi" width="128" height="128">
+    <h1>Qui est <em>Mel&nbsp;Nourdi</em>&nbsp;?</h1>
+    <p class="st-intro">Je m’appelle Mel. Je suis entrepreneure, et j’accompagne les indépendants pour qu’ils gagnent <b>plus de clients et plus de temps</b>. Voici comment j’en suis arrivée là.</p>
+  </header>
+
+  <section class="st-ch" id="debuts" aria-labelledby="ch1">
+    <span class="st-num">Chapitre 1</span>
+    <h2 id="ch1">Une enfant pleine d’idées</h2>
+    <p>J’ai grandi en France, fait mes études entre la Suisse et la France, et beaucoup voyagé. J’ai toujours été très créative, avec plein d’idées en tête.</p>
+    <p>Et depuis toute petite, une envie&nbsp;: <b>entreprendre, pour décider moi-même de ce que je fais de mon temps.</b></p>
+    <figure class="st-fig"><img src="assets/mel-atelier.webp" alt="Mel dans un atelier de pagne à Abidjan" width="632" height="950" loading="lazy" style="object-position:50% 38%"><figcaption>En voyage, dans un atelier de pagne à Abidjan.</figcaption></figure>
+  </section>
+
+  <section class="st-ch" id="recrutement" aria-labelledby="ch2">
+    <span class="st-num">Chapitre 2</span>
+    <h2 id="ch2">Cinq ans dans le recrutement</h2>
+    <p>J’ai commencé très jeune. D’abord salariée, puis très vite à mon compte. J’y ai passé 5 ans.</p>
+  </section>
+
+  <section class="st-ch" id="boutiques" aria-labelledby="ch3">
+    <span class="st-num">Chapitre 3</span>
+    <h2 id="ch3">Mes premières boutiques</h2>
+    <p>Ma première&nbsp;: une boutique artisanale de <b>bombes de bain personnalisables</b>. Puis la cosmétique, et l’e-commerce.</p>
+  </section>
+
+  <section class="st-ch" id="beaute" aria-labelledby="ch4">
+    <span class="st-num">Chapitre 4</span>
+    <h2 id="ch4">La beauté, jusqu’en Afrique</h2>
+    <p>J’ai toujours eu à cœur d’embellir les gens. Je me suis formée dans une niche de la beauté, et <b>j’ai même ouvert un cabinet en Afrique.</b> C’est une activité qui marche très bien pour moi.</p>
+  </section>
+
+  <section class="st-ch" id="logiciel" aria-labelledby="ch5">
+    <span class="st-num">Chapitre 5</span>
+    <h2 id="ch5">Mon propre logiciel</h2>
+    <p>Pour mes rendez-vous, j’ai testé les plateformes de réservation. J’ai très vite compris que ce n’était pas un système juste pour ma clientèle.</p>
+    <p><b>Alors j’ai créé mon propre logiciel.</b> Mes clients réservent chez moi, et je ne dépends plus d’une plateforme.</p>
+  </section>
+
+  <section class="st-facts" aria-labelledby="reperes">
+    <h2 id="reperes">En quelques repères</h2>
+    <ul>
+      <li><b>5 ans</b><span>dans le recrutement</span></li>
+      <li><b>2 pays</b><span>pour mes études, la Suisse et la France</span></li>
+      <li><b>1 cabinet</b><span>ouvert en Afrique</span></li>
+      <li><b class="js-sold">5 pros</b><span>ont déjà pris leur place pour leur logiciel</span></li>
+    </ul>
+  </section>
+
+  <section class="st-ch" id="aujourdhui" aria-labelledby="ch6">
+    <span class="st-num">Aujourd’hui</span>
+    <h2 id="ch6">Ce que je transmets</h2>
+    <p>Je vois énormément d’indépendants galérer. Alors je t’accompagne pour <b>optimiser ton business et le système que tu as déjà construit</b>, et je crée les outils qui te simplifient la vie, que tu sois dans la beauté ou ailleurs.</p>
+    <blockquote class="st-quote"><p>«&nbsp;C’est la peur qui nous contrôle. Le jour où tu arrives à la tuer, tu peux tout faire.&nbsp;»</p><footer>Je le dis à tout le monde. Alors je te le dis aussi.</footer></blockquote>
+  </section>
+
+  <section class="st-next" aria-labelledby="suite">
+    <h2 id="suite">Et maintenant&nbsp;?</h2>
+    <p>Deux façons de commencer avec moi.</p>
+    <div class="st-cards">
+      <a class="st-card dark" href="/logiciel-reservation"><b>Ton logiciel de réservation</b><small>À ton nom, à 0&nbsp;% de commission. 290&nbsp;€ en offre de lancement, plus que <span class="js-left-plain" style="all:unset">15</span> places.</small><span>Voir l’offre</span></a>
+      <a class="st-card lime" href="/#gratuit"><b>Le guide gratuit</b><small>7 choses à savoir avant de vendre ton offre sur les réseaux.</small><span>Recevoir le guide</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/">melnourdi<span>.</span></a>
+    <div class="f-links"><a href="/">Accueil</a><a href="mailto:contact@melnourdi.fr">Me contacter</a><a href="/mentions-legales">Mentions légales</a><a href="/confidentialite">Confidentialité</a></div>
+    <span>© 2026 Mel Nourdi</span>
+  </div>
+</footer>
+
+<script src="/melnourdi/mn-offre.js"></script>
+<script>
+const OFFRE = window.MN_OFFRE || { total: 20, prises: 5 };
+document.querySelectorAll('.js-left-plain').forEach(e=>e.textContent=OFFRE.total-OFFRE.prises);
+document.querySelectorAll('.js-sold').forEach(e=>e.textContent=OFFRE.prises+' pros');
+</script>
+<script src="/melnourdi/mn-stats.js" defer></script>
+</body>
+</html>

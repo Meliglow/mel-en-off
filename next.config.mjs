@@ -15,6 +15,7 @@ const nextConfig = {
         { source: "/", destination: "/melnourdi/index.html" },
         { source: "/guide-gratuit", destination: "/melnourdi/guide.html" },
         { source: "/logiciel-reservation", destination: "/melnourdi/logiciel.html" },
+        { source: "/mon-histoire", destination: "/melnourdi/histoire.html" },
         { source: "/demo-reservation", destination: "/melnourdi/lodyva.html" },
         { source: "/configurer-reservation", destination: "/melnourdi/configurer.html" },
         { source: "/administration-reservations", destination: "/melnourdi/administration.html" },

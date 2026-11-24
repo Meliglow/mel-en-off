@@ -63,7 +63,9 @@ let guide = common(await readFile(path.join(source, 'guide.html'), 'utf8'), '/gu
 guide = guide.replace('</head>', '  <meta name="robots" content="noindex">\n</head>');
 // Page de vente du logiciel (21 novembre 2026), servie sur /logiciel-reservation.
 const logiciel = common(await readFile(path.join(source, 'logiciel.html'), 'utf8'), '/logiciel-reservation');
-for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide], ['logiciel.html', logiciel]]) {
+// Page « Mon histoire » (24 novembre 2026), servie sur /mon-histoire.
+const histoire = common(await readFile(path.join(source, 'histoire.html'), 'utf8'), '/mon-histoire');
+for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide], ['logiciel.html', logiciel], ['histoire.html', histoire]]) {
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
@@ -84,7 +86,7 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
 }
 // Refresh cached CSS/JS when a deployment changes their contents.
-for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html']) {
+for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html', 'histoire.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
   for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js', 'mn-offre.js', 'mn-stats.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);

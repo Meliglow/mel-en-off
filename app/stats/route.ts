@@ -37,6 +37,7 @@ const NOMS_PAGES: Record<string, string> = {
   "/logiciel-reservation": "Page du logiciel",
   "/guide-gratuit": "Guide gratuit",
   "/demo-reservation": "Démo du logiciel",
+  "/mon-histoire": "Mon histoire",
 };
 
 function barres(lignes: [string, number][], total: number) {
