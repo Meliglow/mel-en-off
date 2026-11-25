@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,9 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mel Nourdi", "jobTitle": "Entrepreneure et formatrice", "url": "https://melnourdi.fr/", "sameAs": []}</script>
   <title>Mel Nourdi · Outils et formations pour gagner + d’argent et de temps</title>
   <link rel="stylesheet" href="/melnourdi/mn-base.css">
+  <link rel="stylesheet" href="/melnourdi/motion.css">
+  <link rel="stylesheet" href="/melnourdi/vendor/ui-generation.css">
+  <link rel="stylesheet" href="/melnourdi/vendor/text-image-generation.css">
   <style>@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap}@font-face{font-family:Manrope;src:url('/melnourdi/assets/manrope-latin-ext.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap;unicode-range:U+0100-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 /* ===== Accueil « bibliothèque » (style catalogue, couleurs du site) ===== */
 :root{--surface:#FFFEFA;--surface-soft:#F1EEE6;--sc-line:#E4DED1;--sc-shadow:0 8px 28px rgba(61,53,38,.07);--sc-r:18px}
@@ -82,8 +85,8 @@
 
 /* Cartes */
 .sc-grid{display:grid;gap:16px}
-.sc-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--sc-line);border-radius:var(--sc-r);box-shadow:var(--sc-shadow);overflow:hidden;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
-.sc-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -18px rgba(61,53,38,.28)}
+.sc-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--sc-line);border-radius:var(--sc-r);box-shadow:var(--sc-shadow);overflow:hidden;transition:transform var(--duration-slow) var(--ease-smooth-out),box-shadow var(--duration-slow) var(--ease-smooth-out)}
+.sc-card:hover{box-shadow:0 26px 50px -20px rgba(61,53,38,.32)}
 .sc-prev{position:relative;display:block;aspect-ratio:16/10.5;overflow:hidden;background:var(--ink);color:var(--cream);text-decoration:none}
 .sc-prev.lime{background:var(--lime);color:var(--ink)}
 .sc-exp{position:absolute;top:12px;right:12px;z-index:4;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(22,22,22,.55);backdrop-filter:blur(6px);color:#fff}
@@ -184,9 +187,6 @@
 .sc-end-txt b{background:var(--lime);padding:0 .2em;border-radius:.2em}
 .sc-end-alt{font-size:.9rem;font-weight:700;color:var(--muted);text-underline-offset:3px;text-decoration-thickness:1.5px;min-height:32px;display:inline-flex;align-items:center}
 
-/* Apparition au défilement */
-.sc-in{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
-.sc-in.vu{opacity:1;transform:none}
 
 /* Pied de page */
 footer .wrap{align-items:center}
@@ -239,7 +239,62 @@ footer .wrap{align-items:center}
   footer .wrap{max-width:1280px;padding-inline:28px}
 }
 @media (max-width:979px){.sc-offer-prev{display:none}}
-@media (prefers-reduced-motion:reduce){.sc-in{opacity:1;transform:none}}
+
+
+/* ===== Motion : jetons (transitions.dev) ===== */
+:root{--duration-stagger:40ms;--duration-micro:80ms;--duration-quick:150ms;--duration-fast:250ms;--duration-medium:350ms;--duration-slow:400ms;--duration-very-slow:500ms;
+--ease-smooth-out:cubic-bezier(.22,1,.36,1);--ease-in-out:ease-in-out;--ease-bounce:cubic-bezier(.34,1.36,.64,1);
+--distance-medium:12px;--blur-small:2px;--blur-medium:3px;
+--gen-surface:#F9F7F2;--tig-surface:#F9F7F2;--gen-line:#A8A294;--gen-strong:#5E594F;--tig-line:#A8A294;--tig-strong:#5E594F}
+.m-progress{height:3px;background:var(--lime);box-shadow:0 0 0 .5px rgba(22,22,22,.15)}
+
+/* Pastille qui glisse (tabs sliding) */
+.t-pills-v{position:relative}
+.t-pill{position:absolute;left:0;top:0;width:0;height:38px;border-radius:999px;background:var(--ink);transform:translate(0,0);transition:transform var(--duration-fast) var(--ease-smooth-out),width var(--duration-fast) var(--ease-smooth-out),height var(--duration-fast) var(--ease-smooth-out);will-change:transform,width;pointer-events:none;z-index:0}
+.t-pills .sc-chip{position:relative;z-index:1;transition:color var(--duration-fast) var(--ease-smooth-out)}
+.t-pills .sc-chip.on{background:transparent}
+.t-pills-v{display:flex;flex-direction:column;gap:6px}
+
+/* Bandeau qui défile */
+.sc-band{border-radius:999px;background:var(--ink);color:var(--cream);padding:11px 0;font-weight:750;font-size:.9rem}
+.sc-band .m-track>span{display:inline-flex;align-items:center;gap:2.5rem}
+.sc-band span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);margin-left:2.5rem;display:inline-block}
+.sc-band .m-track{gap:2.5rem}
+
+/* Titres de bloc : montée floutée en décalé (texts reveal) */
+.t-stagger-line{opacity:0;transform:translateY(var(--distance-medium));filter:blur(var(--blur-medium));transition:opacity var(--duration-very-slow) var(--ease-smooth-out),transform var(--duration-very-slow) var(--ease-smooth-out),filter var(--duration-very-slow) var(--ease-smooth-out);will-change:transform,opacity,filter}
+.t-stagger-line--2{transition-delay:calc(var(--duration-stagger) * 2)}
+.t-stagger.is-shown .t-stagger-line{opacity:1;transform:none;filter:blur(0)}
+
+/* Halo citron qui suit la souris ou le doigt (offre) */
+.sc-halo{position:relative;isolation:isolate;overflow:hidden}
+.sc-halo::before{content:"";position:absolute;z-index:-1;width:520px;height:520px;left:var(--mx,85%);top:var(--my,20%);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(232,240,110,.22),transparent 62%);transition:left .35s var(--ease-smooth-out),top .35s var(--ease-smooth-out);pointer-events:none}
+
+/* Questions : accordéon */
+.t-acc+.t-acc{border-top:1px solid var(--sc-line)}
+.t-acc h3{margin:0;font:inherit}
+.t-acc-head{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px;cursor:pointer;font-weight:750;font-size:.98rem;line-height:1.35;color:var(--ink)}
+.t-acc-head:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;border-radius:10px}
+.t-acc-chevron{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--surface);transform:scaleY(1);transform-origin:center;transition:transform var(--duration-fast) var(--ease-smooth-out),background var(--duration-fast) var(--ease-smooth-out)}
+.t-acc-chevron svg{width:15px;height:15px}
+.t-acc-chevron path{vector-effect:non-scaling-stroke}
+.t-acc[data-open="true"] .t-acc-chevron{transform:scaleY(-1);background:var(--lime)}
+.t-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--duration-medium) var(--ease-smooth-out)}
+.t-acc[data-open="true"] .t-acc-panel{grid-template-rows:1fr;transition:grid-template-rows var(--duration-slow) var(--ease-smooth-out)}
+.t-acc-panel-inner{overflow:hidden;opacity:0;filter:blur(var(--blur-small));transition:opacity var(--duration-medium) var(--ease-smooth-out),filter var(--duration-medium) var(--ease-smooth-out)}
+.t-acc[data-open="true"] .t-acc-panel-inner{opacity:1;filter:blur(0);transition:opacity var(--duration-slow) var(--ease-smooth-out),filter var(--duration-slow) var(--ease-smooth-out)}
+.t-acc-panel-inner p{padding:0 16px 16px;font-size:.95rem;color:var(--muted);line-height:1.55}
+@media (min-width:980px){.t-acc-head{padding:19px 22px;font-size:1.02rem}.t-acc-panel-inner p{padding:0 22px 20px}}
+
+/* Boutons : rebond au clic */
+.sc-ctl:active,.btn:active{transform:scale(.96)}
+.sc-ctl,.btn{transition:transform var(--duration-quick) var(--ease-bounce),background var(--duration-quick) ease,box-shadow var(--duration-quick) ease}
+.btn-lime[data-m="reflet"]{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){
+  .t-pill,.t-pills .sc-chip,.t-acc-panel,.t-acc-panel-inner,.t-acc-chevron,.sc-halo::before{transition:none!important}
+  .t-stagger-line{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+}
 
 /* Fenêtres */
 dialog#info-dialog{border:0;border-radius:24px;padding:clamp(22px,4vw,36px);max-width:min(560px,calc(100vw - 32px));width:100%;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.3)}
@@ -274,6 +329,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <symbol id="camera" viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3Z"/><circle cx="12" cy="13" r="4"/></symbol>
     <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
   </svg>
+<div class="m-progress" aria-hidden="true"></div>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="urgency clear" role="status">
   <div class="wrap"><span>Ton logiciel de réservation à <b>0&nbsp;% de commission</b>, à seulement <b>290&nbsp;€</b>. Plus que <b class="js-left-plain">15</b> places, l’offre finit le 31/12.</span><a class="urg-link" href="/logiciel-reservation#offre">Voir l’offre</a></div>
@@ -283,11 +339,12 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
   <a class="sc-brand" href="/"><b>melnourdi<span>.</span></b></a>
   <div class="sc-top-r">
     <a class="sc-ctl hide-m" href="#gratuit"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Guide gratuit</a>
-    <a class="sc-ctl lime" href="/logiciel-reservation#offre">Je prends ma place</a>
+    <a class="sc-ctl lime" data-m="reflet" href="/logiciel-reservation#offre">Je prends ma place</a>
   </div>
 </header>
 
-<nav class="sc-chips" aria-label="Sur cette page">
+<nav class="sc-chips t-pills" aria-label="Sur cette page">
+  <span class="t-pill" aria-hidden="true"></span>
   <a class="sc-chip on" href="#contenu">Tout</a>
   <a class="sc-chip" href="#logiciel">Logiciel <small>290&nbsp;€</small></a>
   <a class="sc-chip" href="#gratuit">Guide <small>gratuit</small></a>
@@ -298,11 +355,14 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 <div class="sc">
   <aside class="sc-side" aria-label="Sur cette page">
     <p class="sc-label">Sur cette page</p>
+    <div class="t-pills t-pills-v">
+    <span class="t-pill" aria-hidden="true"></span>
     <a class="sc-chip on" href="#contenu">Tout voir</a>
     <a class="sc-chip" href="#logiciel">Logiciel de réservation <small>290&nbsp;€</small></a>
     <a class="sc-chip" href="#gratuit">Guide gratuit <small>7</small></a>
     <a class="sc-chip" href="#avis">Avis <small>2</small></a>
     <a class="sc-chip" href="#faq">Questions <small>8</small></a>
+    </div>
     <div class="sc-side-bot">
       <a class="sc-ctl" href="/logiciel-reservation#demo"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>Teste le logiciel<svg class="go" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       <button class="sc-ctl" type="button" data-dialog="contact"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Me contacter</button>
@@ -315,19 +375,21 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <header class="sc-hero">
       <div class="sc-kicker">
         <img src="assets/mel-nourdi-portrait-v3.webp" alt="Portrait de Mel Nourdi" width="54" height="54">
-        <div><h1>Mel Nourdi</h1><p>Formatrice et entrepreneure depuis 2021.</p></div>
+        <div class="js-gen-small"><h1>Mel Nourdi</h1><p>Formatrice et entrepreneure depuis 2021.</p></div>
       </div>
-      <p class="sc-pitch">Je t’aide à construire un système qui te rapporte <span class="mn-plus" role="img" aria-label="plus"><svg viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="3.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span> de clients et de temps.</p>
+      <p class="sc-pitch js-gen-title">Je t’aide à construire un système qui te rapporte <span class="mn-plus" data-t-trace-skip role="img" aria-label="plus"><svg viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="3.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span> de clients et de temps.</p>
       <div class="sc-stats" aria-label="L’offre en chiffres">
-        <div><small>Il reste</small><b><span class="js-left-plain" data-count>15</span><i>places</i></b></div>
-        <div><small>Commission</small><b><span data-count>0</span><i>%</i></b></div>
-        <div><small>Prêt en</small><b><span data-count>7</span><i>jours</i></b></div>
+        <div><small>Il reste</small><b><span class="js-left-plain" data-m="compte">15</span><i>places</i></b></div>
+        <div><small>Commission</small><b><span>0</span><i>%</i></b></div>
+        <div><small>Prêt en</small><b><span data-m="compte" data-to="7">7</span><i>jours</i></b></div>
       </div>
     </header>
 
+    <div class="sc-band" data-m="bandeau" style="--m-speed:28s" aria-label="Ce que contient le logiciel"><span>0&nbsp;% de commission</span><span>Réservation 24&nbsp;h/24</span><span>Acompte en ligne</span><span>Emails automatiques</span><span>À ton nom, tes couleurs</span><span>Prêt en 7 jours</span></div>
+
     <p class="sc-label">Par où commencer</p>
     <div class="sc-grid">
-      <article class="sc-card sc-in">
+      <article class="sc-card" data-t-generate="skeleton" data-m="incline">
         <a class="sc-prev app" href="/logiciel-reservation#demo" aria-label="Teste le logiciel de réservation" tabindex="-1">
           <span class="sc-badge"><i></i>Démo en direct</span>
           <span class="sc-exp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span>
@@ -337,7 +399,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
         <div class="sc-body"><h3>Ton logiciel de réservation</h3><p>À ton nom, sans commission. Tes clients réservent chez toi, pas chez le voisin.</p></div>
         <div class="sc-foot"><a class="sc-ctl" href="/logiciel-reservation#demo">Teste-le</a><a class="sc-ctl lime" href="/logiciel-reservation#offre">Voir l’offre</a><span class="sc-tag">290&nbsp;€</span></div>
       </article>
-      <article class="sc-card sc-in">
+      <article class="sc-card" data-t-generate="skeleton" data-t-generate-delay="260" data-m="incline">
         <a class="sc-prev lime" href="#gratuit" aria-label="Recevoir le guide gratuit" tabindex="-1">
           <span class="sc-exp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span>
           <span class="sc-doc" aria-hidden="true"><b>7 choses à savoir avant de vendre ton offre</b><span class="bar"></span><span class="bar s"></span>
@@ -349,11 +411,11 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       </article>
     </div>
 
-    <section class="sc-panel lime split sc-in" id="gratuit" aria-labelledby="guide-titre">
+    <section data-m="monte" class="sc-panel lime split" id="gratuit" aria-labelledby="guide-titre">
       <div class="sc-col">
         <h2 id="guide-titre">7 choses à savoir avant de vendre ton offre sur les réseaux.</h2>
         <p class="sc-sub">Le guide est gratuit. Il s’ouvre juste après ton inscription.</p>
-        <ol class="mn-inside" aria-label="Dans le guide">
+        <ol class="mn-inside" data-m="cascade" aria-label="Dans le guide">
           <li>Ton offre doit tenir en une phrase</li>
           <li>Le début de ta vidéo décide de tout le reste</li>
           <li>Les réseaux sont devenus des moteurs de recherche</li>
@@ -368,14 +430,14 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
         <p class="lead-feedback" role="status" aria-live="polite" hidden></p>
       </form>
     </section>
-    <p class="sc-soft">Tu viens pour le logiciel à 290&nbsp;€&nbsp;? <a href="/logiciel-reservation#offre">C’est ici</a></p>
+    <p class="sc-soft" data-m="monte">Tu viens pour le logiciel à 290&nbsp;€&nbsp;? <a href="/logiciel-reservation#offre">C’est ici</a></p>
 
-    <section class="sc-panel ink split sc-in" id="logiciel" aria-labelledby="offre-titre">
+    <section data-m="monte" class="sc-panel ink split sc-halo" id="logiciel" aria-labelledby="offre-titre">
       <div class="sc-col">
         <p class="mn-offer-tag">L’offre du moment</p>
         <h2 id="offre-titre">Arrête de payer une plateforme qui montre tes concurrents à tes clients.</h2>
         <p class="mn-offer-sub">Ton logiciel de réservation, à ton nom. Tes clients réservent chez toi, pas chez le voisin.</p>
-        <ul class="mn-checks" aria-label="Ce qui est inclus">
+        <ul class="mn-checks" data-m="cascade" aria-label="Ce qui est inclus">
           <li><span><b>0&nbsp;%</b> de commission</span></li>
           <li><span>Réservation <b>24&nbsp;h/24</b></span></li>
           <li><span><b>Acompte</b> en ligne</span></li>
@@ -384,20 +446,20 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <li><span>À <b>ton nom</b>, tes couleurs</span></li>
         </ul>
         <div class="mn-year" aria-label="Ce que tu paies sur un an">
-          <div><small>Une plateforme, sur un an</small><b>≈ 840&nbsp;€</b><span>en moyenne 70&nbsp;€/mois</span></div>
-          <div class="me"><small>Ton logiciel, la 1re année</small><b>290&nbsp;€</b><span>puis 9&nbsp;€/mois, 0&nbsp;% de commission</span></div>
+          <div><small>Une plateforme, sur un an</small><b data-m="compte" data-to="840" data-before="≈ " data-after="&nbsp;€">≈ 840&nbsp;€</b><span>en moyenne 70&nbsp;€/mois</span></div>
+          <div class="me"><small>Ton logiciel, la 1re année</small><b data-m="compte" data-to="290" data-after="&nbsp;€">290&nbsp;€</b><span>puis 9&nbsp;€/mois, 0&nbsp;% de commission</span></div>
         </div>
         <p class="mn-price">Offre de lancement jusqu’au 31/12. Plus que <b class="js-left-plain">15</b> places sur 20.</p>
         <div class="mn-ctas">
           <a class="btn btn-onink" href="/logiciel-reservation#demo">Teste le logiciel</a>
-          <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
+          <a class="btn btn-lime" data-m="reflet" href="/logiciel-reservation#offre">Je prends ma place</a>
         </div>
         <p class="mn-how">Tu remplis un questionnaire, je l’installe pour toi en 7 jours maximum.</p>
       </div>
       <a class="sc-offer-prev" href="/logiciel-reservation#demo" aria-hidden="true" tabindex="-1"><span class="sc-glow"></span><div class="phone"><div class="screen lv-screen"><div class="lv" id="offer-app"></div></div></div></a>
     </section>
 
-    <section class="sc-panel sc-row2 sc-in" id="avis" aria-labelledby="avis-titre">
+    <section data-m="monte" class="sc-panel sc-row2" id="avis" aria-labelledby="avis-titre">
       <div class="sc-col"><h2 id="avis-titre">Ce qu’en disent les premiers pros.</h2>
       <p class="mn-note">Messages reçus sur WhatsApp en novembre 2026.</p></div>
       <div class="mn-shots">
@@ -406,23 +468,23 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
       </div>
     </section>
 
-    <section class="sc-panel sc-row2 sc-in" id="faq" aria-labelledby="faq-titre">
+    <section data-m="monte" class="sc-panel sc-row2" id="faq" aria-labelledby="faq-titre">
       <div class="sc-col"><h2 id="faq-titre">Tes questions</h2></div>
-      <div class="faq mn-faq">
-        <details><summary>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel&nbsp;?</summary><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, et chaque RDV arrive direct dans ton logiciel. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></details>
-        <details><summary>Il y a des frais après les 290 €&nbsp;?</summary><p>La 1re année est incluse. Ensuite, c’est 9 €/mois (108 € par an) pour que ton logiciel reste en ligne et à jour. Aucune commission sur tes prestations. Si tu arrêtes, ton logiciel s’arrête, mais ton nom de domaine reste à toi.</p></details>
-        <details><summary>Je ne suis pas dans la beauté. C’est pour moi&nbsp;?</summary><p>Oui. Le logiciel marche pour tous ceux qui travaillent sur rendez-vous&nbsp;: coiffure, barbier, coaching, yoga, tatouage… Le guide gratuit aussi.</p></details>
-        <details><summary>Est-ce qu’il faut savoir coder&nbsp;?</summary><p>Non. Je crée ton logiciel pour toi&nbsp;: tu remplis un questionnaire, je m’occupe du reste.</p></details>
-        <details><summary>En combien de temps mon logiciel est-il prêt&nbsp;?</summary><p>7 jours maximum une fois ton questionnaire complet.</p></details>
-        <details><summary>Je peux demander un acompte à mes clients&nbsp;?</summary><p>Oui, c’est inclus. Tu choisis les prestations concernées et le montant. L’argent arrive directement sur ton compte.</p></details>
-        <details><summary>Le nom de domaine est à qui&nbsp;?</summary><p>À toi&nbsp;: c’est toi qui l’achètes et le renouvelles, il n’est pas compris dans les 290 €. Je m’occupe ensuite de le brancher à ton logiciel.</p></details>
-        <details><summary>Je peux payer en plusieurs fois&nbsp;?</summary><p>Oui, en 3 fois si tu es éligible, directement au moment du paiement. Sinon, en une fois.</p></details>
+      <div class="mn-faq">
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je suis sur une plateforme de réservation. Je peux passer à mon propre logiciel&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui, c’est exactement ce que j’ai fait pour mon activité beauté. Tes clients réservent sur ton propre site, et chaque RDV arrive direct dans ton logiciel. Tous les détails et la démo sont sur la page du logiciel de réservation.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il y a des frais après les 290 €&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>La 1re année est incluse. Ensuite, c’est 9 €/mois (108 € par an) pour que ton logiciel reste en ligne et à jour. Aucune commission sur tes prestations. Si tu arrêtes, ton logiciel s’arrête, mais ton nom de domaine reste à toi.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je ne suis pas dans la beauté. C’est pour moi&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui. Le logiciel marche pour tous ceux qui travaillent sur rendez-vous&nbsp;: coiffure, barbier, coaching, yoga, tatouage… Le guide gratuit aussi.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Est-ce qu’il faut savoir coder&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Je crée ton logiciel pour toi&nbsp;: tu remplis un questionnaire, je m’occupe du reste.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>En combien de temps mon logiciel est-il prêt&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>7 jours maximum une fois ton questionnaire complet.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je peux demander un acompte à mes clients&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui, c’est inclus. Tu choisis les prestations concernées et le montant. L’argent arrive directement sur ton compte.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Le nom de domaine est à qui&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>À toi&nbsp;: c’est toi qui l’achètes et le renouvelles, il n’est pas compris dans les 290 €. Je m’occupe ensuite de le brancher à ton logiciel.</p></div></div></div>
+        <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je peux payer en plusieurs fois&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui, en 3 fois si tu es éligible, directement au moment du paiement. Sinon, en une fois.</p></div></div></div>
       </div>
     </section>
 
-    <section class="sc-panel sc-end sc-in" aria-label="Réserver ta place">
+    <section data-m="monte" class="sc-panel sc-end" aria-label="Réserver ta place">
       <p class="sc-end-txt">Plus que <b class="js-left-plain">15</b> places à 290&nbsp;€, jusqu’au&nbsp;31/12.</p>
-      <a class="btn btn-lime" href="/logiciel-reservation#offre">Je prends ma place</a>
+      <a class="btn btn-lime" data-m="reflet" href="/logiciel-reservation#offre">Je prends ma place</a>
       <a class="sc-end-alt" href="#gratuit">Pas encore prêt&nbsp;? Commence par le guide gratuit</a>
     </section>
 
@@ -461,22 +523,47 @@ if(matchMedia('(min-width:980px)').matches)LV.client(document.getElementById('of
 </script>
 <script src="lead.js"></script>
 <script src="app.js"></script>
+<script src="/melnourdi/motion.js"></script>
 <script>
-/* Accueil : apparition au défilement, sommaire actif, compteurs */
+/* Accueil : pastille qui glisse, titres en décalé, halo, accordéon */
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els=document.querySelectorAll('.sc-in');
-  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('vu')})}
-  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(e){io.observe(e)})}
-  var ids=['logiciel','gratuit','avis','faq'];
-  function spy(){var cur='contenu';ids.forEach(function(id){var s=document.getElementById(id);if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=id});
-    document.querySelectorAll('.sc-chip').forEach(function(c){var on=c.getAttribute('href')==='#'+cur;c.classList.toggle('on',on);
-      if(on&&c.parentNode.classList.contains('sc-chips')){var p=c.parentNode;var x=c.offsetLeft-16;if(Math.abs(p.scrollLeft-x)>4)p.scrollTo({left:x,behavior:reduce?'auto':'smooth'})}})}
-  var t;addEventListener('scroll',function(){cancelAnimationFrame(t);t=requestAnimationFrame(spy)},{passive:true});spy();
-  if(!reduce)document.querySelectorAll('[data-count]').forEach(function(e){var n=parseInt(e.textContent,10);if(!n)return;var t0=null;e.textContent='0';
-    requestAnimationFrame(function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/900);e.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)})});
+  /* Pastille qui glisse vers la rubrique en cours */
+  var bars=[].slice.call(document.querySelectorAll('.t-pills'));
+  function place(bar,animate){var pill=bar.querySelector('.t-pill'),on=bar.querySelector('.sc-chip.on');if(!pill||!on)return;
+    var set=function(){pill.style.transform='translate('+on.offsetLeft+'px,'+on.offsetTop+'px)';pill.style.width=on.offsetWidth+'px';pill.style.height=on.offsetHeight+'px'};
+    if(animate){set()}else{var prev=pill.style.transition;pill.style.transition='none';set();void pill.offsetWidth;pill.style.transition=prev}}
+  var ids=['gratuit','logiciel','avis','faq'],last=null;
+  function spy(first){var cur='contenu';ids.forEach(function(id){var s=document.getElementById(id);if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=id});
+    if(cur===last&&!first)return;last=cur;
+    bars.forEach(function(bar){bar.querySelectorAll('.sc-chip').forEach(function(c){c.classList.toggle('on',c.getAttribute('href')==='#'+cur)});place(bar,!first);
+      if(bar.classList.contains('sc-chips')){var on=bar.querySelector('.sc-chip.on');var x=on.offsetLeft-16;if(Math.abs(bar.scrollLeft-x)>4)bar.scrollTo({left:x,behavior:reduce?'auto':'smooth'})}})}
+  var t;addEventListener('scroll',function(){cancelAnimationFrame(t);t=requestAnimationFrame(function(){spy(false)})},{passive:true});
+  addEventListener('resize',function(){bars.forEach(function(b){place(b,false)})});
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){spy(true)});
+  /* Titres de bloc : montée floutée, le titre puis sa phrase */
+  document.querySelectorAll('.sc-panel h2').forEach(function(h){var box=h.parentNode;box.classList.add('t-stagger');h.classList.add('t-stagger-line');
+    var n=h.nextElementSibling;if(n&&n.tagName==='P')n.classList.add('t-stagger-line','t-stagger-line--2')});
+  if(reduce||!('IntersectionObserver' in window)){document.querySelectorAll('.t-stagger').forEach(function(b){b.classList.add('is-shown')})}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-shown');io.unobserve(e.target)}})},{threshold:.3});document.querySelectorAll('.t-stagger').forEach(function(b){io.observe(b)})}
+  /* Halo de l'offre */
+  document.querySelectorAll('.sc-halo').forEach(function(el){function m(x,y){var r=el.getBoundingClientRect();el.style.setProperty('--mx',(x-r.left)+'px');el.style.setProperty('--my',(y-r.top)+'px')}
+    el.addEventListener('pointermove',function(e){m(e.clientX,e.clientY)});el.addEventListener('touchmove',function(e){var p=e.touches[0];m(p.clientX,p.clientY)},{passive:true})});
+  /* Accordéon des questions */
+  document.querySelectorAll('.t-acc-head').forEach(function(h){h.addEventListener('click',function(){var a=h.closest('.t-acc'),o=a.getAttribute('data-open')==='true';a.setAttribute('data-open',String(!o));h.setAttribute('aria-expanded',String(!o))})});
   document.querySelectorAll('.mn-shots img').forEach(function(i){if(i.complete)i.classList.add('ok');else i.addEventListener('load',function(){i.classList.add('ok')})});
 })();
+</script>
+<script type="module">
+/* Le titre se dessine comme si une IA l'écrivait, puis les deux cartes se construisent en pointillés */
+import { generate, auto } from "/melnourdi/vendor/ui-generation.js";
+const title=document.querySelector('.js-gen-title'), small=document.querySelector('.js-gen-small');
+title.style.opacity=0; small.style.opacity=0;
+await document.fonts.ready;
+title.style.opacity=''; small.style.opacity='';
+generate(small,{variant:"small-text",duration:1600});
+generate(title,{variant:"text",duration:2200,delay:150,fadeStagger:22,fadeDelay:100});
+auto();
 </script>
 <script src="/melnourdi/mn-stats.js" defer></script>
 </body>

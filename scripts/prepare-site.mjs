@@ -80,6 +80,9 @@ await writeFile(path.join(output, 'app.js'), app);
 let linksScript = await readFile(path.join(source, 'liens.js'), 'utf8');
 linksScript = linksScript.slice(0, linksScript.indexOf("document.addEventListener('submit'"));
 await writeFile(path.join(output, 'liens.js'), linksScript);
+await mkdir(path.join(output, 'vendor'), { recursive: true });
+for (const name of ['motion.css', 'motion.js']) await copyFile(path.join(source, name), path.join(output, name));
+for (const v of await readdir(path.join(source, 'vendor'))) await copyFile(path.join(source, 'vendor', v), path.join(output, 'vendor', v));
 for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
 }
