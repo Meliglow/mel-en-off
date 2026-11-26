@@ -571,10 +571,11 @@ section.nums{padding:0;min-height:0}
 .kw-vis:empty{display:none}
 @media(min-width:760px){.kw-p.novis{grid-template-columns:1fr;width:min(620px,100%)}}
 .stage2.lg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;animation:10s infinite both}
-.lg1{animation-name:lg1!important}.lg2{animation-name:lg2!important}.lg3{animation-name:lg3!important}
-@keyframes lg1{0%,30%{opacity:1}34%,96%{opacity:0}100%{opacity:1}}
-@keyframes lg2{0%,30%{opacity:0;transform:translateY(16px)}34%,63%{opacity:1;transform:none}67%,100%{opacity:0}}
-@keyframes lg3{0%,63%{opacity:0;transform:scale(1.04)}67%,96%{opacity:1;transform:none}100%{opacity:0}}
+.lg1{animation-name:lg1!important}.lg2{animation-name:lg2!important}.lg3{animation-name:lg3!important}.lg4{animation-name:lg4!important}
+@keyframes lg1{0%,22%{opacity:1}26%,97%{opacity:0}100%{opacity:1}}
+@keyframes lg2{0%,22%{opacity:0;transform:translateY(16px)}26%,47%{opacity:1;transform:none}51%,100%{opacity:0}}
+@keyframes lg3{0%,47%{opacity:0;transform:scale(1.04)}51%,72%{opacity:1;transform:none}76%,100%{opacity:0}}
+@keyframes lg4{0%,72%{opacity:0;transform:translateY(16px)}76%,96%{opacity:1;transform:none}100%{opacity:0}}
 .xa-av{position:absolute;inset:0;width:280px;height:498px;transform:scale(.4286);transform-origin:0 0;font-family:Manrope,sans-serif;color:#161616;overflow:hidden}
 @media(min-width:420px){.xa-av{transform:scale(.5)}}
 .xa-av>div{position:absolute;inset:0;padding:26px 18px;opacity:0;animation:12s cubic-bezier(.22,1,.36,1) infinite}
@@ -725,8 +726,8 @@ section.nums{padding:0;min-height:0}
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-resa" class="kcard">
-        <div class="thumb"><div class="stage2 lg" aria-label="Le logiciel de réservation : la page client, le choix du créneau, puis le tableau de bord" role="img"><img class="lg1" src="assets/kit-log-L0.jpg" alt="" loading="lazy"><img class="lg2" src="assets/kit-log-L3.jpg" alt="" loading="lazy"><img class="lg3" src="assets/kit-log-A0.jpg" alt="" loading="lazy"></div></div>
-        <div class="kbody"><span class="kk">Si tu dépends d’une plateforme</span><h3>Kit logiciel de réservation</h3><p class="klead">Tes clients réservent chez toi, pas chez tes concurrents.</p><p class="kdesc">Ta page à ton nom, acomptes et rappels. 0&nbsp;% de commission.</p>
+        <div class="thumb"><div class="stage2 lg" aria-label="Le logiciel de réservation : la page client, le choix du créneau, la confirmation, puis ton agenda" role="img"><img class="lg1" src="assets/kit-log2-P1.jpg" alt="" loading="lazy"><img class="lg2" src="assets/kit-log2-P2.jpg" alt="" loading="lazy"><img class="lg3" src="assets/kit-log2-P4.jpg" alt="" loading="lazy"><img class="lg4" src="assets/kit-log2-A0.jpg" alt="" loading="lazy"></div></div>
+        <div class="kbody"><span class="kk">Si tu dépends d’une plateforme</span><h3>Kit logiciel de réservation</h3><p class="klead">Tes clients réservent chez toi, pas chez tes concurrents.</p><p class="kdesc">Claude t’installe tout, pas à pas. Arrhes en ligne, 0&nbsp;% de commission.</p>
           <div class="krow"><span class="kprice"><b>160&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-hub" class="kcard hub">
@@ -951,8 +952,8 @@ const K={
  'kit-lapins':{p:'67 €',l:'Tes clients reçoivent un rappel avant leur rendez-vous et confirment en un message.',
   u:['Ta règle d’annulation rédigée (arrhes ou acompte)','Un rappel 2 jours avant, puis la veille','Le client confirme en un message','Des messages dans ton style, jamais secs'],
   r:'Moins de rendez-vous manqués, sans te fâcher avec tes clients.'},
- 'kit-resa':{p:'160 €',l:'Ta propre page de réservation, à ton nom. Tes clients réservent chez toi, pas sur une plateforme.',
-  u:['Ta page de réservation à ton nom','Des acomptes en ligne pour bloquer les créneaux','Un rappel avant chaque rendez-vous','0 % de commission sur tes réservations'],
+ 'kit-resa':{p:'160 €',l:'Ton propre logiciel de réservation, sur ton nom de domaine. Claude t’installe tout, pas à pas. Tes clients réservent chez toi, pas sur une plateforme.',
+  u:['Ta page de réservation et ton agenda, à ton nom','Des arrhes en ligne pour bloquer les créneaux','0 % de commission sur tes réservations','À prévoir : un compte Claude Pro, un hébergement (environ 5 $/mois) et ton nom de domaine'],
   r:'Tes clients réservent chez toi, 24 h/24.'},
  'kit-pack':{p:'197 €',l:'Tes clients réservent chez toi, viennent à leurs rendez-vous et te laissent des avis. Valeur 294 €, tu économises 97 €.',
   u:['Kit logiciel de réservation (160 €)','Kit avis Google (67 €)','Kit fini les lapins (67 €)','Les 3 kits marchent ensemble, dès l’installation'],
