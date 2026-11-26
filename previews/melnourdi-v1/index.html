@@ -575,6 +575,51 @@ section.nums{padding:0;min-height:0}
 @keyframes lg1{0%,30%{opacity:1}34%,96%{opacity:0}100%{opacity:1}}
 @keyframes lg2{0%,30%{opacity:0;transform:translateY(16px)}34%,63%{opacity:1;transform:none}67%,100%{opacity:0}}
 @keyframes lg3{0%,63%{opacity:0;transform:scale(1.04)}67%,96%{opacity:1;transform:none}100%{opacity:0}}
+.xa-av{position:absolute;inset:0;width:280px;height:498px;transform:scale(.4286);transform-origin:0 0;font-family:Manrope,sans-serif;color:#161616;overflow:hidden}
+@media(min-width:420px){.xa-av{transform:scale(.5)}}
+.xa-av>div{position:absolute;inset:0;padding:26px 18px;opacity:0;animation:12s cubic-bezier(.22,1,.36,1) infinite}
+.xa-av .xa-p1{animation-name:av1}.xa-av .xa-p2{animation-name:av2}.xa-av .xa-p3{animation-name:av3}.xa-av .xa-p4{animation-name:av4}
+@keyframes av1{0%{opacity:0;transform:translateY(10px)}3%,24%{opacity:1;transform:none}27%,100%{opacity:0;transform:scale(.96)}}
+@keyframes av2{0%,25%{opacity:0;transform:scale(.9)}28%,36%{opacity:1;transform:none}39%,100%{opacity:0}}
+@keyframes av3{0%,37%{opacity:0}40%,54%{opacity:1}57%,100%{opacity:0;transform:scale(1.04)}}
+@keyframes av4{0%,55%{opacity:0;transform:scale(.92)}58%,96%{opacity:1;transform:none}100%{opacity:0}}
+.xa-av .xa-t{font-weight:800;font-size:22px;margin-bottom:14px}
+.xa-av .xa-row{position:relative;display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #ECE7DC;border-radius:16px;padding:12px 14px;margin-bottom:9px;font-size:15px}
+.xa-av .xa-row small{display:block;color:#6B665C;font-size:12px;font-weight:500}
+.xa-av .xa-sw{position:relative;width:74px;height:26px}.xa-av .xa-sw i{position:absolute;right:0;top:0;font-style:normal;font-size:12px;font-weight:800;border-radius:999px;padding:5px 10px;border:1.5px solid #161616}
+.xa-av .xa-row.xa-on .xa-a{animation:avsa 12s infinite}.xa-av .xa-row.xa-on .xa-b{background:#E8F06E;opacity:0;animation:avsb 12s infinite}
+@keyframes avsa{0%,11%{opacity:1}13%,100%{opacity:0}}@keyframes avsb{0%,11%{opacity:0;transform:scale(.6)}13.5%{opacity:1;transform:scale(1.12)}15%,100%{opacity:1;transform:none}}
+.xa-av .xa-tap{position:absolute;right:30px;top:50%;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(22,22,22,.18);opacity:0;animation:avtap 12s infinite}
+@keyframes avtap{0%,8%{opacity:0;transform:scale(.4)}10%{opacity:1;transform:scale(1)}13%,100%{opacity:0;transform:scale(1.6)}}
+.xa-av .xa-hint{margin-top:18px;font-size:15px;font-weight:700;line-height:1.4;color:#6B665C}
+.xa-av .xa-p2{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.xa-av .xa-ring{width:150px;height:150px;transform:rotate(-90deg);margin-bottom:-104px}.xa-av .xa-ring circle{fill:none;stroke:#ECE7DC;stroke-width:7}.xa-av .xa-ring .xa-pr{stroke:#161616;stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;animation:avpr 12s infinite}
+@keyframes avpr{0%,27%{stroke-dashoffset:327}36%,100%{stroke-dashoffset:0}}
+.xa-av .xa-p2 b{font-size:40px;font-weight:800;line-height:1}.xa-av .xa-p2 span{font-size:14px;color:#6B665C;font-weight:600;margin-bottom:60px}
+.xa-av .xa-notif{display:flex;gap:10px;align-items:center;background:#161616;color:#F9F7F2;border-radius:18px;padding:12px;font-size:13px;line-height:1.35;animation:avnf 12s infinite}
+.xa-av .xa-notif b{display:block;color:#E8F06E}.xa-av .xa-notif .xa-ic{flex:none;width:34px;height:34px;border-radius:10px;background:#E8F06E;color:#161616;display:grid;place-items:center;font-size:17px}
+@keyframes avnf{0%,39%{transform:translateY(-40px);opacity:0}42%,100%{transform:none;opacity:1}}
+.xa-av .xa-mail{margin-top:12px;background:#fff;border:1px solid #ECE7DC;border-radius:20px;padding:16px;text-align:center;animation:avml 12s infinite}
+@keyframes avml{0%,41%{transform:translateY(30px);opacity:0}43.5%,100%{transform:none;opacity:1}}
+.xa-av .xa-mt{color:#161616;margin-top:0;font-weight:800;font-size:19px;line-height:1.2}.xa-av .xa-mw svg{width:118px;height:118px;margin:10px auto 8px;display:block}
+.xa-av .xa-mb{display:inline-block;background:#E8F06E;border:1.5px solid #161616;border-radius:999px;padding:8px 16px;font-weight:800;font-size:13px;animation:avbt 12s infinite}
+@keyframes avbt{0%,46%{transform:none}47.5%{transform:scale(.92)}49%,100%{transform:none}}
+.xa-av .xa-ms{margin-top:12px;padding-top:10px;border-top:1px solid #ECE7DC;font-size:12px;color:#6B665C}.xa-av .xa-ms b{color:#161616}
+.xa-av .xa-p4{display:flex;flex-direction:column;align-items:center;padding-top:44px}
+.xa-av .xa-pin{width:30px;height:38px;background:url(/melnourdi/assets/kit-pointeur.svg) center/contain no-repeat;position:relative;z-index:2;margin-bottom:-22px;animation:avpin 12s infinite}
+@keyframes avpin{0%,58%,79%,100%{transform:none}60%,64%,68%,72%{transform:rotate(-14deg)}62%,66%,70%,74%{transform:rotate(4deg)}}
+.xa-av .xa-spin svg{width:236px;height:236px;display:block}
+.xa-av .xa-spin{animation:avspin 12s infinite}
+@keyframes avspin{0%,58%{transform:rotate(0)}78%,100%{transform:rotate(1800deg)}}
+.xa-av .xa-spin{animation-timing-function:cubic-bezier(.12,.7,.2,1)}
+.xa-av .xa-won{margin-top:14px;background:#161616;color:#F9F7F2;border-radius:18px;padding:12px 20px;text-align:center;opacity:0;animation:avwon 12s infinite}
+.xa-av .xa-won small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E8F06E;font-weight:800}.xa-av .xa-won b{display:block;font-size:22px}.xa-av .xa-won span{font-size:12px;color:#cfcabf}
+@keyframes avwon{0%,79%{opacity:0;transform:translateY(12px) scale(.9)}82%{opacity:1;transform:scale(1.04)}84%,100%{opacity:1;transform:none}}
+.xa-av .xa-rev{margin-top:10px;font-size:13px;font-weight:800;border:1.5px solid #161616;background:#E8F06E;border-radius:999px;padding:7px 14px;opacity:0;animation:avrev 12s infinite}.xa-av .xa-rev span{margin-right:6px}
+@keyframes avrev{0%,48.5%{opacity:0;transform:translateY(8px)}50.5%,100%{opacity:1;transform:none}}
+.xa-av .xa-mq{margin:10px 0 12px;font-size:13px;color:#6B665C;line-height:1.4}.xa-av .xa-p3 .xa-rev{display:table;margin:12px auto 0}
+.xa-av .xa-lab{position:absolute;top:10px;left:0;right:0;text-align:center;font-size:13px;font-weight:800;color:#6B665C}.xa-av .xa-p4{position:absolute}
+.stage2.avs .xa-av{transform:none!important;inset:0}.stage2.avs{background:var(--cream)}
 </style>
 </head>
 <body>
@@ -627,16 +672,20 @@ section.nums{padding:0;min-height:0}
     </div>
     <div class="kit-rail rv-st" id="rail">
       <article id="kit-avis" class="kcard">
-        <div class="thumb"><div class="stage2" aria-label="Le mail cadeau part 24 h après le rendez-vous et le client fait tourner la roue" role="img">
-          <div class="L a1"><div class="hd">Aujourd'hui</div>
-            <div class="rdv"><b>Léa</b><span>14 h · Pose gel</span><em class="s1">Prévu</em><em class="s2">Fait ✓</em></div>
-            <div class="rdv"><b>Sarah</b><span>16 h · Remplissage</span><em class="s0">Prévu</em></div>
-            <div class="rdv"><b>Inès</b><span>17 h 30 · Nail art</span><em class="s0">Prévu</em></div>
-            <div class="hint">Tu marques le RDV « Fait ».<br>Le kit s'occupe du reste.</div></div>
-          <div class="L a2"><span>24 h plus tard</span></div>
-          <div class="L a3"><div class="time">10:24</div><div class="notif"><b>Studio Lumière</b>Une petite attention pour toi</div></div>
-          <div class="L a4"><div class="ml"><span class="ml-from">Studio Lumière</span><div class="mt">Un petit tour.<br>Une surprise pour toi.</div><div class="wh2"><img class="wh-ptr" src="assets/kit-pointeur.svg" alt=""><img class="wh-svg wh-rot" src="assets/kit-roue-da.svg" alt=""></div><div class="won">Gagné&nbsp;: 10&nbsp;€ offerts sur ta prochaine séance</div></div></div>
-        </div></div>
+        <div class="thumb"><div class="stage2 avs" role="img" aria-label="24 h après le rendez-vous, ton client reçoit la demande d’avis. 3 jours plus tard, un merci pour tous avec une roue."><div class="xa-av" aria-label="Animation : 24 h après le rendez-vous, ton client reçoit la demande d'avis et laisse un avis. 3 jours plus tard, il reçoit sa roue merci, offerte à tous.">
+  <div class="xa-p1"><div class="xa-t">Aujourd'hui</div>
+    <div class="xa-row xa-on"><span><b>Léa</b><small>14 h · Pose gel</small></span><span class="xa-sw"><i class="xa-a">Prévu</i><i class="xa-b">Fait ✓</i></span><em class="xa-tap"></em></div>
+    <div class="xa-row"><span><b>Sarah</b><small>16 h · Remplissage</small></span><span class="xa-sw"><i class="xa-a">Prévu</i></span></div>
+    <div class="xa-row"><span><b>Inès</b><small>17 h 30 · Nail art</small></span><span class="xa-sw"><i class="xa-a">Prévu</i></span></div>
+    <p class="xa-hint">Tu notes « Fait ».<br>Le kit fait le reste.</p></div>
+  <div class="xa-p2"><svg viewBox="0 0 120 120" class="xa-ring"><circle cx="60" cy="60" r="52"/><circle cx="60" cy="60" r="52" class="xa-pr"/></svg><b>24 h</b><span>plus tard</span></div>
+  <div class="xa-p3"><div class="xa-notif"><span class="xa-ic">✉︎</span><span><b>Studio Lumière</b>Comment s'est passé ton rendez-vous ? 💬</span></div>
+    <div class="xa-mail"><div class="xa-mt">Comment s'est passé<br>ton rendez-vous ?</div><p class="xa-mq">Ton avis sincère aide d'autres personnes à me trouver.</p><div class="xa-mb">Donner mon avis</div></div>
+    <div class="xa-rev"><span>★★★★★</span>Nouvel avis Google</div></div>
+  <div class="xa-p4"><div class="xa-lab">3 jours plus tard · un merci pour tous</div><div class="xa-pin"></div><div class="xa-spin"><svg class="xa-wsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" width="460" height="460" xmlns:c2pa="http://c2pa.org/manifest"><defs><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#161616" flood-opacity=".18"/></filter></defs><g filter="url(#s)"><circle cx="230" cy="230" r="222" fill="#161616"/></g><circle cx="441.0" cy="230.0" r="4" fill="#F9F7F2"/><circle cx="433.8" cy="284.6" r="4" fill="#E8F06E"/><circle cx="412.7" cy="335.5" r="4" fill="#F9F7F2"/><circle cx="379.2" cy="379.2" r="4" fill="#E8F06E"/><circle cx="335.5" cy="412.7" r="4" fill="#F9F7F2"/><circle cx="284.6" cy="433.8" r="4" fill="#E8F06E"/><circle cx="230.0" cy="441.0" r="4" fill="#F9F7F2"/><circle cx="175.4" cy="433.8" r="4" fill="#E8F06E"/><circle cx="124.5" cy="412.7" r="4" fill="#F9F7F2"/><circle cx="80.8" cy="379.2" r="4" fill="#E8F06E"/><circle cx="47.3" cy="335.5" r="4" fill="#F9F7F2"/><circle cx="26.2" cy="284.6" r="4" fill="#E8F06E"/><circle cx="19.0" cy="230.0" r="4" fill="#F9F7F2"/><circle cx="26.2" cy="175.4" r="4" fill="#E8F06E"/><circle cx="47.3" cy="124.5" r="4" fill="#F9F7F2"/><circle cx="80.8" cy="80.8" r="4" fill="#E8F06E"/><circle cx="124.5" cy="47.3" r="4" fill="#F9F7F2"/><circle cx="175.4" cy="26.2" r="4" fill="#E8F06E"/><circle cx="230.0" cy="19.0" r="4" fill="#F9F7F2"/><circle cx="284.6" cy="26.2" r="4" fill="#E8F06E"/><circle cx="335.5" cy="47.3" r="4" fill="#F9F7F2"/><circle cx="379.2" cy="80.8" r="4" fill="#E8F06E"/><circle cx="412.7" cy="124.5" r="4" fill="#F9F7F2"/><circle cx="433.8" cy="175.4" r="4" fill="#E8F06E"/><path d="M230,230 L130.00,56.79 A200,200 0 0 1 330.00,56.79 Z" fill="#161616" stroke="#161616" stroke-width="2"/><g transform="translate(230.0,104.0) rotate(0.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#E8F06E"><text y="-4" font-size="24" font-weight="800">10 €</text><text y="20" font-size="17" font-weight="600">offerts</text></g><path d="M230,230 L330.00,56.79 A200,200 0 0 1 430.00,230.00 Z" fill="#F9F7F2" stroke="#161616" stroke-width="2"/><g transform="translate(339.1,167.0) rotate(60.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#161616"><text y="-4" font-size="24" font-weight="800">1 soin</text><text y="20" font-size="17" font-weight="600">offert</text></g><path d="M230,230 L430.00,230.00 A200,200 0 0 1 330.00,403.21 Z" fill="#E8F06E" stroke="#161616" stroke-width="2"/><g transform="translate(339.1,293.0) rotate(300.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#161616"><text y="8" font-size="24" font-weight="800">−10 %</text></g><path d="M230,230 L330.00,403.21 A200,200 0 0 1 130.00,403.21 Z" fill="#161616" stroke="#161616" stroke-width="2"/><g transform="translate(230.0,356.0) rotate(360.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#F9F7F2"><text y="-4" font-size="24" font-weight="800">5 €</text><text y="20" font-size="17" font-weight="600">offerts</text></g><path d="M230,230 L130.00,403.21 A200,200 0 0 1 30.00,230.00 Z" fill="#F9F7F2" stroke="#161616" stroke-width="2"/><g transform="translate(120.9,293.0) rotate(420.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#161616"><text y="-4" font-size="24" font-weight="800">Une</text><text y="20" font-size="17" font-weight="600">surprise</text></g><path d="M230,230 L30.00,230.00 A200,200 0 0 1 130.00,56.79 Z" fill="#E8F06E" stroke="#161616" stroke-width="2"/><g transform="translate(120.9,167.0) rotate(300.0)" font-family="Manrope,Arial,sans-serif" text-anchor="middle" fill="#161616"><text y="8" font-size="24" font-weight="800">−15 %</text></g><circle cx="230" cy="230" r="44" fill="#161616" stroke="#F9F7F2" stroke-width="4"/><g transform="translate(214,212)" fill="none" stroke="#E8F06E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="12" width="28" height="22" rx="3"/><path d="M0 12h32M16 12v22M16 12c-3-8-12-9-12-3 0 3 6 3 12 3zM16 12c3-8 12-9 12-3 0 3-6 3-12 3z"/></g></svg></div>
+    <div class="xa-won"><small>Gagné</small><b>10 € offerts</b><span>sur ta prochaine séance</span></div>
+    </div>
+</div></div></div>
         <div class="kbody"><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
@@ -890,8 +939,8 @@ section.nums{padding:0;min-height:0}
 /* Présentation d'un kit : la carte s'ouvre en grande fenêtre */
 (()=>{
 const K={
- 'kit-avis':{p:'67 €',l:'Un mail cadeau part tout seul après chaque rendez-vous. Tes clients reviennent, et pensent à toi.',
-  u:['Un mail cadeau envoyé après le rendez-vous, écrit dans ton style','La roue des petites attentions, pour tous tes clients','Une demande d’avis simple, envoyée à part','Ton IA te pose les bonnes questions, tu n’as rien à rédiger'],
+ 'kit-avis':{p:'67 €',l:'24 h après le rendez-vous, ton client reçoit une demande d’avis simple, écrite dans ton style. 3 jours plus tard, un merci pour tous.',
+  u:['Une demande d’avis envoyée 24 h après le rendez-vous, dans ton style','Un merci 3 jours plus tard, avec une roue offerte à tous','Deux mails séparés : rien n’est donné en échange d’un avis','Ton IA te pose les bonnes questions, tu n’as rien à rédiger'],
   r:'Plus d’avis Google, sans demander à chaque fois.'},
  'kit-devis':{p:'67 €',l:'Tu racontes la demande du client, ton IA rédige un devis pro, prêt à signer.',
   u:['Ton devis rédigé à partir de la demande du client','Les mentions obligatoires vérifiées','Signature électronique gratuite incluse','Une relance prête 3 jours après l’envoi','Tes devis déjà faits, réutilisables en un clic'],
