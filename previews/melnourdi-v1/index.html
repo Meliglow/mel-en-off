@@ -904,7 +904,7 @@ io.observe(fig);
 const plot=svg.parentNode;
 function show(cx){const r=svg.getBoundingClientRect();const fx=(cx-r.left)/r.width*W;let i=Math.round((fx-P)/(W-2*P)*(DATA.length-1));i=Math.max(0,Math.min(DATA.length-1,i));
   const [x,y]=pts[i];cur.setAttribute('x1',x);cur.setAttribute('x2',x);dot.setAttribute('cx',x);dot.setAttribute('cy',y);
-  tip.hidden=false;tip.style.left=(x/W*r.width)+'px';tip.innerHTML=dfmt(DATA[i].d)+' · <b>'+eur(DATA[i].v)+'</b>'}
+  tip.hidden=false;tip.style.left=(x/W*r.width)+'px';tip.innerHTML=(window.MN_REVENUS_PAS==='semaine'?'Semaine du '+dfmt(DATA[i].d):dfmt(DATA[i].d))+' · <b>'+eur(DATA[i].v)+'</b>'}
 function hide(){tip.hidden=true;cur.setAttribute('x1',-10);cur.setAttribute('x2',-10);dot.setAttribute('cx',-10)}
 plot.addEventListener('pointermove',e=>show(e.clientX));plot.addEventListener('pointerdown',e=>show(e.clientX));plot.addEventListener('pointerleave',hide);
 })();
