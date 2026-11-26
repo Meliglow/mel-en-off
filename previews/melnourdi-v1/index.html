@@ -161,14 +161,14 @@ html{scroll-behavior:smooth}
 .thoughts li.r{align-self:flex-end;border-radius:22px 22px 6px 22px;background:var(--ink);color:var(--cream);border-color:var(--ink)}
 .thoughts li.in{opacity:1;transform:none}
 .pain-end{margin-top:28px;font-size:1.12rem;font-weight:750;line-height:1.5;max-width:30em}
-.turn{margin:90px -16px 0;padding:90px 22px;background:var(--ink);color:#fff;position:relative;overflow:hidden;isolation:isolate}
+.turn{margin:90px -16px 0;padding:70px 22px;background:var(--ink);color:#fff;position:relative;overflow:hidden;isolation:isolate}
 .turn::before{content:"";position:absolute;z-index:-1;width:700px;height:700px;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--g,.4));border-radius:50%;background:radial-gradient(closest-side,rgba(232,240,110,.28),transparent);transition:transform .2s linear}
-.turn-txt{max-width:900px;margin:0 auto;font-size:clamp(2rem,8.4vw,4.4rem);line-height:1.05;letter-spacing:-.045em;font-weight:800}
+.turn-txt{max-width:860px;margin:0 auto;text-align:center}
+.tt-big{margin:0;font-size:clamp(2rem,8vw,4.2rem);line-height:1.05;letter-spacing:-.045em;font-weight:800;text-wrap:balance}
+.tt-sm{margin:18px auto 0;max-width:30em;font-size:clamp(1.15rem,3.4vw,1.75rem);line-height:1.3;letter-spacing:-.025em;font-weight:750;text-wrap:balance}
 .turn-txt span{color:rgba(255,255,255,.16);transition:color .5s var(--ease)}
 .turn-txt span.on{color:#fff}
-.turn-txt span.lt{font-size:.52em;letter-spacing:-.03em;line-height:1.25;font-weight:750}
 .turn-txt span.lt.on{color:var(--lime)}
-.turn-txt span:nth-child(4)::after{content:"";display:block;height:.3em}
 .stance{text-align:center;max-width:760px;margin:0 auto}
 .stance-txt{margin-top:14px;font-size:clamp(1.4rem,5.4vw,2.2rem);line-height:1.25;letter-spacing:-.03em;font-weight:750;color:var(--muted);text-wrap:balance}
 .stance-txt b{color:var(--ink);font-weight:800;background:linear-gradient(transparent 62%,var(--lime) 62%,var(--lime) 92%,transparent 92%)}
@@ -177,7 +177,7 @@ html{scroll-behavior:smooth}
   .pain>.rv:first-child{grid-column:1;grid-row:1}
   .thoughts{margin-top:0;grid-row:1/span 2;grid-column:2}
   .pain-end{grid-column:1;grid-row:2;align-self:start;margin-top:22px}
-  .turn{margin:120px calc(50% - 50vw) 0;padding:160px 28px}
+  .turn{margin:120px calc(50% - 50vw) 0;padding:110px 28px}
 }
 /* Métiers qui défilent */
 .mq{margin:54px -16px 0;display:grid;gap:10px;overflow:hidden;padding:4px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
@@ -464,6 +464,25 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
   .kw-t{padding:34px 34px 30px}
 }
 @media(prefers-reduced-motion:reduce){.kw-t>*{opacity:1;transform:none}}
+/* 3 étapes : cartes avec mini visuel */
+.steps2{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}
+.steps2 li{background:#fff;border:1px solid var(--line);border-radius:24px;padding:12px 12px 18px;box-shadow:var(--sh)}
+.steps2 .sv{height:150px;border-radius:16px;background:var(--cream);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;padding:12px}
+.sv-k{width:min(220px,90%);background:#fff;border:1px solid var(--l2);border-radius:12px;padding:8px 12px;font-size:.8rem;font-weight:750;color:var(--muted);display:flex;justify-content:space-between}
+.sv-k.on{background:var(--lime);border-color:var(--ink);color:var(--ink);transform:scale(1.05)}
+.sv-k i{font-style:normal}
+.sv-f,.sv-c{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--l2);border-radius:12px;padding:8px 12px;font-size:.82rem;font-weight:750}
+.sv-zip{font-size:.62rem;font-weight:800;background:var(--ink);color:var(--lime);border-radius:6px;padding:4px 5px}
+.sv-ia{font-size:.68rem;font-weight:800;background:var(--lime);border-radius:6px;padding:3px 5px}
+.sv-c em{font-style:normal;font-size:.72rem;color:var(--ink);background:var(--lime);border-radius:999px;padding:2px 8px;margin-left:4px}
+.sv-ar{font-weight:800;color:var(--soft);line-height:1}
+.sv-b{max-width:86%;font-size:.78rem;font-weight:700;line-height:1.35;padding:7px 11px;border-radius:14px 14px 14px 4px;background:#fff;border:1px solid var(--l2);align-self:flex-start}
+.sv-b.me{align-self:flex-end;background:var(--ink);color:var(--cream);border-color:var(--ink);border-radius:14px 14px 4px 14px}
+.st-t{display:flex;align-items:center;gap:10px;margin:16px 6px 0}
+.st-t b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--lime);font-weight:800;font-size:.9rem}
+.steps2 h3{margin:0;font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.steps2 p{margin:6px 6px 0 46px;color:var(--muted);line-height:1.5;font-size:.95rem}
+@media(min-width:920px){.how{display:block!important}.how>div:first-child{position:static!important;text-align:center;max-width:640px;margin:0 auto;text-wrap:balance}.steps2{grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}}
 </style>
 </head>
 <body>
@@ -623,7 +642,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
   </section>
 
   <section class="turn" id="bascule" aria-label="La solution">
-    <p class="turn-txt" id="turn"><span>Et si l’IA</span> <span>faisait</span> <span>tout ça</span> <span>à ta place&nbsp;?</span> <span class="lt">Pas besoin</span> <span class="lt">d’être doué</span> <span class="lt">en tech.</span> <span class="lt">Tu réponds</span> <span class="lt">à quelques questions,</span> <span class="lt">elle s’occupe</span> <span class="lt">du reste.</span></p>
+    <div class="turn-txt" id="turn"><p class="tt-big"><span>Et si l’IA</span> <span>faisait</span> <span>tout ça</span> <span>à ta place&nbsp;?</span></p><p class="tt-sm"><span class="lt">Pas besoin</span> <span class="lt">d’être doué</span> <span class="lt">en tech.</span> <span class="lt">Tu réponds</span> <span class="lt">à quelques questions,</span> <span class="lt">elle s’occupe</span> <span class="lt">du reste.</span></p></div>
   </section>
 
   <section class="ia-sec how" id="comment" aria-labelledby="how-titre">
@@ -632,10 +651,10 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
       <h2 id="how-titre">3 étapes. <em>10 minutes.</em> Zéro technique.</h2>
       <p class="ia-lead">Tu n’apprends rien de compliqué&nbsp;: tu réponds à quelques questions, l’IA fait le reste.</p>
     </div>
-    <ol class="steps" id="steps">
-      <li class="rv"><b>1</b><h3>Choisis ton kit</h3><p>Celui de la tâche qui te prend le plus de temps.</p></li>
-      <li class="rv"><b>2</b><h3>Ajoute-le à Claude</h3><p>Un fichier à importer en 1 minute. Le compte gratuit suffit.</p></li>
-      <li class="rv"><b>3</b><h3>Réponds à ses questions</h3><p>Il apprend ton activité et ton style. Ensuite, il fait la tâche à ta place.</p></li>
+    <ol class="steps2" id="steps">
+      <li class="rv"><div class="sv"><div class="sv-k">Kit avis Google</div><div class="sv-k on">Kit devis pro <i>✓</i></div><div class="sv-k">Kit fini les impayés</div></div><div class="st-t"><b>1</b><h3>Choisis ton kit</h3></div><p>Celui de la tâche qui te prend le plus de temps.</p></li>
+      <li class="rv"><div class="sv"><div class="sv-f"><span class="sv-zip">ZIP</span>kit-devis-pro</div><div class="sv-ar">↓</div><div class="sv-c"><span class="sv-ia">IA</span>Claude <em>Ajouté ✓</em></div></div><div class="st-t"><b>2</b><h3>Ajoute-le à Claude</h3></div><p>Un fichier à importer en 1 minute. Le compte gratuit suffit.</p></li>
+      <li class="rv"><div class="sv"><div class="sv-b ai">Quel est ton métier&nbsp;?</div><div class="sv-b me">Photographe</div><div class="sv-b ai">Parfait. Je m’occupe de tes devis ✓</div></div><div class="st-t"><b>3</b><h3>Réponds à ses questions</h3></div><p>Il apprend ton activité et ton style. Ensuite, il fait la tâche à ta place.</p></li>
     </ol>
   </section>
 
@@ -649,7 +668,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
   <section class="ia-sec faqw" id="questions" aria-labelledby="faq-titre">
     <div class="rv"><span class="eyebrow2">Questions</span><h2 id="faq-titre">Tes questions</h2></div>
     <div class="faq2 rv">
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut payer Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Les kits marchent avec le compte gratuit de Claude.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut payer Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Les kits marchent avec le compte gratuit de Claude. Mais si tu l’utilises tous les jours, un compte payant (Pro) est encore mieux&nbsp;: tu peux lui envoyer beaucoup plus de messages, sans être bloqué en pleine tâche.</p></div></div></div>
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut savoir coder&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Tu importes un fichier dans Claude en 1 minute, puis il te pose ses questions. Tu réponds comme à une collègue.</p></div></div></div>
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est pour qui&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Pour tous les indépendants&nbsp;: coaching, conseil, création, photo, artisanat, commerce, beauté… Chaque kit s’adapte à ton activité grâce à ses questions.</p></div></div></div>
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je paie comment les kits&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>En une fois, sans abonnement. Le kit est à toi.</p></div></div></div>
