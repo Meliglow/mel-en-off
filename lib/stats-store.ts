@@ -7,8 +7,14 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-export const EVENEMENTS = ["vue", "guide_inscrit", "clic_place", "paiement_lance", "paiement_ok"] as const;
+export const EVENEMENTS = ["vue", "guide_inscrit", "clic_place", "paiement_lance", "paiement_ok", "kit_vue", "kit_attente", "kit_achat"] as const;
 export type Evenement = (typeof EVENEMENTS)[number];
+
+// Kits (26/11/2026) : fenêtre du kit ouverte, « Préviens-moi », clic pour acheter, vente confirmée par le serveur.
+export const KITS = ["kit-avis", "kit-devis", "kit-impayes", "kit-lapins", "kit-hub"] as const;
+export type Kit = (typeof KITS)[number];
+export type StatsKit = { vues: number; attente: number; achats: number; ventes: number; centimes: number };
+const kitVide = (): StatsKit => ({ vues: 0, attente: 0, achats: 0, ventes: 0, centimes: 0 });
 
 type Jour = {
   vues: number; // pages vues
@@ -18,6 +24,7 @@ type Jour = {
   campagnes: Record<string, number>; // utm_campaign, seulement pour les entrées
   evenements: Record<string, number>;
   logicielDepuisGuide: number; // vues de la page logiciel juste après le guide
+  kits?: Record<string, StatsKit>;
 };
 type Donnees = { debut: string; jours: Record<string, Jour> };
 
@@ -73,13 +80,37 @@ const ajouter = (table: Record<string, number>, cle: string) => {
   table[k] = (table[k] || 0) + 1;
 };
 
-export type Mesure = { evenement: Evenement; page: string; source: string | null; campagne: string | null; depuisGuide: boolean };
+export type Mesure = { evenement: Evenement; page: string; source: string | null; campagne: string | null; depuisGuide: boolean; kit?: Kit | null };
+
+const jourDu = (d: Donnees) =>
+  (d.jours[aujourdhui()] ??= { vues: 0, entrees: 0, pages: {}, sources: {}, campagnes: {}, evenements: {}, logicielDepuisGuide: 0 });
+const nettoyer = (d: Donnees) => {
+  const cles = Object.keys(d.jours).sort();
+  for (const ancien of cles.slice(0, Math.max(0, cles.length - JOURS_GARDES))) delete d.jours[ancien];
+};
+
+// Vente d'un kit : à appeler UNIQUEMENT côté serveur, quand le paiement est confirmé (jamais depuis le navigateur).
+export async function enregistrerVenteKit(kit: Kit, centimes: number) {
+  if (!KITS.includes(kit)) return;
+  const d = await charger();
+  const j = jourDu(d);
+  const k = ((j.kits ??= {})[kit] ??= kitVide());
+  k.ventes++;
+  k.centimes += Math.max(0, Math.round(centimes) || 0);
+  nettoyer(d);
+  planifierEcriture();
+}
 
 export async function enregistrer(m: Mesure) {
   const d = await charger();
-  const jour = aujourdhui();
-  const j = (d.jours[jour] ??= { vues: 0, entrees: 0, pages: {}, sources: {}, campagnes: {}, evenements: {}, logicielDepuisGuide: 0 });
+  const j = jourDu(d);
   ajouter(j.evenements, m.evenement);
+  if (m.kit && KITS.includes(m.kit)) {
+    const k = ((j.kits ??= {})[m.kit] ??= kitVide());
+    if (m.evenement === "kit_vue") k.vues++;
+    else if (m.evenement === "kit_attente") k.attente++;
+    else if (m.evenement === "kit_achat") k.achats++;
+  }
   if (m.evenement === "vue") {
     j.vues++;
     ajouter(j.pages, m.page);
@@ -90,8 +121,7 @@ export async function enregistrer(m: Mesure) {
     }
     if (m.depuisGuide && m.page === "/logiciel-reservation") j.logicielDepuisGuide++;
   }
-  const cles = Object.keys(d.jours).sort();
-  for (const ancien of cles.slice(0, Math.max(0, cles.length - JOURS_GARDES))) delete d.jours[ancien];
+  nettoyer(d);
   planifierEcriture();
 }
 
@@ -104,6 +134,7 @@ export type Resume = {
   pages: [string, number][];
   sources: [string, number][];
   campagnes: [string, number][];
+  kits: Record<Kit, StatsKit>;
 };
 
 export async function resumer(nbJours: number): Promise<Resume> {
@@ -117,6 +148,13 @@ export async function resumer(nbJours: number): Promise<Resume> {
     return t;
   };
   const trier = (t: Record<string, number>) => Object.entries(t).sort((a, b) => b[1] - a[1]);
+  const kits = Object.fromEntries(KITS.map((k) => [k, kitVide()])) as Record<Kit, StatsKit>;
+  for (const date of dates)
+    for (const [k, v] of Object.entries(d.jours[date]?.kits || {})) {
+      const t = kits[k as Kit];
+      if (!t) continue;
+      t.vues += v.vues; t.attente += v.attente; t.achats += v.achats; t.ventes += v.ventes; t.centimes += v.centimes;
+    }
   const jours = dates.map((date) => ({ date, vues: d.jours[date]?.vues || 0, entrees: d.jours[date]?.entrees || 0 }));
   return {
     debut: d.debut,
@@ -131,5 +169,6 @@ export async function resumer(nbJours: number): Promise<Resume> {
     pages: trier(somme("pages")),
     sources: trier(somme("sources")),
     campagnes: trier(somme("campagnes")),
+    kits,
   };
 }

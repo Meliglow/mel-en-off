@@ -1,7 +1,7 @@
 // Page privée des statistiques de melnourdi.fr (24/11/2026), protégée par mot de passe.
 // Le mot de passe n'est pas dans le code : seule son empreinte (scrypt + sel) l'est.
 import { scryptSync, timingSafeEqual } from "node:crypto";
-import { resumer, type Resume } from "@/lib/stats-store";
+import { KITS, resumer, type Resume } from "@/lib/stats-store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,6 +39,31 @@ const NOMS_PAGES: Record<string, string> = {
   "/demo-reservation": "Démo du logiciel",
 };
 
+const NOMS_KITS: Record<string, string> = {
+  "kit-avis": "Kit avis Google",
+  "kit-devis": "Kit devis pro",
+  "kit-impayes": "Kit fini les impayés",
+  "kit-lapins": "Kit fini les lapins",
+  "kit-hub": "Hub bureau",
+};
+const euros = (centimes: number) => (centimes / 100).toLocaleString("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: centimes % 100 ? 2 : 0 });
+
+function tableauKits(r: Resume) {
+  const lignes = KITS.map((id) => ({ id, ...r.kits[id] })).sort(
+    (a, b) => b.ventes - a.ventes || b.attente - a.attente || b.vues - a.vues,
+  );
+  const max = Math.max(...lignes.map((l) => l.vues), 1);
+  return `<ol class="kits">${lignes
+    .map(
+      (l, i) => `<li${i === 0 && (l.vues || l.attente || l.ventes) ? ' class="top"' : ""}>
+<div class="kn"><span>${esc(NOMS_KITS[l.id] || l.id)}</span>${i === 0 && (l.vues || l.attente || l.ventes) ? "<em>le plus populaire</em>" : ""}</div>
+<i style="--w:${Math.max(2, (l.vues / max) * 100)}%"></i>
+<div class="kc"><div><b>${nb(l.vues)}</b><small>ouvert${l.vues > 1 ? "s" : ""}</small></div><div><b>${nb(l.attente)}</b><small>« Préviens-moi »</small></div><div><b>${nb(l.ventes)}</b><small>vendu${l.ventes > 1 ? "s" : ""}</small></div><div><b>${euros(l.centimes)}</b><small>encaissé</small></div></div>
+</li>`,
+    )
+    .join("")}</ol>`;
+}
+
 function barres(lignes: [string, number][], total: number) {
   if (!lignes.length) return `<p class="vide">Rien pour l’instant.</p>`;
   const max = Math.max(...lignes.map((l) => l[1]), 1);
@@ -62,6 +87,7 @@ function page(r: Resume, nbJours: number) {
     ["Paiements commencés", ev("paiement_lance")],
     ["Retours après paiement", ev("paiement_ok")],
   ];
+  const tk = KITS.reduce((t, k) => ({ vues: t.vues + r.kits[k].vues, attente: t.attente + r.kits[k].attente, ventes: t.ventes + r.kits[k].ventes, centimes: t.centimes + r.kits[k].centimes }), { vues: 0, attente: 0, ventes: 0, centimes: 0 });
   const maxJour = Math.max(...r.jours.map((j) => j.entrees), 1);
   const jours = [...r.jours].reverse();
   const onglet = (n: number, label: string) => `<a href="?j=${n}"${n === nbJours ? ' aria-current="page"' : ""}>${label}</a>`;
@@ -90,6 +116,13 @@ h2{font-size:19px;letter-spacing:-.02em;margin:34px 0 12px}
 .parcours b{font-size:20px}.parcours small{display:block;color:var(--doux);font-size:13px}.parcours em{font-style:normal;color:var(--doux);font-size:13px;display:block;text-align:right}
 .jours{list-style:none;margin:0;padding:0;display:grid;gap:4px}.jours li{display:grid;grid-template-columns:92px 1fr 44px;gap:10px;align-items:center;font-size:14px}
 .jours i{display:block;height:10px;border-radius:6px;background:var(--encre);width:var(--w);min-width:2px}.jours b{text-align:right}
+.kits{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.kits li{background:var(--blanc);border:1px solid var(--trait);border-radius:16px;padding:12px 14px}
+.kits li.top{border:1.5px solid var(--encre)}
+.kits .kn{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700}
+.kits .kn em{font-style:normal;font-size:12px;font-weight:800;background:var(--citron);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.kits i{display:block;height:6px;border-radius:6px;margin:9px 0 10px;background:var(--citron);width:var(--w)}
+.kits .kc{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.kits .kc b{display:block;font-size:18px;letter-spacing:-.02em}.kits .kc small{display:block;font-size:12px;color:var(--doux);line-height:1.2}
 .vide{color:var(--doux);font-size:15px}
 .note{margin-top:36px;font-size:13px;color:var(--doux)}code{background:var(--blanc);border:1px solid var(--trait);border-radius:6px;padding:1px 5px;font-size:13px}
 </style></head><body><main>
@@ -104,6 +137,15 @@ ${r.durable ? "" : `<p class="alerte">Pour l’instant, les chiffres repartent �
 <div class="carte"><b>${nb(ev("guide_inscrit"))}</b><span>inscriptions au guide</span></div>
 <div class="carte"><b>${nb(ev("paiement_ok"))}</b><span>retours après paiement</span></div>
 </div>
+<h2>Tes kits</h2>
+<div class="cartes">
+<div class="carte noire"><b>${nb(tk.ventes)}</b><span>kits vendus</span></div>
+<div class="carte"><b>${euros(tk.centimes)}</b><span>encaissé avec les kits</span></div>
+<div class="carte"><b>${nb(tk.vues)}</b><span>kits ouverts</span></div>
+<div class="carte"><b>${nb(tk.attente)}</b><span>« Préviens-moi »</span></div>
+</div>
+<p class="sous" style="margin:16px 0 10px;font-size:14px">Du plus populaire au moins populaire : d’abord les ventes, puis les « Préviens-moi », puis les ouvertures.</p>
+${tableauKits(r)}
 <h2>D’où viennent tes visiteurs</h2>
 ${barres(r.sources, r.totaux.entrees)}
 <h2>Le parcours</h2>
@@ -117,7 +159,7 @@ ${barres(r.sources, r.totaux.entrees)}
 <h2>Pages les plus vues</h2>
 ${barres(r.pages.map(([p, n]) => [NOMS_PAGES[p] || p, n] as [string, number]), r.totaux.vues)}
 ${r.campagnes.length ? `<h2>Liens étiquetés (campagnes)</h2>${barres(r.campagnes, r.totaux.entrees)}` : ""}
-<p class="note">Sans cookie et sans donnée personnelle : le site ne garde que des totaux par jour. Une « visite » est une arrivée depuis l’extérieur du site. Pour reconnaître TikTok à coup sûr, mets ce lien dans ta bio : <code>melnourdi.fr/?utm_source=tiktok#gratuit</code>. Les ventes réelles restent à vérifier dans tes emails de commande.</p>
+<p class="note">Sans cookie et sans donnée personnelle : le site ne garde que des totaux par jour. Une « visite » est une arrivée depuis l’extérieur du site. Pour reconnaître TikTok à coup sûr, mets ce lien dans ta bio : <code>melnourdi.fr/?utm_source=tiktok#gratuit</code>. « Ouvert » = quelqu’un a cliqué sur la carte du kit pour lire sa fenêtre. Les ventes de kits s’afficheront dès que le paiement des kits sera en ligne (comptées seulement quand le paiement est confirmé). Les ventes du logiciel restent à vérifier dans tes emails de commande.</p>
 </main></body></html>`;
 }
 

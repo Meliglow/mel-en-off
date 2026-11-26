@@ -2,8 +2,8 @@
    Le serveur ne garde que des totaux par jour (voir lib/stats-store.ts). */
 (() => {
   const qs = new URLSearchParams(location.search);
-  const envoyer = (e) => {
-    const data = JSON.stringify({ e, p: location.pathname, r: document.referrer, us: qs.get('utm_source') || '', uc: qs.get('utm_campaign') || '', ac: qs.get('acces') || '' });
+  const envoyer = (e, k) => {
+    const data = JSON.stringify({ e, k: k || '', p: location.pathname, r: document.referrer, us: qs.get('utm_source') || '', uc: qs.get('utm_campaign') || '', ac: qs.get('acces') || '' });
     try { if (navigator.sendBeacon && navigator.sendBeacon('/api/stats', data)) return; } catch (x) {}
     try { fetch('/api/stats', { method: 'POST', body: data, keepalive: true }); } catch (x) {}
   };
@@ -13,5 +13,13 @@
   document.addEventListener('click', (ev) => {
     const el = ev.target && ev.target.closest ? ev.target.closest('a,button') : null;
     if (el && /je prends ma place|je veux mon logiciel/i.test(el.textContent || '')) envoyer('clic_place');
+    // Kits : un bouton d'achat porte data-kit-achat="kit-xxx" ; un clic sur une carte ouvre la fenêtre du kit.
+    const achat = ev.target && ev.target.closest ? ev.target.closest('[data-kit-achat]') : null;
+    if (achat) { envoyer('kit_achat', achat.getAttribute('data-kit-achat')); return; }
+    const carte = ev.target && ev.target.closest ? ev.target.closest('#kits .kcard[id^="kit-"]') : null;
+    if (carte && !ev.target.closest('a:not(.kopen)')) envoyer('kit_vue', carte.id);
   }, true);
+  // Arrivée directe sur un kit (lien melnourdi.fr/#devis) : la fenêtre s'ouvre toute seule.
+  const h = location.hash.slice(1);
+  if (/^[a-z]+$/.test(h) && document.querySelector('#kits #kit-' + h)) envoyer('kit_vue', 'kit-' + h);
 })();

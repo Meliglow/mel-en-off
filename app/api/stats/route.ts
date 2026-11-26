@@ -1,5 +1,5 @@
 // Reçoit les mesures du compteur maison (mn-stats.js). Aucune IP ni identifiant n'est gardé.
-import { EVENEMENTS, enregistrer, type Evenement } from "@/lib/stats-store";
+import { EVENEMENTS, KITS, enregistrer, type Evenement, type Kit } from "@/lib/stats-store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -51,8 +51,13 @@ export async function POST(request: Request) {
     const brut = await request.text();
     if (brut.length > 2000) return new Response(null, { status: 413 });
     const m = JSON.parse(brut) as Record<string, unknown>;
-    const evenement = texte(m.e, 20) as Evenement;
+    let evenement = texte(m.e, 30) as Evenement;
+    let kit: Kit | null = KITS.includes(texte(m.k, 20) as Kit) ? (texte(m.k, 20) as Kit) : null;
+    // L'accueil envoie déjà « attente_kit-xxx » après un « Préviens-moi » réussi.
+    const attente = /^attente_(kit-[a-z]+)$/.exec(evenement);
+    if (attente && KITS.includes(attente[1] as Kit)) { evenement = "kit_attente"; kit = attente[1] as Kit; }
     if (!EVENEMENTS.includes(evenement)) return new Response(null, { status: 400 });
+    if (evenement.startsWith("kit_") && !kit) return new Response(null, { status: 400 });
     const page = chemin(m.p);
     const referent = texte(m.r, 300);
     const hoteReferent = hote(referent);
@@ -71,7 +76,7 @@ export async function POST(request: Request) {
     if (interne) {
       try { depuisGuide = new URL(referent).pathname.startsWith("/guide-gratuit"); } catch {}
     }
-    await enregistrer({ evenement, page, source, campagne: source ? texte(m.uc, 60).toLowerCase() || null : null, depuisGuide });
+    await enregistrer({ evenement, page, source, campagne: source ? texte(m.uc, 60).toLowerCase() || null : null, depuisGuide, kit });
     return ok();
   } catch {
     return new Response(null, { status: 400 });
