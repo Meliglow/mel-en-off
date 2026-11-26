@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit Avis Google — melnourdi.</title>
+<meta name="description" content="La méthode qui m’a fait doubler mes avis Google, installée dans ton business en 10 minutes. 67 €, une seule fois.">
+<meta name="theme-color" content="#F9F7F2">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+:root{--ink:#161616;--mut:#6F6A62;--lime:#E8F06E;--ivo:#F9F7F2;--line:#E6E1D6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ivo);color:var(--ink);font:500 15px/1.5 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.page{max-width:980px;margin:0 auto;padding:0 18px 60px}
+svg.i{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* haut */
+.top{padding:26px 0 8px;display:grid;gap:18px}
+.badge{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px 5px 6px;width:max-content}
+.badge b{width:22px;height:22px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:12px}
+h1{font-size:clamp(30px,7.6vw,48px);line-height:1.2;letter-spacing:-.04em;font-weight:800;max-width:17ch}
+h1 mark{background:var(--lime);padding:0 .12em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.faits{display:flex;flex-wrap:wrap;gap:8px}
+.fait{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13.5px;font-weight:700}
+.fait svg.i{width:20px;height:20px}
+.cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-weight:800;font-size:16px;padding:15px 26px;border-radius:999px;text-decoration:none;border:0}
+.prix{font-weight:800;font-size:22px}.prix small{font-size:13px;color:var(--mut);font-weight:600;margin-left:6px}
+h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
+.avant{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.av{background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:14px;display:grid;gap:10px;font-size:15px;line-height:1.25}
+.av svg.i{width:30px;height:30px;background:var(--lime);border-radius:50%;padding:5px;box-sizing:content-box}
+.src{font-size:12.5px;color:var(--mut);margin-top:10px}.src a{color:var(--ink);font-weight:700}
+.num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:12px;font-weight:800;margin-bottom:6px}
+.duo-img{position:relative}.duo-img img.roue{position:absolute;width:62%;height:62%;right:-6px;bottom:-6px;object-fit:contain;padding:0}
+/* frise */
+.frise{background:#fff;border:1.5px solid var(--ink);border-radius:22px;padding:22px 16px;position:relative;overflow:hidden}
+.etapes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;position:relative}
+.etapes:before{content:"";position:absolute;top:31px;left:12%;right:12%;height:2px;background:var(--line)}
+.etapes .rail{position:absolute;top:31px;left:12%;height:2px;background:var(--ink);width:0}
+.et{text-align:center;position:relative;z-index:1}
+.et .rond{width:64px;height:64px;margin:0 auto 10px;border-radius:50%;background:#fff;border:2px solid var(--ink);display:grid;place-items:center;transition:background .35s,box-shadow .35s,transform .35s}
+.et.on .rond{background:var(--lime);box-shadow:0 0 0 8px rgba(232,240,110,.35);transform:scale(1.04)}
+.et b{display:block;font-size:13.5px;line-height:1.25}
+.et small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+/* ce que tu reçois */
+.recois{display:grid;gap:12px}
+.carte{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:16px;display:flex;gap:14px;align-items:center}
+.carte .vis{width:118px;height:118px;flex:none;border-radius:14px;background:var(--ivo);border:1.5px solid var(--line);overflow:hidden;display:grid;place-items:center}
+.carte .vis img{width:100%;height:100%;object-fit:cover;object-position:top}
+.carte .vis img.roue{object-fit:contain;padding:6px}
+.carte h3{font-size:17px;letter-spacing:-.01em;margin-bottom:4px}
+.carte p{font-size:14px;color:var(--mut);line-height:1.45}
+.carte .tag{display:inline-block;margin-top:8px;font-size:12px;font-weight:800;background:var(--lime);border-radius:999px;padding:3px 10px}
+.qr{width:70px;height:70px;background:
+ conic-gradient(from 90deg at 30% 30%,var(--ink) 25%,transparent 0) 0 0/14px 14px;border:6px solid #fff;outline:2px solid var(--ink);border-radius:4px}
+/* installation */
+.install{display:grid;gap:16px;align-items:center}
+.pile{position:relative;height:190px}
+.q{position:absolute;inset:0 0 auto;background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:16px;box-shadow:4px 4px 0 var(--ink);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .45s,transform .45s}
+.q.on{opacity:1;transform:none;transition-delay:.25s}
+.q:not(.on){transition-duration:.2s}
+.q b{display:block;font-size:15.5px;margin-bottom:2px}
+.q small{color:var(--mut);font-size:12.5px}
+.q .bt{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.q .bt span{font-size:13px;font-weight:700;border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px}
+.q .bt span.ok{background:var(--lime)}
+.liste{display:grid;gap:8px}
+.liste div{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14.5px}
+.liste i{width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center;font-style:normal;font-size:12px;flex:none}
+/* besoin + regle */
+.duo{display:grid;gap:12px}
+.bloc{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.bloc b{display:block;font-size:15px;margin-bottom:2px}.bloc p{font-size:14px;color:var(--mut)}
+.fin{margin-top:40px;background:var(--ink);color:#fff;border-radius:24px;padding:26px 22px;display:grid;gap:14px}
+.fin h2{color:#fff;margin:0}
+.fin .btn{background:var(--lime);color:var(--ink);width:max-content}
+.fin p{color:#cfcabd;font-size:14px}
+/* barre du haut + formulaire Préviens-moi + pied de page */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0}
+.bar a{color:var(--ink);text-decoration:none;font-weight:800;font-size:20px;letter-spacing:-.04em}
+.bar a span{color:#b9c22a}
+.bar .bk{font-size:14px;font-weight:700;letter-spacing:0;border-bottom:1.5px solid var(--ink)}
+.pf{display:grid;gap:10px;width:100%}
+.pf .row{display:flex;gap:8px;flex-wrap:wrap}
+.pf input[type=email]{flex:1 1 200px;min-width:0;font:600 16px Manrope,system-ui,sans-serif;padding:14px 18px;border-radius:999px;border:1.5px solid #3a3a3a;background:#1d1d1d;color:#fff}
+.pf input[type=email]:focus{outline:2px solid var(--lime);outline-offset:1px}
+.pf .btn{cursor:pointer;font-family:inherit}
+.pf .btn:disabled{opacity:.6;cursor:default}
+.pf label{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.4;color:#a9a497}
+.pf label input{margin-top:2px;accent-color:var(--lime)}
+.pf label a{color:#d9d4c8}
+.pf .msg{font-size:14px;font-weight:700;color:var(--lime);min-height:1.2em}
+.pied{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
+.pied a{color:var(--mut)}
+/* apparition */
+.m{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.m.vu{opacity:1;transform:none}
+@media(min-width:860px){
+ .top{grid-template-columns:1.1fr .9fr;align-items:end;padding-top:46px}
+ .recois{grid-template-columns:1fr 1fr 1fr}.recois .carte{flex-direction:column;align-items:flex-start}.recois .carte .vis{width:100%;height:150px}
+ .avant{grid-template-columns:repeat(4,1fr)}
+ .install{grid-template-columns:1fr 1fr}
+ .duo{grid-template-columns:1fr 1fr}
+ .fin{grid-template-columns:1fr auto;align-items:center}
+}
+@media(max-width:520px){.et .rond{width:52px;height:52px}.etapes:before,.etapes .rail{top:25px}.et b{font-size:12.5px}.et small{font-size:11px}.carte .vis{width:96px;height:96px}}
+@media(prefers-reduced-motion:reduce){.m,.q,.et .rond{transition:none}.m{opacity:1;transform:none}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15l2.5 2.5L16 13"/></symbol>
+ <symbol id="hor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+ <symbol id="etoile" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.9 6.6 19.8l1.1-6.1L3.2 9.4l6.1-.8z"/></symbol>
+ <symbol id="roue" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 5v16M4 13h16M6.3 7.3l11.4 11.4M17.7 7.3L6.3 18.7"/><path d="M10 2h4l-2 3z"/></symbol>
+ <symbol id="euro" viewBox="0 0 24 24"><path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/></symbol>
+ <symbol id="main" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.5 15a1.5 1.5 0 0 1 2.5-1.7L8 15"/></symbol>
+ <symbol id="bouclier" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+ <symbol id="loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 11l2 2 3.5-4"/></symbol>
+ <symbol id="retour" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/></symbol>
+ <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+</svg>
+<main class="page">
+ <nav class="bar" aria-label="Navigation"><a href="/" aria-label="melnourdi, accueil">melnourdi<span>.</span></a><a class="bk" href="/#kits">Tous les kits</a></nav>
+ <header class="top">
+  <div style="display:grid;gap:16px">
+   <span class="badge m"><b>★</b>Kit Avis Google</span>
+   <h1 class="m">La méthode qui m'a fait <mark>doubler mes avis Google,</mark> installée dans ton business.</h1>
+  </div>
+  <div style="display:grid;gap:16px">
+   <div class="faits m">
+    <span class="fait"><svg class="i"><use href="#hor"/></svg>Installé en 10 min</span>
+    <span class="fait"><svg class="i"><use href="#euro"/></svg>0 € par mois</span>
+    <span class="fait"><svg class="i"><use href="#main"/></svg>Zéro technique</span>
+   </div>
+   <div class="cta m"><a class="btn" href="#prevenir">Préviens-moi</a><span class="prix">67 €<small>une seule fois</small></span></div>
+  </div>
+ </header>
+
+ <h2 class="m">Ce que ça change pour toi</h2>
+ <div class="avant">
+  <div class="av m"><svg class="i"><use href="#etoile"/></svg><b>Plus d'avis, sans y penser</b></div>
+  <div class="av m"><svg class="i"><use href="#loupe"/></svg><b>Mieux classé sur Google</b></div>
+  <div class="av m"><svg class="i"><use href="#retour"/></svg><b>Des clients qui reviennent</b></div>
+  <div class="av m"><svg class="i"><use href="#main"/></svg><b>Rien à faire au quotidien</b></div>
+ </div>
+ <p class="src m">Google le dit : « Plus vous obtenez d'avis et de notes positives, plus votre établissement grimpe dans le classement local. » <a href="https://support.google.com/business/answer/7091?hl=fr">Aide Google</a></p>
+
+ <h2 class="m">Ce que contient le kit</h2>
+ <div class="recois">
+  <div class="carte m"><div class="vis"><svg class="i" style="width:46px;height:46px"><use href="#etoile"/></svg></div><div><span class="num">1</span><h3>Ma méthode pour augmenter tes avis</h3><p>Celle qui m'a fait doubler mes avis, adaptée à ton métier.</p></div></div>
+  <div class="carte m"><div class="vis"><svg class="i" style="width:46px;height:46px"><use href="#cal"/></svg></div><div><span class="num">2</span><h3>L'envoi automatique</h3><p>Réglé selon ton outil : ton logiciel de réservation, ton Google Agenda ou ton autre logiciel.</p></div></div>
+  <div class="carte m"><div class="vis"><div class="qr"></div></div><div><span class="num">3</span><h3>Ton QR code à imprimer</h3><p>Pour demander les avis sur place, si tu reçois tes clients.</p></div></div>
+ </div>
+
+ <h2 class="m">L'installation : tu cliques, c'est tout</h2>
+ <div class="install">
+  <div class="pile m" id="pile">
+   <div class="q"><b>Présente-toi en une phrase</b><small>Question 1 sur 8</small><div class="bt"><span class="ok">Hugo, coach</span></div></div>
+   <div class="q"><b>As-tu le logiciel de réservation Mel&nbsp;Nourdi&nbsp;?</b><small>Question 2 sur 8</small><div class="bt"><span>Oui</span><span class="ok">Non</span></div></div>
+   <div class="q"><b>Tu dis tu ou vous à tes clients&nbsp;?</b><small>Question 3 sur 8</small><div class="bt"><span class="ok">Je dis tu</span><span>Je dis vous</span></div></div>
+   <div class="q"><b>Où sont tes rendez-vous&nbsp;?</b><small>Question 8 sur 8</small><div class="bt"><span class="ok">Google Agenda</span><span>Autre logiciel</span><span>Agenda papier</span></div></div>
+  </div>
+  <div class="liste m">
+   <div><i>1</i>Tu importes le kit dans Claude</div>
+   <div><i>2</i>Tu écris « Installe mon kit avis »</div>
+   <div><i>3</i>8 questions, tu cliques tes réponses</div>
+   <div><i>4</i>Tout est prêt, à ton nom et à tes couleurs</div>
+  </div>
+ </div>
+
+ <h2 class="m">Ce qu'il te faut</h2>
+ <div class="duo">
+  <div class="bloc m"><svg class="i"><use href="#chat"/></svg><div><b>Un compte Claude</b><p>En plus, idéalement, un compte Google.</p></div></div>
+  <div class="bloc m"><svg class="i"><use href="#bouclier"/></svg><div><b>Conforme aux règles Google</b><p>La méthode respecte les règles de Google sur les avis. Ta fiche ne risque rien.</p></div></div>
+ </div>
+
+ <div class="fin m" id="prevenir">
+  <div><h2>Kit Avis Google</h2><p>67 €, une seule fois. Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p></div>
+  <form class="pf" novalidate>
+   <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+   <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+   <div class="msg" role="status"></div>
+  </form>
+ </div>
+ <footer class="pied"><a href="/">melnourdi.fr</a><a href="/mentions-legales">Mentions légales</a><a href="/confidentialite">Confidentialité</a></footer>
+</main>
+<script>
+const red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// apparition au défilement
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.m').forEach((el,i)=>{el.style.transitionDelay=(el.closest('header')?i*90:0)+'ms';io.observe(el)});
+// frise : les étapes s'allument une à une, en boucle
+const ets=[...document.querySelectorAll('.et')],rail=document.getElementById('rail');let k=0;
+function pas(){if(!rail)return;ets.forEach((e,i)=>e.classList.toggle('on',i===k));rail.style.width=(k/(ets.length-1))*76+'%';rail.style.transition=k?'width .6s':'none';k=(k+1)%ets.length}
+pas();if(!red)setInterval(pas,1300);
+// questions : une carte après l'autre
+const qs=[...document.querySelectorAll('.q')];let j=0;
+function q(){qs.forEach((e,i)=>e.classList.toggle('on',i===j));j=(j+1)%qs.length}
+q();if(!red)setInterval(q,1800);
+// Préviens-moi : liste d'attente du kit
+const f=document.querySelector('.pf'),msg=f.querySelector('.msg');
+f.addEventListener('submit',async e=>{e.preventDefault();
+ const email=f.email.value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){msg.textContent='Vérifie ton email.';return}
+ if(!f.ok.checked){msg.textContent='Coche la case pour être prévenu.';return}
+ const b=f.querySelector('button');b.disabled=true;msg.textContent='Un instant…';
+ try{const r=await fetch('/api/inscription',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,consentement:true,source:'attente-kit-avis'})});
+  const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.message||'');
+  msg.textContent='C’est noté ✓ Tu seras prévenu en premier.';f.reset();if(window.mnStat)window.mnStat('attente_kit-avis');
+ }catch(err){msg.textContent=(err&&err.message)||'Ça n’a pas marché. Réessaie dans un instant.'}
+ b.disabled=false});
+document.querySelectorAll('a[href="#prevenir"]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>f.email.focus({preventScroll:true}),500)));
+</script>
+<script src="/melnourdi/mn-stats.js" defer></script>
+</body></html>
