@@ -418,6 +418,50 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 .icon-library{position:absolute;width:0;height:0;overflow:hidden}
 </style>
 <style>
+/* Scène « fiche Google qui se remplit d'avis » (kit Avis) */
+@property --nb{syntax:'<integer>';inherits:false;initial-value:23}
+.gf{--star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z'/%3E%3C/svg%3E");position:absolute;inset:0;background:var(--cream);padding:18px 14px 0;overflow:hidden}
+.gf-q{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:14px;font-weight:600;color:var(--muted)}
+.gf-q svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.gf-card{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 16px 14px;position:relative}
+.gf-ex{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+.gf-n{font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.gf-c{font-size:13px;color:var(--muted);margin-top:3px}
+.gf-r{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:15px;font-weight:800}
+.gf-st{display:inline-flex;gap:2px}
+.gf-st i{width:15px;height:15px;display:block;background:#E6E1D6;-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+.gf-r .gf-st i{background:#F4B400}
+.gf-cnt{color:var(--muted);font-weight:700;font-size:14px;animation:gfcnt 10s infinite both;counter-reset:nb var(--nb)}
+.gf-cnt::before{content:"(" counter(nb) " avis)"}
+.gf-bars{margin-top:10px;display:grid;gap:5px}
+.gf-bars div{display:grid;grid-template-columns:10px 1fr;gap:8px;align-items:center;font-size:11px;font-weight:700;color:var(--muted)}
+.gf-bars span{height:7px;border-radius:9px;background:#EFEBE2;overflow:hidden}
+.gf-bars span b{display:block;height:100%;background:#F4B400;border-radius:9px}
+.gf-b5{animation:gfb5 10s infinite both}
+.gf-new{position:absolute;left:50%;top:-12px;transform:translateX(-50%);background:var(--ink);color:var(--lime);font-size:12px;font-weight:800;border-radius:999px;padding:5px 11px;white-space:nowrap;opacity:0;animation:gfnew 10s infinite both}
+.gf-list{margin-top:3px;display:flex;flex-direction:column}
+.gf-av{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 13px;opacity:0;max-height:0;margin-top:0;overflow:hidden;animation:10s infinite both}
+.gf-av header{display:flex;align-items:center;gap:9px}
+.gf-av em{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:12px;background:var(--lime);color:var(--ink)}
+.gf-av b{font-size:13.5px;display:block;line-height:1.1}
+.gf-av small{font-size:11px;color:var(--muted)}
+.gf-av p{margin:7px 0 0;font-size:13px;line-height:1.35}
+.gf-av .gf-st{margin-top:6px}
+.gf-av .gf-st i{animation:10s infinite both}
+.gf-v1{animation-name:gfv1}.gf-v2{animation-name:gfv2}.gf-v3{animation-name:gfv3}
+.gf-v1 .gf-st i{animation-name:gfs1}.gf-v2 .gf-st i{animation-name:gfs2}.gf-v3 .gf-st i{animation-name:gfs3}
+.gf-av .gf-st i:nth-child(2){animation-delay:.08s}.gf-av .gf-st i:nth-child(3){animation-delay:.16s}.gf-av .gf-st i:nth-child(4){animation-delay:.24s}.gf-av .gf-st i:nth-child(5){animation-delay:.32s}
+@keyframes gfcnt{0%,6%{--nb:23}88%,100%{--nb:148}}
+@keyframes gfb5{0%,6%{width:52%}88%,100%{width:94%}}
+@keyframes gfnew{0%,10%{opacity:0;transform:translate(-50%,6px) scale(.8)}13%{opacity:1;transform:translate(-50%,0) scale(1.08)}15%,30%{opacity:1;transform:translate(-50%,0)}33%,40%{opacity:0}43%{opacity:1;transform:translate(-50%,0) scale(1.08)}45%,60%{opacity:1;transform:translate(-50%,0)}63%,70%{opacity:0}73%{opacity:1;transform:translate(-50%,0) scale(1.08)}75%,92%{opacity:1;transform:translate(-50%,0)}96%,100%{opacity:0}}
+@keyframes gfv1{0%,8%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}13%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfv2{0%,38%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}43%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfv3{0%,68%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}73%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfs1{0%,12%{background:#E6E1D6;transform:scale(.6)}15%{transform:scale(1.25)}17%,100%{background:#F4B400;transform:none}}
+@keyframes gfs2{0%,42%{background:#E6E1D6;transform:scale(.6)}45%{transform:scale(1.25)}47%,100%{background:#F4B400;transform:none}}
+@keyframes gfs3{0%,72%{background:#E6E1D6;transform:scale(.6)}75%{transform:scale(1.25)}77%,100%{background:#F4B400;transform:none}}
+@media(prefers-reduced-motion:reduce){.gf *{animation:none!important}.gf-av,.gf-new{opacity:1}.gf-av{max-height:none;margin-top:9px;padding:11px 13px}.gf-av .gf-st i{background:#F4B400}.gf-cnt{--nb:148}.gf-b5{width:94%}}
+
 /* Fenêtre de présentation d'un kit (clic sur une carte) */
 .kcard{cursor:pointer}
 .kcard .kopen{font:inherit;border:0;cursor:pointer}
@@ -540,16 +584,19 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
     </div>
     <div class="kit-rail rv-st" id="rail">
       <article id="kit-avis" class="kcard">
-        <div class="thumb"><div class="stage2" aria-label="Le mail cadeau part 24 h après le rendez-vous et le client fait tourner la roue" role="img">
-          <div class="L a1"><div class="hd">Aujourd'hui</div>
-            <div class="rdv"><b>Léa</b><span>14 h · Pose gel</span><em class="s1">Prévu</em><em class="s2">Fait ✓</em></div>
-            <div class="rdv"><b>Sarah</b><span>16 h · Remplissage</span><em class="s0">Prévu</em></div>
-            <div class="rdv"><b>Inès</b><span>17 h 30 · Nail art</span><em class="s0">Prévu</em></div>
-            <div class="hint">Tu marques le RDV « Fait ».<br>Le kit s'occupe du reste.</div></div>
-          <div class="L a2"><span>24 h plus tard</span></div>
-          <div class="L a3"><div class="time">10:24</div><div class="notif"><b>Studio Lumière</b>Une petite attention pour toi 🎁</div></div>
-          <div class="L a4"><div class="mt">Un petit tour.<br>Une surprise pour toi.</div><img class="wheel" src="assets/kit-roue.png" alt="" loading="lazy"><div class="won">🎉 Gagné : 10 € de remise</div></div>
-        </div></div>
+        <div class="thumb"><div class="stage2"><div class="gf" role="img" aria-label="Exemple : une fiche Google qui reçoit de plus en plus d'avis 5 étoiles">
+  <div class="gf-q"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>studio lumière<span class="gf-ex">Exemple</span></div>
+  <div class="gf-card"><span class="gf-new">+1 avis ★★★★★</span>
+    <div class="gf-n">Studio Lumière</div><div class="gf-c">Institut de beauté · Lyon</div>
+    <div class="gf-r">4,9 <span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><span class="gf-cnt"></span></div>
+    <div class="gf-bars"><div>5<span><b class="gf-b5"></b></span></div><div>4<span><b style="width:9%"></b></span></div><div>3<span><b style="width:3%"></b></span></div></div>
+  </div>
+  <div class="gf-list">
+    <div class="gf-av gf-v3"><header><em>N</em><div><b>Nadia</b><small>à l'instant</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Super accueil, résultat parfait. Je reviens !</p></div>
+    <div class="gf-av gf-v2"><header><em>T</em><div><b>Thomas</b><small>il y a 2 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Pro, à l'écoute et ponctuelle.</p></div>
+    <div class="gf-av gf-v1"><header><em>C</em><div><b>Camille</b><small>il y a 5 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Je recommande les yeux fermés.</p></div>
+  </div>
+</div></div></div>
         <div class="kbody"><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
