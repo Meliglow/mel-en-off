@@ -62,7 +62,7 @@ html{scroll-behavior:smooth}
 .h-tag i{position:relative;width:9px;height:9px;border-radius:50%;background:var(--ink)}
 .h-tag i::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--lime-deep);animation:ping 2s var(--ease) infinite}
 @keyframes ping{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.5);opacity:0}}
-.h1x{font-size:clamp(1.95rem,8.6vw,3.4rem);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:16px 0 0}
+.h1x{font-size:clamp(1.8rem,7.6vw,3.4rem);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:16px 0 0}
 .h1x .ln{display:block;overflow:hidden;padding-bottom:.2em;margin-bottom:-.2em}
 .h1x .ln>span{display:inline-block;transform:translateY(105%) rotate(4deg);transform-origin:0 100%;animation:lineUp .95s var(--ease) forwards}
 .h1x .ln:nth-child(2)>span{animation-delay:.09s}.h1x .ln:nth-child(3)>span{animation-delay:.18s}.h1x .ln:nth-child(4)>span{animation-delay:.27s}
@@ -130,7 +130,7 @@ html{scroll-behavior:smooth}
 .fc2{right:-22px;bottom:18%;animation:fc 6s ease-in-out infinite -3s}
 @keyframes fc{50%{transform:translateY(-12px)}}
 
-.h1x .ln.sm{font-size:.52em;letter-spacing:-.035em;margin-top:.25em;color:var(--muted)}
+.h1x .ln.sm{font-size:.74em;letter-spacing:-.035em;margin-top:.25em;color:var(--muted)}
 .h-link{font-weight:750;font-size:.92rem;color:var(--ink);text-underline-offset:5px;text-decoration-thickness:2px;text-decoration-color:var(--lime-deep)}
 .day{position:absolute;inset:0;padding:52px 16px 16px;display:flex;flex-direction:column;gap:8px}
 .day .hd2{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
@@ -370,7 +370,7 @@ footer .wrap{align-items:center}
   .ia-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:3px;border-radius:3px;background:var(--lime);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
   .ia-nav a:hover::after{transform:scaleX(1);transform-origin:left}
   .ia{padding:0 28px}
-  .hero2{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;padding:70px 0 10px;gap:40px}
+  .hero2{display:block;padding:80px 0 10px;text-align:center}.hero2>div{max-width:820px;margin:0 auto}.hero2 .h-tag{margin:0 auto}.hero2 .h-sub{margin-left:auto;margin-right:auto}.hero2 .h-ticks{justify-content:center;display:flex;gap:10px 22px}.hero2 .h-cta{justify-content:center}
   .h1x{font-size:clamp(2.4rem,3.6vw,3.5rem)}
   .h-sub{font-size:1.02rem}
   .mq{margin:80px -28px 0}
@@ -511,6 +511,65 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
 .rev-tip b{color:var(--lime)}
 .rev-f{display:flex;justify-content:space-between;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.78rem;color:var(--soft)}
 @media(min-width:920px){.moi-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center}}
+/* v3 : roue, pack, chiffres, avis */
+.a4{background:var(--ink)!important}
+.ml{margin:26px 14px 0;background:var(--cream);border-radius:22px;padding:18px 14px 16px;text-align:center}
+.ml-from{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ml .mt{color:var(--ink);font-size:21px;margin-top:8px}
+.wh2{position:relative;width:206px;height:206px;margin:16px auto 0}
+.wh-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 14px 22px rgba(22,22,22,.3))}
+.wh-svg text{font:800 11px Manrope,sans-serif;text-anchor:middle;dominant-baseline:middle}
+.wh-rot{transform-origin:100px 100px;animation:10s infinite both whspin}
+.wh-ptr{position:absolute;top:-8px;left:50%;width:26px;height:22px;transform:translateX(-50%);z-index:2;animation:10s infinite both whptr}
+.wl0{fill:#E8F06E;animation:.5s steps(1) infinite wl}.wl1{fill:#F9F7F2;opacity:.5;animation:.5s steps(1) infinite wl2}
+@keyframes wl{50%{opacity:.35}}@keyframes wl2{50%{opacity:1}}
+@keyframes whspin{0%,58%{transform:rotate(0)}82%,100%{transform:rotate(1440deg)}}
+@keyframes whptr{0%,58%{transform:translateX(-50%) rotate(0)}60%,78%{transform:translateX(-50%) rotate(-12deg)}82%,100%{transform:translateX(-50%) rotate(0)}}
+.ml .won{margin:14px 6px 0;font-size:15px;padding:11px}
+/* pack */
+.pack{margin-top:22px;cursor:pointer;background:var(--ink)!important;color:#fff;border-color:var(--ink)!important;padding:22px;display:grid;gap:18px}
+.pk-tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--lime);border-radius:999px;padding:5px 10px}
+.pack h3{font-size:clamp(1.5rem,5vw,2rem)!important;margin:12px 0 0;color:#fff}
+.pk-l p{margin:8px 0 0;color:#cfcabd;line-height:1.5}
+.pk-ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pk-ul li{display:flex;justify-content:space-between;gap:12px;background:#232323;border-radius:14px;padding:11px 14px;font-weight:700;font-size:.95rem}
+.pk-ul s{color:#8f8a7f}.pk-ul b{color:var(--lime)}
+.pk-r{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.pk-old{color:#8f8a7f;text-decoration:line-through;font-weight:700}
+.pk-new{font-size:2.2rem;font-weight:800;letter-spacing:-.04em}
+.pk-save{font-size:.8rem;font-weight:800;color:var(--ink);background:var(--lime);border-radius:999px;padding:4px 10px}
+.pk-r .pill-btn{flex-basis:100%;padding:16px 22px}
+@media(min-width:920px){.pack{grid-template-columns:1.1fr 1fr .8fr;align-items:center;padding:30px;gap:30px}.pk-r .pill-btn{flex-basis:auto}}
+/* chiffres */
+section.nums{padding:0;min-height:0}
+.nums{margin:64px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.nums div{background:var(--surface);padding:20px 16px;text-align:center;display:grid;gap:2px}
+.nums b{font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;letter-spacing:-.04em}
+.nums span{font-size:.82rem;color:var(--muted);font-weight:600}
+@media(min-width:920px){.nums{grid-template-columns:repeat(4,1fr)}}
+/* avis */
+.avis2{margin:80px -16px 0;padding:70px 16px;background:var(--ink);color:#fff}
+.avis2 .ia-in{max-width:1120px;margin:0 auto}
+.avis2 .eyebrow2{color:#a9a497}
+.avis2 h2{color:#fff;margin-top:8px}
+.avis-note{color:#a9a497;margin:10px 0 0;font-size:.9rem;max-width:36em}
+.av-rail{margin-top:28px;display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.av-card{scroll-snap-align:start;text-align:left;font:inherit;color:inherit;border:0;padding:0;cursor:pointer;background:#fff;color:var(--ink);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .4s var(--ease)}
+.av-card:hover{transform:translateY(-4px)}
+.av-img{position:relative;display:block;height:230px;background-size:cover;background-position:top center}
+.av-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,22,22,.05) 15%,rgba(22,22,22,.92) 88%)}
+.av-big{position:relative;margin-top:-58px;padding:0 18px;color:#fff;font-size:2.2rem;font-weight:800;letter-spacing:-.04em;z-index:1}
+.av-b{display:grid;gap:3px;padding:14px 18px 18px}
+.av-b b{font-size:1.05rem}.av-b small{color:var(--muted);font-weight:600}
+.av-b>span{margin-top:8px;padding-top:10px;border-top:1px solid var(--line);font-size:.95rem;line-height:1.45}
+.av-b em{font-style:normal;font-weight:800;background:var(--lime);border-radius:4px;padding:0 3px}
+.av-dlg{border:0;padding:0;background:transparent;max-width:min(420px,92vw);max-height:90dvh;overflow:visible}
+.av-dlg::backdrop{background:rgba(22,22,22,.7);backdrop-filter:blur(4px)}
+.av-dlg img{display:block;width:100%;height:auto;max-height:86dvh;object-fit:contain;border-radius:18px}
+.av-dlg .kw-x{top:-46px;right:0}
+@media(min-width:920px){.avis2{margin:110px calc(50% - 50vw) 0;padding:100px 28px}.av-rail{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,360px));overflow:visible}}
+.kw-vis:empty{display:none}
+@media(min-width:760px){.kw-p.novis{grid-template-columns:1fr;width:min(620px,100%)}}
 </style>
 </head>
 <body>
@@ -538,52 +597,28 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
   <section class="hero2" aria-labelledby="titre">
     <div>
       <p class="h-tag fade-up"><i></i>Pour tous les indépendants</p>
-      <h1 class="h1x" id="titre" aria-label="Gagne du temps et de l’argent grâce à ma méthode IA, même si t’es nul en tech.">
+      <h1 class="h1x" id="titre" aria-label="Gagne du temps et de l’argent grâce à ma méthode IA même si t’es nul en tech.">
         <span class="ln" aria-hidden="true"><span>Gagne du temps</span></span>
         <span class="ln" aria-hidden="true"><span>et de l’argent</span></span>
-        <span class="ln" aria-hidden="true"><span>grâce à ma méthode IA,</span></span>
+        <span class="ln" aria-hidden="true"><span>grâce à ma méthode IA</span></span>
         <span class="ln sm" aria-hidden="true"><span><span class="mk">même si t’es nul en tech</span>.</span></span>
       </h1>
-      <p class="h-sub fade-up" style="animation-delay:.45s">Je crée des <b>kits</b> que tu ajoutes à Claude, l’IA gratuite. Chaque kit fait une tâche à ta place&nbsp;: tes devis, tes relances, tes avis Google, tes rappels de rendez-vous, ton admin.</p>
-      <ul class="h-ticks fade-up" style="animation-delay:.6s"><li>Zéro technique</li><li>Avec Claude gratuit</li><li>Installé en 10 minutes</li><li>Paiement unique</li></ul>
+      <p class="h-sub fade-up" style="animation-delay:.45s">Un kit, ce n’est pas une liste d’astuces. C’est <b>ma méthode, installée dans ton Claude</b>&nbsp;: il te pose les bonnes questions, puis il fait la tâche à ta façon. Tes devis, tes relances, tes avis Google, tes rappels de rendez-vous, ton admin.</p>
+      <ul class="h-ticks fade-up" style="animation-delay:.6s"><li>0 technique</li><li>Installé en moins de 10 minutes</li></ul>
       <div class="h-cta fade-up" style="animation-delay:.75s">
         <a class="pill-btn lime shine" href="#kits" data-magnet>Voir les kits <span class="ar"><svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
         <a class="h-link" href="#comment">Comment ça marche&nbsp;?</a>
       </div>
     </div>
 
-    <div class="dev fade-up" aria-hidden="true">
-      <span class="float-chip fc1"><b>IA</b>Claude gratuit</span>
-      <span class="float-chip fc2"><b>10′</b>Installé</span>
-      <div class="dev-s">
-        <div class="day">
-          <span class="hd2">Aujourd’hui</span><h4>Ce que ton IA a fait pour toi</h4>
-          <div class="dl dl1"><b>✓</b><span>Devis envoyé à Julie<small>Kit devis pro</small></span></div>
-          <div class="dl dl2"><b>✓</b><span>Facture relancée, avec tes mots<small>Kit fini les impayés</small></span></div>
-          <div class="dl dl3"><b>✓</b><span>Rappel pour le RDV de demain<small>Kit fini les lapins</small></span></div>
-          <div class="dl dl4"><b>✓</b><span>Mail cadeau envoyé après le RDV<small>Kit avis Google</small></span></div>
-          <div class="dl dl5"><b>✓</b><span>Planning de la semaine prêt<small>Hub bureau en ordre</small></span></div>
-          <div class="ready">Toi, tu as fait ton métier ✓</div>
-        </div>
-      </div>
-    </div>
   </section>
 
-  <div class="mq" aria-label="Ce que les kits font à ta place">
-    <div class="mq-row">
-      <a href="#kit-devis"><i>1</i>Faire tes devis</a><a href="#kit-impayes"><i>2</i>Relancer tes factures</a><a href="#kit-avis"><i>3</i>Avoir plus d’avis Google</a><a href="#kit-lapins"><i>4</i>Éviter les lapins</a><a href="#kit-hub"><i>5</i>Organiser ta semaine</a>
-    </div>
-    <div class="mq-row rev">
-      <a href="#kit-hub"><i>6</i>Ranger ton admin</a><a href="#kit-devis"><i>7</i>Faire signer en ligne</a><a href="#kit-impayes"><i>8</i>Te faire payer</a><a href="#kit-lapins"><i>9</i>Rappeler tes rendez-vous</a><a href="#kit-avis"><i>10</i>Remercier tes clients</a>
-    </div>
-  </div>
-  <p class="mq-lbl">Des tâches qui disparaissent de ta semaine.</p>
 
   <section class="ia-sec" id="kits" aria-labelledby="kits-titre">
     <div class="kits-head rv">
       <span class="eyebrow2">Les kits</span>
       <h2 id="kits-titre">Ton IA fait le travail. <em>Toi, tu encaisses.</em></h2>
-      <p class="ia-lead">Un kit = une tâche qui disparaît de ta semaine. Choisis celui qui te soulage le plus. Tous marchent avec Claude gratuit.</p>
+      <p class="ia-lead">Un kit = une tâche qui disparaît de ta semaine. Choisis celui qui te soulage le plus.</p>
     </div>
     <div class="kit-rail rv-st" id="rail">
       <article id="kit-avis" class="kcard">
@@ -594,11 +629,11 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
             <div class="rdv"><b>Inès</b><span>17 h 30 · Nail art</span><em class="s0">Prévu</em></div>
             <div class="hint">Tu marques le RDV « Fait ».<br>Le kit s'occupe du reste.</div></div>
           <div class="L a2"><span>24 h plus tard</span></div>
-          <div class="L a3"><div class="time">10:24</div><div class="notif"><b>Studio Lumière</b>Une petite attention pour toi 🎁</div></div>
-          <div class="L a4"><div class="mt">Un petit tour.<br>Une surprise pour toi.</div><img class="wheel" src="assets/kit-roue.png" alt="" loading="lazy"><div class="won">🎉 Gagné : 10 € de remise</div></div>
+          <div class="L a3"><div class="time">10:24</div><div class="notif"><b>Studio Lumière</b>Une petite attention pour toi</div></div>
+          <div class="L a4"><div class="ml"><span class="ml-from">Studio Lumière</span><div class="mt">Un petit tour.<br>Une surprise pour toi.</div><div class="wh2"><svg class="wh-ptr" viewBox="0 0 24 20" aria-hidden="true"><path d="M12 20 2 2h20z" fill="#E8F06E" stroke="#161616" stroke-width="2" stroke-linejoin="round"/></svg><svg class="wh-svg" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="99" fill="#161616"/><circle class="wl0" cx="196.0" cy="100.0" r="2.6"/><circle class="wl1" cx="192.7" cy="124.8" r="2.6"/><circle class="wl0" cx="183.1" cy="148.0" r="2.6"/><circle class="wl1" cx="167.9" cy="167.9" r="2.6"/><circle class="wl0" cx="148.0" cy="183.1" r="2.6"/><circle class="wl1" cx="124.8" cy="192.7" r="2.6"/><circle class="wl0" cx="100.0" cy="196.0" r="2.6"/><circle class="wl1" cx="75.2" cy="192.7" r="2.6"/><circle class="wl0" cx="52.0" cy="183.1" r="2.6"/><circle class="wl1" cx="32.1" cy="167.9" r="2.6"/><circle class="wl0" cx="16.9" cy="148.0" r="2.6"/><circle class="wl1" cx="7.3" cy="124.8" r="2.6"/><circle class="wl0" cx="4.0" cy="100.0" r="2.6"/><circle class="wl1" cx="7.3" cy="75.2" r="2.6"/><circle class="wl0" cx="16.9" cy="52.0" r="2.6"/><circle class="wl1" cx="32.1" cy="32.1" r="2.6"/><circle class="wl0" cx="52.0" cy="16.9" r="2.6"/><circle class="wl1" cx="75.2" cy="7.3" r="2.6"/><circle class="wl0" cx="100.0" cy="4.0" r="2.6"/><circle class="wl1" cx="124.8" cy="7.3" r="2.6"/><circle class="wl0" cx="148.0" cy="16.9" r="2.6"/><circle class="wl1" cx="167.9" cy="32.1" r="2.6"/><circle class="wl0" cx="183.1" cy="52.0" r="2.6"/><circle class="wl1" cx="192.7" cy="75.2" r="2.6"/><g class="wh-rot"><path d="M100 100L55.0 22.1A90 90 0 0 1 145.0 22.1Z" fill="#E8F06E"/><text x="100.0" y="42.0" fill="#161616" transform="rotate(0 100.0 42.0)">−10 €</text><path d="M100 100L145.0 22.1A90 90 0 0 1 190.0 100.0Z" fill="#F9F7F2"/><text x="150.2" y="71.0" fill="#161616" transform="rotate(60 150.2 71.0)">Mini-soin</text><path d="M100 100L190.0 100.0A90 90 0 0 1 145.0 177.9Z" fill="#2a2a2a"/><text x="150.2" y="129.0" fill="#F9F7F2" transform="rotate(120 150.2 129.0)">−5 €</text><path d="M100 100L145.0 177.9A90 90 0 0 1 55.0 177.9Z" fill="#E8F06E"/><text x="100.0" y="158.0" fill="#161616" transform="rotate(180 100.0 158.0)">Surprise</text><path d="M100 100L55.0 177.9A90 90 0 0 1 10.0 100.0Z" fill="#F9F7F2"/><text x="49.8" y="129.0" fill="#161616" transform="rotate(240 49.8 129.0)">−15 %</text><path d="M100 100L10.0 100.0A90 90 0 0 1 55.0 22.1Z" fill="#2a2a2a"/><text x="49.8" y="71.0" fill="#F9F7F2" transform="rotate(300 49.8 71.0)">Cadeau</text><g stroke="#161616" stroke-width="1.5"><line x1="100" y1="100" x2="55.0" y2="22.1"/><line x1="100" y1="100" x2="145.0" y2="22.1"/><line x1="100" y1="100" x2="190.0" y2="100.0"/><line x1="100" y1="100" x2="145.0" y2="177.9"/><line x1="100" y1="100" x2="55.0" y2="177.9"/><line x1="100" y1="100" x2="10.0" y2="100.0"/></g></g><circle cx="100" cy="100" r="17" fill="#161616" stroke="#E8F06E" stroke-width="3"/><path d="M100 91l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z" fill="#E8F06E"/></svg></div><div class="won">Gagné&nbsp;: −10&nbsp;€ sur ta prochaine séance</div></div></div>
         </div></div>
         <div class="kbody"><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-devis" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="Le kit transforme la demande du client en devis, envoyé puis signé" role="img">
@@ -609,7 +644,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="L d3"><div class="chip c1">Envoyé ✓</div><div class="chip c2">Relance J+3 prête</div><div class="chip c3">Signé · Bon pour accord ✓</div></div>
         </div></div>
         <div class="kbody"><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-impayes" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="La facture en retard est relancée toute seule, puis payée" role="img"><div class="gs">
@@ -621,7 +656,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="big g4">+ 450 € encaissés</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si tu n’oses pas relancer</span><h3>Kit fini les impayés</h3><p class="klead">Tu te fais payer sans courir après tes clients.</p><p class="kdesc">Relances automatiques dans ton style. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-lapins" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="Le rappel part la veille, le client confirme, zéro lapin" role="img"><div class="gs">
@@ -633,7 +668,19 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="big g5">0 lapin</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si tes clients oublient leur RDV</span><h3>Kit fini les lapins</h3><p class="klead">Moins de rendez-vous manqués, sans te fâcher avec tes clients.</p><p class="kdesc">Ta règle d'annulation et tes rappels, dans ton style. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
+      </article>
+      <article id="kit-resa" class="kcard">
+        <div class="thumb"><div class="stage2" aria-label="Le client réserve en ligne, paie l’acompte, et le rendez-vous arrive dans ton agenda" role="img"><div class="gs">
+          <div class="t">Ta page de réservation</div><div class="st2">Tes clients réservent chez toi, 24 h/24</div>
+          <div class="row g1"><span>Jeudi 14 h<small>Pose gel · 45 min</small></span><span class="pl y">Choisi ✓</span></div>
+          <div class="row g2"><span>Acompte<small>Payé en ligne</small></span><span class="pl k">20 € ✓</span></div>
+          <div class="bub ai g3">Nouveau RDV : Léa, jeudi 14 h. Rappel programmé ✓</div>
+          <div class="lab g4">Commission</div>
+          <div class="big g5">0 %</div>
+        </div></div></div>
+        <div class="kbody"><span class="kk">Si tu dépends d’une plateforme</span><h3>Kit logiciel de réservation</h3><p class="klead">Tes clients réservent chez toi, pas chez tes concurrents.</p><p class="kdesc">Ta page à ton nom, acomptes et rappels. 0&nbsp;% de commission.</p>
+          <div class="krow"><span class="kprice"><b>160&nbsp;€</b></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-hub" class="kcard hub">
         <div class="thumb"><div class="stage2" aria-label="La checklist de la semaine se coche toute seule" role="img"><div class="shb">
@@ -646,11 +693,58 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="ok">Admin à jour ✓</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si ton admin est un bazar</span><h3>Hub bureau en ordre</h3><p class="klead">Ta semaine planifiée et ton admin à jour, sans y penser.</p><p class="kdesc">Planning de la semaine, checklists du mois, rappels des échéances, argent mis de côté.</p>
-          <div class="krow"><span class="kprice"><b>Bientôt</b><span>paiement unique</span></span><button class="pill-btn lime sm kopen" type="button">Voir le hub</button></div></div>
+          <div class="krow"><span class="kprice"><b>Bientôt</b></span><button class="pill-btn lime sm kopen" type="button">Voir le hub</button></div></div>
       </article>
     </div>
     <div class="rail-dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      <article class="pack kcard" id="kit-pack">
+      <div class="pk-l"><span class="pk-tag">L’offre complète</span><h3>Pack agenda plein</h3><p>Tes clients réservent chez toi, viennent à leurs rendez-vous et te laissent des avis.</p></div>
+      <ul class="pk-ul">
+        <li><span>Kit logiciel de réservation</span><b>160&nbsp;€</b></li>
+        <li><span>Kit avis Google</span><s>67&nbsp;€</s></li>
+        <li><span>Kit fini les lapins</span><s>67&nbsp;€</s></li>
+      </ul>
+      <div class="pk-r"><span class="pk-old">294&nbsp;€</span><span class="pk-new">197&nbsp;€</span><span class="pk-save">97&nbsp;€ d’économie</span><button class="pill-btn lime kopen" type="button">Je veux le pack</button></div>
+    </article>
   </section>
+
+
+  <section class="nums rv" aria-label="En chiffres">
+    <div><b>2021</b><span>entrepreneure depuis</span></div>
+    <div><b>6</b><span>kits pour ton business</span></div>
+    <div><b>&lt;&nbsp;10&nbsp;min</b><span>pour installer un kit</span></div>
+    <div><b>0&nbsp;%</b><span>de commission sur tes réservations</span></div>
+  </section>
+
+  <section class="avis2" id="avis" aria-labelledby="avis-titre">
+    <div class="ia-in">
+      <span class="eyebrow2">Ce qu’ils en disent</span>
+      <h2 id="avis-titre">Leurs messages, <em>tels quels.</em></h2>
+      <p class="avis-note">Messages reçus sur WhatsApp en novembre 2026, à propos du logiciel de réservation. Touche une carte pour lire le message.</p>
+      <div class="av-rail">
+        <button class="av-card" type="button" data-shot="/melnourdi/assets/mn-b8499efc6f.webp" data-alt="Message WhatsApp d’une cliente du 18 novembre 2026 : « Ça fait deux mois que je teste et j’ai réduit les lapins de moitié ! » et « le logiciel est hyper intuitif »">
+          <span class="av-img" style="background-image:url(/melnourdi/assets/mn-b8499efc6f.webp)"></span><span class="av-big">−50&nbsp;%</span>
+          <span class="av-b"><b>Une cliente</b><small>Logiciel de réservation, 2 mois</small><span><em>2 fois moins de lapins</em> en deux mois, et un logiciel «&nbsp;hyper intuitif&nbsp;».</span></span>
+        </button>
+        <button class="av-card" type="button" data-shot="/melnourdi/assets/mn-ae3e684b2e.webp" data-alt="Message WhatsApp de Camille du 20 novembre 2026 : « c’est une pépite ! Plus besoin de gérer les appels »">
+          <span class="av-img" style="background-image:url(/melnourdi/assets/mn-ae3e684b2e.webp)"></span><span class="av-big">0 appel</span>
+          <span class="av-b"><b>Camille</b><small>Logiciel de réservation</small><span>«&nbsp;C’est une pépite&nbsp;!&nbsp;» <em>Plus besoin de gérer les appels.</em></span></span>
+        </button>
+      </div>
+    </div>
+    <dialog class="av-dlg" id="av-dlg"><button class="kw-x" type="button" aria-label="Fermer">×</button><img alt=""></dialog>
+  </section>
+
+  <div class="mq" aria-label="Ce que les kits font à ta place">
+    <div class="mq-row">
+      <a href="#kit-devis"><i>1</i>Faire tes devis</a><a href="#kit-impayes"><i>2</i>Relancer tes factures</a><a href="#kit-avis"><i>3</i>Avoir plus d’avis Google</a><a href="#kit-lapins"><i>4</i>Éviter les lapins</a><a href="#kit-hub"><i>5</i>Organiser ta semaine</a>
+    </div>
+    <div class="mq-row rev">
+      <a href="#kit-hub"><i>6</i>Ranger ton admin</a><a href="#kit-devis"><i>7</i>Faire signer en ligne</a><a href="#kit-impayes"><i>8</i>Te faire payer</a><a href="#kit-lapins"><i>9</i>Rappeler tes rendez-vous</a><a href="#kit-avis"><i>10</i>Remercier tes clients</a>
+    </div>
+  </div>
+  <p class="mq-lbl">Des tâches qui disparaissent de ta semaine.</p>
+
 
   <section class="ia-sec pain" id="toi" aria-labelledby="pain-titre">
     <div class="rv">
@@ -681,7 +775,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
     </div>
     <ol class="steps2" id="steps">
       <li class="rv"><div class="sv"><div class="sv-k">Kit avis Google</div><div class="sv-k on">Kit devis pro <i>✓</i></div><div class="sv-k">Kit fini les impayés</div></div><div class="st-t"><b>1</b><h3>Choisis ton kit</h3></div><p>Celui de la tâche qui te prend le plus de temps.</p></li>
-      <li class="rv"><div class="sv"><div class="sv-f"><span class="sv-zip">ZIP</span>kit-devis-pro</div><div class="sv-ar">↓</div><div class="sv-c"><span class="sv-ia">IA</span>Claude <em>Ajouté ✓</em></div></div><div class="st-t"><b>2</b><h3>Ajoute-le à Claude</h3></div><p>Un fichier à importer en 1 minute. Le compte gratuit suffit.</p></li>
+      <li class="rv"><div class="sv"><div class="sv-f"><span class="sv-zip">ZIP</span>kit-devis-pro</div><div class="sv-ar">↓</div><div class="sv-c"><span class="sv-ia">IA</span>Claude <em>Ajouté ✓</em></div></div><div class="st-t"><b>2</b><h3>Ajoute-le à Claude</h3></div><p>Un fichier à importer en 1 minute. Je te montre où cliquer.</p></li>
       <li class="rv"><div class="sv"><div class="sv-b ai">Quel est ton métier&nbsp;?</div><div class="sv-b me">Photographe</div><div class="sv-b ai">Parfait. Je m’occupe de tes devis ✓</div></div><div class="st-t"><b>3</b><h3>Réponds à ses questions</h3></div><p>Il apprend ton activité et ton style. Ensuite, il fait la tâche à ta place.</p></li>
     </ol>
   </section>
@@ -716,10 +810,12 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
   <section class="ia-sec faqw" id="questions" aria-labelledby="faq-titre">
     <div class="rv"><span class="eyebrow2">Questions</span><h2 id="faq-titre">Tes questions</h2></div>
     <div class="faq2 rv">
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut payer Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Les kits marchent avec le compte gratuit de Claude. Mais si tu l’utilises tous les jours, un compte payant (Pro) est encore mieux&nbsp;: tu peux lui envoyer beaucoup plus de messages, sans être bloqué en pleine tâche.</p></div></div></div>
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut savoir coder&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Tu importes un fichier dans Claude en 1 minute, puis il te pose ses questions. Tu réponds comme à une collègue.</p></div></div></div>
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est pour qui&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Pour tous les indépendants&nbsp;: coaching, conseil, création, photo, artisanat, commerce, beauté… Chaque kit s’adapte à ton activité grâce à ses questions.</p></div></div></div>
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je paie comment les kits&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>En une fois, sans abonnement. Le kit est à toi.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est quoi la différence avec demander directement à Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Claude sait beaucoup de choses, mais il ne connaît ni ton métier, ni tes clients, ni la bonne façon de faire. Le kit lui donne <b>ma méthode, étape par étape</b>&nbsp;: les bonnes questions, les bons modèles, les règles à respecter. Il ne te sort pas des conseils au hasard, il fait la tâche comme tu l’aurais faite, en mieux et en quelques minutes.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il me faut quel compte Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Je te conseille <b>un compte payant (Pro)</b>. Un kit travaille avec toi sur de vraies tâches, tous les jours. Avec le compte gratuit, tu peux l’essayer, mais tu seras vite limité en messages, parfois en pleine tâche. Le compte payant, c’est ce qui te fait vraiment gagner des heures.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je suis nul en tech, je vais y arriver&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui. Tu ajoutes un fichier dans Claude, puis tu réponds à ses questions comme à une collègue. Pas de code, pas de réglages compliqués&nbsp;: c’est installé en moins de 10 minutes.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je reçois quoi exactement&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Le kit à ajouter à Claude, ses modèles prêts à l’emploi (messages, mails, devis selon le kit) et le pas-à-pas pour l’installer. Ensuite, il s’adapte à ton activité grâce à tes réponses.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est pour mon métier&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Oui, si tu es indépendant&nbsp;: coaching, conseil, création, photo, artisanat, commerce, beauté… Chaque kit pose ses questions sur ton activité avant de travailler.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est quoi le pack agenda plein&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Le kit logiciel de réservation, le kit avis Google et le kit fini les lapins, ensemble. Tes clients réservent chez toi, viennent à leurs rendez-vous et te laissent des avis. Tu économises 97&nbsp;€.</p></div></div></div>
     </div>
   </section>
 
@@ -809,6 +905,12 @@ const K={
  'kit-lapins':{p:'67 €',l:'Tes clients reçoivent un rappel avant leur rendez-vous et confirment en un message.',
   u:['Ta règle d’annulation rédigée (arrhes ou acompte)','Un rappel 2 jours avant, puis la veille','Le client confirme en un message','Des messages dans ton style, jamais secs'],
   r:'Moins de rendez-vous manqués, sans te fâcher avec tes clients.'},
+ 'kit-resa':{p:'160 €',l:'Ta propre page de réservation, à ton nom. Tes clients réservent chez toi, pas sur une plateforme.',
+  u:['Ta page de réservation à ton nom','Des acomptes en ligne pour bloquer les créneaux','Un rappel avant chaque rendez-vous','0 % de commission sur tes réservations'],
+  r:'Tes clients réservent chez toi, 24 h/24.'},
+ 'kit-pack':{p:'197 €',l:'Tes clients réservent chez toi, viennent à leurs rendez-vous et te laissent des avis. Valeur 294 €, tu économises 97 €.',
+  u:['Kit logiciel de réservation (160 €)','Kit avis Google (67 €)','Kit fini les lapins (67 €)','Les 3 kits marchent ensemble, dès l’installation'],
+  r:'Un agenda plein, moins de lapins, plus d’avis.'},
  'kit-hub':{p:'Bientôt',l:'Chaque lundi, ta semaine est prête et ton admin est à jour.',
   u:['Ta semaine préparée chaque lundi','« Vide ma tête » : tu dictes, ton IA range','Tes échéances rappelées (URSSAF, impôts, CFE)','L’argent à mettre de côté calculé pour toi'],
   r:'Ton admin à jour, sans y penser.'}
@@ -819,11 +921,11 @@ const ease='cubic-bezier(.22,1,.36,1)',RM=matchMedia('(prefers-reduced-motion: r
 let from=null,busy=false;
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function fill(card){
-  const k=K[card.id]||{},b=card.querySelector('.kbody');
+  const k=K[card.id]||{},b=card.querySelector('.kbody')||card;
   V.innerHTML='';V.classList.toggle('dark',card.classList.contains('hub'));
-  const st=card.querySelector('.stage2');if(st)V.appendChild(st.cloneNode(true));
+  const st=card.querySelector('.stage2');if(st)V.appendChild(st.cloneNode(true));P.classList.toggle('novis',!st);
   const soon=k.p==='Bientôt';
-  T.innerHTML=`<div class="kw-top"><span class="kw-k">${esc(b.querySelector('.kk').textContent)}</span><span class="kw-price">${esc(k.p||'')}${soon?'':'<small>paiement unique</small>'}</span></div>
+  T.innerHTML=`<div class="kw-top"><span class="kw-k">${esc((b.querySelector('.kk')||card.querySelector('.pk-tag')).textContent)}</span><span class="kw-price">${esc(k.p||'')}</span></div>
 <h3 id="kw-title">${esc(b.querySelector('h3').textContent)}</h3>
 <p class="kw-lead">${esc(k.l||'')}</p>
 <ul class="kw-ul">${(k.u||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
@@ -908,6 +1010,11 @@ function show(cx){const r=svg.getBoundingClientRect();const fx=(cx-r.left)/r.wid
 function hide(){tip.hidden=true;cur.setAttribute('x1',-10);cur.setAttribute('x2',-10);dot.setAttribute('cx',-10)}
 plot.addEventListener('pointermove',e=>show(e.clientX));plot.addEventListener('pointerdown',e=>show(e.clientX));plot.addEventListener('pointerleave',hide);
 })();
+</script>
+<script>
+(()=>{const d=document.getElementById('av-dlg');if(!d)return;const im=d.querySelector('img');
+document.querySelectorAll('.av-card').forEach(c=>c.addEventListener('click',()=>{im.src=c.dataset.shot;im.alt=c.dataset.alt;d.showModal()}));
+d.querySelector('.kw-x').addEventListener('click',()=>d.close());d.addEventListener('click',e=>{if(e.target===d)d.close()});})();
 </script>
 </body>
 </html>
