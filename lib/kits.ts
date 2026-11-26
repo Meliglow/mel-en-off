@@ -11,7 +11,7 @@ import { EMAIL_CONTACT_PRO } from "@/config";
  * adresse publique devinable. Le lien d'accès contient l'identifiant de la
  * session de paiement (long et aléatoire), revérifié à chaque téléchargement.
  *
- * Variables Railway : STRIPE_SECRET_KEY (obligatoire), BREVO_API_KEY (mails),
+ * Variables Railway : STRIPE_KITS_SECRET_KEY (compte Mel Nourdi ; à défaut STRIPE_SECRET_KEY), BREVO_API_KEY (mails),
  * STRIPE_WEBHOOK_SECRET (facultatif : livraison même si l'acheteur ferme la page).
  */
 
@@ -58,9 +58,14 @@ export function isKitId(v: unknown): v is KitId {
   return v === "avis" || v === "devis";
 }
 
+/** Compte de paiement « Mel Nourdi » pour les kits, séparé de celui du logiciel. */
+export function kitsKey() {
+  return process.env.STRIPE_KITS_SECRET_KEY || process.env.STRIPE_SECRET_KEY || "";
+}
+
 export function stripeFetch(p: string, init: RequestInit = {}) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) throw new Error("STRIPE_SECRET_KEY manquante");
+  const key = kitsKey();
+  if (!key) throw new Error("STRIPE_KITS_SECRET_KEY manquante");
   return fetch(`${process.env.STRIPE_API_BASE || "https://api.stripe.com"}/v1/${p}`, {
     ...init,
     headers: {

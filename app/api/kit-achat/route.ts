@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { safeOrigin, rateLimit } from "@/lib/booking-security";
-import { KITS, SITE, isKitId, stripeFetch } from "@/lib/kits";
+import { KITS, SITE, isKitId, kitsKey, stripeFetch } from "@/lib/kits";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
   if (!safeOrigin(request)) return retour("erreur");
   if (!rateLimit(request, "kit-achat", 15)) return retour("attente");
-  if (!process.env.STRIPE_SECRET_KEY) return retour("bientot");
+  if (!kitsKey()) return retour("bientot");
 
   const p = new URLSearchParams();
   p.set("mode", "payment");
