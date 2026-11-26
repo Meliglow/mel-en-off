@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kit Avis Google — melnourdi.</title>
-<meta name="description" content="La méthode qui m’a fait doubler mes avis Google, installée dans ton business en 10 minutes. 67 €, une seule fois.">
+<meta name="description" content="La méthode qui m’a fait doubler mes avis Google, installée dans ton business en 20 minutes. 67 €, une seule fois.">
 <meta name="theme-color" content="#F9F7F2">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -90,6 +90,70 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
 .pf .msg{font-size:14px;font-weight:700;color:var(--lime);min-height:1.2em}
 .pied{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
 .pied a{color:var(--mut)}
+
+/* haut : panneau noir (même affichage que la fenêtre des kits de l'accueil) */
+.hero{margin-top:18px;background:var(--ink);color:#fff;border-radius:28px;padding:10px;display:grid;gap:0}
+.h-vis{position:relative;height:360px;border-radius:20px;background:#232323;overflow:hidden}
+.h-vis .phone{position:absolute;left:50%;top:24px;width:280px;height:498px;transform:translateX(-50%) scale(.64);transform-origin:top center;border-radius:28px;overflow:hidden;background:var(--ivo);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.h-t{padding:22px 14px 16px;display:grid;gap:14px;align-content:start}
+.h-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.h-k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
+.h-p{font-size:26px;font-weight:800;letter-spacing:-.03em;white-space:nowrap;text-align:right;line-height:1}
+.h-p small{display:block;font-size:11.5px;font-weight:700;color:#a9a497;letter-spacing:0;margin-top:4px}
+.hero h1{color:#fff;font-size:clamp(30px,6vw,40px);line-height:1.08;max-width:none}
+.h-lead{color:#d9d4c8;font-size:16px;line-height:1.5}
+.h-ul{list-style:none;display:grid;gap:10px}
+.h-ul li{display:flex;gap:10px;font-size:15px;line-height:1.4;color:#ece8dd}
+.h-ul li::before{content:"";flex:none;margin-top:2px;width:19px;height:19px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23161616' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.h-res{background:#262626;border-radius:16px;padding:12px 14px;font-size:15px;color:#ece8dd}
+.h-res b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:3px}
+.hero .pf p{margin:0;font-size:14px;color:#cfcabd}
+.hero .pf .btn{background:var(--lime);color:var(--ink)}
+@media(min-width:760px){.hero{grid-template-columns:.9fr 1.1fr;padding:12px}.h-vis{height:auto;min-height:560px}.h-vis .phone{top:50%;transform:translate(-50%,-50%) scale(.98);transform-origin:center}.h-t{padding:30px 30px 26px}}
+/* Scène « fiche Google qui se remplit d'avis » (kit Avis) */
+@property --nb{syntax:'<integer>';inherits:false;initial-value:23}
+.gf{--star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z'/%3E%3C/svg%3E");--cream:#F9F7F2;--muted:#6F6A62;color:var(--ink);position:absolute;inset:0;background:var(--cream);padding:18px 14px 0;overflow:hidden}
+.gf-q{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:14px;font-weight:600;color:var(--muted)}
+.gf-q svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.gf-card{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 16px 14px;position:relative}
+.gf-ex{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+.gf-n{font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.gf-c{font-size:13px;color:var(--muted);margin-top:3px}
+.gf-r{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:15px;font-weight:800}
+.gf-st{display:inline-flex;gap:2px}
+.gf-st i{width:15px;height:15px;display:block;background:#E6E1D6;-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+.gf-r .gf-st i{background:#F4B400}
+.gf-cnt{color:var(--muted);font-weight:700;font-size:14px;animation:gfcnt 10s infinite both;counter-reset:nb var(--nb)}
+.gf-cnt::before{content:"(" counter(nb) " avis)"}
+.gf-bars{margin-top:10px;display:grid;gap:5px}
+.gf-bars div{display:grid;grid-template-columns:10px 1fr;gap:8px;align-items:center;font-size:11px;font-weight:700;color:var(--muted)}
+.gf-bars span{height:7px;border-radius:9px;background:#EFEBE2;overflow:hidden}
+.gf-bars span b{display:block;height:100%;background:#F4B400;border-radius:9px}
+.gf-b5{animation:gfb5 10s infinite both}
+.gf-new{position:absolute;left:50%;top:-12px;transform:translateX(-50%);background:var(--ink);color:var(--lime);font-size:12px;font-weight:800;border-radius:999px;padding:5px 11px;white-space:nowrap;opacity:0;animation:gfnew 10s infinite both}
+.gf-list{margin-top:3px;display:flex;flex-direction:column}
+.gf-av{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 13px;opacity:0;max-height:0;margin-top:0;overflow:hidden;animation:10s infinite both}
+.gf-av header{display:flex;align-items:center;gap:9px}
+.gf-av em{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:12px;background:var(--lime);color:var(--ink)}
+.gf-av b{font-size:13.5px;display:block;line-height:1.1}
+.gf-av small{font-size:11px;color:var(--muted)}
+.gf-av p{margin:7px 0 0;font-size:13px;line-height:1.35}
+.gf-av .gf-st{margin-top:6px}
+.gf-av .gf-st i{animation:10s infinite both}
+.gf-v1{animation-name:gfv1}.gf-v2{animation-name:gfv2}.gf-v3{animation-name:gfv3}
+.gf-v1 .gf-st i{animation-name:gfs1}.gf-v2 .gf-st i{animation-name:gfs2}.gf-v3 .gf-st i{animation-name:gfs3}
+.gf-av .gf-st i:nth-child(2){animation-delay:.08s}.gf-av .gf-st i:nth-child(3){animation-delay:.16s}.gf-av .gf-st i:nth-child(4){animation-delay:.24s}.gf-av .gf-st i:nth-child(5){animation-delay:.32s}
+@keyframes gfcnt{0%,6%{--nb:23}88%,100%{--nb:148}}
+@keyframes gfb5{0%,6%{width:52%}88%,100%{width:94%}}
+@keyframes gfnew{0%,10%{opacity:0;transform:translate(-50%,6px) scale(.8)}13%{opacity:1;transform:translate(-50%,0) scale(1.08)}15%,30%{opacity:1;transform:translate(-50%,0)}33%,40%{opacity:0}43%{opacity:1;transform:translate(-50%,0) scale(1.08)}45%,60%{opacity:1;transform:translate(-50%,0)}63%,70%{opacity:0}73%{opacity:1;transform:translate(-50%,0) scale(1.08)}75%,92%{opacity:1;transform:translate(-50%,0)}96%,100%{opacity:0}}
+@keyframes gfv1{0%,8%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}13%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfv2{0%,38%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}43%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfv3{0%,68%{opacity:0;max-height:0;margin-top:0;padding-top:0;padding-bottom:0;transform:translateY(-10px) scale(.96)}73%,94%{opacity:1;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px;transform:none}98%,100%{opacity:0;max-height:130px;margin-top:9px;padding-top:11px;padding-bottom:11px}}
+@keyframes gfs1{0%,12%{background:#E6E1D6;transform:scale(.6)}15%{transform:scale(1.25)}17%,100%{background:#F4B400;transform:none}}
+@keyframes gfs2{0%,42%{background:#E6E1D6;transform:scale(.6)}45%{transform:scale(1.25)}47%,100%{background:#F4B400;transform:none}}
+@keyframes gfs3{0%,72%{background:#E6E1D6;transform:scale(.6)}75%{transform:scale(1.25)}77%,100%{background:#F4B400;transform:none}}
+@media(prefers-reduced-motion:reduce){.gf *{animation:none!important}.gf-av,.gf-new{opacity:1}.gf-av{max-height:none;margin-top:9px;padding:11px 13px}.gf-av .gf-st i{background:#F4B400}.gf-cnt{--nb:148}.gf-b5{width:94%}}
+
 /* apparition */
 .m{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
 .m.vu{opacity:1;transform:none}
@@ -119,18 +183,31 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
 </svg>
 <main class="page">
  <nav class="bar" aria-label="Navigation"><a href="/" aria-label="melnourdi, accueil">melnourdi<span>.</span></a><a class="bk" href="/#kits">Tous les kits</a></nav>
- <header class="top">
-  <div style="display:grid;gap:16px">
-   <span class="badge m"><b>★</b>Kit Avis Google</span>
-   <h1 class="m">La méthode qui m'a fait <mark>doubler mes avis Google,</mark> installée dans ton business.</h1>
+ <header class="hero">
+  <div class="h-vis"><div class="phone"><div class="gf" role="img" aria-label="Exemple : une fiche Google qui reçoit de plus en plus d'avis 5 étoiles">
+  <div class="gf-q"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>studio lumière<span class="gf-ex">Exemple</span></div>
+  <div class="gf-card"><span class="gf-new">+1 avis ★★★★★</span>
+    <div class="gf-n">Studio Lumière</div><div class="gf-c">Institut de beauté · Lyon</div>
+    <div class="gf-r">4,9 <span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><span class="gf-cnt"></span></div>
+    <div class="gf-bars"><div>5<span><b class="gf-b5"></b></span></div><div>4<span><b style="width:9%"></b></span></div><div>3<span><b style="width:3%"></b></span></div></div>
   </div>
-  <div style="display:grid;gap:16px">
-   <div class="faits m">
-    <span class="fait"><svg class="i"><use href="#hor"/></svg>Installé en 10 min</span>
-    <span class="fait"><svg class="i"><use href="#euro"/></svg>0 € par mois</span>
-    <span class="fait"><svg class="i"><use href="#main"/></svg>Zéro technique</span>
-   </div>
-   <div class="cta m"><a class="btn" href="#prevenir">Préviens-moi</a><span class="prix">67 €<small>une seule fois</small></span></div>
+  <div class="gf-list">
+    <div class="gf-av gf-v3"><header><em>N</em><div><b>Nadia</b><small>à l'instant</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Super accueil, résultat parfait. Je reviens !</p></div>
+    <div class="gf-av gf-v2"><header><em>T</em><div><b>Thomas</b><small>il y a 2 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Pro, à l'écoute et ponctuelle.</p></div>
+    <div class="gf-av gf-v1"><header><em>C</em><div><b>Camille</b><small>il y a 5 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Je recommande les yeux fermés.</p></div>
+  </div>
+</div></div></div>
+  <div class="h-t">
+   <div class="h-top"><span class="h-k">Si tu n'as presque pas d'avis</span><span class="h-p">67&nbsp;€<small>paiement unique</small></span></div>
+   <h1>Kit avis Google</h1>
+   <p class="h-lead">La méthode qui m'a fait doubler mes avis Google, installée dans ton business.</p>
+   <ul class="h-ul"><li>Ma méthode pour augmenter tes avis</li><li>L'envoi automatique, réglé selon ton outil</li><li>Ton QR code à imprimer, si tu reçois tes clients</li><li>Installé en 20 minutes, 0&nbsp;€ par mois</li><li>Conforme aux règles Google</li></ul>
+   <div class="h-res"><b>Le résultat</b>Plus d'avis 5 étoiles, sans y penser.</div>
+   <form class="pf" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
+    <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+    <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+    <div class="msg" role="status"></div>
+   </form>
   </div>
  </header>
 
@@ -196,7 +273,7 @@ const qs=[...document.querySelectorAll('.q')];let j=0;
 function q(){qs.forEach((e,i)=>e.classList.toggle('on',i===j));j=(j+1)%qs.length}
 q();if(!red)setInterval(q,1800);
 // Préviens-moi : liste d'attente du kit
-const f=document.querySelector('.pf'),msg=f.querySelector('.msg');
+document.querySelectorAll('.pf').forEach(f=>{const msg=f.querySelector('.msg');
 f.addEventListener('submit',async e=>{e.preventDefault();
  const email=f.email.value.trim();
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){msg.textContent='Vérifie ton email.';return}
@@ -206,8 +283,7 @@ f.addEventListener('submit',async e=>{e.preventDefault();
   const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.message||'');
   msg.textContent='C’est noté ✓ Tu seras prévenu en premier.';f.reset();if(window.mnStat)window.mnStat('attente_kit-avis');
  }catch(err){msg.textContent=(err&&err.message)||'Ça n’a pas marché. Réessaie dans un instant.'}
- b.disabled=false});
-document.querySelectorAll('a[href="#prevenir"]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>f.email.focus({preventScroll:true}),500)));
+ b.disabled=false})});
 </script>
 <script src="/melnourdi/mn-stats.js" defer></script>
 </body></html>
