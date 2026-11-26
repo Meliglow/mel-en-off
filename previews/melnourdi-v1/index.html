@@ -215,6 +215,9 @@ html{scroll-behavior:smooth}
 .kdesc{color:var(--muted);font-size:.9rem;line-height:1.5}
 .krow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px}
 .kprice b{font-size:1.6rem;font-weight:800;letter-spacing:-.03em}.kprice span{display:block;font-size:.75rem;color:var(--soft);font-weight:650}
+.ktag{width:max-content;margin-bottom:4px;font-size:.72rem;font-weight:800;letter-spacing:.02em;border-radius:999px;padding:6px 11px;background:#fff;color:var(--soft);border:1px solid var(--line)}
+.ktag.on{background:var(--lime);color:var(--ink);border-color:var(--ink);display:flex;align-items:center;gap:6px}
+.ktag.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
 .kcard.hub{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 .kcard.hub .kk,.kcard.hub .kdesc,.kcard.hub .kprice span{color:#CFCABF}
 .kcard.hub .thumb{background:#222;border-color:#2a2a2a}
@@ -597,7 +600,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
     <div class="gf-av gf-v1"><header><em>C</em><div><b>Camille</b><small>il y a 5 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Je recommande les yeux fermés.</p></div>
   </div>
 </div></div></div>
-        <div class="kbody"><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 20 minutes.</p>
+        <div class="kbody"><span class="ktag on">Disponible</span><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 20 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-devis" class="kcard">
@@ -608,7 +611,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="L d2"><div class="paper"><img src="assets/kit-devis-apercu.jpg" alt="" loading="lazy"></div><div class="tot">Net à payer <b>1 660,00 €</b></div></div>
           <div class="L d3"><div class="chip c1">Envoyé ✓</div><div class="chip c2">Relance J+3 prête</div><div class="chip c3">Signé · Bon pour accord ✓</div></div>
         </div></div>
-        <div class="kbody"><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
+        <div class="kbody"><span class="ktag on">Disponible</span><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-impayes" class="kcard">
@@ -620,7 +623,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="bub ai g3">J+7 : 2e relance prête. Elle part demain matin.</div>
           <div class="big g4">+ 450 € encaissés</div>
         </div></div></div>
-        <div class="kbody"><span class="kk">Si tu n’oses pas relancer</span><h3>Kit fini les impayés</h3><p class="klead">Tu te fais payer sans courir après tes clients.</p><p class="kdesc">Relances automatiques dans ton style. Installé en 10 minutes.</p>
+        <div class="kbody"><span class="ktag">Bientôt</span><span class="kk">Si tu n’oses pas relancer</span><h3>Kit fini les impayés</h3><p class="klead">Tu te fais payer sans courir après tes clients.</p><p class="kdesc">Relances automatiques dans ton style. Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-lapins" class="kcard">
@@ -632,7 +635,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="lab g4">Ce mois-ci</div>
           <div class="big g5">0 lapin</div>
         </div></div></div>
-        <div class="kbody"><span class="kk">Si tes clients oublient leur RDV</span><h3>Kit fini les lapins</h3><p class="klead">Moins de rendez-vous manqués, sans te fâcher avec tes clients.</p><p class="kdesc">Ta règle d'annulation et tes rappels, dans ton style. Installé en 10 minutes.</p>
+        <div class="kbody"><span class="ktag">Bientôt</span><span class="kk">Si tes clients oublient leur RDV</span><h3>Kit fini les lapins</h3><p class="klead">Moins de rendez-vous manqués, sans te fâcher avec tes clients.</p><p class="kdesc">Ta règle d'annulation et tes rappels, dans ton style. Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-hub" class="kcard hub">
@@ -699,7 +702,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut payer Claude&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Les kits marchent avec le compte gratuit de Claude.</p></div></div></div>
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Il faut savoir coder&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Non. Tu importes un fichier dans Claude en 1 minute, puis il te pose ses questions. Tu réponds comme à une collègue.</p></div></div></div>
       <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>C’est pour qui&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>Pour tous les indépendants&nbsp;: coaching, conseil, création, photo, artisanat, commerce, beauté… Chaque kit s’adapte à ton activité grâce à ses questions.</p></div></div></div>
-      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je paie comment les kits&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>En une fois, sans abonnement. Le kit est à toi.</p></div></div></div>
+      <div class="t-acc" data-open="false"><h3><button class="t-acc-head" type="button" aria-expanded="false"><span>Je paie comment les kits&nbsp;?</span><span class="t-acc-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5L12 6.5"/></svg></span></button></h3><div class="t-acc-panel"><div class="t-acc-panel-inner"><p>En une fois, sans abonnement. Le kit est à toi, et tu le télécharges juste après le paiement.</p></div></div></div>
     </div>
   </section>
 
