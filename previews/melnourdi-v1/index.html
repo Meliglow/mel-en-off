@@ -63,7 +63,7 @@ html{scroll-behavior:smooth}
 .h-tag i::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--lime-deep);animation:ping 2s var(--ease) infinite}
 @keyframes ping{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.5);opacity:0}}
 .h1x{font-size:clamp(1.95rem,8.6vw,3.4rem);line-height:.98;letter-spacing:-.05em;font-weight:800;margin:16px 0 0}
-.h1x .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.h1x .ln{display:block;overflow:hidden;padding-bottom:.2em;margin-bottom:-.2em}
 .h1x .ln>span{display:inline-block;transform:translateY(105%) rotate(4deg);transform-origin:0 100%;animation:lineUp .95s var(--ease) forwards}
 .h1x .ln:nth-child(2)>span{animation-delay:.09s}.h1x .ln:nth-child(3)>span{animation-delay:.18s}.h1x .ln:nth-child(4)>span{animation-delay:.27s}
 @keyframes lineUp{to{transform:none}}
@@ -417,6 +417,54 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 #info-dialog .button-dark{background:var(--ink);color:var(--lime)}
 .icon-library{position:absolute;width:0;height:0;overflow:hidden}
 </style>
+<style>
+/* Fenêtre de présentation d'un kit (clic sur une carte) */
+.kcard{cursor:pointer}
+.kcard .kopen{font:inherit;border:0;cursor:pointer}
+dialog.kwin{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;overflow:hidden}
+dialog.kwin::backdrop{background:rgba(22,22,22,0);backdrop-filter:blur(0);transition:background .45s var(--ease),backdrop-filter .45s var(--ease)}
+dialog.kwin.on::backdrop{background:rgba(22,22,22,.5);backdrop-filter:blur(6px)}
+.kw-wrap{position:fixed;inset:0;display:grid;place-items:center;padding:12px}
+.kw-p{position:relative;width:min(940px,100%);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;background:var(--ink);color:#fff;border-radius:30px;display:grid;grid-template-columns:1fr;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);transform-origin:top left;scrollbar-width:none}
+.kw-x{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .2s}
+.kw-x:hover{background:rgba(255,255,255,.22)}
+.kw-vis{position:relative;height:330px;margin:10px 10px 0;border-radius:22px;background:#232323;overflow:hidden}
+.kw-vis .stage2{position:absolute;left:50%;top:22px;width:280px;height:498px;transform:translateX(-50%) scale(.6);transform-origin:top center;border-radius:28px;overflow:hidden;background:var(--cream);color:var(--ink);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.kw-vis.dark .stage2{background:#222}
+.kw-t{padding:22px 22px 24px;display:grid;gap:14px;align-content:start}
+.kw-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-right:44px}
+.kw-k{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
+.kw-price{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+.kw-price small{display:block;font-size:.7rem;font-weight:700;color:#a9a497;letter-spacing:0;text-align:right}
+.kw-t h3{margin:0;font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.05;letter-spacing:-.035em;font-weight:800}
+.kw-lead{margin:0;color:#d9d4c8;font-size:1rem;line-height:1.5}
+.kw-ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.kw-ul li{display:flex;gap:10px;font-size:.95rem;line-height:1.4;color:#ece8dd}
+.kw-ul li::before{content:"";flex:none;margin-top:2px;width:18px;height:18px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23161616' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/11px no-repeat}
+.kw-res{background:#262626;border-radius:16px;padding:12px 14px;font-size:.92rem;color:#ece8dd}
+.kw-res b{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:3px}
+.kw-f{display:grid;gap:10px;margin-top:2px}
+.kw-f p{margin:0;font-size:.9rem;color:#cfcabd}
+.kw-row{display:flex;gap:8px;flex-wrap:wrap}
+.kw-row input[type=email]{flex:1 1 200px;min-width:0;font:600 1rem var(--sans);padding:.85em 1.1em;border-radius:999px;border:1.5px solid #3a3a3a;background:#1d1d1d;color:#fff}
+.kw-row input[type=email]:focus{outline:2px solid var(--lime);outline-offset:1px}
+.kw-row button{flex:none}
+.kw-c{display:flex;gap:9px;align-items:flex-start;font-size:.78rem;line-height:1.4;color:#a9a497}
+.kw-c input{margin-top:2px;accent-color:var(--lime)}
+.kw-c a{color:#d9d4c8}
+.kw-msg{font-size:.9rem;font-weight:700;color:var(--lime);min-height:1.2em}
+.kw-t>*{opacity:0;transform:translateY(14px)}
+dialog.kwin.on .kw-t>*{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .6s var(--ease)}
+dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*:nth-child(3){transition-delay:.1s}dialog.kwin.on .kw-t>*:nth-child(4){transition-delay:.15s}dialog.kwin.on .kw-t>*:nth-child(5){transition-delay:.2s}dialog.kwin.on .kw-t>*:nth-child(6){transition-delay:.25s}
+@media(min-width:760px){
+  .kw-wrap{padding:24px}
+  .kw-p{grid-template-columns:.9fr 1.1fr;max-height:calc(100dvh - 48px)}
+  .kw-vis{height:auto;min-height:540px;margin:12px 0 12px 12px}
+  .kw-vis .stage2{top:50%;transform:translate(-50%,-50%) scale(.95);transform-origin:center}
+  .kw-t{padding:34px 34px 30px}
+}
+@media(prefers-reduced-motion:reduce){.kw-t>*{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -503,7 +551,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <div class="L a4"><div class="mt">Un petit tour.<br>Une surprise pour toi.</div><img class="wheel" src="assets/kit-roue.png" alt="" loading="lazy"><div class="won">🎉 Gagné : 10 € de remise</div></div>
         </div></div>
         <div class="kbody"><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><a class="pill-btn ink sm" href="/kits#avis">Voir le kit</a></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-devis" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="Le kit transforme la demande du client en devis, envoyé puis signé" role="img">
@@ -514,7 +562,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <div class="L d3"><div class="chip c1">Envoyé ✓</div><div class="chip c2">Relance J+3 prête</div><div class="chip c3">Signé · Bon pour accord ✓</div></div>
         </div></div>
         <div class="kbody"><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><a class="pill-btn ink sm" href="/kits#devis">Voir le kit</a></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-impayes" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="La facture en retard est relancée toute seule, puis payée" role="img"><div class="gs">
@@ -526,7 +574,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <div class="big g4">+ 450 € encaissés</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si tu n’oses pas relancer</span><h3>Kit fini les impayés</h3><p class="klead">Tu te fais payer sans courir après tes clients.</p><p class="kdesc">Relances automatiques dans ton style. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><a class="pill-btn ink sm" href="/kits#impayes">Voir le kit</a></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-lapins" class="kcard">
         <div class="thumb"><div class="stage2" aria-label="Le rappel part la veille, le client confirme, zéro lapin" role="img"><div class="gs">
@@ -538,7 +586,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <div class="big g5">0 lapin</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si tes clients oublient leur RDV</span><h3>Kit fini les lapins</h3><p class="klead">Moins de rendez-vous manqués, sans te fâcher avec tes clients.</p><p class="kdesc">Ta règle d'annulation et tes rappels, dans ton style. Installé en 10 minutes.</p>
-          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><a class="pill-btn ink sm" href="/kits#lapins">Voir le kit</a></div></div>
+          <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-hub" class="kcard hub">
         <div class="thumb"><div class="stage2" aria-label="La checklist de la semaine se coche toute seule" role="img"><div class="shb">
@@ -551,7 +599,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
           <div class="ok">Admin à jour ✓</div>
         </div></div></div>
         <div class="kbody"><span class="kk">Si ton admin est un bazar</span><h3>Hub bureau en ordre</h3><p class="klead">Ta semaine planifiée et ton admin à jour, sans y penser.</p><p class="kdesc">Planning de la semaine, checklists du mois, rappels des échéances, argent mis de côté.</p>
-          <div class="krow"><span class="kprice"><b>Bientôt</b><span>paiement unique</span></span><a class="pill-btn lime sm" href="/kits#hub">Voir le hub</a></div></div>
+          <div class="krow"><span class="kprice"><b>Bientôt</b><span>paiement unique</span></span><button class="pill-btn lime sm kopen" type="button">Voir le hub</button></div></div>
       </article>
     </div>
     <div class="rail-dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
@@ -625,6 +673,7 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
     <span>© 2026 Mel Nourdi</span>
   </div>
 </footer>
+  <dialog class="kwin" id="kwin" aria-labelledby="kw-title"><div class="kw-wrap"><div class="kw-p"><button class="kw-x" type="button" aria-label="Fermer">×</button><div class="kw-vis" aria-hidden="true"></div><div class="kw-t"></div></div></div></dialog>
   <dialog id="info-dialog" aria-labelledby="dialog-title">
     <button class="dialog-close" aria-label="Fermer la fenêtre"><svg><use href="#close"/></svg></button>
     <div id="dialog-content"></div>
@@ -677,5 +726,83 @@ dialog#info-dialog::backdrop{background:rgba(22,22,22,.55);backdrop-filter:blur(
 </script>
 <script src="app.js"></script>
 <script src="/melnourdi/mn-stats.js" defer></script>
+<script>
+/* Présentation d'un kit : la carte s'ouvre en grande fenêtre */
+(()=>{
+const K={
+ 'kit-avis':{p:'67 €',l:'Un mail cadeau part tout seul après chaque rendez-vous. Tes clients reviennent, et pensent à toi.',
+  u:['Un mail cadeau envoyé après le rendez-vous, écrit dans ton style','La roue des petites attentions, pour tous tes clients','Une demande d’avis simple, envoyée à part','Ton IA te pose les bonnes questions, tu n’as rien à rédiger'],
+  r:'Plus d’avis Google, sans demander à chaque fois.'},
+ 'kit-devis':{p:'67 €',l:'Tu racontes la demande du client, ton IA rédige un devis pro, prêt à signer.',
+  u:['Ton devis rédigé à partir de la demande du client','Les mentions obligatoires vérifiées','Signature électronique gratuite incluse','Une relance prête 3 jours après l’envoi','Tes devis déjà faits, réutilisables en un clic'],
+  r:'Un devis propre en 5 minutes, au lieu d’une soirée.'},
+ 'kit-impayes':{p:'67 €',l:'Ton IA surveille tes factures et relance à ta place, avec tes mots.',
+  u:['Relances à J+1, J+7 et J+15, dans ton style','Un ton aimable d’abord, plus ferme ensuite','Pénalités de retard et indemnité de 40 € calculées','Tu valides toujours les étapes sensibles'],
+  r:'Tu te fais payer sans courir après tes clients.'},
+ 'kit-lapins':{p:'67 €',l:'Tes clients reçoivent un rappel avant leur rendez-vous et confirment en un message.',
+  u:['Ta règle d’annulation rédigée (arrhes ou acompte)','Un rappel 2 jours avant, puis la veille','Le client confirme en un message','Des messages dans ton style, jamais secs'],
+  r:'Moins de rendez-vous manqués, sans te fâcher avec tes clients.'},
+ 'kit-hub':{p:'Bientôt',l:'Chaque lundi, ta semaine est prête et ton admin est à jour.',
+  u:['Ta semaine préparée chaque lundi','« Vide ma tête » : tu dictes, ton IA range','Tes échéances rappelées (URSSAF, impôts, CFE)','L’argent à mettre de côté calculé pour toi'],
+  r:'Ton admin à jour, sans y penser.'}
+};
+const d=document.getElementById('kwin');if(!d)return;
+const P=d.querySelector('.kw-p'),V=d.querySelector('.kw-vis'),T=d.querySelector('.kw-t');
+const ease='cubic-bezier(.22,1,.36,1)',RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let from=null,busy=false;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fill(card){
+  const k=K[card.id]||{},b=card.querySelector('.kbody');
+  V.innerHTML='';V.classList.toggle('dark',card.classList.contains('hub'));
+  const st=card.querySelector('.stage2');if(st)V.appendChild(st.cloneNode(true));
+  const soon=k.p==='Bientôt';
+  T.innerHTML=`<div class="kw-top"><span class="kw-k">${esc(b.querySelector('.kk').textContent)}</span><span class="kw-price">${esc(k.p||'')}${soon?'':'<small>paiement unique</small>'}</span></div>
+<h3 id="kw-title">${esc(b.querySelector('h3').textContent)}</h3>
+<p class="kw-lead">${esc(k.l||'')}</p>
+<ul class="kw-ul">${(k.u||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+<div class="kw-res"><b>Le résultat</b>${esc(k.r||'')}</div>
+<form class="kw-f" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
+<div class="kw-row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="pill-btn lime" type="submit">Préviens-moi</button></div>
+<label class="kw-c"><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+<div class="kw-msg" role="status"></div></form>`;
+  const f=T.querySelector('form'),m=f.querySelector('.kw-msg');
+  f.addEventListener('submit',async e=>{e.preventDefault();
+    const email=f.email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){m.textContent='Vérifie ton email.';return}
+    if(!f.ok.checked){m.textContent='Coche la case pour être prévenu.';return}
+    const btn=f.querySelector('button');btn.disabled=true;m.textContent='Un instant…';
+    try{const r=await fetch('/api/inscription',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,consentement:true,source:'attente-'+card.id})});
+      const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.message||'');
+      m.textContent='C’est noté ✓ Tu seras prévenu en premier.';f.reset();if(window.mnStat)window.mnStat('attente_'+card.id);
+    }catch(err){m.textContent=(err&&err.message)||'Ça n’a pas marché. Réessaie dans un instant.'}
+    btn.disabled=false});
+}
+function open(card){
+  if(busy)return;busy=true;from=card;fill(card);
+  d.showModal();document.documentElement.style.overflow='hidden';P.scrollTop=0;
+  requestAnimationFrame(()=>{
+    d.classList.add('on');
+    if(RM){busy=false;return}
+    const a=card.getBoundingClientRect(),b=P.getBoundingClientRect();
+    const sx=a.width/b.width,sy=a.height/b.height;
+    P.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${sx},${sy})`,borderRadius:'60px',opacity:.6},{transform:'none',borderRadius:'30px',opacity:1}],{duration:560,easing:ease}).finished.then(()=>busy=false,()=>busy=false);
+  });
+}
+function close(){
+  if(busy||!d.open)return;busy=true;d.classList.remove('on');
+  const done=()=>{d.close();document.documentElement.style.overflow='';busy=false;V.innerHTML=''};
+  if(RM||!from){done();return}
+  const a=from.getBoundingClientRect(),b=P.getBoundingClientRect();
+  P.animate([{transform:'none',opacity:1},{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`,opacity:0}],{duration:380,easing:ease}).finished.then(done,done);
+}
+document.querySelectorAll('#kits .kcard').forEach(c=>{
+  c.addEventListener('click',e=>{if(e.target.closest('a:not(.kopen)'))return;e.preventDefault();open(c)});
+});
+d.querySelector('.kw-x').addEventListener('click',close);
+d.addEventListener('cancel',e=>{e.preventDefault();close()});
+d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('kw-wrap'))close()});
+const h=location.hash.slice(1);if(h&&K['kit-'+h]){const c=document.getElementById('kit-'+h);if(c)setTimeout(()=>open(c),600)}
+})();
+</script>
 </body>
 </html>
