@@ -151,6 +151,14 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
 .ecran img{display:block;width:100%;height:auto;border-radius:14px}
 @media(max-width:640px){.ecran{max-width:340px;margin:0 auto}}
 .ecran .ex{position:absolute;top:-12px;left:20px;z-index:1;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);border-radius:999px;padding:4px 10px}
+/* FAQ */
+.faq{display:grid;gap:8px}
+.faq details{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.faq summary{list-style:none;cursor:pointer;font-weight:800;font-size:15.5px;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;line-height:1;flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:8px;font-size:14.5px;color:var(--mut);line-height:1.5}
 /* apparition */
 .m{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
 .m.vu{opacity:1;transform:none}
@@ -205,7 +213,7 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
    <div class="h-top"><span class="h-k">Si tu fais des devis</span><span class="h-p">67&nbsp;€<small>paiement unique</small></span></div>
    <h1>Kit Devis pro</h1>
    <p class="h-lead">Tes devis à ton nom et à tes couleurs, signés en ligne et payés dès la signature.</p>
-   <ul class="h-ul"><li>Signature électronique</li><li>Relances automatiques, jamais le week-end</li><li>Acompte payé dès la signature de ton client</li><li>Ton tableau de bord : devis, clients, argent encaissé</li><li>Installé en 20 minutes, 0&nbsp;€ par mois</li></ul>
+   <ul class="h-ul"><li>Signature électronique</li><li>Relances automatiques, jamais le week-end</li><li>Acompte payé dès la signature de ton client</li><li>Ton tableau de bord : devis, clients, argent encaissé</li><li>Un compte Gmail gratuit suffit</li><li>Installé en 20 minutes, 0&nbsp;€ par mois</li></ul>
    <div class="h-res"><b>Le résultat</b>Tu envoies ton devis. Ton client signe et paie. Tu suis tout au même endroit.</div>
    <form class="pf" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
     <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
@@ -246,6 +254,15 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
  <div class="duo">
   <div class="bloc m"><svg class="i"><use href="#chat"/></svg><div><b>Un compte Claude et un compte Gmail</b><p>Et deux comptes gratuits que le kit t'aide à ouvrir : un pour la signature, un pour le paiement de l'acompte.</p></div></div>
   <div class="bloc m"><svg class="i"><use href="#tab"/></svg><div><b>0 € par mois</b><p>Pas d'abonnement. Seuls les paiements par carte de tes clients ont des frais : 1,5 % + 0,25 €.</p></div></div>
+ </div>
+
+ <h2 class="m">Tes questions</h2>
+ <div class="faq m">
+  <details><summary>Il faut un compte Google professionnel ?</summary><p>Non. Un compte Gmail gratuit suffit. Pas besoin de Google Workspace ni d'abonnement Google.</p></details>
+  <details><summary>Mes devis sont vraiment signés en ligne ?</summary><p>Oui. Ton client reçoit un lien, il signe sur son téléphone ou son ordinateur, et tu reçois le devis signé. Le compte de signature est gratuit, le kit t'aide à l'ouvrir.</p></details>
+  <details><summary>Comment mon client paie l'acompte ?</summary><p>Dès qu'il a signé, il reçoit un mail avec deux boutons : régler l'acompte ou régler le total. Le paiement en 3 fois lui est proposé s'il y a droit. Tu branches pour ça un compte de paiement gratuit, sans abonnement : 1,5 % + 0,25 € par paiement par carte. C'est une option : sans elle, l'acompte est écrit sur le devis et réglé par virement.</p></details>
+  <details><summary>Mes devis sont tous différents, ça marche quand même ?</summary><p>Oui. Tu donnes tes bases (taux horaire, matériel, déplacement…) à l'installation. Ensuite tu racontes la demande et ton devis est calculé à partir de tes prix, ligne par ligne.</p></details>
+  <details><summary>Je peux suivre mes devis sur mon téléphone ?</summary><p>Oui. Ton tableau de bord s'ouvre dans le navigateur de ton téléphone, et tu peux l'ajouter à ton écran d'accueil comme une appli.</p></details>
  </div>
 
  <div class="fin m" id="prevenir">
