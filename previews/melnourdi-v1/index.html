@@ -483,6 +483,34 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
 .steps2 h3{margin:0;font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
 .steps2 p{margin:6px 6px 0 46px;color:var(--muted);line-height:1.5;font-size:.95rem}
 @media(min-width:920px){.how{display:block!important}.how>div:first-child{position:static!important;text-align:center;max-width:640px;margin:0 auto;text-wrap:balance}.steps2{grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}}
+/* Mon parcours + graphique des encaissements */
+.moi-head{text-align:left}
+.moi-grid{display:grid;gap:28px;margin-top:28px}
+.moi-tl{list-style:none;margin:0;padding:0 0 0 26px;position:relative;display:grid;gap:22px}
+.moi-tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--l2);border-radius:2px}
+.moi-tl li{position:relative}
+.moi-tl li::before{content:"";position:absolute;left:-26px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--ink)}
+.moi-tl li.now::before{background:var(--lime)}
+.moi-d{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.moi-tl p{margin:4px 0 0;font-size:1.02rem;line-height:1.5;font-weight:600}
+.rev{margin:0;background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--sh)}
+.rev-h{display:grid;gap:2px}
+.rev-h span{font-size:.85rem;font-weight:800;color:var(--muted)}
+.rev-h b{font-size:clamp(1.8rem,6vw,2.4rem);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.rev-h small{font-size:.82rem;color:var(--soft)}
+.rev-plot{position:relative;margin-top:14px;height:220px;touch-action:pan-y}
+.rev-plot svg{width:100%;height:100%;display:block;overflow:visible}
+.rev-line{fill:none;stroke:var(--ink);stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.6s var(--ease)}
+.rev.in .rev-line{stroke-dashoffset:0}
+.rev-area{fill:url(#revg);opacity:0;transition:opacity .8s .9s}
+.rev.in .rev-area{opacity:1}
+.rev-grid{stroke:var(--line);stroke-width:1;vector-effect:non-scaling-stroke}
+.rev-cur{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+.rev-dot{fill:var(--lime);stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.rev-tip{position:absolute;top:-6px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:10px;padding:6px 10px;font-size:.78rem;font-weight:700;white-space:nowrap;pointer-events:none}
+.rev-tip b{color:var(--lime)}
+.rev-f{display:flex;justify-content:space-between;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.78rem;color:var(--soft)}
+@media(min-width:920px){.moi-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center}}
 </style>
 </head>
 <body>
@@ -660,6 +688,26 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
 
 
 
+  <section class="ia-sec moi" id="moi" aria-labelledby="moi-titre">
+    <div class="moi-head rv">
+      <span class="eyebrow2">Mon parcours</span>
+      <h2 id="moi-titre">Mes kits, je les ai d’abord <em>faits pour moi.</em></h2>
+    </div>
+    <div class="moi-grid">
+      <ol class="moi-tl rv-st">
+        <li><span class="moi-d">Depuis 2021</span><p>Je suis entrepreneure. Comme toi, je fais tout&nbsp;: mon métier, les clients, les devis, l’admin.</p></li>
+        <li><span class="moi-d">L’étape d’après</span><p>Je quitte les plateformes de réservation et je crée mon propre outil, pour garder mes clients chez moi.</p></li>
+        <li><span class="moi-d">Avec l’IA</span><p>Je digitalise mes business&nbsp;: devis, relances, avis, rappels, admin.</p></li>
+        <li class="now"><span class="moi-d">Aujourd’hui</span><p>Je transforme ce qui marche chez moi en kits, pour que tu gagnes ce temps toi aussi.</p></li>
+      </ol>
+      <figure class="rev rv" id="rev" hidden>
+        <figcaption class="rev-h"><span>Mes encaissements</span><b id="rev-total">0&nbsp;€</b><small id="rev-range"></small></figcaption>
+        <div class="rev-plot"><svg id="rev-svg" viewBox="0 0 600 240" preserveAspectRatio="none" role="img" aria-label="Évolution de mes encaissements"></svg><div class="rev-tip" id="rev-tip" hidden></div></div>
+        <div class="rev-f"><span id="rev-src">Chiffres réels de mes paiements.</span><span id="rev-n"></span></div>
+      </figure>
+    </div>
+  </section>
+
   <section class="ia-sec stance rv" aria-label="Ma façon de faire">
     <span class="eyebrow2">Ma façon de faire</span>
     <p class="stance-txt">Je ne te vends pas un cours de 10&nbsp;heures sur l’IA. <b>Je te donne des kits qui font le travail.</b> Tu les installes en 10 minutes, et tu retournes à ton métier.</p>
@@ -821,6 +869,44 @@ d.querySelector('.kw-x').addEventListener('click',close);
 d.addEventListener('cancel',e=>{e.preventDefault();close()});
 d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('kw-wrap'))close()});
 const h=location.hash.slice(1);if(h&&K['kit-'+h]){const c=document.getElementById('kit-'+h);if(c)setTimeout(()=>open(c),600)}
+})();
+</script>
+<script>
+window.MN_REVENUS=window.MN_REVENUS||[];
+/* Graphique des encaissements : s'affiche uniquement avec de vraies données.
+   MN_REVENUS = [{d:'2026-10-21', v:123.45}, ...] (montant encaissé par jour, en euros). */
+(()=>{
+const DATA=window.MN_REVENUS||[];const N_PAIEMENTS=window.MN_REVENUS_N||null;
+const fig=document.getElementById('rev');if(!fig||!DATA.length)return;
+fig.hidden=false;
+const svg=document.getElementById('rev-svg'),tip=document.getElementById('rev-tip');
+const W=600,H=240,P=8,max=Math.max(...DATA.map(x=>x.v))*1.15||1;
+const eur=v=>v.toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';
+const dfmt=s=>new Date(s+'T12:00').toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+const total=DATA.reduce((a,x)=>a+x.v,0);
+document.getElementById('rev-range').textContent='Du '+dfmt(DATA[0].d)+' au '+dfmt(DATA[DATA.length-1].d);
+if(N_PAIEMENTS)document.getElementById('rev-n').textContent=N_PAIEMENTS+' paiements';
+const X=i=>P+(W-2*P)*i/Math.max(1,DATA.length-1),Y=v=>H-P-(H-2*P)*v/max;
+const pts=DATA.map((x,i)=>[X(i),Y(x.v)]);
+const line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('');
+const ns='http://www.w3.org/2000/svg';
+svg.innerHTML=`<defs><linearGradient id="revg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8F06E" stop-opacity=".55"/><stop offset="1" stop-color="#E8F06E" stop-opacity="0"/></linearGradient></defs>
+${[.25,.5,.75].map(f=>`<line class="rev-grid" x1="0" x2="${W}" y1="${H*f}" y2="${H*f}"/>`).join('')}
+<path class="rev-area" d="${line}L${X(DATA.length-1)} ${H-P}L${X(0)} ${H-P}Z"/>
+<path class="rev-line" d="${line}"/>
+<line class="rev-cur" y1="0" y2="${H}" x1="-10" x2="-10"/><circle class="rev-dot" r="5" cx="-10" cy="-10"/>`;
+const pl=svg.querySelector('.rev-line');pl.style.setProperty('--len',Math.ceil(pl.getTotalLength()));
+const cur=svg.querySelector('.rev-cur'),dot=svg.querySelector('.rev-dot'),tot=document.getElementById('rev-total');
+tot.textContent=eur(0);
+const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();fig.classList.add('in');
+  const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-k,3);tot.textContent=eur(total*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)},{threshold:.4});
+io.observe(fig);
+const plot=svg.parentNode;
+function show(cx){const r=svg.getBoundingClientRect();const fx=(cx-r.left)/r.width*W;let i=Math.round((fx-P)/(W-2*P)*(DATA.length-1));i=Math.max(0,Math.min(DATA.length-1,i));
+  const [x,y]=pts[i];cur.setAttribute('x1',x);cur.setAttribute('x2',x);dot.setAttribute('cx',x);dot.setAttribute('cy',y);
+  tip.hidden=false;tip.style.left=(x/W*r.width)+'px';tip.innerHTML=dfmt(DATA[i].d)+' · <b>'+eur(DATA[i].v)+'</b>'}
+function hide(){tip.hidden=true;cur.setAttribute('x1',-10);cur.setAttribute('x2',-10);dot.setAttribute('cx',-10)}
+plot.addEventListener('pointermove',e=>show(e.clientX));plot.addEventListener('pointerdown',e=>show(e.clientX));plot.addEventListener('pointerleave',hide);
 })();
 </script>
 </body>
