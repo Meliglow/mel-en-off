@@ -31,6 +31,7 @@ function common(html, canonical) {
     .replaceAll('href="signature.css"', 'href="/melnourdi/signature.css"')
     .replaceAll('src="signature.js"', 'src="/melnourdi/signature.js"')
     .replaceAll('src="assets/', 'src="/melnourdi/assets/')
+    .replaceAll('srcset="assets/', 'srcset="/melnourdi/assets/')
     .replaceAll('href="index.html', 'href="/');
 }
 
@@ -65,7 +66,8 @@ guide = guide.replace('</head>', '  <meta name="robots" content="noindex">\n</he
 const logiciel = common(await readFile(path.join(source, 'logiciel.html'), 'utf8'), '/logiciel-reservation');
 // Page du kit Avis Google (26 novembre 2026), bouton « Préviens-moi » en attendant le paiement.
 const kitAvis = common(await readFile(path.join(source, 'kit-avis-google.html'), 'utf8'), '/kit-avis-google');
-for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide], ['logiciel.html', logiciel], ['kit-avis-google.html', kitAvis]]) {
+const kitDevis = common(await readFile(path.join(source, 'kit-devis-pro.html'), 'utf8'), '/kit-devis-pro');
+for (const [name, html] of [['index.html', home], ['liens.html', links], ['guide.html', guide], ['logiciel.html', logiciel], ['kit-avis-google.html', kitAvis], ['kit-devis-pro.html', kitDevis]]) {
   if (/Aperçu|démonstration|non publiée|formulaire de démonstration/i.test(html)) throw new Error(`Preview-only copy leaked into ${name}`);
   await writeFile(path.join(output, name), html);
 }
@@ -86,7 +88,7 @@ for (const asset of await readdir(path.join(source, 'assets'))) {
   await copyFile(path.join(source, 'assets', asset), path.join(output, 'assets', asset));
 }
 // Refresh cached CSS/JS when a deployment changes their contents.
-for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html', 'kit-avis-google.html']) {
+for (const name of ['index.html', 'liens.html', 'guide.html', 'logiciel.html', 'kit-avis-google.html', 'kit-devis-pro.html']) {
   let html = await readFile(path.join(output, name), 'utf8');
   for (const asset of ['styles.css', 'liens.css', 'release.css', 'app.js', 'liens.js', 'lead.css', 'lead.js', 'signature.css', 'signature.js', 'mn-base.css', 'mn-lv.js', 'mn-offre.js', 'mn-stats.js']) {
     const version = createHash('sha256').update(await readFile(path.join(output, asset))).digest('hex').slice(0, 12);

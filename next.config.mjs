@@ -16,6 +16,7 @@ const nextConfig = {
         { source: "/guide-gratuit", destination: "/melnourdi/guide.html" },
         { source: "/logiciel-reservation", destination: "/melnourdi/logiciel.html" },
         { source: "/kit-avis-google", destination: "/melnourdi/kit-avis-google.html" },
+        { source: "/kit-devis-pro", destination: "/melnourdi/kit-devis-pro.html" },
         { source: "/demo-reservation", destination: "/melnourdi/lodyva.html" },
         { source: "/configurer-reservation", destination: "/melnourdi/configurer.html" },
         { source: "/administration-reservations", destination: "/melnourdi/administration.html" },

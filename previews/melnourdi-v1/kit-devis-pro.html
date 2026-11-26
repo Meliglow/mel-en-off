@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit Devis pro — melnourdi.</title>
+<meta name="description" content="Tes devis à ton nom et à tes couleurs, signés en ligne, l’acompte payé dès la signature et des relances automatiques. 67 €, une seule fois.">
+<meta name="theme-color" content="#F9F7F2">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+:root{--ink:#161616;--mut:#6F6A62;--lime:#E8F06E;--ivo:#F9F7F2;--line:#E6E1D6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ivo);color:var(--ink);font:500 15px/1.5 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.page{max-width:980px;margin:0 auto;padding:0 18px 60px}
+svg.i{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* haut */
+.top{padding:26px 0 8px;display:grid;gap:18px}
+.badge{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px 5px 6px;width:max-content}
+.badge b{width:22px;height:22px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:12px}
+h1{font-size:clamp(30px,7.6vw,48px);line-height:1.2;letter-spacing:-.04em;font-weight:800;max-width:17ch}
+h1 mark{background:var(--lime);padding:0 .12em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.faits{display:flex;flex-wrap:wrap;gap:8px}
+.fait{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13.5px;font-weight:700}
+.fait svg.i{width:20px;height:20px}
+.cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-weight:800;font-size:16px;padding:15px 26px;border-radius:999px;text-decoration:none;border:0}
+.prix{font-weight:800;font-size:22px}.prix small{font-size:13px;color:var(--mut);font-weight:600;margin-left:6px}
+h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
+.avant{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.av{background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:14px;display:grid;gap:10px;font-size:15px;line-height:1.25}
+.av svg.i{width:30px;height:30px;background:var(--lime);border-radius:50%;padding:5px;box-sizing:content-box}
+.src{font-size:12.5px;color:var(--mut);margin-top:10px}.src a{color:var(--ink);font-weight:700}
+.num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:12px;font-weight:800;margin-bottom:6px}
+.duo-img{position:relative}.duo-img img.roue{position:absolute;width:62%;height:62%;right:-6px;bottom:-6px;object-fit:contain;padding:0}
+/* frise */
+.frise{background:#fff;border:1.5px solid var(--ink);border-radius:22px;padding:22px 16px;position:relative;overflow:hidden}
+.etapes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;position:relative}
+.etapes:before{content:"";position:absolute;top:31px;left:12%;right:12%;height:2px;background:var(--line)}
+.etapes .rail{position:absolute;top:31px;left:12%;height:2px;background:var(--ink);width:0}
+.et{text-align:center;position:relative;z-index:1}
+.et .rond{width:64px;height:64px;margin:0 auto 10px;border-radius:50%;background:#fff;border:2px solid var(--ink);display:grid;place-items:center;transition:background .35s,box-shadow .35s,transform .35s}
+.et.on .rond{background:var(--lime);box-shadow:0 0 0 8px rgba(232,240,110,.35);transform:scale(1.04)}
+.et b{display:block;font-size:13.5px;line-height:1.25}
+.et small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+/* ce que tu reçois */
+.recois{display:grid;gap:12px}
+.carte{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:16px;display:flex;gap:14px;align-items:center}
+.carte .vis{width:118px;height:118px;flex:none;border-radius:14px;background:var(--ivo);border:1.5px solid var(--line);overflow:hidden;display:grid;place-items:center}
+.carte .vis img{width:100%;height:100%;object-fit:cover;object-position:top}
+.carte .vis img.roue{object-fit:contain;padding:6px}
+.carte h3{font-size:17px;letter-spacing:-.01em;margin-bottom:4px}
+.carte p{font-size:14px;color:var(--mut);line-height:1.45}
+.carte .tag{display:inline-block;margin-top:8px;font-size:12px;font-weight:800;background:var(--lime);border-radius:999px;padding:3px 10px}
+.qr{width:70px;height:70px;background:
+ conic-gradient(from 90deg at 30% 30%,var(--ink) 25%,transparent 0) 0 0/14px 14px;border:6px solid #fff;outline:2px solid var(--ink);border-radius:4px}
+/* installation */
+.install{display:grid;gap:16px;align-items:center}
+.pile{position:relative;height:190px}
+.q{position:absolute;inset:0 0 auto;background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:16px;box-shadow:4px 4px 0 var(--ink);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .45s,transform .45s}
+.q.on{opacity:1;transform:none;transition-delay:.25s}
+.q:not(.on){transition-duration:.2s}
+.q b{display:block;font-size:15.5px;margin-bottom:2px}
+.q small{color:var(--mut);font-size:12.5px}
+.q .bt{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.q .bt span{font-size:13px;font-weight:700;border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px}
+.q .bt span.ok{background:var(--lime)}
+.liste{display:grid;gap:8px}
+.liste div{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14.5px}
+.liste i{width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--lime);display:grid;place-items:center;font-style:normal;font-size:12px;flex:none}
+/* besoin + regle */
+.duo{display:grid;gap:12px}
+.bloc{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.bloc b{display:block;font-size:15px;margin-bottom:2px}.bloc p{font-size:14px;color:var(--mut)}
+.fin{margin-top:40px;background:var(--ink);color:#fff;border-radius:24px;padding:26px 22px;display:grid;gap:14px}
+.fin h2{color:#fff;margin:0}
+.fin .btn{background:var(--lime);color:var(--ink);width:max-content}
+.fin p{color:#cfcabd;font-size:14px}
+/* barre du haut + formulaire Préviens-moi + pied de page */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0}
+.bar a{color:var(--ink);text-decoration:none;font-weight:800;font-size:20px;letter-spacing:-.04em}
+.bar a span{color:#b9c22a}
+.bar .bk{font-size:14px;font-weight:700;letter-spacing:0;border-bottom:1.5px solid var(--ink)}
+.pf{display:grid;gap:10px;width:100%}
+.pf .row{display:flex;gap:8px;flex-wrap:wrap}
+.pf input[type=email]{flex:1 1 200px;min-width:0;font:600 16px Manrope,system-ui,sans-serif;padding:14px 18px;border-radius:999px;border:1.5px solid #3a3a3a;background:#1d1d1d;color:#fff}
+.pf input[type=email]:focus{outline:2px solid var(--lime);outline-offset:1px}
+.pf .btn{cursor:pointer;font-family:inherit}
+.pf .btn:disabled{opacity:.6;cursor:default}
+.pf label{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.4;color:#a9a497}
+.pf label input{margin-top:2px;accent-color:var(--lime)}
+.pf label a{color:#d9d4c8}
+.pf .msg{font-size:14px;font-weight:700;color:var(--lime);min-height:1.2em}
+.pied{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
+.pied a{color:var(--mut)}
+
+/* haut : panneau noir (même affichage que la fenêtre des kits de l'accueil) */
+.hero{margin-top:18px;background:var(--ink);color:#fff;border-radius:28px;padding:10px;display:grid;gap:0}
+.h-vis{position:relative;height:360px;border-radius:20px;background:#232323;overflow:hidden}
+.h-vis .phone{position:absolute;left:50%;top:24px;width:280px;height:498px;transform:translateX(-50%) scale(.64);transform-origin:top center;border-radius:28px;overflow:hidden;background:var(--ivo);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.h-t{padding:22px 14px 16px;display:grid;gap:14px;align-content:start}
+.h-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.h-k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
+.h-p{font-size:26px;font-weight:800;letter-spacing:-.03em;white-space:nowrap;text-align:right;line-height:1}
+.h-p small{display:block;font-size:11.5px;font-weight:700;color:#a9a497;letter-spacing:0;margin-top:4px}
+.hero h1{color:#fff;font-size:clamp(30px,6vw,40px);line-height:1.08;max-width:none}
+.h-lead{color:#d9d4c8;font-size:16px;line-height:1.5}
+.h-ul{list-style:none;display:grid;gap:10px}
+.h-ul li{display:flex;gap:10px;font-size:15px;line-height:1.4;color:#ece8dd}
+.h-ul li::before{content:"";flex:none;margin-top:2px;width:19px;height:19px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23161616' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.h-res{background:#262626;border-radius:16px;padding:12px 14px;font-size:15px;color:#ece8dd}
+.h-res b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:3px}
+.hero .pf p{margin:0;font-size:14px;color:#cfcabd}
+.hero .pf .btn{background:var(--lime);color:var(--ink)}
+@media(min-width:760px){.hero{grid-template-columns:.9fr 1.1fr;padding:12px}.h-vis{height:auto;min-height:560px}.h-vis .phone{top:50%;transform:translate(-50%,-50%) scale(.98);transform-origin:center}.h-t{padding:30px 30px 26px}}
+/* Scène « tableau de bord des devis » (kit Devis) */
+.tb{--c:#1F4D3F;--a:#E9B44C;--mut:#6E7570;color:var(--ink);position:absolute;inset:0;background:#F6F4EF;padding:16px 12px 0;overflow:hidden;font-size:12px}
+.tb-h{display:flex;align-items:center;gap:8px}
+.tb-lg{width:30px;height:30px;border-radius:9px;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.tb-h b{font-size:14.5px;display:block;line-height:1.1}.tb-h small{font-size:10px;color:var(--mut)}
+.tb-ex{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 7px;background:#fff}
+.tb-k{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.tb-c{background:#fff;border-radius:13px;padding:10px;box-shadow:0 6px 16px -12px rgba(0,0,0,.25);position:relative;overflow:hidden}
+.tb-c small{font-size:9.5px;color:var(--mut);font-weight:600;display:block}
+.tb-c b{font-size:18px;font-weight:800;letter-spacing:-.02em;display:block;margin-top:3px;line-height:1.1}
+.tb-c.hl{background:var(--c);color:#fff}.tb-c.hl small{color:rgba(255,255,255,.75)}
+.tb-sw{position:relative;height:20px;margin-top:3px}.tb-sw b{position:absolute;left:0;top:0;margin:0}
+.tb-bar{height:4px;border-radius:9px;background:rgba(255,255,255,.25);margin-top:7px;overflow:hidden}.tb-bar i{display:block;height:100%;width:23%;background:var(--a);border-radius:9px;animation:tbbar 10s infinite both}
+.tb-p{background:#fff;border-radius:13px;padding:4px 10px;margin-top:8px;box-shadow:0 6px 16px -12px rgba(0,0,0,.25)}
+.tb-p h4{font-size:11.5px;font-weight:800;padding:7px 0 3px}
+.tb-r{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:7px 0;border-top:1px solid #EEEAE2;align-items:center}
+.tb-r b{font-size:12px}.tb-r small{font-size:9.5px;color:var(--mut);display:block}
+.tb-r .m{font-weight:800;font-size:12px;text-align:right}
+.tb-pl{position:relative;justify-self:end;height:17px;min-width:76px}
+.tb-pl span{position:absolute;right:0;top:0;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.p-att{background:#FFF3D6;color:#8A5A00}.p-rep{background:#E6EEFF;color:#2A4FA8}.p-sig{background:#E3F4EA;color:#1D6B41}.p-aco{background:#D7EEE2;color:#145234}.p-pay{background:var(--c);color:#fff}
+.tb-toast{position:absolute;left:12px;right:12px;top:58px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 12px;display:flex;gap:9px;align-items:center;font-size:11.5px;font-weight:700;opacity:0;animation:tbtoast 10s infinite both;z-index:2;box-shadow:0 14px 30px -12px rgba(0,0,0,.5)}
+.tb-toast i{width:24px;height:24px;border-radius:8px;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-style:normal;font-weight:800;flex:none}
+.tb-toast small{display:block;color:#bdb8ad;font-weight:600;font-size:10px}
+.s1{animation:tbs1 10s infinite both}.s2{animation:tbs2 10s infinite both}.s3{animation:tbs3 10s infinite both}
+.v1{animation:tbv1 10s infinite both}.v2{animation:tbv2 10s infinite both}
+.tb-c,.tb-p{animation:tbin 10s infinite both}.tb-k .tb-c:nth-child(2){animation-delay:.08s}.tb-k .tb-c:nth-child(3){animation-delay:.16s}.tb-k .tb-c:nth-child(4){animation-delay:.24s}.tb-p{animation-delay:.32s}
+@keyframes tbin{0%{opacity:0;transform:translateY(10px)}6%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes tbs1{0%,30%{opacity:1;transform:none}33%,100%{opacity:0;transform:scale(.8)}}
+@keyframes tbs2{0%,30%{opacity:0;transform:scale(.8)}34%,55%{opacity:1;transform:none}58%,100%{opacity:0;transform:scale(.8)}}
+@keyframes tbs3{0%,55%{opacity:0;transform:scale(.8)}59%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes tbv1{0%,56%{opacity:1}59%,100%{opacity:0}}
+@keyframes tbv2{0%,56%{opacity:0;transform:translateY(6px)}60%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes tbbar{0%,56%{width:23%}66%,96%{width:40%}100%{width:23%}}
+@keyframes tbtoast{0%,52%{opacity:0;transform:translateY(-8px) scale(.95)}56%,76%{opacity:1;transform:none}80%,100%{opacity:0;transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.tb *{animation:none!important}.s1,.s2,.v1,.tb-toast{opacity:0}.s3,.v2{opacity:1}.tb-bar i{width:40%}}
+/* grande capture ordinateur */
+.ecran{background:#fff;border:1.5px solid var(--ink);border-radius:22px;padding:10px;position:relative}
+.ecran img{display:block;width:100%;height:auto;border-radius:14px}
+@media(max-width:640px){.ecran{max-width:340px;margin:0 auto}}
+.ecran .ex{position:absolute;top:-12px;left:20px;z-index:1;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);border-radius:999px;padding:4px 10px}
+/* apparition */
+.m{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.m.vu{opacity:1;transform:none}
+@media(min-width:860px){
+ .top{grid-template-columns:1.1fr .9fr;align-items:end;padding-top:46px}
+ .recois{grid-template-columns:1fr 1fr 1fr}.recois .carte{flex-direction:column;align-items:flex-start}.recois .carte .vis{width:100%;height:150px}
+ .avant{grid-template-columns:repeat(4,1fr)}
+ .install{grid-template-columns:1fr 1fr}
+ .duo{grid-template-columns:1fr 1fr}
+ .fin{grid-template-columns:1fr auto;align-items:center}
+}
+@media(max-width:520px){.et .rond{width:52px;height:52px}.etapes:before,.etapes .rail{top:25px}.et b{font-size:12.5px}.et small{font-size:11px}.carte .vis{width:96px;height:96px}}
+@media(prefers-reduced-motion:reduce){.m,.q,.et .rond{transition:none}.m{opacity:1;transform:none}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15l2.5 2.5L16 13"/></symbol>
+ <symbol id="hor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+ <symbol id="etoile" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.9 6.6 19.8l1.1-6.1L3.2 9.4l6.1-.8z"/></symbol>
+ <symbol id="roue" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 5v16M4 13h16M6.3 7.3l11.4 11.4M17.7 7.3L6.3 18.7"/><path d="M10 2h4l-2 3z"/></symbol>
+ <symbol id="euro" viewBox="0 0 24 24"><path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/></symbol>
+ <symbol id="main" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.5 15a1.5 1.5 0 0 1 2.5-1.7L8 15"/></symbol>
+ <symbol id="bouclier" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+ <symbol id="loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 11l2 2 3.5-4"/></symbol>
+ <symbol id="retour" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/></symbol>
+ <symbol id="sign" viewBox="0 0 24 24"><path d="M3 17c3-1 4-6 6-6s1 5 3 5 2-3 4-3 2 2 5 2"/><path d="M3 21h18"/></symbol>
+ <symbol id="tab" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 15v-3M12 15V9M17 15v-5"/></symbol>
+ <symbol id="doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></symbol>
+ <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+</svg>
+<main class="page">
+ <nav class="bar" aria-label="Navigation"><a href="/" aria-label="melnourdi, accueil">melnourdi<span>.</span></a><a class="bk" href="/#kits">Tous les kits</a></nav>
+ <header class="hero">
+  <div class="h-vis"><div class="phone"><div class="tb" role="img" aria-label="Exemple : le tableau de bord des devis. Un devis passe de En attente à Signé puis Acompte payé.">
+  <div class="tb-h"><div class="tb-lg">S</div><div><b>Sarah Martin Design</b><small>Mes devis</small></div><span class="tb-ex">Exemple</span></div>
+  <div class="tb-toast"><i>€</i><div>Julie Moreau a payé 498 €<small>Acompte payé · D-2026-014</small></div></div>
+  <div class="tb-k">
+   <div class="tb-c hl"><small>Encaissé ce mois</small><div class="tb-sw"><b class="v1">700 €</b><b class="v2">1 198 €</b></div><div class="tb-bar"><i></i></div></div>
+   <div class="tb-c"><small>En attente de signature</small><b>3 460 €</b></div>
+   <div class="tb-c"><small>Signé, à encaisser</small><b>1 842 €</b></div>
+   <div class="tb-c"><small>Taux de signature</small><b>60 %</b></div>
+  </div>
+  <div class="tb-p"><h4>Tous mes devis</h4>
+   <div class="tb-r"><div><b>Julie Moreau</b><small>D-2026-014 · 1 660 €</small></div><div class="tb-pl"><span class="p-att s1">En attente</span><span class="p-sig s2">Signé</span><span class="p-aco s3">Acompte payé</span></div></div>
+   <div class="tb-r"><div><b>Café Mona</b><small>D-2026-013 · 1 800 €</small></div><div class="tb-pl"><span class="p-rep">Répondu</span></div></div>
+   <div class="tb-r"><div><b>Lucas Petit</b><small>D-2026-012 · 680 €</small></div><div class="tb-pl"><span class="p-sig">Signé</span></div></div>
+   <div class="tb-r"><div><b>Nina Robert</b><small>D-2026-010 · 700 €</small></div><div class="tb-pl"><span class="p-pay">Payé</span></div></div>
+   <div class="tb-r"><div><b>Atelier Rivière</b><small>D-2026-011 · 1 660 €</small></div><div class="tb-pl"><span class="p-aco">Acompte payé</span></div></div>
+  </div>
+</div></div></div>
+  <div class="h-t">
+   <div class="h-top"><span class="h-k">Si tu fais des devis</span><span class="h-p">67&nbsp;€<small>paiement unique</small></span></div>
+   <h1>Kit Devis pro</h1>
+   <p class="h-lead">Tes devis à ton nom et à tes couleurs, signés en ligne et payés dès la signature.</p>
+   <ul class="h-ul"><li>Signature électronique</li><li>Relances automatiques, jamais le week-end</li><li>Acompte payé dès la signature de ton client</li><li>Ton tableau de bord : devis, clients, argent encaissé</li><li>Installé en 20 minutes, 0&nbsp;€ par mois</li></ul>
+   <div class="h-res"><b>Le résultat</b>Tu envoies ton devis. Ton client signe et paie. Tu suis tout au même endroit.</div>
+   <form class="pf" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
+    <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+    <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+    <div class="msg" role="status"></div>
+   </form>
+  </div>
+ </header>
+
+ <h2 class="m">Ton tableau de bord, à tes couleurs</h2>
+ <div class="ecran m"><span class="ex">Exemple</span><picture><source media="(max-width:640px)" srcset="assets/kit-devis-tableau-mobile.webp" width="780" height="1800"><img src="assets/kit-devis-tableau.webp" alt="Exemple de tableau de bord : encaissé ce mois, en attente de signature, reste à encaisser, taux de signature, à savoir aujourd'hui et la liste des devis" loading="lazy" width="1600" height="1035"></picture></div>
+ <p class="src m">Il s'ouvre comme une appli sur ton téléphone. Il se met à jour tout seul, et tes clients s'y ajoutent à chaque devis.</p>
+
+ <h2 class="m">Ce que contient le kit</h2>
+ <div class="recois">
+  <div class="carte m"><div class="vis"><svg class="i" style="width:46px;height:46px"><use href="#doc"/></svg></div><div><span class="num">1</span><h3>Tes devis en 5 minutes</h3><p>Tu racontes la demande, ton devis est prêt, calculé à partir de tes prix. Même sur mesure.</p></div></div>
+  <div class="carte m"><div class="vis"><svg class="i" style="width:46px;height:46px"><use href="#sign"/></svg></div><div><span class="num">2</span><h3>Signature et relances</h3><p>Ton client signe en ligne. Sans réponse, une relance part toute seule, et s'arrête dès qu'il répond.</p></div></div>
+  <div class="carte m"><div class="vis"><svg class="i" style="width:46px;height:46px"><use href="#euro"/></svg></div><div><span class="num">3</span><h3>L'acompte dès la signature</h3><p>Ton client choisit : l'acompte, le total ou en 3 fois. Compte gratuit, sans abonnement : 1,5 % + 0,25 € par paiement par carte.</p></div></div>
+ </div>
+
+ <h2 class="m">L'installation : tu cliques, c'est tout</h2>
+ <div class="install">
+  <div class="pile m" id="pile">
+   <div class="q"><b>Ton métier, en une phrase ?</b><small>Question 1 sur 9</small><div class="bt"><span class="ok">Graphiste indépendante</span></div></div>
+   <div class="q"><b>Choisis tes couleurs</b><small>Question 5 sur 9</small><div class="bt"><span class="ok">Vert sapin</span><span>Bleu nuit</span><span>Terracotta</span></div></div>
+   <div class="q"><b>Tu veux être payé dès que ton client signe ?</b><small>Question 7 sur 9</small><div class="bt"><span class="ok">Acompte de 30 %</span><span>Acompte de 50 %</span><span>Non</span></div></div>
+   <div class="q"><b>Tes clients, ils sont où aujourd'hui ?</b><small>Question 9 sur 9</small><div class="bt"><span class="ok">Contacts Google</span><span>Autre outil</span><span>Nulle part</span></div></div>
+  </div>
+  <div class="liste m">
+   <div><i>1</i>Tu importes le kit dans Claude</div>
+   <div><i>2</i>Tu écris « Installe mon kit devis »</div>
+   <div><i>3</i>9 questions, tu cliques tes réponses</div>
+   <div><i>4</i>Tout est prêt, à ton nom et à tes couleurs</div>
+  </div>
+ </div>
+
+ <h2 class="m">Ce qu'il te faut</h2>
+ <div class="duo">
+  <div class="bloc m"><svg class="i"><use href="#chat"/></svg><div><b>Un compte Claude et un compte Gmail</b><p>Et deux comptes gratuits que le kit t'aide à ouvrir : un pour la signature, un pour le paiement de l'acompte.</p></div></div>
+  <div class="bloc m"><svg class="i"><use href="#tab"/></svg><div><b>0 € par mois</b><p>Pas d'abonnement. Seuls les paiements par carte de tes clients ont des frais : 1,5 % + 0,25 €.</p></div></div>
+ </div>
+
+ <div class="fin m" id="prevenir">
+  <div><h2>Kit Devis pro</h2><p>67 €, une seule fois. Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p></div>
+  <form class="pf" novalidate>
+   <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+   <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
+   <div class="msg" role="status"></div>
+  </form>
+ </div>
+ <footer class="pied"><a href="/">melnourdi.fr</a><a href="/mentions-legales">Mentions légales</a><a href="/confidentialite">Confidentialité</a></footer>
+</main>
+<script>
+const red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// apparition au défilement
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.m').forEach((el,i)=>{el.style.transitionDelay=(el.closest('header')?i*90:0)+'ms';io.observe(el)});
+// frise : les étapes s'allument une à une, en boucle
+const ets=[...document.querySelectorAll('.et')],rail=document.getElementById('rail');let k=0;
+function pas(){if(!rail)return;ets.forEach((e,i)=>e.classList.toggle('on',i===k));rail.style.width=(k/(ets.length-1))*76+'%';rail.style.transition=k?'width .6s':'none';k=(k+1)%ets.length}
+pas();if(!red)setInterval(pas,1300);
+// questions : une carte après l'autre
+const qs=[...document.querySelectorAll('.q')];let j=0;
+function q(){qs.forEach((e,i)=>e.classList.toggle('on',i===j));j=(j+1)%qs.length}
+q();if(!red)setInterval(q,1800);
+// Préviens-moi : liste d'attente du kit
+document.querySelectorAll('.pf').forEach(f=>{const msg=f.querySelector('.msg');
+f.addEventListener('submit',async e=>{e.preventDefault();
+ const email=f.email.value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){msg.textContent='Vérifie ton email.';return}
+ if(!f.ok.checked){msg.textContent='Coche la case pour être prévenu.';return}
+ const b=f.querySelector('button');b.disabled=true;msg.textContent='Un instant…';
+ try{const r=await fetch('/api/inscription',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,consentement:true,source:'attente-kit-devis'})});
+  const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.message||'');
+  msg.textContent='C’est noté ✓ Tu seras prévenu en premier.';f.reset();if(window.mnStat)window.mnStat('attente_kit-devis');
+ }catch(err){msg.textContent=(err&&err.message)||'Ça n’a pas marché. Réessaie dans un instant.'}
+ b.disabled=false})});
+</script>
+<script src="/melnourdi/mn-stats.js" defer></script>
+</body></html>

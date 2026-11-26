@@ -843,12 +843,12 @@ function close(){
   P.animate([{transform:'none',opacity:1},{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`,opacity:0}],{duration:380,easing:ease}).finished.then(done,done);
 }
 document.querySelectorAll('#kits .kcard').forEach(c=>{
-  c.addEventListener('click',e=>{if(e.target.closest('a:not(.kopen)'))return;e.preventDefault();if(c.id==='kit-avis'){location.href='/kit-avis-google';return}open(c)});
+  c.addEventListener('click',e=>{if(e.target.closest('a:not(.kopen)'))return;e.preventDefault();if(c.id==='kit-avis'){location.href='/kit-avis-google';return}if(c.id==='kit-devis'){location.href='/kit-devis-pro';return}open(c)});
 });
 d.querySelector('.kw-x').addEventListener('click',close);
 d.addEventListener('cancel',e=>{e.preventDefault();close()});
 d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('kw-wrap'))close()});
-const h=location.hash.slice(1);if(h==='avis'){location.replace('/kit-avis-google')}else if(h&&K['kit-'+h]){const c=document.getElementById('kit-'+h);if(c)setTimeout(()=>open(c),600)}
+const h=location.hash.slice(1);if(h==='avis'){location.replace('/kit-avis-google')}else if(h==='devis'){location.replace('/kit-devis-pro')}else if(h&&K['kit-'+h]){const c=document.getElementById('kit-'+h);if(c)setTimeout(()=>open(c),600)}
 })();
 </script>
 </body>
