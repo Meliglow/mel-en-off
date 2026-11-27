@@ -216,6 +216,7 @@ html{scroll-behavior:smooth}
 .krow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px}
 .kprice b{font-size:1.6rem;font-weight:800;letter-spacing:-.03em}.kprice span{display:block;font-size:.75rem;color:var(--soft);font-weight:650}
 .ktag{width:max-content;margin-bottom:4px;font-size:.72rem;font-weight:800;letter-spacing:.02em;border-radius:999px;padding:6px 11px;background:#fff;color:var(--soft);border:1px solid var(--line)}
+.ktag.on[hidden]{display:none!important}
 .ktag.on{background:var(--lime);color:var(--ink);border-color:var(--ink);display:flex;align-items:center;gap:6px}
 .ktag.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
 .kcard.hub{background:var(--ink);color:var(--cream);border-color:var(--ink)}
@@ -600,7 +601,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
     <div class="gf-av gf-v1"><header><em>C</em><div><b>Camille</b><small>il y a 5 jours</small></div></header><span class="gf-st"><i></i><i></i><i></i><i></i><i></i></span><p>Je recommande les yeux fermés.</p></div>
   </div>
 </div></div></div>
-        <div class="kbody"><span class="ktag on">Disponible</span><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 20 minutes.</p>
+        <div class="kbody"><span class="ktag on" hidden>Disponible</span><span class="kk">Si tu n’as presque pas d’avis</span><h3>Kit avis Google</h3><p class="klead">Obtiens plus d'avis Google sans effort.</p><p class="kdesc">Installé en 20 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-devis" class="kcard">
@@ -611,7 +612,7 @@ dialog.kwin.on .kw-t>*:nth-child(2){transition-delay:.05s}dialog.kwin.on .kw-t>*
           <div class="L d2"><div class="paper"><img src="assets/kit-devis-apercu.jpg" alt="" loading="lazy"></div><div class="tot">Net à payer <b>1 660,00 €</b></div></div>
           <div class="L d3"><div class="chip c1">Envoyé ✓</div><div class="chip c2">Relance J+3 prête</div><div class="chip c3">Signé · Bon pour accord ✓</div></div>
         </div></div>
-        <div class="kbody"><span class="ktag on">Disponible</span><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
+        <div class="kbody"><span class="ktag on" hidden>Disponible</span><span class="kk">Si tes devis te prennent des heures</span><h3>Kit devis pro</h3><p class="klead">Des devis pros qui font signer, en 5 minutes.</p><p class="kdesc">Signature électronique incluse. Installé en 10 minutes.</p>
           <div class="krow"><span class="kprice"><b>67&nbsp;€</b><span>paiement unique</span></span><button class="pill-btn ink sm kopen" type="button">Voir le kit</button></div></div>
       </article>
       <article id="kit-impayes" class="kcard">
@@ -854,5 +855,6 @@ d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('kw-
 const h=location.hash.slice(1);if(h==='avis'){location.replace('/kit-avis-google')}else if(h==='devis'){location.replace('/kit-devis-pro')}else if(h&&K['kit-'+h]){const c=document.getElementById('kit-'+h);if(c)setTimeout(()=>open(c),600)}
 })();
 </script>
+<script>fetch('/api/kit-achat',{cache:'no-store'}).then(r=>r.json()).then(j=>{if(j&&j.ouvert)document.querySelectorAll('.ktag.on').forEach(t=>t.hidden=false)}).catch(()=>{});</script>
 </body>
 </html>

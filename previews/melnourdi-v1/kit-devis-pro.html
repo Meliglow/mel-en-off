@@ -90,6 +90,7 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
 .pf .sure{display:flex;align-items:center;gap:7px;font-size:13px;color:#a9a497;margin:0}
 .pf .sure svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .pf.buy .btn{width:max-content;max-width:100%;font-size:17px;padding:16px 28px}
+.pf[hidden]{display:none}
 .pf .msg{font-size:14px;font-weight:700;color:var(--lime);min-height:1.2em}
 .pied{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
 .pied a{color:var(--mut)}
@@ -242,9 +243,14 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
    <p class="h-lead">Tes devis à ton nom et à tes couleurs, signés en ligne et payés dès la signature.</p>
    <ul class="h-ul"><li>Signature électronique</li><li>Relances automatiques, jamais le week-end</li><li>Acompte payé dès la signature de ton client</li><li>Ton tableau de bord : devis, clients, argent encaissé</li><li>Un compte Gmail gratuit suffit</li><li>Installé en 20 minutes, 0&nbsp;€ par mois</li></ul>
    <div class="h-res"><b>Le résultat</b>Tu envoies ton devis. Ton client signe et paie. Tu suis tout au même endroit.</div>
-   <form class="pf buy" method="post" action="/api/kit-achat">
+   <form class="pf buy" hidden method="post" action="/api/kit-achat">
     <input type="hidden" name="kit" value="devis"><button class="btn" type="submit">Je prends le kit · 67&nbsp;€</button>
     <p class="sure"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé. Tu télécharges ton kit juste après.</p>
+    <div class="msg" role="status"></div>
+   </form>
+   <form class="pf wait" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
+    <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+    <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
     <div class="msg" role="status"></div>
    </form>
   </div>
@@ -316,9 +322,14 @@ h2{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:44px 0 16px}
 
  <div class="fin m" id="acheter">
   <div><h2>Kit Devis pro</h2><p>67 €, une seule fois. Pas d'abonnement : le kit est à toi.</p></div>
-  <form class="pf buy" method="post" action="/api/kit-achat">
+  <form class="pf buy" hidden method="post" action="/api/kit-achat">
     <input type="hidden" name="kit" value="devis"><button class="btn" type="submit">Je prends le kit · 67&nbsp;€</button>
     <p class="sure"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé. Tu télécharges ton kit juste après.</p>
+    <div class="msg" role="status"></div>
+   </form>
+   <form class="pf wait" novalidate><p>Le kit sort très bientôt. Laisse ton email, tu es prévenu en premier.</p>
+    <div class="row"><input type="email" name="email" placeholder="Ton email" autocomplete="email" required aria-label="Ton email"><button class="btn" type="submit">Préviens-moi</button></div>
+    <label><input type="checkbox" name="ok" required><span>J’accepte de recevoir les emails de Mel. Désinscription en un clic à tout moment. <a href="/confidentialite">Confidentialité</a></span></label>
     <div class="msg" role="status"></div>
    </form>
  </div>
@@ -337,6 +348,19 @@ pas();if(!red)setInterval(pas,1300);
 const qs=[...document.querySelectorAll('.q')];let j=0;
 function q(){qs.forEach((e,i)=>e.classList.toggle('on',i===j));j=(j+1)%qs.length}
 q();if(!red)setInterval(q,1800);
+// Vente ouverte ? Sinon on garde « Préviens-moi » (liste d'attente du kit).
+fetch('/api/kit-achat',{cache:'no-store'}).then(r=>r.json()).then(j=>{if(j&&j.ouvert){document.querySelectorAll('.buy').forEach(f=>f.hidden=false);document.querySelectorAll('.wait').forEach(f=>f.hidden=true)}}).catch(()=>{});
+document.querySelectorAll('.wait').forEach(f=>{const msg=f.querySelector('.msg');
+f.addEventListener('submit',async e=>{e.preventDefault();
+ const email=f.email.value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){msg.textContent='Vérifie ton email.';return}
+ if(!f.ok.checked){msg.textContent='Coche la case pour être prévenu.';return}
+ const b=f.querySelector('button');b.disabled=true;msg.textContent='Un instant…';
+ try{const r=await fetch('/api/inscription',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,consentement:true,source:'attente-kit-devis'})});
+  const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.message||'');
+  msg.textContent='C’est noté ✓ Tu seras prévenu en premier.';f.reset();if(window.mnStat)window.mnStat('attente_kit-devis');
+ }catch(err){msg.textContent=(err&&err.message)||'Ça n’a pas marché. Réessaie dans un instant.'}
+ b.disabled=false})});
 // Achat : message au retour (paiement annulé, indisponible…) et bouton « Un instant… »
 (()=>{const c=new URLSearchParams(location.search).get('achat');const t={annule:'Paiement annulé. Tu peux reprendre quand tu veux.',bientot:'Le paiement ouvre dans un instant. Réessaie un peu plus tard.',attente:'Trop de tentatives. Réessaie dans quelques minutes.',erreur:'Le paiement n’a pas pu s’ouvrir. Réessaie dans un instant.'}[c];
 if(t)document.querySelectorAll('.buy .msg').forEach(m=>m.textContent=t);

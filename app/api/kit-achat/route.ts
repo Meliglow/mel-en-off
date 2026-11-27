@@ -65,3 +65,8 @@ export async function POST(request: Request) {
     return retour("erreur");
   }
 }
+
+/** Les pages des kits demandent si la vente est ouverte (sinon elles gardent « Préviens-moi »). */
+export async function GET() {
+  return NextResponse.json({ ouvert: Boolean(kitsKey()) }, { headers: { "Cache-Control": "no-store" } });
+}
