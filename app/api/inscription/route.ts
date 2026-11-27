@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { LISTE_BREVO_NEWSLETTER } from "@/config";
+import { LISTE_BREVO_NEWSLETTER, EMAIL_CONTACT_PRO } from "@/config";
 
 // Seule fonction serveur du site avec le contact professionnel.
 // Node, jamais edge : les fonctions edge sont exclues.
@@ -77,7 +77,50 @@ export async function POST(requete: Request) {
     return echec("L'inscription n'a pas pu aboutir. Réessaie dans un instant.", 502);
   }
 
+  // Mel reçoit aussi chaque inscription dans sa boîte mail (sans bloquer l'inscription).
+  await prevenirMel(cle, email, prenom, source);
+
   return NextResponse.json({ ok: true });
+}
+
+/** Nom lisible de l'endroit où la personne s'est inscrite. */
+function provenance(source: string) {
+  const kits: Record<string, string> = {
+    avis: "Kit avis Google", devis: "Kit devis pro", impayes: "Kit fini les impayés",
+    lapins: "Kit fini les lapins", hub: "Hub bureau en ordre",
+  };
+  const m = source.match(/^attente-kit-([a-z]+)$/);
+  if (m) return `liste d'attente ${kits[m[1]] || m[1]}`;
+  if (/guide/.test(source)) return "guide gratuit";
+  if (/lettre|newsletter/.test(source)) return "newsletter";
+  return source;
+}
+
+async function prevenirMel(cle: string, email: string, prenom: string, source: string) {
+  const ou = provenance(source);
+  try {
+    await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: { accept: "application/json", "content-type": "application/json", "api-key": cle },
+      body: JSON.stringify({
+        sender: { name: "Site melnourdi.fr", email: "contact@melnourdi.fr" },
+        to: [{ email: EMAIL_CONTACT_PRO }],
+        replyTo: { email },
+        subject: `📩 Nouvelle inscription : ${email} (${ou})`,
+        textContent: [
+          `Email : ${email}`,
+          prenom ? `Prénom : ${prenom}` : "",
+          `Inscrit depuis : ${ou}`,
+          `Date : ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}`,
+          "",
+          "Le contact est aussi dans ta liste Brevo.",
+        ].filter(Boolean).join("\n"),
+      }),
+      cache: "no-store",
+    });
+  } catch (e) {
+    console.error("Email d'inscription à Mel impossible", e);
+  }
 }
 
 function echec(message: string, statut: number) {
